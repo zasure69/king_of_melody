@@ -4,40 +4,65 @@
     box-sizing: border-box;
 }
 
+/* background-image: linear-gradient(132deg, rgb(228, 157, 252), rgb(168,98,230), rgb(122, 57, 214), rgb(95, 30, 203), rgb(69,6, 191),rgb(61,7,185),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(84, 132, 208), rgb(109, 162, 214), rgb(131, 188, 221), rgb(168, 228, 236)); */
+
 @font-face {
     font-family: neosans;
     src: url("font/UTM_Neo_Sans_IntelBold_Italic.ttf");
 }
 
 body{
-    
+    font-family: neosans;
     background-image: linear-gradient(132deg, rgb(228, 157, 252), rgb(168,98,230), rgb(122, 57, 214), rgb(95, 30, 203), rgb(69,6, 191),rgb(61,7,185),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(84, 132, 208), rgb(109, 162, 214), rgb(131, 188, 221), rgb(168, 228, 236));
     min-width: 50vw;
     min-height: 100vh;
+    /* min-height: 100%; */
     background-repeat: no-repeat; 
-}
-#header {
-    background-color: black;
-    height: 60px;
-    width: 100%;
+    /* background-size: 100%; */
 }
 
-#content{
+#header {
+    background-color: black;
+    height: 80px;
+}
+
+#content {
+    color: white;
+    font-size: 3.5vw;
+    height: 650px;
     position: relative;
 }
 
-#content .button{
-    position: absolute;
+#content .menubtn {
+    padding-top: 12%;
+    padding-left: 6%;
+    width: 40%;
+}
+
+#content .menubtn ul {
+    list-style-type: none;
+}
+
+#content .menubtn li {
+    padding-bottom: 6px;
+}
+
+#content .menubtn li:hover {
+    cursor: pointer;
+    color: #a19bd9;
+    /* di chuột chữ to ra */
+    transform: translateZ(0) scale(1.0238);
 }
 
 #content .button {
+    position: absolute;
     /* left:  30%; */
-    right: 20%;
-    padding-top: 10%;
+    right: 13%;
+    top: 30%;
 }
 
 #content .button .speaker{
-    width: 120%;
+    width: 124%;
     position: relative;
     bottom: 100px;
         /* right: 200px; */
@@ -45,9 +70,9 @@ body{
 }
 
 #content .button .girl{
-    width: 52%;
+    width: 70%;
     position: relative;
-    bottom:100px;
+    bottom:150px;
     margin-top: -550px;
     margin-left: 200px;
     z-index: 6;
@@ -84,3 +109,8 @@ body{
     padding: 16px 38px;
     transform: scale(1.15);
 } 
+
+#footer {
+
+}
+

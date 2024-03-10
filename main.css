@@ -19,6 +19,7 @@ body{
 }
 #header {
     display: flex;
+    
     background-color: black;
     height: 60px;
     width: 100%;

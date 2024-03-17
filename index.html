@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,10 +37,10 @@
     <div id="content">
         <div class="menubtn">
             <ul>
-                <li>CHẾ ĐỘ THƯỜNG</li>
-                <li>CHẾ ĐỘ XẾP HẠNG</li>
-                <li>THÀNH TÍCH</li>
-                <li>BẢNG XẾP HẠNG</li>
+                <li><a href="">CHẾ ĐỘ THƯỜNG</a></li>
+                <li><a href="">CHẾ ĐỘ XẾP HẠNG</a></li>
+                <li><a href="#avm" >THÀNH TÍCH</a></li>
+                <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
             </ul>
         </div>
 
@@ -51,7 +52,7 @@
         </div>
         
     </div>
-
+    <!-- Footer -->
     <div id="footer">
         <div class="menu_btn">
                 <button class="menu_btn_btn">
@@ -68,6 +69,119 @@
                 </button>   
         </div>
         <div class="para"><b> A product of team11!</b></div>
+    </div>
+    <!-- Leaderboard -->
+    <div class="leaderboard" id="ldtest">
+        <div class="overlay">
+
+        </div>
+        <div class="ldboardbody">
+            <div class="ld">
+                <h1 class = "ldheader">Leaderboard</h1>
+                <table class="rank" ><a href="#">Trở lại</a>
+                    <tr id="lr">
+                        <thead>
+                        <th id="lr">Xếp hạng</th>
+                        <th id="lr">Tên tài khoản</th>
+                        <th id="lr">Rank</th>
+                        <th id="lr">Điểm</th>
+                        </thead>
+                    </tr>
+                    <tbody>
+                    <tr>
+                        <th class="top1">1</th>
+                        <th class="top1" id="usr">username</th>
+                        <th class="top1">challenger</th>
+                        <th class="top1">1000đ</th>
+                    </tr>
+                    <tr>
+                        <th class="top2">2</th>
+                        <th class="top2" id="usr">username</th>
+                        <th class="top2">challenger</th>
+                        <th class="top2">1000đ</th>
+                    </tr>
+                    <tr>
+                        <th class="top3">3</th>
+                        <th class="top3" id="usr">username</th>
+                        <th class="top3">challenger</th>
+                        <th class="top3">1000đ</th>
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        <th id="usr">username</th>
+                        <th>challenger</th>
+                        <th>1000đ</th>
+                    </tr>
+                    <tr>
+                        <th>5</th>
+                        <th id="usr">username</th>
+                        <th>challenger</th>
+                        <th>1000đ</th>
+                    </tr>
+                    <tr>
+                        <th>6</th>
+                        <th id="usr">username</th>
+                        <th>challenger</th>
+                        <th>1000đ</th>
+                    </tr>
+                    <tr>
+                        <th>7</th>
+                        <th id="usr">username</th>
+                        <th>challenger</th>
+                        <th>1000đ</th>
+                    </tr>
+                    <tr>
+                        <th>8</th>
+                        <th id="usr">username</th>
+                        <th>challenger</th>
+                        <th>1000đ</th>
+                    </tr>
+                    <tr>
+                        <th>9</th>
+                        <th id="usr">username</th>
+                        <th>challenger</th>
+                        <th>1000đ</th>
+                    </tr>
+                    <tr>
+                        <th>10</th>
+                        <th id="usr">username</th>
+                        <th>challenger</th>
+                        <th>1000đ</th>
+                    </tr>
+                    
+                    </tbody>
+                    
+                </table>
+            </div>
+            
+        </div>
+    </div>
+    <!-- Thành tích -->
+    <div class="achievement" id="avm">
+        <div class="overlay">
+
+        </div>
+        <div class="avmbody">
+            <img src="assets/img/avatar.png" alt="avt">
+            <div class="avm">
+                <h1 class="avmheader">Achivement</h1>
+                <table class="avmtable">
+                    <tr>
+                        <th class="avmth" id="username"><img src="assets/img/Avatar_header.jpg" alt="avatar">Username: username</th>
+                        <th class="avmth" id="normal">Normal: 50/50</th>
+                    </tr>
+                    <tr>
+                        <th class="avmth" id="rank">Rank: challenger</th>
+                        <th class="avmth" id="point">Điểm rank: 1000đ</th>
+                    </tr>
+                    <tr>
+                        <th class="avmth" id="ranking">Đứng xếp hạng: 1</th>
+                        <th class="avmth" id="shortestime">Shortesttime: 1s</th>
+                    </tr>
+                </table>
+                <div><a href="#">Trờ lại</a></div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -7,3 +7,11 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
     container.classList.remove("sign-up-mode");
 });
+document.addEventListener('DOMContentLoaded', function() {
+    var submitBtn = document.getElementById('submitBtn');
+    submitBtn.addEventListener('click', redirectToURL);
+  });
+  function redirectToURL(event) {
+    event.preventDefault(); 
+    window.location.href = "index.html";
+  }

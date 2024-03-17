@@ -11,7 +11,9 @@
 
     <div id="header">
         <div class="left_header">
-            <img src="assets/img/Logo_LTMCB.png" alt="logo" >
+            <div class="logo">
+                <img src="assets/img/Logo_LTMCB.png" alt="logo" >
+            </div>
         </div>
         
         <div class="right_header">
@@ -34,8 +36,8 @@
     <div id="content">
         <div class="menubtn">
             <ul>
-                <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
-                <li id = "cd_xep_hang">CHẾ ĐỘ XẾP HẠNG</li>
+                <li>CHẾ ĐỘ THƯỜNG</li>
+                <li>CHẾ ĐỘ XẾP HẠNG</li>
                 <li>THÀNH TÍCH</li>
                 <li>BẢNG XẾP HẠNG</li>
             </ul>
@@ -67,173 +69,5 @@
         </div>
         <div class="para"><b> A product of team11!</b></div>
     </div>
-
-    <div class="modal_thuong" id ="team_modal_thuong">
-        <!-- <div class="select_mode_overlay"></div> -->
-
-        <div class="select_normal_mode_body">
-
-            <div class="select_normal_mode_header">
-                <div class="select_normal_mode_return">
-                    <span class = "return_thuong">TRỞ LẠI</span>
-                    <div class="select_normal_mode_information">
-                        <img src="assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
-                        <div class="information">
-                            <div class="username">
-                                King_Of_Melody
-                            </div>
-                            <div class="point_number">
-                                <div class="point">
-                                    Điểm
-                                </div>
-                                <div class="number">
-                                    1000
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="select_normal_mode_img">
-                <div class="select_normal_mode_img_Heaven">
-                    <img src="assets/img/Heaven.jpg" alt="Heaven" class="Heaven"> 
-                </div>
-
-                <div class="select_normal_mode_img_Hell">
-                    <img src="assets/img/Gates_Of_Hell.png" alt="Gates_Of_Hell" class="Hell">
-                </div>
-
-                <div class="select_normal_mode_img_Waste_land">
-                    <img src="assets/img/Waste_land.jpg" alt="" class="Waste_land">
-                </div>
-            </div>
-
-            <div class="select_normal_mode_radio">
-                <label  class="container">Khó
-                    <input type="radio"  name="radio" checked="checked" >
-                    <span class="checkmark"></span>
-                </label>
-
-                <label  class="container">Địa ngục
-                    <input type="radio" name="radio" >
-                    <span class="checkmark"></span>
-                </label>
-                
-                <label class="container">Tuyệt vọng
-                    <input type="radio" name="radio" >
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-
-            <div class="select_normal_mode_play_button">
-                <button type="submit"  class="playclick"><b>PLAY</b></button>
-                <button type="submit"  class="resumeclick"><b>RESUME</b></button>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="modal_xep_hang" id ="team_modal_xep_hang">
-        <!-- <div class="select_mode_overlay"></div> -->
-
-        <div class="select_rank_mode_body">
-
-            <div class="select_rank_mode_header">
-                <div class="select_rank_mode_return">
-                    <span class = "return_xep_hang">TRỞ LẠI</span>
-                    <div class="select_rank_mode_information">
-                        <img src="assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
-                        <div class="information">
-                            <div class="username">
-                                King_Of_Melody
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="select_rank_mode_center">
-
-                <div class="select_rank_mode_img">
-                    <img src="assets/img/avatar.png" alt="" class="img">
-                </div>
-
-                <div class="select_rank_mode_center_center">
-
-                    <div class="select_rank_mode_center_rank_point">
-                        <div class="select_rank_mode_rank_img">
-                            <img src="assets/img/rank.png" alt="" class="rank_img">
-                            <div class="select_rank_mode_rank">
-                                <b>bronze</b>
-                            </div>
-                            <img src="assets/img/rank.png" alt="" class="rank_img">
-                        </div>
-
-                        <div class="point_number">
-                            <div class="point">
-                                Điểm
-                            </div>
-                            <div class="number">
-                                1000
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="select_rank_mode_play_button">
-                        <button type="submit"  class="playclick"><b>PLAY</b></button>
-                    </div>
-                </div>
-
-                <div class="select_rank_mode_center_right_rank">
-                    <img src="assets/img/bronzerank.png" alt="" class="rank">
-                </div>
-
-            </div>
-            
-        </div>
-
-    </div>
-
-    <script>
-        // Get the modal
-        var modal_thuong = document.getElementById("team_modal_thuong");
-        var modal_xep_hang = document.getElementById("team_modal_xep_hang");
-
-        // Get the button that opens the modal
-        var text_thuong = document.getElementById("cd_thuong");
-        var text_xep_hang = document.getElementById("cd_xep_hang");
-
-        // Get the <span> element that closes the modal
-        var span_thuong = document.getElementsByClassName("return_thuong")[0];
-        var span_xep_hang = document.getElementsByClassName("return_xep_hang")[0];
-
-        // When the user clicks the button, open the modal 
-        text_thuong.onclick = function() {
-          modal_thuong.style.display = "flex";
-        }
-        text_xep_hang.onclick = function() {
-          modal_xep_hang.style.display = "flex";
-        }
-        
-        // When the user clicks on <span> (TRỞ LẠI), close the modal
-        span_thuong.onclick = function() {
-          modal_thuong.style.display = "none";
-        }
-        span_xep_hang.onclick = function() {
-          modal_xep_hang.style.display = "none";
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal_thuong) {
-            modal_thuong.style.display = "none";
-          }
-          if (event.target == modal_xep_hang) {
-            modal_xep_hang.style.display = "none";
-          }
-        }
-    </script>
 </body>
 </html>

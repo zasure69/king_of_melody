@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +22,7 @@
                 </div>
                 <div class="player" >
                     <button class="button1">
-                                <b> Đăng nhập </b>
+                                <b><a href="signin.html">Đăng nhập</a></b>
                     </button>
                     <button class="button1">
                             <b> Đăng ký </b>
@@ -37,10 +36,10 @@
     <div id="content">
         <div class="menubtn">
             <ul>
-                <li><a href="">CHẾ ĐỘ THƯỜNG</a></li>
-                <li><a href="">CHẾ ĐỘ XẾP HẠNG</a></li>
-                <li><a href="#avm" >THÀNH TÍCH</a></li>
-                <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
+                <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
+                <li id = "cd_xep_hang">CHẾ ĐỘ XẾP HẠNG</li>
+                <li>THÀNH TÍCH</li>
+                <li>BẢNG XẾP HẠNG</li>
             </ul>
         </div>
 
@@ -52,7 +51,7 @@
         </div>
         
     </div>
-    <!-- Footer -->
+
     <div id="footer">
         <div class="menu_btn">
                 <button class="menu_btn_btn">
@@ -70,118 +69,135 @@
         </div>
         <div class="para"><b> A product of team11!</b></div>
     </div>
-    <!-- Leaderboard -->
-    <div class="leaderboard" id="ldtest">
-        <div class="overlay">
 
+    <div class="modal_thuong" id ="team_modal_thuong">
+        <!-- <div class="select_mode_overlay"></div> -->
+
+        <div class="select_normal_mode_body">
+
+            <div class="select_normal_mode_header">
+                <div class="select_normal_mode_return">
+                    <span class = "return_thuong">TRỞ LẠI</span>
+                    <div class="select_normal_mode_information">
+                        <img src="assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
+                        <div class="information">
+                            <div class="username">
+                                King_Of_Melody
+                            </div>
+                            <div class="point_number">
+                                <div class="point">
+                                    Điểm
+                                </div>
+                                <div class="number">
+                                    1000
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="select_normal_mode_img">
+                <div class="select_normal_mode_img_Heaven">
+                    <img src="assets/img/Heaven.jpg" alt="Heaven" class="Heaven"> 
+                </div>
+
+                <div class="select_normal_mode_img_Hell">
+                    <img src="assets/img/Gates_Of_Hell.png" alt="Gates_Of_Hell" class="Hell">
+                </div>
+
+                <div class="select_normal_mode_img_Waste_land">
+                    <img src="assets/img/Waste_land.jpg" alt="" class="Waste_land">
+                </div>
+            </div>
+
+            <div class="select_normal_mode_radio">
+                <label  class="container">Khó
+                    <input type="radio"  name="radio" checked="checked" >
+                    <span class="checkmark"></span>
+                </label>
+
+                <label  class="container">Địa ngục
+                    <input type="radio" name="radio" >
+                    <span class="checkmark"></span>
+                </label>
+                
+                <label class="container">Tuyệt vọng
+                    <input type="radio" name="radio" >
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+            <div class="select_normal_mode_play_button">
+                <button type="submit"  class="playclick"><b>PLAY</b></button>
+                <button type="submit"  class="resumeclick"><b>RESUME</b></button>
+            </div>
         </div>
-        <div class="ldboardbody">
-            <div class="ld">
-                <h1 class = "ldheader">Leaderboard</h1>
-                <table class="rank" ><a href="#">Trở lại</a>
-                    <tr id="lr">
-                        <thead>
-                        <th id="lr">Xếp hạng</th>
-                        <th id="lr">Tên tài khoản</th>
-                        <th id="lr">Rank</th>
-                        <th id="lr">Điểm</th>
-                        </thead>
-                    </tr>
-                    <tbody>
-                    <tr>
-                        <th class="top1">1</th>
-                        <th class="top1" id="usr">username</th>
-                        <th class="top1">challenger</th>
-                        <th class="top1">1000đ</th>
-                    </tr>
-                    <tr>
-                        <th class="top2">2</th>
-                        <th class="top2" id="usr">username</th>
-                        <th class="top2">challenger</th>
-                        <th class="top2">1000đ</th>
-                    </tr>
-                    <tr>
-                        <th class="top3">3</th>
-                        <th class="top3" id="usr">username</th>
-                        <th class="top3">challenger</th>
-                        <th class="top3">1000đ</th>
-                    </tr>
-                    <tr>
-                        <th>4</th>
-                        <th id="usr">username</th>
-                        <th>challenger</th>
-                        <th>1000đ</th>
-                    </tr>
-                    <tr>
-                        <th>5</th>
-                        <th id="usr">username</th>
-                        <th>challenger</th>
-                        <th>1000đ</th>
-                    </tr>
-                    <tr>
-                        <th>6</th>
-                        <th id="usr">username</th>
-                        <th>challenger</th>
-                        <th>1000đ</th>
-                    </tr>
-                    <tr>
-                        <th>7</th>
-                        <th id="usr">username</th>
-                        <th>challenger</th>
-                        <th>1000đ</th>
-                    </tr>
-                    <tr>
-                        <th>8</th>
-                        <th id="usr">username</th>
-                        <th>challenger</th>
-                        <th>1000đ</th>
-                    </tr>
-                    <tr>
-                        <th>9</th>
-                        <th id="usr">username</th>
-                        <th>challenger</th>
-                        <th>1000đ</th>
-                    </tr>
-                    <tr>
-                        <th>10</th>
-                        <th id="usr">username</th>
-                        <th>challenger</th>
-                        <th>1000đ</th>
-                    </tr>
-                    
-                    </tbody>
-                    
-                </table>
+
+    </div>
+
+    <div class="modal_xep_hang" id ="team_modal_xep_hang">
+        <!-- <div class="select_mode_overlay"></div> -->
+
+        <div class="select_rank_mode_body">
+
+            <div class="select_rank_mode_header">
+                <div class="select_rank_mode_return">
+                    <span class = "return_xep_hang">TRỞ LẠI</span>
+                    <div class="select_rank_mode_information">
+                        <img src="assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
+                        <div class="information">
+                            <div class="username">
+                                King_Of_Melody
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="select_rank_mode_center">
+
+                <div class="select_rank_mode_img">
+                    <img src="assets/img/avatar.png" alt="" class="img">
+                </div>
+
+                <div class="select_rank_mode_center_center">
+
+                    <div class="select_rank_mode_center_rank_point">
+                        <div class="select_rank_mode_rank_img">
+                            <img src="assets/img/rank.png" alt="" class="rank_img">
+                            <div class="select_rank_mode_rank">
+                                <b>bronze</b>
+                            </div>
+                            <img src="assets/img/rank.png" alt="" class="rank_img">
+                        </div>
+
+                        <div class="point_number">
+                            <div class="point">
+                                Điểm
+                            </div>
+                            <div class="number">
+                                1000
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="select_rank_mode_play_button">
+                        <button type="submit"  class="playclick"><b>PLAY</b></button>
+                    </div>
+                </div>
+
+                <div class="select_rank_mode_center_right_rank">
+                    <img src="assets/img/bronzerank.png" alt="" class="rank">
+                </div>
+
             </div>
             
         </div>
-    </div>
-    <!-- Thành tích -->
-    <div class="achievement" id="avm">
-        <div class="overlay">
 
-        </div>
-        <div class="avmbody">
-            <img src="assets/img/avatar.png" alt="avt">
-            <div class="avm">
-                <h1 class="avmheader">Achivement</h1>
-                <table class="avmtable">
-                    <tr>
-                        <th class="avmth" id="username"><img src="assets/img/Avatar_header.jpg" alt="avatar">Username: username</th>
-                        <th class="avmth" id="normal">Normal: 50/50</th>
-                    </tr>
-                    <tr>
-                        <th class="avmth" id="rank">Rank: challenger</th>
-                        <th class="avmth" id="point">Điểm rank: 1000đ</th>
-                    </tr>
-                    <tr>
-                        <th class="avmth" id="ranking">Đứng xếp hạng: 1</th>
-                        <th class="avmth" id="shortestime">Shortesttime: 1s</th>
-                    </tr>
-                </table>
-                <div><a href="#">Trờ lại</a></div>
-            </div>
-        </div>
     </div>
+
+    <script src="modal_normal_rank.js"></script>
 </body>
 </html>

@@ -4,6 +4,9 @@
     box-sizing: border-box;
 }
 
+:root{
+    --background: linear-gradient(132deg, rgb(228, 157, 252), rgb(168,98,230), rgb(122, 57, 214), rgb(95, 30, 203), rgb(69,6, 191),rgb(61,7,185),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(84, 132, 208), rgb(109, 162, 214), rgb(131, 188, 221), rgb(168, 228, 236));
+}
 
 @font-face {
     font-family: neosans;
@@ -33,11 +36,8 @@ body{
     top: -46%;
 }
 
-#header .left_header .logo{
-    height: 105%;
-}
 
-#header .logo >img {
+#header .left_header >img {
     width: 120%;
     height: 150%;
 }
@@ -157,7 +157,6 @@ body{
     background-color: rgba(14,59,132,255);
     background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
     padding: 1% 5%;
-
     position: absolute;
     right: 42%;
     font-size: 70%;
@@ -166,7 +165,7 @@ body{
     text-decoration: none;
     margin-bottom: 16%;
     margin-right: 0%;
-    z-index: 10;
+    z-index: 2;
     border-radius: 8px;
     transition-property: padding;
     transition-duration: 0.5s;
@@ -218,3 +217,381 @@ body{
     font-family: neosans;
 }
 
+.modal_thuong{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* .modal_thuong .select_mode_overlay{
+    position: absolute;
+    
+} */
+
+.modal_thuong .select_normal_mode_body{
+    background-image: var(--background);
+    margin: auto;
+    z-index: 101;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal_thuong .select_normal_mode_return{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.25rem;
+    padding: 1rem 1rem;
+}
+
+.modal_thuong .select_normal_mode_return .return_thuong {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_thuong .select_normal_mode_return .return_thuong:hover,
+.modal_thuong .select_normal_mode_return .return_thuong:focus{
+    color: white;
+}
+
+.modal_thuong .select_normal_mode_information{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.modal_thuong .select_normal_mode_information >img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.modal_thuong .select_normal_mode_information .information{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5px;
+    margin-right: 25px;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: white;
+    background-color: transparent;
+}
+
+.modal_thuong .select_normal_mode_information .point_number{
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+}
+
+
+.modal_thuong .select_normal_mode_img{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 30px;
+    margin: 24px 24px 12px;
+}
+
+.modal_thuong .select_normal_mode_img_Hell, .select_normal_mode_img_Heaven, .select_normal_mode_img_Waste_land{
+    display: flex;
+    justify-content: space-between; 
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.modal_thuong .Hell, .Heaven, .Waste_land{
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+} 
+
+.modal_thuong .select_normal_mode_radio{
+    display: flex;
+    justify-content: space-around;
+    flex: row wrap;
+}
+
+.modal_thuong .select_normal_mode_radio .container{
+    display: block;
+    font-size: 1.2rem;
+    padding-left: 28px;
+    margin-bottom: 20px;
+    margin-left: 45px;
+    cursor: pointer;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.modal_thuong .select_normal_mode_radio .container input{
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+}
+
+.modal_thuong .select_normal_mode_radio .container .checkmark{
+    position: absolute;
+    top:5px;
+    left: 3px;
+    height: 20px;
+    width: 20px;
+    background-color: #d8d4d4;
+    border: 4px;
+    border-radius: 50%;
+    transition: background-color 0.5 ease ;
+} 
+
+/* On mouse-over, add a background color */
+.modal_thuong .select_normal_mode_radio .container:hover input ~ .checkmark {
+    background-color: #adafb1;
+}
+
+/* When the radio button is checked, add an other background */
+.modal_thuong .select_normal_mode_radio .container input:checked ~ .checkmark {
+    background-color: rgb(22, 221, 75);
+}
+  
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.modal_thuong .select_normal_mode_radio .container .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.modal_thuong .select_normal_mode_radio .container input:checked ~ .checkmark::after {
+    display: inline-block;
+}
+
+/* Style the indicator (dot/circle) */
+.modal_thuong .select_normal_mode_radio .container .checkmark::after {
+    top: 5.5px;
+    left: 5.5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.modal_thuong .select_normal_mode_play_button{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 5px 0 10px;
+}
+
+.modal_thuong .select_normal_mode_play_button .playclick{
+    border: 0;
+    background-color: rgba(14,59,132,255);
+    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
+    padding: 12px 24px;
+    font-size: 1.25rem;
+    color: aliceblue;
+    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
+    text-decoration: none;
+    border-radius: 8px;
+    transition-property: padding;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    
+}
+
+.modal_thuong .select_normal_mode_play_button .playclick:hover{
+    padding: 16px 38px;
+    transform: scale(1.15);
+}
+
+.modal_thuong .select_normal_mode_play_button .resumeclick{
+    border: 0;
+    background-color: rgba(14,59,132,255);
+    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
+    padding: 12px 24px;
+    font-size: 1.25rem;
+    color: aliceblue;
+    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
+    text-decoration: none;
+    border-radius: 8px;
+    transition-property: padding;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    
+}
+
+.modal_thuong .select_normal_mode_play_button .resumeclick:hover{
+    padding: 16px 38px;
+    transform: scale(1.15);
+} 
+
+.modal_xep_hang{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* .modal_xep_hang .select_mode_overlay{
+    position: absolute;
+    
+} */
+
+.modal_xep_hang .select_rank_mode_body{
+    background-image: var(--background);
+    margin: auto;
+    z-index: 101;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+.modal_xep_hang .select_rank_mode_return{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.25rem;
+    padding: 1rem 1rem;
+}
+
+.modal_xep_hang .select_rank_mode_return .return_xep_hang {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_xep_hang .select_rank_mode_return .return_xep_hang:hover,
+.modal_xep_hang .select_rank_mode_return .return_xep_hang:focus{
+    color: white;
+}
+
+.modal_xep_hang .select_rank_mode_information{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.modal_xep_hang .select_rank_mode_information >img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.modal_xep_hang .select_rank_mode_information .information{
+    padding: 5px;
+    margin-right: 25px;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.modal_xep_hang .select_rank_mode_center{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 20px;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_img .img{
+    width: 300px;
+    height: 300px;
+    margin-left: 16px;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_center_rank_point{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_rank_img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.8rem;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_rank_img .select_rank_mode_rank{
+    text-transform: uppercase;
+    line-height: 2.5rem;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+@keyframes rank_img {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_rank_img .rank_img{
+    width: 40px;
+    height: 40px;
+    animation: rank_img 5s infinite linear;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .point_number{
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_play_button .playclick{
+    border: 0;
+    background-color: rgba(14,59,132,255);
+    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
+    padding: 12px 24px;
+    font-size: 1.25rem;
+    color: aliceblue;
+    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
+    text-decoration: none;
+    border-radius: 8px;
+    transition-property: padding;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_play_button .playclick:hover{
+    padding: 16px 38px;
+    transform: scale(1.15);
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_right_rank{
+    display:flex;
+    align-items: center;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_right_rank .rank{
+    width: 300px;
+    height: 300px;
+}

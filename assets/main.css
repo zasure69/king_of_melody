@@ -666,6 +666,7 @@ body{
     background-repeat: no-repeat; 
     background-size: cover;
     overflow-y: scroll;
+    /* border-radius: 10px; */
     z-index: 20;
 }
 
@@ -687,7 +688,7 @@ body{
 }
 
 .ldheader{
-    position: relative;
+    position: sticky;
     /* align-items: center; */
     text-align: center;
     justify-content: center;
@@ -781,6 +782,7 @@ table, th, tr{
     background-repeat: no-repeat;
     background-size: cover;
     /* overflow-y: scroll; */
+    border-radius: 10px;
     z-index: 20;
 }
 

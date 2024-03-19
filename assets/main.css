@@ -245,16 +245,6 @@ body{
     font-family: neosans;
 }
 
-.modal_thuong a{
-    text-decoration: none;
-    color: white;
-}
-
-.select_rank_mode_play_button a{
-    text-decoration: none;
-    color: white;
-}
-
 .modal_thuong{
     position: fixed;
     top: 0;
@@ -421,6 +411,11 @@ body{
     height: 8px;
     border-radius: 50%;
     background: white;
+}
+
+.modal_thuong .select_normal_mode_play_button a{
+    text-decoration: none;
+    color: white;
 }
 
 .modal_thuong .select_normal_mode_play_button{
@@ -600,6 +595,11 @@ body{
     flex-direction: row;
     gap: 0.4rem;
     font-size: 0.9rem;
+    color: white;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_play_button a{
+    text-decoration: none;
     color: white;
 }
 

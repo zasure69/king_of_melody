@@ -5,6 +5,7 @@ var modal_xep_hang = document.getElementById("team_modal_xep_hang");
 // Get the button that opens the modal
 var text_thuong = document.getElementById("cd_thuong");
 var text_xep_hang = document.getElementById("cd_xep_hang");
+//var playbtn = document.getElementsById("asd");
 
 // Get the <span> element that closes the modal
 var span_thuong = document.getElementsByClassName("return_thuong")[0];
@@ -17,6 +18,9 @@ text_thuong.onclick = function() {
 text_xep_hang.onclick = function() {
   modal_xep_hang.style.display = "flex";
 }
+// playbtn.onclick = function() {
+//   modal_thuong.style.display = "flex"
+// }
 
 // When the user clicks on <span> (TRỞ LẠI), close the modal
 span_thuong.onclick = function() {

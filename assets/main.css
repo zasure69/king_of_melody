@@ -245,16 +245,6 @@ body{
     font-family: neosans;
 }
 
-.modal_thuong a{
-    text-decoration: none;
-    color: white;
-}
-
-.select_rank_mode_play_button a{
-    text-decoration: none;
-    color: white;
-}
-
 .modal_thuong{
     position: fixed;
     top: 0;
@@ -421,6 +411,11 @@ body{
     height: 8px;
     border-radius: 50%;
     background: white;
+}
+
+.modal_thuong .select_normal_mode_play_button a{
+    text-decoration: none;
+    color: white;
 }
 
 .modal_thuong .select_normal_mode_play_button{
@@ -603,6 +598,11 @@ body{
     color: white;
 }
 
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_play_button a{
+    text-decoration: none;
+    color: white;
+}
+
 .modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_play_button .playclick{
     border: 0;
     background-color: rgba(14,59,132,255);
@@ -666,6 +666,7 @@ body{
     background-repeat: no-repeat; 
     background-size: cover;
     overflow-y: scroll;
+    /* border-radius: 10px; */
     z-index: 20;
 }
 
@@ -687,7 +688,7 @@ body{
 }
 
 .ldheader{
-    position: relative;
+    position: sticky;
     /* align-items: center; */
     text-align: center;
     justify-content: center;
@@ -781,6 +782,7 @@ table, th, tr{
     background-repeat: no-repeat;
     background-size: cover;
     /* overflow-y: scroll; */
+    border-radius: 10px;
     z-index: 20;
 }
 

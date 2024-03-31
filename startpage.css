@@ -116,14 +116,11 @@
     align-items: center;
     height: 100%;
     justify-content: center;
-    opacity: 1;
-    transition: opacity .3s linear .3s;
     margin-top: 2em;
 }
 
 .body .content .body-content .play-button-label {
     max-width: 100%;
-    overflow: hidden;
     padding: 0.5em 1.5em;
     background-color: #6cb928;
     background-image: radial-gradient(150% 160% at 50% 15%, #fff 0, transparent 30%);

@@ -6,6 +6,7 @@
     <title>King_Of_Melody</title>
     <link rel="stylesheet" href="assets/main.css">
     <script src="https://kit.fontawesome.com/d3a938e050.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ef9bfced87.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -34,7 +35,7 @@
         <div class="menubtn">
             <ul>
                 <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
-                <li id = "cd_xep_hang">CHẾ ĐỘ XẾP HẠNG</li>
+                <li id = "cd_xep_hang">MULTIPLAYER</li>
                 <li><a href="#avm" >THÀNH TÍCH</a></li>
                 <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
             </ul>
@@ -141,6 +142,13 @@
             <div class="select_rank_mode_header">
                 <div class="select_rank_mode_return">
                     <span class = "return_xep_hang">TRỞ LẠI</span>
+                    <div class="search_room">
+                        <input type="text" placeholder="Mã phòng hoặc tên phòng">
+                        <button class="find">
+                            <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                        </button>
+                        
+                    </div>
                     <div class="select_rank_mode_information">
                         <img src="assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
                         <div class="information">
@@ -180,8 +188,9 @@
                         </div>
                     </div>
 
-                    <div class="select_rank_mode_play_button">
-                        <button type="submit"  class="playclick"><b><a href="playweb.html">PLAY</a></b></button>
+                    <div class="select_rank_mode_button">
+                        <button class="createclick" id = "create_room"><b>Tạo phòng</b></button>
+                        <button class="playclick"><b><a href="playweb.html">Vào nhanh</a></b></button>
                     </div>
                 </div>
 
@@ -191,6 +200,28 @@
 
             </div>
             
+        </div>
+
+    </div>
+
+    <div class="modal_create_room" id = "team_modal_create_room">
+        <div class="create_room_body">
+            <div class="create_room_header">
+                <div class="create_room_return">
+                    <span class = "return_create_room">TRỞ LẠI</span>
+                </div>
+            </div>
+
+            <div class="create_room_content">
+                <div class="create_room_input">
+                    <label for="Name">Tên phòng</label><br>
+                    <input type="text" placeholder="Tên phòng">
+                </div>
+
+                <div class="create_room_create">
+                    <button class="create"><a href="playweb.html">PLAY</a></button>
+                </div>
+            </div>
         </div>
 
     </div>

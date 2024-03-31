@@ -427,30 +427,10 @@ body{
     margin: 5px 0 10px;
 }
 
-.modal_thuong .select_normal_mode_play_button .playclick{
-    border: 0;
-    background-color: rgba(14,59,132,255);
-    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
-    padding: 12px 24px;
-    font-size: 1.25rem;
-    color: aliceblue;
-    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
-    text-decoration: none;
-    border-radius: 8px;
-    transition-property: padding;
-    transition-duration: 0.5s;
-    cursor: pointer;
-    
-}
-
-.modal_thuong .select_normal_mode_play_button .playclick:hover{
-    padding: 16px 38px;
-    transform: scale(1.15);
-}
-
+.modal_thuong .select_normal_mode_play_button .playclick,
 .modal_thuong .select_normal_mode_play_button .resumeclick{
     border: 0;
-    background-color: rgba(14,59,132,255);
+    background-color: rgba(61, 7, 185, .6);
     background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
     padding: 12px 24px;
     font-size: 1.25rem;
@@ -464,10 +444,11 @@ body{
     
 }
 
+.modal_thuong .select_normal_mode_play_button .playclick:hover,
 .modal_thuong .select_normal_mode_play_button .resumeclick:hover{
     padding: 16px 38px;
     transform: scale(1.15);
-} 
+}
 
 .modal_xep_hang{
     position: fixed;
@@ -514,6 +495,42 @@ body{
 .modal_xep_hang .select_rank_mode_return .return_xep_hang:hover,
 .modal_xep_hang .select_rank_mode_return .return_xep_hang:focus{
     color: white;
+}
+
+.select_rank_mode_body .search_room{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    left: 42%;
+}
+.select_rank_mode_body .search_room input{
+    overflow: hidden;
+    background-color: #eee;
+    border: none;
+    text-overflow: ellipsis;
+    width: 12rem;
+    height: 2rem;
+    font-size: 1rem;
+    outline: none;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.select_rank_mode_body .search_room .find{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background-color: #eee;
+    border: none;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.select_rank_mode_body .search_room i{
+    background-size: 20px;
 }
 
 .modal_xep_hang .select_rank_mode_information{
@@ -598,29 +615,39 @@ body{
     color: white;
 }
 
-.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_play_button a{
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 0.2rem;
+}
+
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_button a{
     text-decoration: none;
     color: white;
 }
 
-.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_play_button .playclick{
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_button .playclick, 
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_button .createclick{
     border: 0;
-    background-color: rgba(14,59,132,255);
+    background-color: rgba(61, 7, 185, .6);
     background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
     padding: 12px 24px;
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: aliceblue;
     box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
-    text-decoration: none;
     border-radius: 8px;
     transition-property: padding;
     transition-duration: 0.5s;
+    text-transform: uppercase;
     cursor: pointer;
     margin-bottom: 10px;
 }
 
-.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_play_button .playclick:hover{
-    padding: 16px 38px;
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_button .playclick:hover,
+.modal_xep_hang .select_rank_mode_center .select_rank_mode_center_center .select_rank_mode_button .createclick:hover{
+    padding: 18px 38px;
     transform: scale(1.15);
 }
 
@@ -632,6 +659,102 @@ body{
 .modal_xep_hang .select_rank_mode_center .select_rank_mode_center_right_rank .rank{
     width: 300px;
     height: 300px;
+}
+
+.modal_create_room{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 102;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal_create_room .create_room_body{
+    background-image: var(--background);
+    margin: auto;
+    padding: 10px 20px;
+    z-index: 103;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.modal_create_room .create_room_return{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    padding: 1rem 0;
+}
+
+.modal_create_room .create_room_content{
+    display: flex;
+    gap: 1rem;
+}
+
+.modal_create_room .create_room_content .create_room_input label{
+    font-size: 1.1rem;
+    color: white;
+    text-shadow: 0 0.0625rem 0.125rem #09090b;
+}
+
+.modal_create_room .create_room_content .create_room_input input{
+    border-radius: 12px;
+    margin-top: 10px;
+    padding: 4px;
+    font-size: 1rem;
+    color: rgb(104, 101, 101);
+    font-style: italic;
+    border: none;
+    outline: none;
+}
+
+.modal_create_room .create_room_content .create_room_create{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal_create_room .create_room_content .create_room_create a{
+    text-decoration: none;
+    color: white;
+}
+
+
+.modal_create_room .create_room_content .create_room_create .create{
+    border-radius: 16px;
+    text-transform: uppercase;
+    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
+    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
+    background-color: rgb(61, 7, 185);
+    padding: 8px 16px;
+    font-style: italic;
+    font-weight: 550;
+    font-size: 0.8rem;
+    text-shadow: 0 0.0625rem 0.125rem #131314;
+    border: none;
+}
+
+.modal_create_room .create_room_return .return_create_room {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_create_room .create_room_return .return_create_room:hover,
+.modal_create_room .create_room_return .return_create_room:focus{
+    color: white;
+}
+
+.modal_create_room .create_room_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
 }
 
 .leaderboard{

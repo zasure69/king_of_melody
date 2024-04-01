@@ -1,0 +1,278 @@
+@font-face {
+    font-family: neosans;
+    src: url("font/UTM_Neo_Sans_IntelBold_Italic.ttf");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: neosans;
+}
+
+body {
+    background: linear-gradient(132deg, rgb(228, 157, 252), rgb(168,98,230), rgb(122, 57, 214), rgb(95, 30, 203), rgb(69,6, 191),rgb(61,7,185),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(84, 132, 208), rgb(109, 162, 214), rgb(131, 188, 221), rgb(168, 228, 236));
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    color: white;
+    flex-grow: 1;
+}
+
+.container .play-area img{
+    width: 20%;
+}
+
+.container .play-area .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+.container .play-area .info .player1-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 2em;
+    width: 27em;
+}
+
+.container .play-area .info .player1-info .player1-info-illustrator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1em;
+    position: relative;
+}
+
+.container .play-area .info .player1-info .player1-info-illustrator .score-parallelogram {
+    width: 10em;
+    height: 3em;
+    background-color: #f53192;
+    transform: skew(-20deg);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 2em;
+}
+
+.container .play-area .info .player1-info .player1-info-illustrator .score-wrapper {
+    width: 8em;
+    height: 2em;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-left: 1em;
+}
+
+.container .play-area .info .player1-info .player1-info-illustrator .score-parallelogram .score-label {
+    transform: skew(20deg);
+    text-transform: none;
+}
+
+.container .play-area .info .player1-info .player1-info-illustrator>img {
+    z-index: 1;
+    width: 6em;
+}
+
+.container .play-area .info .round-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 5em;
+    width: 20em;
+}
+
+.container .play-area .info .round-info {
+    line-height: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.play-area .info .round-info h3{
+    font-size: 2em;
+}
+
+.container .play-area .info .time-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 2em;
+    border-left: 1px solid white;
+    padding-left: 2em;
+}
+
+.container .play-area .info .time-info h3 {
+    font-size: 2em;
+}
+
+.container .play-area .info .player2-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 2em;
+    width: 27em;
+    padding-left: 3.2em;
+}
+
+.container .play-area .info .player2-info .player2-info-illustrator {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-top: 1em;
+    position: relative;
+}
+
+.container .play-area .info .player2-info .player2-info-illustrator .score-parallelogram {
+    width: 10em;
+    height: 3em;
+    background-color: #f53192;
+    transform: skew(20deg);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 3em;
+}
+
+.container .play-area .info .player2-info .player2-info-illustrator .score-wrapper {
+    width: 8em;
+    height: 2em;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-right: 1em;
+}
+
+.container .play-area .info .player2-info .player2-info-illustrator .score-parallelogram .score-label {
+    transform: skew(-20deg);
+    text-transform: none;
+}
+
+.container .play-area .info .player2-info .player2-info-illustrator>img {
+    z-index: 1;
+    width: 6em;
+}
+
+.container .play-area .info .player2-info .player2-name {
+    text-align: end;
+}
+
+.container .play-area .disc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2em;
+}
+
+.container .play-area .disc img {
+    width: 28%;
+}
+
+.container .play-area .disc .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .disc .btn #progress {
+    -webkit-appearance: none;
+    width: 20em;
+    height: 0.3em;
+    background: #f53192;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2.5em 0;
+    rotate: -90deg;
+}
+
+.container .disc .btn #progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 2em;
+    height: 2em;
+    background: #f53192;
+    border-radius: 50%;
+    border: 0.5em solid #fff;
+}
+
+.container .disc .btn #progress-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+}
+
+.container .disc .btn #progress-control div {
+    width: 2.5em;
+    height: 2.5em;
+    background-color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #f53192;
+    cursor: pointer;
+    margin: 1em;
+}
+
+.container .disc .btn #progress-control div:hover{
+    transform: scale(1.5);
+    background-color: #f53192;
+    color:#fff;
+}
+
+.container .disc .btn #progress-control div:nth-child(1){
+    rotate: -90deg;
+}
+
+.container .disc .btn #progress-control div:nth-child(3){
+    rotate: -90deg;
+}
+
+.container .play-area .answer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .play-area .answer input {
+    background-color: #eee;
+    border: none;
+    border-radius: 16px;
+    margin: 8px 8px 8px 0;
+    padding: 10px 15px;
+    width: 60%;
+    outline: none;
+}
+
+.container .play-area .answer button {
+    border: none;
+    width: 7em;
+    height: 3em;
+    border-radius: 36px;
+    color: white;
+    font-size: 1.2em;
+    text-shadow: 0 0.125em 0.4em black;
+    background-color: #6cb928;
+    background-image: radial-gradient(150% 160% at 50% 15%, #fff 0, transparent 30%);
+}
+
+.container .play-area .answer button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+

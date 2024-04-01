@@ -29,6 +29,7 @@ body{
     position: sticky;
     justify-content: space-between;
     padding: 0 10px 0 10px;
+    z-index: 4;
 }
 #header .left_header{
     position: relative;
@@ -46,9 +47,10 @@ body{
 }
 #header .right_header{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
-    gap: 15px;
+    /* gap: 15px; */
+    gap: 2rem;
     position: relative;
 }
 
@@ -64,7 +66,85 @@ body{
     height: 39px;
     font-family: neosans;
     width: 80%;
+    
 }
+
+#header .nav{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+#header .nav .username{
+    color: white;
+    position: relative;
+    top: 4px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#header .nav .username:hover{
+    opacity: .75;
+    cursor: pointer;
+    transform: scale(.975);
+}
+
+#header .nav .username:active{
+    opacity: .5;
+    cursor: pointer;
+    transform: scale(.95);
+}
+
+#header .nav .nav-arrow-down{
+    margin-top: 5px;
+}
+
+#header .nav .subnav::before{
+    background: transparent;
+    border-bottom: .6rem solid rgba(16, 16, 28, .5);
+    border-left: .4rem solid transparent;
+    border-right: .4rem solid transparent;
+    border-top: 0;
+    content: "";
+    display: block;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: -.59rem;
+    width: 0;
+}
+
+#header .nav .subnav{
+    background-color: rgba(16, 16, 28, .5);
+    border-radius: .6rem;
+    padding: 10px;
+    margin: 0 auto;
+    position: absolute;
+    top: 80%;
+    transition: .15s ease;
+    display: none;
+}
+#header .nav .subnav .background{
+    padding: 12px;
+    width: 100%;
+}
+
+#header .subnav .profile, #header .subnav .signout{
+    width: 100%;
+    cursor: pointer;
+    background: none;
+    text-decoration: none;
+}
+
+#header .subnav .profile:hover, 
+#header .subnav .signout:hover{
+    color: #a19bd9;
+    cursor: pointer;
+    
+}
+
 #header .button1{
     display: flex;
     align-items: center;
@@ -895,7 +975,7 @@ table, th, tr{
 .leaderboard #usr{
     font-size:  25px;
 }
-
+/* 
 .avmbody{
     position: relative;
     width: 1200px;
@@ -904,12 +984,12 @@ table, th, tr{
     margin: auto;
     background-repeat: no-repeat;
     background-size: cover;
-    /* overflow-y: scroll; */
-    border-radius: 10px;
+            /* overflow-y: scroll; */
+    /* border-radius: 10px;
     z-index: 20;
-}
+} */
 
-.achievement{
+/* .achievement{
     position: fixed;
     left: 0;
     right: 0;
@@ -935,71 +1015,71 @@ table, th, tr{
     justify-content: center;
     border: 5px;
     border-radius: 5px;
-}
-
+} */
+/*
 .avmtable{
-    /* margin: auto; */
-    position: absolute;
+            /* margin: auto; */
+    /* position: absolute;
     right: 10%;
     color: white;
     width: 700px;
-    margin-top: 10px;
-    /*  display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    border: 10px solid black;
-    border-collapse: collapse;
-    /* overflow-y: scroll; */
-    text-align: left;
-}
+    margin-top: 10px; */
+            /*  display: flex; */
+            /* justify-content: center; */
+            /* align-items: center; */
+    /* border: 10px solid black;
+    border-collapse: collapse; */
+            /* overflow-y: scroll; */
+    /* text-align: left; */
+/* }*/ 
 
-#normal{
+/* #normal{
     width: 50%;
 }
 
 .avmth{
     border: 5px solid black;
     padding: 30px;
-}
+} */
 
-.avmbody > img{
+/* .avmbody > img{
     position: absolute;
-    /* padding: 10px; */
-    left: 2.5%;
+            /* padding: 10px; */
+    /* left: 2.5%;
     width: 300px;
     height: 350px;
-    top: 10%;
-}
+    top: 10%; */
+/* }  */
 
-.avmbody .avm img{
+/* .avmbody .avm img{
     padding: 10px;
     width: 80px;
     height: 80px;
     border-radius: 50%;
     vertical-align: middle;
-}
+} */
 
 
 
-.achievement a{
+/* .achievement a{
     background-color: rgba(14,59,132,255);
     background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
-    padding: 1% 5%;
-    /* width: 40%; */
-    text-align: center;
-    /* width: 8%; */
-    /* position: absolute; */
-    /* left: 0; */
-    position: absolute;
+    padding: 1% 5%; */
+            /* width: 40%; */
+    /* text-align: center; */
+            /* width: 8%; */
+            /* position: absolute; */
+            /* left: 0; */
+    /* position: absolute;
     bottom: 5%;
     left: 43%;
     font-size: 100%;
     color: aliceblue;
     box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
-    text-decoration: none;
-    /* display: flex; */
-    /* margin-bottom: 16%; */
-    /* margin-right: 0%; */
-    /* z-index: 10; */
-    border-radius: 8px;
-}
+    text-decoration: none; */
+            /* display: flex; */
+            /* margin-bottom: 16%; */
+            /* margin-right: 0%; */
+            /* z-index: 10; */
+    /* border-radius: 8px;
+}*/ 

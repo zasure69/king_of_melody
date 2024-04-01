@@ -7,11 +7,13 @@ var modal_create_room = document.getElementById("team_modal_create_room")
 var text_thuong = document.getElementById("cd_thuong");
 var text_xep_hang = document.getElementById("cd_xep_hang");
 var create_click = document.getElementById("create_room");
+//var username = document.getElementById("username");
 
 // Get the <span> element that closes the modal
 var span_thuong = document.getElementsByClassName("return_thuong")[0];
 var span_xep_hang = document.getElementsByClassName("return_xep_hang")[0];
 var span_create_room = document.getElementsByClassName("return_create_room")[0];
+
 
 // When the user clicks the button, open the modal 
 text_thuong.onclick = function() {
@@ -23,6 +25,29 @@ text_xep_hang.onclick = function() {
 create_click.onclick = function(){
   modal_create_room.style.display = "flex";
 }
+let sub = true;
+let icon_arrow = function(icon){
+  icon.classList.toggle('fa-angle-up');
+}
+document.getElementById("username").onclick = function()
+{
+  subnav = document.getElementById("subnav");
+  if (sub === true)
+  {
+    subnav.style.display = "flex";
+    sub = false;
+  }
+  else
+  {
+    subnav.style.display = "none";
+    sub = true;
+  }
+}
+
+
+// username.onclick = function(){
+//   subnav.style.display = "block";
+// }
 
 // When the user clicks on <span> (TRỞ LẠI), close the modal
 span_thuong.onclick = function() {

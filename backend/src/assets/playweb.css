@@ -1,0 +1,221 @@
+@font-face {
+    font-family: neosans;
+    src: url("font/UTM_Neo_Sans_IntelBold_Italic.ttf");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: neosans;
+}
+
+body {
+    background: linear-gradient(132deg, rgb(228, 157, 252), rgb(168,98,230), rgb(122, 57, 214), rgb(95, 30, 203), rgb(69,6, 191),rgb(61,7,185),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(84, 132, 208), rgb(109, 162, 214), rgb(131, 188, 221), rgb(168, 228, 236));
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    color: white;
+    flex-grow: 1;
+}
+
+.container .hint {
+    /* position: absolute; */
+    /* left: 0;
+    top: 0; */
+    font-size: 1rem;
+    width: 40rem;
+}
+
+.container .hint{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 1.5em;
+}
+
+.container .hint{
+    overflow: auto;
+}
+
+.container .hint>div{
+    padding-left: 0.7em;
+}
+
+.container .hint::-webkit-scrollbar {
+    width: 0.2em;
+}
+
+.container .hint::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    width: 2em;
+    border-radius: 18px;
+}
+
+.container .hint h2 {
+    margin-top: 0em;
+    font-size: 2em;
+}
+
+.container .hint p {
+    font-size: 0.6em;
+    opacity: 0.7;
+}
+
+.container .play-area {
+    /* position: absolute; */
+    /* left: 50%;
+    top: 0; */
+    width: calc(200/3) %;
+}
+
+.container .play-area img{
+    width: 20%;
+}
+
+.container .play-area .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.container .play-area .info .round-info {
+    line-height: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.play-area .info .round-info h3{
+    font-size: 2em;
+}
+
+.container .play-area .info .player-info {
+    display: flex;
+    width: 16em;
+    line-height: 4em;
+}
+
+.container .play-area .info .player-info p {
+    font-size: 2em;
+}
+
+.container .play-area .info .player-info img{
+    width: 5em;
+}
+
+.container .play-area .info .time-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 2em;
+}
+
+.container .play-area .info .time-info h3 {
+    font-size: 2em;
+}
+
+.container .play-area .disc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2em;
+}
+
+.container .play-area .disc img {
+    width: 45%;
+}
+
+.container .play-area .disc .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .disc .btn #progress {
+    -webkit-appearance: none;
+    width: 20em;
+    height: 0.3em;
+    background: #f53192;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2.5em 0;
+    rotate: -90deg;
+}
+
+.container .disc .btn #progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 2em;
+    height: 2em;
+    background: #f53192;
+    border-radius: 50%;
+    border: 0.5em solid #fff;
+}
+
+.container .disc .btn #progress-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+}
+
+.container .disc .btn #progress-control div {
+    width: 2.5em;
+    height: 2.5em;
+    background-color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #f53192;
+    cursor: pointer;
+    margin: 1em;
+}
+
+.container .disc .btn #progress-control div:hover{
+    transform: scale(1.5);
+    background-color: #f53192;
+    color:#fff;
+}
+
+.container .disc .btn #progress-control div:nth-child(1){
+    rotate: -90deg;
+}
+
+.container .disc .btn #progress-control div:nth-child(3){
+    rotate: -90deg;
+}
+
+.container .play-area .answer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .play-area .answer input {
+    background-color: #eee;
+    border: none;
+    border-radius: 16px;
+    margin: 8px 8px 8px 0;
+    padding: 10px 15px;
+    width: 60%;
+    outline: none;
+}
+
+.container .play-area .answer button {
+    border: none;
+    width: 7em;
+    height: 3em;
+    border-radius: 36px;
+    color: white;
+    font-size: 1em;
+    background: linear-gradient(132deg, rgb(168,98,230), rgb(122, 57, 214), rgb(69,6, 191),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(168, 228, 236));
+}
+

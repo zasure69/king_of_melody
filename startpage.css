@@ -74,7 +74,7 @@
 }
 
 .body .content {
-    background: url('/assets/img/musicparty.png') top center / cover no-repeat;
+    background: url('./assets/img/musicparty.png') top center / cover no-repeat;
     display: flex;
     align-items: center;
     flex-direction: column;

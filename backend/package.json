@@ -1,0 +1,31 @@
+{
+  "name": "kingofmelody",
+  "version": "1.0.0",
+  "description": "“King of melody” là một website giải trí dưới hình thức giải câu đố về âm nhạc được thiết kế bởi Nhóm 11 thuộc lớp NT208.O23.ANTT. Web được tạo ra xuất phát từ yêu cầu giải trí, thư giãn của con người và lấy nguồn cảm hứng từ chủ đề âm nhạc. Chi tiết về tổng quan và chức năng của trang web như sau:<br><br>\r ![image](https://github.com/zasure69/king_of_melody/assets/162142037/aa063fae-9784-4b89-a899-21c94d77d4a6)",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zasure69/king_of_melody.git"
+  },
+  "keywords": [
+    "kingofmelody",
+    "backend"
+  ],
+  "author": "zasure69",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zasure69/king_of_melody/issues"
+  },
+  "homepage": "https://github.com/zasure69/king_of_melody#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0"
+  }
+}

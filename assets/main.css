@@ -96,9 +96,9 @@ body{
     transform: scale(.95);
 }
 
-#header .nav .nav-arrow-down{
+/* #header .nav .nav-arrow-down{
     margin-top: 5px;
-}
+} */
 
 #header .nav .subnav::before{
     background: transparent;
@@ -126,6 +126,7 @@ body{
     transition: .15s ease;
     display: none;
 }
+
 #header .nav .subnav .background{
     padding: 12px;
     width: 100%;
@@ -142,7 +143,6 @@ body{
 #header .subnav .signout:hover{
     color: #a19bd9;
     cursor: pointer;
-    
 }
 
 #header .button1{

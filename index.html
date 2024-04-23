@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>King_Of_Melody</title>
     <link rel="stylesheet" href="assets/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://kit.fontawesome.com/d3a938e050.js" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ef9bfced87.js" crossorigin="anonymous"></script>
 </head>
@@ -23,22 +24,21 @@
                 </div>
                 <div class="player" >
                     <div class="nav">
-                        <p class = "username" id = "username">
+                        <div class = "username" id = "username">
                             KING_OF_MELODY
-                            <i class="nav-arrow-down fa-solid fa-angle-down" onclick="icon_arrow(this)"></i>
-                        </p>
+                            <span class="material-symbols-outlined" id="icon_nar">
+                                keyboard_arrow_up
+                            </span>
+                        </div>
                         <div class="subnav" id = "subnav">
                             <div class="background">
-                                <a href="">
+                                <a href="profile.html">
                                     <div class="profile">HỒ SƠ</div>
                                 </a>
-    
-                                
                                 <a href="startpage.html">
                                     <div class="signout">ĐĂNG XUẤT</div>
                                 </a>
                             </div>
-                            
                         </div>                      
                     </div>                            
                     <!-- <button class="button1">
@@ -72,9 +72,9 @@
     <div id="footer">
         <div class="menu_btn">
                 <button class="menu_btn_btn">
-                    <div class="menu_btn_dt">
+                    <div class="menu_btn_dt" id = "go_to_setting">
                         <i class="fa-solid fa-gear"></i>
-                        <span><b><a href="setting.html">CÀI ĐẶT</a></b></span>
+                        <span><b>CÀI ĐẶT</b></span>
                     </div>
                 </button>
                 <button class="menu_btn_btn">

@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  res.render('home');
+  res.redirect('/');
 });
 
 app.listen(port, () => {

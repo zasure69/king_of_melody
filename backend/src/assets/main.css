@@ -196,7 +196,7 @@ body{
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-top: 10%;
+    padding-top: 3%;
     padding-left: 6%;
     width: 40%;
 }

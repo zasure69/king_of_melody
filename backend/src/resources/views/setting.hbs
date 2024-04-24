@@ -1,0 +1,68 @@
+<form method="post" action="/" class="setting_container">
+        <p>SETTING</p>
+        <div class="menu">
+            <div class="selc">
+                <div class="ef_volume">
+                    <p class="name">EFFECT VOLUME</p>
+                    <div class="set">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">
+                                graphic_eq
+                            </span>
+                        </div>
+                        <input name="range_effect" type="range" class="rangeslider" minlength="0" maxlength="100">
+                    </div>
+                </div>
+            </div>
+            <div class="selc">
+                <div class="ef_volume">
+                    <p class="name">MUSIC VOLUME</p>
+                    <div class="set">
+                        <div class="icon">
+                            <span class="material-symbols-outlined">
+                                music_note
+                            </span>
+                        </div>
+                        <input name="range_volume" type="range" class="rangeslider" minlength="0" maxlength="100">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space"></div>
+            <div class="space"></div>
+
+            <div class="selc_bot">
+                <div class="ic_bot">
+                    <span class="material-symbols-outlined" id="icon_sound">
+                        volume_up
+                    </span> 
+                    <p class="text_bot" id="text_sound">SOUND ON</p>
+                    <div class="ani_bot">
+                        <input name="check_sound" type="checkbox" class="toggle" id="check_sound" checked>
+                    </div>
+                </div>
+
+                <div class="ic_bot">
+                    <span class="material-symbols-outlined" id="icon_eff">
+                        blur_on
+                    </span>
+                    <p class="text_bot" id="text_eff">EFFECT ON</p>
+                    <div class="ani_bot">
+                        <input name="check_eff" type="checkbox" class="toggle" id="check_eff" checked>
+                    </div>
+                </div>
+
+                <div class="ic_bot">
+                    <span class="material-symbols-outlined" id="icon_screen">
+                        fullscreen_exit
+                    </span>
+                    <p class="text_bot" id="text_screen">FULLSCREEN OFF</p>
+                    <div class="ani_bot">
+                        <input name="check_screen" type="checkbox" class="toggle" id="check_screen">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type ="submit" id="back_home">CLOSE</button>
+    </form>
+    <script src="setting.js"></script>

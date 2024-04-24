@@ -25,20 +25,21 @@ text_xep_hang.onclick = function() {
 create_click.onclick = function(){
   modal_create_room.style.display = "flex";
 }
+
 let sub = true;
-let icon_arrow = function(icon){
-  icon.classList.toggle('fa-angle-up');
-}
+let subnav  = document.getElementById("subnav");
 document.getElementById("username").onclick = function()
 {
-  subnav = document.getElementById("subnav");
+  let icon_nar = document.getElementById("icon_nar");
   if (sub === true)
   {
+    icon_nar.textContent = "keyboard_arrow_down";
     subnav.style.display = "flex";
     sub = false;
   }
   else
   {
+    icon_nar.textContent = "keyboard_arrow_up";
     subnav.style.display = "none";
     sub = true;
   }
@@ -71,4 +72,8 @@ window.onclick = function(event) {
   if (event.target == modal_create_room) {
     modal_create_room.style.display = "none";
   }
+}
+
+document.getElementById("go_to_setting").onclick = function(){
+  window.location.href = "setting.html"
 }

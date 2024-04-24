@@ -55,3 +55,6 @@ document.getElementById("check_screen").onclick = function()
         fl_screen = true;
     }
 }
+document.getElementById("back_home").onclick = function(){
+    window.location.href = "index.html";
+}

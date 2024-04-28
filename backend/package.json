@@ -23,7 +23,8 @@
   "homepage": "https://github.com/zasure69/king_of_melody#readme",
   "dependencies": {
     "express": "^4.19.2",
-    "express-handlebars": "^7.1.2"
+    "express-handlebars": "^7.1.2",
+    "mongoose": "^8.3.2"
   },
   "devDependencies": {
     "husky": "^9.0.11",

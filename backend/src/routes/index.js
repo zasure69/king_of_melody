@@ -6,6 +6,7 @@ const playsingleRouter = require('./playsingle');
 const profileRouter = require('./profile');
 const startRouter = require('./start');
 const loginRouter = require('./login');
+const testRouter = require('./test');
 
 
 function route(app) {
@@ -20,6 +21,8 @@ function route(app) {
     app.use('/playmulti', playmultiRouter);
 
     app.use('/playsingle', playsingleRouter);
+
+    app.use('/test', testRouter);
 
     app.use('/', homeRouter);
     

@@ -6,10 +6,15 @@ const app = express()
 const port = 3000
 
 const route = require('./routes');
+const db = require('./config/db');
+
+//Connect DB
+db.connect();
 
 app.use(express.urlencoded({
   extended: true
 }));
+
 app.use(express.json());
 
 //static files
@@ -22,6 +27,7 @@ app.use(morgan('combined'))
 app.engine('hbs', handlebars.engine({
   extname: 'hbs'
 }))
+
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'resources/views'))
 

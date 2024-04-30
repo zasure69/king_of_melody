@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 async function connect() {
     try {
-        await mongoose.connect('mongodb://localhost:27017/kingofmelody', {
+        await mongoose.connect('mongodb+srv://zasureh69:HD8d2ZNETWZlpXl0@cluster0.eglftpe.mongodb.net/king_of_melody', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
@@ -10,6 +10,5 @@ async function connect() {
         console.log('Connect failure!!!');
     }
 }
-
 
 module.exports = { connect };

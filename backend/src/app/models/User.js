@@ -48,6 +48,34 @@ const userSchema = new Schema({
     multiWinGames: {
         type: Number,
         default: 0
+    },
+    MusicVL: {
+        type: Number,
+        default: 0.5
+    },
+    EffectVL: {
+        type: Number,
+        default: 0.5
+    },
+    IsSoundOn: {
+        type: Boolean,
+        default: true
+    },
+    IsEffectOn: {
+        type: Boolean,
+        default: true
+    },
+    IsFullScreen: {
+        type: Boolean,
+        default: false
+    },
+    Level: {
+        type: Number,
+        default: 1
+    },
+    CurExp: {
+        type: Number,
+        default: 0
     }
 });
 

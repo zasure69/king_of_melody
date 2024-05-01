@@ -6,7 +6,7 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        maxLength: 255,
+        maxLength: 255
     },
     email: {
         type: String,
@@ -49,26 +49,6 @@ const userSchema = new Schema({
         type: Number,
         default: 0
     },
-    MusicVL: {
-        type: Number,
-        default: 0.5
-    },
-    EffectVL: {
-        type: Number,
-        default: 0.5
-    },
-    IsSoundOn: {
-        type: Boolean,
-        default: true
-    },
-    IsEffectOn: {
-        type: Boolean,
-        default: true
-    },
-    IsFullScreen: {
-        type: Boolean,
-        default: false
-    },
     Level: {
         type: Number,
         default: 1
@@ -79,4 +59,4 @@ const userSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

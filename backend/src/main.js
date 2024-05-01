@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const path = require('path')
 const handlebars = require('express-handlebars')
+const MenthodOverride = require('method-override')
 const app = express()
 const port = 3000
 
@@ -23,9 +24,14 @@ app.use(express.static(path.join(__dirname)))
 //HTTP logger
 app.use(morgan('combined'))
 
+app.use(MenthodOverride('_method'))
+
 //Template engine
 app.engine('hbs', handlebars.engine({
-  extname: 'hbs'
+  extname: 'hbs',
+  helpers: {
+    sum: (a, b) => a + b,
+  }
 }))
 
 app.set('view engine', 'hbs')

@@ -1,10 +1,12 @@
 
+
 class homeController {
     index(req, res) {
         res.render('home')
     }
-    post(req, res) {
-        res.redirect('/');
+    update(req, res, next) {
+        // res.redirect('/');
+        res.json(req.body);
     }
 }
 

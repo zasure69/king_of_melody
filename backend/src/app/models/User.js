@@ -50,7 +50,15 @@ const userSchema = new Schema({
     multiWinGames: {
         type: Number,
         default: 0
+    },
+    Level: {
+        type: Number,
+        default: 1
+    },
+    CurExp: {
+        type: Number,
+        default: 0
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

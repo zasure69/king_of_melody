@@ -1,4 +1,4 @@
-<form method="post" action="/" class="setting_container">
+<form method="post" action="/?_method=PUT" class="setting_container">
         <p>SETTING</p>
         <div class="menu">
             <div class="selc">
@@ -10,7 +10,7 @@
                                 graphic_eq
                             </span>
                         </div>
-                        <input name="range_effect" type="range" class="rangeslider" minlength="0" maxlength="100">
+                        <input name="EffectVL" type="range" class="rangeslider" minlength="0" maxlength="100">
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                                 music_note
                             </span>
                         </div>
-                        <input name="range_volume" type="range" class="rangeslider" minlength="0" maxlength="100">
+                        <input name="MusicVL" type="range" class="rangeslider" minlength="0" maxlength="100">
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     </span> 
                     <p class="text_bot" id="text_sound">SOUND ON</p>
                     <div class="ani_bot">
-                        <input name="check_sound" type="checkbox" class="toggle" id="check_sound" checked>
+                        <input name="IsSoundOn" type="checkbox" class="toggle" id="check_sound" checked>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                     </span>
                     <p class="text_bot" id="text_eff">EFFECT ON</p>
                     <div class="ani_bot">
-                        <input name="check_eff" type="checkbox" class="toggle" id="check_eff" checked>
+                        <input name="IsEffectOn" type="checkbox" class="toggle" id="check_eff" checked>
                     </div>
                 </div>
 
@@ -58,7 +58,7 @@
                     </span>
                     <p class="text_bot" id="text_screen">FULLSCREEN OFF</p>
                     <div class="ani_bot">
-                        <input name="check_screen" type="checkbox" class="toggle" id="check_screen">
+                        <input name="IsFullScreen" type="checkbox" class="toggle" id="check_screen">
                     </div>
                 </div>
             </div>

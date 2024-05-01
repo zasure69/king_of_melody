@@ -13,8 +13,8 @@ let transporter = nodemailer.createTransport({
     debug: true,
     secureConnection: false,
     auth: {
-        user: "haun11723@gmail.com",
-        pass: "uvdskfujhaxcwwzw"
+        user: "king.of.melody.nhom.11@gmail.com",
+        pass: "nhjjcjtxrzkjyiuy"
     },
     tls: {
         rejectUnauthorized: true
@@ -30,7 +30,7 @@ const sendResetEmail = ({_id, email}, redirectUrl, res) => {
             //xóa thành công
             // gửi email reset password
             const mailOptions = {
-                from: "haun11723@gmail.com",
+                from: "king.of.melody.nhom.11@gmail.com",
                 to: email,
                 subject: "Đặt lại mật khẩu",
                 html: `

@@ -17,8 +17,8 @@ let transporter = nodemailer.createTransport({
     debug: true,
     secureConnection: false,
     auth: {
-        user: "haun11723@gmail.com",
-        pass: "uvdskfujhaxcwwzw"
+        user: "king.of.melody.nhom.11@gmail.com",
+        pass: "nhjjcjtxrzkjyiuy"
     },
     tls: {
         rejectUnauthorized: true
@@ -29,7 +29,7 @@ const sendVerificationEmail = ({_id, email}, res) => {
     const currentUrl = "http://localhost:3000";
     const uniqueString = uuidv4() + _id;
     const mailOptions = {
-        from: process.env.AUTH_EMAIL,
+        from: 'king.of.melody.nhom.11@gmail.com',
         to: email,
         subject: "Xác nhận đăng ký",
         html: `
@@ -108,7 +108,12 @@ class loginController {
                         .hash(formData.password, saltRound)
                         .then((hashPassword) => {
                             formData.password = hashPassword;
-                            const user = new userSchema(formData);
+                            const user = new userSchema({
+                                username: formData.username,
+                                email: formData.email,
+                                password: hashPassword,
+                                verified: false
+                            });
                             user.save()
                                 .then((result) => {
                                     sendVerificationEmail(result, res);

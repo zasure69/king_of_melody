@@ -6,8 +6,8 @@ const playsingleRouter = require('./playsingle');
 const profileRouter = require('./profile');
 const startRouter = require('./start');
 const loginRouter = require('./login');
-const testRouter = require('./test');
-
+const verifyRouter = require('./verify');
+const restPasswordRouter = require('./resetpassword');
 
 function route(app) {
     app.use('/setting', settingRouter);
@@ -22,7 +22,9 @@ function route(app) {
 
     app.use('/playsingle', playsingleRouter);
 
-    app.use('/test', testRouter);
+    app.use('/verify', verifyRouter);
+
+    app.use('/resetpassword', restPasswordRouter);
 
     app.use('/', homeRouter);
     

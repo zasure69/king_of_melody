@@ -6,7 +6,6 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        maxLength: 255,
     },
     email: {
         type: String,
@@ -16,6 +15,9 @@ const userSchema = new Schema({
         type: String,
         required: true,
         minLength: 6
+    },
+    verified: {
+        type: Boolean,
     },
     hardGames: {
         type: Number,

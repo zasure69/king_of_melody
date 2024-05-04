@@ -114,28 +114,30 @@
                     <img src="assets/img/Waste_land.jpg" alt="" class="Waste_land">
                 </div>
             </div>
-
+            <form action="playsingle/?_method=PUT" method="post">
             <div class="select_normal_mode_radio">
                 <label  class="container">Khó
-                    <input type="radio"  name="radio" checked="checked" >
+                    <input type="radio"  name ="mode" value="hard" checked="checked" >
                     <span class="checkmark"></span>
                 </label>
 
                 <label  class="container">Địa ngục
-                    <input type="radio" name="radio" >
+                    <input type="radio" name ="mode" value="hell">
                     <span class="checkmark"></span>
                 </label>
                 
                 <label class="container">Tuyệt vọng
-                    <input type="radio" name="radio" >
+                    <input type="radio" name ="mode" value="no hope">
                     <span class="checkmark"></span>
                 </label>
             </div>
 
             <div class="select_normal_mode_play_button">
-                <button type="submit"  class="playclick"><b><a href="playsingle">PLAY</a></b></button>
+                <button type="submit"  class="playclick"><b>PLAY</b></button>
                 <button type="submit"  class="resumeclick"><b><a href="playsingle">RESUME</a></b></button>
             </div>
+
+            </form>
         </div>
 
     </div>

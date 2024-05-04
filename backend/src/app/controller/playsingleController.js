@@ -7,7 +7,7 @@ class playsingleController {
     index(req, res) {
         const document = fs.readFileSync('../../resources/views/playsingle.hbs', 'utf8');
         const $ = cheerio.load(document);
-        songSchema.aggregate([
+        songsSchema.aggregate([
             { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
             { $sample: { size: 10} }
             ])
@@ -21,6 +21,10 @@ class playsingleController {
                 console.log("Error: ", error);
             })
         res.render('playsingle')
+    }
+    update(req, res, next) {
+        res.redirect("/playsingle");
+        // res.json(req.body); req.body = {"mode": "..."}
     }
 }
 

@@ -5,8 +5,8 @@ class homeController {
         res.render('home')
     }
     update(req, res, next) {
-        // res.redirect('/');
-        res.json(req.body);
+        res.redirect('/');
+        // res.json(req.body);
     }
 }
 

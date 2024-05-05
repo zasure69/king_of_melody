@@ -2,13 +2,13 @@
     <div id="header">
         <div class="left_header">
             <div class="logo">
-                <img src="assets/img/Logo_LTMCB.png" alt="logo" >
+                <img src="/assets/img/Logo_LTMCB.png" alt="logo" >
             </div>
         </div>
         
         <div class="right_header">
                 <div class="ava">
-                    <img src="assets/img/Avatar_header.jpg" alt="" >
+                    <img src="/assets/img/Avatar_header.jpg" alt="" >
                 </div>
                 <div class="indexer" >
                     <div class="nav">
@@ -21,9 +21,9 @@
                                 <a href="profile">
                                     <div class="profile">HỒ SƠ</div>
                                 </a>
-                                <a href="login">
-                                    <div class="signout">ĐĂNG XUẤT</div>
-                                </a>
+                                <form action="/home/logout" method="post">
+                                    <button type ="submit" class="signout">ĐĂNG XUẤT</button>
+                                </form>
                             </div>
                             
                         </div>                      
@@ -48,8 +48,8 @@
         </div>
 
         <div class="button">
-            <img src="assets/img/Speaker.png"  alt="Speaker" class="speaker">
-            <img src="assets/img/lonelygirl.jpg" alt="Lonely Girl" class="girl">
+            <img src="/assets/img/Speaker.png"  alt="Speaker" class="speaker">
+            <img src="/assets/img/lonelygirl.jpg" alt="Lonely Girl" class="girl">
             <a href="playsingle" class="playclick"><b>PLAY</b></a>
             
         </div>
@@ -83,7 +83,7 @@
                 <div class="select_normal_mode_return">
                     <span class = "return_thuong">TRỞ LẠI</span>
                     <div class="select_normal_mode_information">
-                        <img src="assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
+                        <img src="/assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
                         <div class="information">
                             <div class="username">
                                 King_Of_Melody
@@ -103,39 +103,41 @@
 
             <div class="select_normal_mode_img">
                 <div class="select_normal_mode_img_Heaven">
-                    <img src="assets/img/Heaven.jpg" alt="Heaven" class="Heaven"> 
+                    <img src="/assets/img/Heaven.jpg" alt="Heaven" class="Heaven"> 
                 </div>
 
                 <div class="select_normal_mode_img_Hell">
-                    <img src="assets/img/Gates_Of_Hell.png" alt="Gates_Of_Hell" class="Hell">
+                    <img src="/assets/img/Gates_Of_Hell.png" alt="Gates_Of_Hell" class="Hell">
                 </div>
 
                 <div class="select_normal_mode_img_Waste_land">
-                    <img src="assets/img/Waste_land.jpg" alt="" class="Waste_land">
+                    <img src="/assets/img/Waste_land.jpg" alt="" class="Waste_land">
                 </div>
             </div>
-
+            <form action="playsingle/?_method=PUT" method="post">
             <div class="select_normal_mode_radio">
                 <label  class="container">Khó
-                    <input type="radio"  name="radio" checked="checked" >
+                    <input type="radio"  name ="mode" value="hard" checked="checked" >
                     <span class="checkmark"></span>
                 </label>
 
                 <label  class="container">Địa ngục
-                    <input type="radio" name="radio" >
+                    <input type="radio" name ="mode" value="hell">
                     <span class="checkmark"></span>
                 </label>
                 
                 <label class="container">Tuyệt vọng
-                    <input type="radio" name="radio" >
+                    <input type="radio" name ="mode" value="no hope">
                     <span class="checkmark"></span>
                 </label>
             </div>
 
             <div class="select_normal_mode_play_button">
-                <button type="submit"  class="playclick"><b><a href="playsingle">PLAY</a></b></button>
+                <button type="submit"  class="playclick"><b>PLAY</b></button>
                 <button type="submit"  class="resumeclick"><b><a href="playsingle">RESUME</a></b></button>
             </div>
+
+            </form>
         </div>
 
     </div>
@@ -156,7 +158,7 @@
                         
                     </div>
                     <div class="select_rank_mode_information">
-                        <img src="assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
+                        <img src="/assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
                         <div class="information">
                             <div class="username">
                                 King_Of_Melody
@@ -170,18 +172,18 @@
             <div class="select_rank_mode_center">
 
                 <div class="select_rank_mode_img">
-                    <img src="assets/img/avatar.png" alt="" class="img">
+                    <img src="/assets/img/avatar.png" alt="" class="img">
                 </div>
 
                 <div class="select_rank_mode_center_center">
 
                     <div class="select_rank_mode_center_rank_point">
                         <div class="select_rank_mode_rank_img">
-                            <img src="assets/img/rank.png" alt="" class="rank_img">
+                            <img src="/assets/img/rank.png" alt="" class="rank_img">
                             <div class="select_rank_mode_rank">
                                 <b>bronze</b>
                             </div>
-                            <img src="assets/img/rank.png" alt="" class="rank_img">
+                            <img src="/assets/img/rank.png" alt="" class="rank_img">
                         </div>
 
                         <div class="point_number">
@@ -201,7 +203,7 @@
                 </div>
 
                 <div class="select_rank_mode_center_right_rank">
-                    <img src="assets/img/bronzerank.png" alt="" class="rank">
+                    <img src="/assets/img/bronzerank.png" alt="" class="rank">
                 </div>
 
             </div>
@@ -345,4 +347,4 @@
         </div>
     </div> -->
 
-    <script src="modal_normal_rank.js"></script>
+    <script src="/modal_normal_rank.js"></script>

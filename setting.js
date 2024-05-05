@@ -44,12 +44,15 @@ document.getElementById("check_screen").onclick = function()
     icon_screen = document.getElementById("icon_screen")
     if(fl_screen === true)
     {
+        document.exitFullscreen();
         text_screen.textContent = "FULLSCREEN OFF"
         icon_screen.textContent = "fullscreen_exit"
         fl_screen = false;
     }
     else 
     {
+        if(document.fullscreenElement == null)
+         document.documentElement.requestFullscreen();
         text_screen.textContent = "FULLSCREEN ON"
         icon_screen.textContent = "fullscreen"
         fl_screen = true;

@@ -3,10 +3,8 @@ const songSchema = require('../models/Song');
 const cheerio = require('cheerio');
 const fs = require('fs');
 
-
-
 class playmultiController {
-    index(req, res, next) {
+    index(req, res) {
         songSchema.aggregate([
             { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
             { $sample: { size: 10} }
@@ -53,7 +51,6 @@ class playmultiController {
         //   .catch((error) => {
         //     console.error(error);
         // });
-        
     }
     
 }

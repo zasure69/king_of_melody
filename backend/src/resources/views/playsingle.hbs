@@ -78,7 +78,7 @@
                         
                         <div id="progress-control">
                             <div><i class="fa-solid fa-backward"></i></div>
-                            <div><i class="fa-solid fa-play"></i></div>
+                            <div class="btn-play-pause"><i class="fa-solid fa-play"></i></div>    
                             <div><i class="fa-solid fa-forward"></i></div>
                         </div>
                     </div>
@@ -86,18 +86,16 @@
                 </div>
                 <div class="answer">
                     <input type="text" placeholder="Nhập tên bài hát">
-                    
                     <button>Đoán</button>
                 </div>
             </div>
         </div>
+        <input type="hidden" id="songsInput" data-songs="{{curSong}}">
+        <script src="/playsingle.js"></script>
+            {{!-- const audio = new Audio("data:audio/ogg;base64,{{curSong.content}}");
+            function play() {
+            audio.play();
+            }
+        </script> --}}
     </body>
-    <script>
-        const base64Data = {{curSong.content}};
-        // Tạo đối tượng Audio từ dữ liệu Base64
-        const audio = new Audio("data:audio/mpeg;base64,{{curSong.content}}");
-
-        // Phát âm thanh
-        audio.play();
-    </script>
 </html>

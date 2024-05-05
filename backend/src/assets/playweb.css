@@ -19,10 +19,11 @@ body {
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 100%;
     color: white;
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    gap: 3rem;
 }
 
 .container .hint {
@@ -218,4 +219,13 @@ body {
     font-size: 1em;
     background: linear-gradient(132deg, rgb(168,98,230), rgb(122, 57, 214), rgb(69,6, 191),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(168, 228, 236));
 }
+
+/* .btn-play-pause {
+    position: relative;
+    width: 2.5em;
+    height: 2.5em;
+    border: none;
+    opacity: 1;
+    border-radius: 50%;
+} */
 

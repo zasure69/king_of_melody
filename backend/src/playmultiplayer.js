@@ -45,7 +45,7 @@ function loadSongs() {
         src: ["data:audio/ogg;base64," + songs[i].content],
         autoplay: false,
         loop: false,
-        volume: 0.5,
+        volume: 0.3,
         format: ["ogg"],
         onload: function() {
           loadedCount++;
@@ -153,7 +153,8 @@ List_song.prototype = {
     //   if (time == 0)
     //     clearInterval(countdown);
     // }, 1000)
-    this.play(index);
+    count = -1;
+    ctrlIcon.click();
   },
 
   volume: function(val){
@@ -187,7 +188,7 @@ decreaseVolume.addEventListener('click', () =>{
 });
 
 ctrlIcon.addEventListener('click', ()=>{
-  console.log(time_song);
+  //console.log(time_song);
   
   if (ctrlIcon.classList.contains("fa-pause"))
   {
@@ -195,7 +196,6 @@ ctrlIcon.addEventListener('click', ()=>{
     count++;
     if (count == 1){
       var time = time_song[player.index];
-      //totalDuration = 
       countdown = setInterval(() => {
         time--;
         calculate_time_song(time);
@@ -212,6 +212,19 @@ ctrlIcon.addEventListener('click', ()=>{
   else
   {
     player.pause();
+    count++;
+    if (count == 1){
+      var time = time_song[player.index];
+      countdown = setInterval(() => {
+        time--;
+        calculate_time_song(time);
+        if (time == 0){
+          clearInterval(countdown);
+          guessButton.click();
+        }
+          
+      }, 1000)
+    }
     ctrlIcon.classList.remove("fa-play");
     ctrlIcon.classList.add("fa-pause");
   }
@@ -231,9 +244,7 @@ volumeSlider.addEventListener('mousemove', function(){
 });
 
 function playNextSong() {
-  
   player.next();
-
 };
 // Hàm để kiểm tra đoán đúng tên bài hát
 guessButton.addEventListener('click', () => {

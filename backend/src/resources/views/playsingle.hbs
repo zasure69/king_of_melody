@@ -12,64 +12,51 @@
             <div class="hint">
                 <h2>Bài hát gợi ý</h2>
                 <div class="hintlist-1">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
+                    <h3>{{songs.[0].name}}</h3>
+                    <p>{{songs.[0].singer}}</p>
                 </div>
                 <div class="hintlist-2">
-                    <h3>Chúng ta của tương lai</h3>
-                    <p>Sơn Tùng</p>
+                    <h3>{{songs.[1].name}}</h3>
+                    <p>{{songs.[1].name}}</p>
                 </div>
                 <div class="hintlist-3">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
+                    <h3>{{songs.[2].name}}</h3>
+                    <p>{{songs.[2].singer}}</p>
                 </div>
                 <div class="hintlist-4">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
+                    <h3>{{songs.[3].name}}</h3>
+                    <p>{{songs.[3].singer}}</p>
                 </div>
                 <div class="hintlist-5">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
+                    <h3>{{songs.[4].name}}</h3>
+                    <p>{{songs.[4].singer}}</p>
                 </div>
                 <div class="hintlist-6">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
+                    <h3>{{songs.[5].name}}</h3>
+                    <p>{{songs.[5].singer}}</p>
                 </div>
                 <div class="hintlist-7">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
+                    <h3>{{songs.[6].name}}</h3>
+                    <p>{{songs.[6].singer}}</p>
                 </div>
                 <div class="hintlist-8">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
+                    <h3>{{songs.[7].name}}</h3>
+                    <p>{{songs.[7].singer}}</p>
                 </div>
                 <div class="hintlist-9">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
+                    <h3>{{songs.[8].name}}</h3>
+                    <p>{{songs.[8].singer}}</p>
                 </div>
                 <div class="hintlist-10">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
+                    <h3>{{songs.[9].name}}</h3>
+                    <p>{{songs.[9].singer}}</p>
                 </div>
-                <div class="hintlist-10">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
-                </div>
-                <div class="hintlist-10">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
-                </div>
-                <div class="hintlist-10">
-                    <h3>Super Shy</h3>
-                    <p>Newjeans</p>
-                </div>
-                
             </div>
             <div class="play-area">
                 <div class="info">
                     <div class="round-info">
                         Round<br>
-                        <h3>6/10</h3>
+                        <h3>1/10</h3>
                     </div>
                     <div class="player-info">
                         <img src="assets/img/ava-crop.png" alt="">
@@ -83,7 +70,7 @@
                     </div>
                 
                 <div class="disc">
-                    
+                    {{!-- <audio src="data:audio/mpeg;base64,{{curSong.content}}" id="audio" autoplay controls></audio> --}}
                     <img src="assets/img/dianhac2.png" class="discimg" alt="disc">
                     
                     <div class="btn">
@@ -105,4 +92,12 @@
             </div>
         </div>
     </body>
+    <script>
+        const base64Data = {{curSong.content}};
+        // Tạo đối tượng Audio từ dữ liệu Base64
+        const audio = new Audio("data:audio/mpeg;base64,{{curSong.content}}");
+
+        // Phát âm thanh
+        audio.play();
+    </script>
 </html>

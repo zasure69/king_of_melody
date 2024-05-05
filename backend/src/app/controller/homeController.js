@@ -24,8 +24,8 @@ class homeController {
             })
     }
     update(req, res, next) {
-        // res.redirect('/');
-        res.json(req.body);
+        res.render('home')
+        // res.json(req.body);
     }
 }
 

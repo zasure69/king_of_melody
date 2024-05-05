@@ -5,4 +5,5 @@ const playmultiController = require('../app/controller/playmultiController');
 
 router.get('/', playmultiController.index);
 
+
 module.exports = router;

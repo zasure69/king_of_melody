@@ -236,11 +236,11 @@ body {
 }
 
 .container .disc .btn #progress-control div:nth-child(1){
-    rotate: -90deg;
+    rotate: 0deg;
 }
 
 .container .disc .btn #progress-control div:nth-child(3){
-    rotate: -90deg;
+    rotate: 0deg;
 }
 
 .container .play-area .answer{

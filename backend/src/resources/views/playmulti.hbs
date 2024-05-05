@@ -5,7 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>King of Melody</title>
         <link rel="stylesheet" href="../assets/playweb-multi.css">
-        <script src="https://kit.fontawesome.com/d42216d8d0.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/d42216d8d0.js" crossorigin="anonymous"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" 
+        integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js" 
+        integrity="sha512-+wqa4/aOL4vwhL637A4p+6epqhUHDqpEfYJa1+PlzlMf908CSOb3xtIeKwZWh5Q0Q/R2nYUKxH4vvcQg+k8KKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js" 
+        integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
         <div class="container">
@@ -17,7 +23,7 @@
                             <img src="assets/img/ava-crop.png" alt="">
                             <div class="score-parallelogram">
                                 <div class="score-wrapper">
-                                    <h2 class="score-label">1000</h2> 
+                                    <h2 class="score-label" id="Score_player1">1000</h2> 
                                 </div>
                             </div>
                         </div>
@@ -26,11 +32,11 @@
                     <div class="round-time">
                         <div class="round-info">
                             Round<br>
-                            <h3>6/10</h3>
+                            <h3 id="Round_play">1/10</h3>
                         </div>
                         <div class="time-info">
                             Time<br>
-                            <h3>12:30</h3>
+                            <h3 id="Time_duration">12:30</h3>
                         </div>
                     </div>
                     <div class="player2-info">
@@ -38,7 +44,7 @@
                             <img src="/assets/img/ava-crop.png" alt="">
                             <div class="score-parallelogram">
                                 <div class="score-wrapper">
-                                    <h2 class="score-label">1000</h2> 
+                                    <h2 class="score-label" id="Score_player1">1000</h2> 
                                 </div>
                             </div>
                         </div>
@@ -51,22 +57,25 @@
                     <img src="/assets/img/dianhac2.png" class="discimg" alt="disc">
                     
                     <div class="btn">
-                        <div><input type="range" value="0" id="progress"></div>
+                        <div><input type="range" min="0" max="100" value="30" id="progress"></div>
                         
                         <div id="progress-control">
-                            <div><i class="fa-solid fa-backward"></i></div>
-                            <div><i class="fa-solid fa-play"></i></div>
-                            <div><i class="fa-solid fa-forward"></i></div>
+                            <div><i class="fa-solid fa-volume-low" id="increase-volume"></i></div>
+                            <div><i class="fa-solid fa-pause" id="ctrlIcon"></i></div>
+                            <div><i class="fa-solid fa-volume-high" id="decrease-volume"></i></div>
                         </div>
                     </div>
                     
                 </div>
                 <div class="answer">
-                    <input type="text" placeholder="Nhập tên bài hát">
+                    <input type="text" id="answer_song" placeholder="Nhập tên bài hát">
                     
-                    <button>Đoán</button>
+                    <button id="guessButton">Đoán</button>
                 </div>
             </div>
         </div>
+        <input type="hidden" id="songsInput" data-songs="{{songs}}">
+
+        <script src="playmultiplayer.js"></script>
     </body>
 </html>

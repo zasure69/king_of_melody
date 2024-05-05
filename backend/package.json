@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/zasure69/king_of_melody#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
+    "howler": "^2.2.4",
     "mongoose": "^8.3.2"
   },
   "devDependencies": {

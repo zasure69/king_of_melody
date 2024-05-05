@@ -63,7 +63,7 @@ function calculateDuration() {
     totalDuration += Math.ceil(play_song[j].duration());
     time_song.push(Math.ceil(play_song[j].duration() + 30));
   }
-  console.log("Tổng thời lượng của các bài hát:", totalDuration);
+  //console.log("Tổng thời lượng của các bài hát:", totalDuration);
   calculate_time(totalDuration);
 }
 function calculate_time(totalDuration){

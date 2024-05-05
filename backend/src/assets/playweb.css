@@ -215,7 +215,14 @@ body {
     height: 3em;
     border-radius: 36px;
     color: white;
-    font-size: 1em;
-    background: linear-gradient(132deg, rgb(168,98,230), rgb(122, 57, 214), rgb(69,6, 191),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(168, 228, 236));
+    font-size: 1.2em;
+    text-shadow: 0 0.125em 0.4em black;
+    background-color: #6cb928;
+    background-image: radial-gradient(150% 160% at 50% 15%, #fff 0, transparent 30%);
+}
+
+.container .play-area .answer button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
 }
 

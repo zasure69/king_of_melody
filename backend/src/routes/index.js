@@ -10,13 +10,15 @@ const verifyRouter = require('./verify');
 const restPasswordRouter = require('./resetpassword');
 
 function route(app) {
+
+
     app.use('/setting', settingRouter);
     
     app.use('/login', loginRouter);
 
     app.use('/profile', profileRouter);
 
-    app.use('/start', startRouter);
+    app.use('/', startRouter);
 
     app.use('/playmulti', playmultiRouter);
 
@@ -26,7 +28,7 @@ function route(app) {
 
     app.use('/resetpassword', restPasswordRouter);
 
-    app.use('/', homeRouter);
+    app.use('/home', homeRouter);
     
 }
 

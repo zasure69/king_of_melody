@@ -3,7 +3,8 @@ const router = express.Router();
 
 const homeController = require('../app/controller/homeController');
 
-router.get('/', homeController.index);
-router.post('/', homeController.update);
+router.get('/:userId', homeController.index);
+router.post('/logout', homeController.del);
+router.put('/', homeController.update);
 
 module.exports = router;

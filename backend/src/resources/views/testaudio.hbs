@@ -1,0 +1,15 @@
+{{!-- <audio id="audio" controls volume="0.5">
+    <source src="data:audio/mpeg;base64,{{curSong.content}}" > 
+</audio> --}}
+<p>{{curSong.name}}</p>
+<p>{{ran}}</p>
+<button id="play" onclick="play()">PLAY</button>
+<script>
+    const audio = new Audio("data:audio/ogg;base64,{{curSong.content}}");
+
+    function play() {
+        audio.play();
+    }  
+</script>
+
+

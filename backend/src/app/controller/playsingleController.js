@@ -52,7 +52,6 @@ class playsingleController {
         }
          
         shuffleArray(hintlist)
-
         res.render('playsingle', { songs: JSON.stringify(listsong), hintlist})
     }
     update(req, res, next) {

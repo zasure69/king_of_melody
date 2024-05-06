@@ -275,7 +275,7 @@ guessButton.addEventListener('click', () => {
         else
           score += 10;
         score_player1.textContent = score;
-        setTimeout(playNextSong, 2500);
+        setTimeout(playNextSong, 1000);
         answer_song.value = "";
       }
       else if ( answer_value != songs[index].name.toLowerCase() || answer_song.value == "")
@@ -289,7 +289,7 @@ guessButton.addEventListener('click', () => {
           player.songs[player.index].stop();
         }
         clearInterval(countdown); // Dừng đếm ngược
-        setTimeout(playNextSong, 5500);
+        setTimeout(playNextSong, 1000);
         answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
       }
       click = false;

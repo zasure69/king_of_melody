@@ -3,10 +3,11 @@
   // Lấy các phần tử DOM cần sử dụng
 // import { Howl, Howler } from 'howler';
 // const { Howl, Howler } = require('howler');
-let volumeSlider = document.querySelector("#progress");
+let songSlider = document.querySelector("#progress");
 let increaseVolume = document.querySelector("#increase-volume");
 let decreaseVolume = document.querySelector("#decrease-volume");
 let ctrlIcon = document.querySelector("#ctrlIcon");
+let disc = document.getElementById("music_disc");
 let guessButton = document.getElementById("guessButton");
 let time = document.getElementById("Time_duration");
 let round = document.getElementById("Round_play");
@@ -16,7 +17,7 @@ let score_player2 = document.getElementById("Score_player2");
 const songsInput = document.getElementById('songsInput');
 const songs = JSON.parse(songsInput.dataset.songs);
 const length = songs.length;
-// Sử dụng biến songs trong các xử lý JavaScript khác
+//Sử dụng biến songs trong các xử lý JavaScript khác
 for(let i = 0; i < length; i++)
 {
   console.log(songs[i].name);
@@ -30,9 +31,10 @@ var incorrect_answer = new Howl({
   src: ['assets/sound/sound_incorrect_answer.mp3'],
 })
 
+
 let play_song = [];
 let index = 0;
-let totalDuration = 0;
+let totalDuration = 0, dem_tg = 0;
 let time_song = [];
 function loadSongs() {
   return new Promise(function(resolve, reject) 
@@ -42,17 +44,35 @@ function loadSongs() {
     {
       play_song.push(
         new Howl({
-        src: ["data:audio/ogg;base64," + songs[i].content],
-        autoplay: false,
-        loop: false,
-        volume: 0.3,
-        format: ["ogg"],
-        onload: function() {
-          loadedCount++;
-          if (loadedCount === play_song.length) {
-            resolve();
+          src: ["data:audio/ogg;base64," + songs[i].content],
+          autoplay: false,
+          loop: false,
+          volume: 0.3,
+          format: ["ogg"],
+          onload: function() {
+            loadedCount++;
+            if (loadedCount === play_song.length) {
+              resolve();
+            }
+          },
+          onplay: function(){
+            disc.style.animationPlayState = "running";
+            
+          },
+          onpause: function(){
+            disc.style.animationPlayState = "paused";
+            clearInterval(dem_tg);
+          },
+          onend: function(){
+            disc.style.animationPlayState = "paused";
+            clearInterval(dem_tg);
+            songSlider.value = 0;
+            if (ctrlIcon.classList.contains('fa-play'))
+            {
+              ctrlIcon.classList.remove("fa-play");
+              ctrlIcon.classList.add("fa-pause");
+            }
           }
-        }
         })
       );
     }
@@ -63,7 +83,6 @@ function calculateDuration() {
     totalDuration += Math.ceil(play_song[j].duration());
     time_song.push(Math.ceil(play_song[j].duration() + 30));
   }
-  //console.log("Tổng thời lượng của các bài hát:", totalDuration);
   calculate_time(totalDuration);
 }
 function calculate_time(totalDuration){
@@ -112,16 +131,11 @@ loadSongs()
     console.log("Đã xảy ra lỗi:", error);
   });
 
-
-// function countdown(time_songs)
-// {
-
-// }
 var List_song = function (songs) {
   this.songs = songs;
   this.index = 0;
 }
-let countdown = 0, count = 0;
+let countdown = 0, count = 0, click = true, score = 0;
 
 
 List_song.prototype = {
@@ -130,7 +144,6 @@ List_song.prototype = {
     if (this.songs[index]) {
       this.songs[index].play();
       this.index = index;
-      
     }
   },
   
@@ -144,16 +157,10 @@ List_song.prototype = {
     let answer_song = document.getElementById("answer_song");
     answer_song.value = "";
     index = this.index + 1;
+    console.log("index: ", index);
     round.textContent = (index + 1) + "/10";
-    // var time = time_song[index];
-    // //totalDuration = 
-    // countdown = setInterval(() => {
-    //   time--;
-    //   calculate_time_song(time);
-    //   if (time == 0)
-    //     clearInterval(countdown);
-    // }, 1000)
     count = -1;
+    //count_guess == 0;
     ctrlIcon.click();
   },
 
@@ -166,30 +173,25 @@ List_song.prototype = {
 var player = new List_song(play_song);
 
 increaseVolume.addEventListener('click', () => {
-  let volume = parseInt(volumeSlider.value);
-  volume -= 10;
-  if (volume < 0) {
-    volume = 0;
+  let volume = play_song[index].volume();
+  volume += 0.1;
+  if (volume > 1) {
+    volume = 1;
   }
-  let volume_1 = volume / 100;
-  player.volume(volume_1);
-  volumeSlider.value = volume;
+  player.volume(volume);
 });
 
 decreaseVolume.addEventListener('click', () =>{
-  let volume = parseInt(volumeSlider.value);
-  volume += 10;
-  if (volume > 100) {
-    volume = 100;
+  let volume = play_song[index].volume();
+  volume -= 0.1;
+  if (volume < 0) {
+    volume = 0;
   }
-  let volume_1 = volume / 100;
-  player.volume(volume_1);
-  volumeSlider.value = volume;
+  player.volume(volume);
 });
 
+let tmp = 0;
 ctrlIcon.addEventListener('click', ()=>{
-  //console.log(time_song);
-  
   if (ctrlIcon.classList.contains("fa-pause"))
   {
     player.play(index);
@@ -198,6 +200,7 @@ ctrlIcon.addEventListener('click', ()=>{
       var time = time_song[player.index];
       countdown = setInterval(() => {
         time--;
+        tmp = time;
         calculate_time_song(time);
         if (time == 0){
           clearInterval(countdown);
@@ -208,39 +211,41 @@ ctrlIcon.addEventListener('click', ()=>{
     }
     ctrlIcon.classList.remove("fa-pause");
     ctrlIcon.classList.add("fa-play");
+    click = true;
+    dem_tg = setInterval(updateSlider, 1000);
   }
   else
   {
     player.pause();
     count++;
     if (count == 1){
-      var time = time_song[player.index];
+      time = time_song[player.index];
       countdown = setInterval(() => {
         time--;
+        tmp = time;
         calculate_time_song(time);
         if (time == 0){
           clearInterval(countdown);
           guessButton.click();
         }
-          
       }, 1000)
     }
     ctrlIcon.classList.remove("fa-play");
     ctrlIcon.classList.add("fa-pause");
+    clearInterval(dem_tg);
   }
 });
-volumeSlider.addEventListener('mousedown', function(){
-  let volume = parseInt(volumeSlider.value);
-  volume += 10;
-  let volume_1 = volume / 100;
-  player.volume(volume_1);
-});
-
-volumeSlider.addEventListener('mousemove', function(){
-  let volume = parseInt(volumeSlider.value);
-  volume += 10;
-  let volume_1 = volume / 100;
-  player.volume(volume_1);
+function updateSlider() {
+  var currentTime = play_song[index].seek();
+  var duration = play_song[index].duration();
+  songSlider.max = duration;
+  var progress = currentTime;
+  songSlider.value = progress;
+}
+songSlider.addEventListener("input", function() {
+  var progress = parseInt(songSlider.value);
+  var seekTime = progress;
+  play_song[index].seek(seekTime);
 });
 
 function playNextSong() {
@@ -250,36 +255,49 @@ function playNextSong() {
 guessButton.addEventListener('click', () => {
   let answer_song = document.getElementById("answer_song");
   let answer_value = answer_song.value.trim().toLowerCase();
+  disc.style.animationPlayState = "paused";
   count = 0;
-  if (answer_value == songs[index].name.toLowerCase())
+  if (click == true)
   {
-    correct_answer.play();
-    if (ctrlIcon.classList.contains("fa-pause")){
-      ctrlIcon.classList.remove("fa-pause");
-      ctrlIcon.classList.add("fa-play");
-    }
-    if (player.songs[player.index]){
-      player.songs[player.index].stop();
-    }
-    clearInterval(countdown); // Dừng đếm ngược
-    setTimeout(playNextSong, 2500);
-    answer_song.value = "";
+    if (answer_value == songs[index].name.toLowerCase())
+      {
+        correct_answer.play();
+        if (ctrlIcon.classList.contains("fa-pause")){
+          ctrlIcon.classList.remove("fa-pause");
+          ctrlIcon.classList.add("fa-play");
+        }
+        if (player.songs[player.index]){
+          player.songs[player.index].stop();
+        }
+        clearInterval(countdown); // Dừng đếm ngược
+        if (tmp != 0)
+          score += tmp * 10;
+        else
+          score += 10;
+        score_player1.textContent = score;
+        setTimeout(playNextSong, 2500);
+        answer_song.value = "";
+      }
+      else if ( answer_value != songs[index].name.toLowerCase() || answer_song.value == "")
+      {
+        incorrect_answer.play();
+        if (ctrlIcon.classList.contains("fa-pause")){
+          ctrlIcon.classList.remove("fa-pause");
+          ctrlIcon.classList.add("fa-play");
+        }
+        if (player.songs[player.index]){
+          player.songs[player.index].stop();
+        }
+        clearInterval(countdown); // Dừng đếm ngược
+        setTimeout(playNextSong, 5500);
+        answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
+      }
+      click = false;
   }
-  else if ( answer_value != songs[index].name.toLowerCase() || answer_song.value == "")
-  {
-    incorrect_answer.play();
-    if (ctrlIcon.classList.contains("fa-pause")){
-      ctrlIcon.classList.remove("fa-pause");
-      ctrlIcon.classList.add("fa-play");
-    }
-    if (player.songs[player.index]){
-      player.songs[player.index].stop();
-    }
-    clearInterval(countdown); // Dừng đếm ngược
-    setTimeout(playNextSong, 5500);
-    answer_song.value = songs[player.index].name.toLowerCase();
-  }
+  
+  //}
 })
+
 let answer_song = document.getElementById("answer_song");
 let answer_value = answer_song.value.trim().toLowerCase();
 answer_song.addEventListener('keypress', function(event){

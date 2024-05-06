@@ -87,39 +87,39 @@ body {
     justify-content: space-evenly;
 }
 
-.container .play-area .info .round-info {
+.container .play-area .info .round-info .point-info {
     line-height: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.play-area .info .round-info h3{
+.play-area .info .round-info .point-info h3{
     font-size: 2em;
 }
 
-.container .play-area .info .player-info {
+.container .play-area .info .player-info .point-info{
     display: flex;
     width: 16em;
     line-height: 4em;
 }
 
-.container .play-area .info .player-info p {
+.container .play-area .info .player-info .point-info p {
     font-size: 2em;
 }
 
-.container .play-area .info .player-info img{
+.container .play-area .info .player-info .point-info img{
     width: 5em;
 }
 
-.container .play-area .info .time-info {
+.container .play-area .info .time-info .point-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     line-height: 2em;
 }
 
-.container .play-area .info .time-info h3 {
+.container .play-area .info .time-info .point-info h3 {
     font-size: 2em;
 }
 

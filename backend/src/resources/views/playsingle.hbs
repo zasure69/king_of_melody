@@ -6,57 +6,29 @@
         <title>King of Melody</title>
         <link rel="stylesheet" href="../assets/playweb.css">
         <script src="https://kit.fontawesome.com/d42216d8d0.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" 
+        integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js" 
+        integrity="sha512-+wqa4/aOL4vwhL637A4p+6epqhUHDqpEfYJa1+PlzlMf908CSOb3xtIeKwZWh5Q0Q/R2nYUKxH4vvcQg+k8KKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js" 
+        integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
         <div class="container">
             <div class="hint">
                 <h2>Bài hát gợi ý</h2>
+                {{#each hintlist}}
                 <div class="hintlist-1">
-                    <h3>{{songs.[0].name}}</h3>
-                    <p>{{songs.[0].singer}}</p>
+                    <h3>{{this.name}}</h3>
+                    <p>{{this.singer}}</p>
                 </div>
-                <div class="hintlist-2">
-                    <h3>{{songs.[1].name}}</h3>
-                    <p>{{songs.[1].name}}</p>
-                </div>
-                <div class="hintlist-3">
-                    <h3>{{songs.[2].name}}</h3>
-                    <p>{{songs.[2].singer}}</p>
-                </div>
-                <div class="hintlist-4">
-                    <h3>{{songs.[3].name}}</h3>
-                    <p>{{songs.[3].singer}}</p>
-                </div>
-                <div class="hintlist-5">
-                    <h3>{{songs.[4].name}}</h3>
-                    <p>{{songs.[4].singer}}</p>
-                </div>
-                <div class="hintlist-6">
-                    <h3>{{songs.[5].name}}</h3>
-                    <p>{{songs.[5].singer}}</p>
-                </div>
-                <div class="hintlist-7">
-                    <h3>{{songs.[6].name}}</h3>
-                    <p>{{songs.[6].singer}}</p>
-                </div>
-                <div class="hintlist-8">
-                    <h3>{{songs.[7].name}}</h3>
-                    <p>{{songs.[7].singer}}</p>
-                </div>
-                <div class="hintlist-9">
-                    <h3>{{songs.[8].name}}</h3>
-                    <p>{{songs.[8].singer}}</p>
-                </div>
-                <div class="hintlist-10">
-                    <h3>{{songs.[9].name}}</h3>
-                    <p>{{songs.[9].singer}}</p>
-                </div>
+                {{/each}}
             </div>
             <div class="play-area">
                 <div class="info">
                     <div class="round-info">
                         Round<br>
-                        <h3>1/10</h3>
+                        <h3 id="Round_play">1/10</h3>
                     </div>
                     <div class="player-info">
                         <img src="assets/img/ava-crop.png" alt="">
@@ -64,38 +36,41 @@
                     </div>
                     <div class="time-info">
                         Time<br>
-                        <h3>12:30</h3>
+                        <h3 id="Time_duration">12:30</h3>
+                    </div>
+                    <div class="point-info">
+                        Point<br>
+                        <h3 id="Point_play">0</h3>
                     </div>
                     
                     </div>
                 
                 <div class="disc">
                     {{!-- <audio src="data:audio/mpeg;base64,{{curSong.content}}" id="audio" autoplay controls></audio> --}}
-                    <img src="assets/img/dianhac2.png" class="discimg" alt="disc">
+                    <img src="/assets/img/dianhac2.png" class="discimg" alt="disc">
                     
                     <div class="btn">
                         <div><input type="range" value="0" id="progress"></div>
                         
                         <div id="progress-control">
+
                             <div><i class="fa-solid fa-backward"></i></div>
                             <div class="btn-play-pause"><i class="fa-solid fa-play"></i></div>    
                             <div><i class="fa-solid fa-forward"></i></div>
+                            <div><i class="fa-solid fa-volume-low" id="increase-volume"></i></div>
+                            <div><i class="fa-solid fa-pause" id="ctrlIcon"></i></div>
+                            <div><i class="fa-solid fa-volume-high" id="decrease-volume"></i></div>
                         </div>
                     </div>
                     
                 </div>
                 <div class="answer">
-                    <input type="text" placeholder="Nhập tên bài hát">
-                    <button>Đoán</button>
+                    <input type="text" id="answer_song" placeholder="Nhập tên bài hát">
+                    <button id="guessButton">Đoán</button>
                 </div>
             </div>
         </div>
-        <input type="hidden" id="songsInput" data-songs="{{curSong}}">
-        <script src="/playsingle.js"></script>
-            {{!-- const audio = new Audio("data:audio/ogg;base64,{{curSong.content}}");
-            function play() {
-            audio.play();
-            }
-        </script> --}}
+        <input type="hidden" id="songsInput" data-songs="{{songs}}">
+        <script src="playsingleplayer.js"></script>
     </body>
 </html>

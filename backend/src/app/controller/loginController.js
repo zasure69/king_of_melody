@@ -1,4 +1,6 @@
 const userSchema = require('../models/User');
+//lib sessions
+const session = require('express-session');
 //lib hash
 const bcrypt = require('bcrypt');
 const passwordResetSchema = require('../models/PasswordReset');
@@ -166,7 +168,8 @@ class loginController {
                             .compare(password, user[0].password)
                             .then(checkPassword => {
                                 if (checkPassword) {
-                                    res.redirect('/');
+                                    req.session.isAuth = true;
+                                    res.redirect('/home/' + user[0]._id);
                                 } else {
                                     res.send('Sai mật khẩu');
                                 }

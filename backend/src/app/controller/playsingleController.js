@@ -43,7 +43,16 @@ class playsingleController {
             hintlist.push({name: listsong[i].name, singer: listsong[i].singer});
         }
 
-        
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+         
+        shuffleArray(hintlist)
+
         res.render('playsingle', { songs: JSON.stringify(listsong), hintlist})
     }
     update(req, res, next) {
@@ -65,7 +74,6 @@ class playsingleController {
                 .catch(err => {
                     console.log("Error: ", err);
                 })
-                // res.json(songs)
             })
             .catch(err => {
                 console.log("Error: ", err);

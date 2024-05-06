@@ -10,12 +10,11 @@ let ctrlIcon = document.querySelector("#ctrlIcon");
 let guessButton = document.getElementById("guessButton");
 let time = document.getElementById("Time_duration");
 let round = document.getElementById("Round_play");
-let score_player1 = document.getElementById("Score_player1");
-let score_player2 = document.getElementById("Score_player2");
 
 const songsInput = document.getElementById('songsInput');
 const songs = JSON.parse(songsInput.dataset.songs);
 const length = songs.length;
+
 // Sử dụng biến songs trong các xử lý JavaScript khác
 for(let i = 0; i < length; i++)
 {
@@ -34,6 +33,7 @@ let play_song = [];
 let index = 0;
 let totalDuration = 0;
 let time_song = [];
+
 function loadSongs() {
   return new Promise(function(resolve, reject) 
   {
@@ -96,6 +96,7 @@ function calculate_time_song(totalDuration){
   totalDuration = parseInt(minutes * 60) + parseInt(second);
  // return totalDuration;
 }
+
 loadSongs()
   .then(function() {
     calculateDuration();
@@ -107,7 +108,7 @@ loadSongs()
   })
   .then(function() {
     console.log("Kết quả duration:", totalDuration);
-  })
+    })
   .catch(function(error) {
     console.log("Đã xảy ra lỗi:", error);
   });
@@ -145,6 +146,7 @@ List_song.prototype = {
     answer_song.value = "";
     index = this.index + 1;
     round.textContent = (index + 1) + "/10";
+    time.textContent = "0:" + time_song[player.index + 1];
     // var time = time_song[index];
     // //totalDuration = 
     // countdown = setInterval(() => {
@@ -189,7 +191,6 @@ decreaseVolume.addEventListener('click', () =>{
 
 ctrlIcon.addEventListener('click', ()=>{
   //console.log(time_song);
-  
   if (ctrlIcon.classList.contains("fa-pause"))
   {
     player.play(index);
@@ -253,6 +254,7 @@ guessButton.addEventListener('click', () => {
   count = 0;
   if (answer_value == songs[index].name.toLowerCase())
   {
+    correct_answer.volume(0.5);
     correct_answer.play();
     if (ctrlIcon.classList.contains("fa-pause")){
       ctrlIcon.classList.remove("fa-pause");
@@ -262,11 +264,15 @@ guessButton.addEventListener('click', () => {
       player.songs[player.index].stop();
     }
     clearInterval(countdown); // Dừng đếm ngược
-    setTimeout(playNextSong, 2500);
+
+    const str_time = document.getElementById("Time_duration").innerHTML.split(":");
+    document.getElementById("Point_play").innerHTML = parseInt(document.getElementById("Point_play").innerHTML) + parseInt(str_time[1]);
+    setTimeout(playNextSong, 1000);
     answer_song.value = "";
   }
-  else if ( answer_value != songs[index].name.toLowerCase() || answer_song.value == "")
+  else if ( answer_value != songs[index].name.toLowerCase() || answer_song.value == null || answer_song.value == "")
   {
+    incorrect_answer.volume(0);
     incorrect_answer.play();
     if (ctrlIcon.classList.contains("fa-pause")){
       ctrlIcon.classList.remove("fa-pause");
@@ -276,7 +282,7 @@ guessButton.addEventListener('click', () => {
       player.songs[player.index].stop();
     }
     clearInterval(countdown); // Dừng đếm ngược
-    setTimeout(playNextSong, 5500);
+    setTimeout(playNextSong, 1000);
     answer_song.value = songs[player.index].name.toLowerCase();
   }
 })

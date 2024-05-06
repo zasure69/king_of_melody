@@ -38,6 +38,10 @@
                         Time<br>
                         <h3 id="Time_duration">12:30</h3>
                     </div>
+                    <div class="point-info">
+                        Point<br>
+                        <h3 id="Point_play">0</h3>
+                    </div>
                     
                     </div>
                 
@@ -49,6 +53,10 @@
                         <div><input type="range" value="0" id="progress"></div>
                         
                         <div id="progress-control">
+
+                            <div><i class="fa-solid fa-backward"></i></div>
+                            <div class="btn-play-pause"><i class="fa-solid fa-play"></i></div>    
+                            <div><i class="fa-solid fa-forward"></i></div>
                             <div><i class="fa-solid fa-volume-low" id="increase-volume"></i></div>
                             <div><i class="fa-solid fa-pause" id="ctrlIcon"></i></div>
                             <div><i class="fa-solid fa-volume-high" id="decrease-volume"></i></div>
@@ -58,7 +66,6 @@
                 </div>
                 <div class="answer">
                     <input type="text" id="answer_song" placeholder="Nhập tên bài hát">
-                    
                     <button id="guessButton">Đoán</button>
                 </div>
             </div>
@@ -66,5 +73,4 @@
         <input type="hidden" id="songsInput" data-songs="{{songs}}">
         <script src="playsingleplayer.js"></script>
     </body>
-    
 </html>

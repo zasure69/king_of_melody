@@ -19,10 +19,11 @@ body {
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 100%;
     color: white;
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    gap: 3rem;
 }
 
 .container .hint {
@@ -86,7 +87,7 @@ body {
     justify-content: space-evenly;
 }
 
-.container .play-area .info .round-info {
+.container .play-area .info .round-info .point-info {
     line-height: 2em;
     display: flex;
     flex-direction: column;
@@ -107,18 +108,18 @@ body {
     font-size: 2em;
 }
 
-.container .play-area .info .player-info img{
+.container .play-area .info .player-info .point-info img{
     width: 5em;
 }
 
-.container .play-area .info .time-info {
+.container .play-area .info .time-info .point-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     line-height: 2em;
 }
 
-.container .play-area .info .time-info h3 {
+.container .play-area .info .time-info .point-info h3 {
     font-size: 2em;
 }
 
@@ -225,4 +226,13 @@ body {
     transform: scale(1.05);
     cursor: pointer;
 }
+
+/* .btn-play-pause {
+    position: relative;
+    width: 2.5em;
+    height: 2.5em;
+    border: none;
+    opacity: 1;
+    border-radius: 50%;
+} */
 

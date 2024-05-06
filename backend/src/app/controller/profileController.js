@@ -1,6 +1,6 @@
 class profileController {
     index(req, res) {
-        res.render('profile')
+        res.render('profile', {userId: req.params.userId})
     }
 }
 

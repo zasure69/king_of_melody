@@ -13,6 +13,9 @@ let time = document.getElementById("Time_duration");
 let round = document.getElementById("Round_play");
 let score_player1 = document.getElementById("Score_player1");
 let score_player2 = document.getElementById("Score_player2");
+let endmodal = document.getElementById("end-model");
+let numright = 0;
+let numwrong = 0;
 
 const songsInput = document.getElementById('songsInput');
 const songs = JSON.parse(songsInput.dataset.songs);
@@ -29,6 +32,10 @@ var correct_answer = new Howl({
 })
 var incorrect_answer = new Howl({
   src: ['assets/sound/sound_incorrect_answer.mp3'],
+})
+var endgame = new Howl({
+  src: ['assets/sound/Cheap_Thrills.mp3'],
+  loop: true
 })
 
 
@@ -157,11 +164,12 @@ List_song.prototype = {
     let answer_song = document.getElementById("answer_song");
     answer_song.value = "";
     index = this.index + 1;
-    console.log("index: ", index);
-    round.textContent = (index + 1) + "/10";
-    count = -1;
-    //count_guess == 0;
-    ctrlIcon.click();
+    if (index < 10){
+      round.textContent = (index + 1) + "/10";
+      calculate_time_song(time_song[player.index + 1]);
+      count = -1;
+      ctrlIcon.click();
+    }
   },
 
   volume: function(val){
@@ -270,6 +278,7 @@ guessButton.addEventListener('click', () => {
           player.songs[player.index].stop();
         }
         clearInterval(countdown); // Dừng đếm ngược
+        numright++;
         if (tmp != 0)
           score += tmp * 10;
         else
@@ -289,13 +298,20 @@ guessButton.addEventListener('click', () => {
           player.songs[player.index].stop();
         }
         clearInterval(countdown); // Dừng đếm ngược
+        numwrong++;
         setTimeout(playNextSong, 1000);
         answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
+        
       }
+      if (index == 9){
+        document.getElementsByClassName("container")[0].style.opacity = "0.35";
+        endmodal.style.display = "flex";
+        document.getElementById("endpoint").innerHTML = score_player1.innerHTML;
+        endgame.volume(0.5);
+        endgame.play();
+        }
       click = false;
   }
-  
-  //}
 })
 
 let answer_song = document.getElementById("answer_song");
@@ -308,5 +324,16 @@ answer_song.addEventListener('keypress', function(event){
   }
 });
 
+let detailmodal = document.getElementById("detail-model");
+document.getElementById("btn-detail").onclick = function(){
+  detailmodal.style.display = "flex";
+  document.getElementById("detailendpoint").innerHTML = score_player1.innerHTML;
+  document.getElementById("num-r").innerHTML = numright;
+  document.getElementById("num-w").innerHTML = numwrong;
+}
+
+document.getElementById("return").onclick = function(){
+  detailmodal.style.display = "none";
+}
 
 

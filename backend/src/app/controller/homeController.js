@@ -1,5 +1,7 @@
 const session = require('express-session');
 const userSchema = require('../models/User');
+const mongooseToObject = require('../../util/mongoose')
+
 
 class homeController {
     index(req, res) {
@@ -15,7 +17,6 @@ class homeController {
                         message: "Lỗi xảy ra khi lay thong tin nguoi dung"
                     })
                 })
-
         } else {
             res.redirect('/login');
         }

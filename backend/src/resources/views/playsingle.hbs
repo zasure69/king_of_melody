@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>King of Melody</title>
-        <link rel="stylesheet" href="../assets/playweb.css">
+        <link rel="stylesheet" href="../../assets/playweb.css">
         <script src="https://kit.fontawesome.com/d42216d8d0.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" 
         integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -51,7 +51,6 @@
                     
                     <div class="btn">
                         <div><input type="range" value="0" id="progress"></div>
-                        
                         <div id="progress-control"> 
                             <div><i class="fa-solid fa-volume-low" id="decrease-volume"></i></div>
                             <div><i class="fa-solid fa-pause" id="ctrlIcon"></i></div>
@@ -66,79 +65,76 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="modal">
-            <div class="modal-correct-answer">
-                <h2 class="label">
-                    Bạn đã đoán đúng tên bài hát.
-                </h2>
-                <div class="gif-img">
-                    <img src="../../assets/img/200w.gif" alt="">
-                    {{!-- <p><a href="https://giphy.com/gifs/5VKbvrjxpVJCM">via GIPHY</a></p> --}}
+        <div id="end-model">
+            <div class="bg-model">
+                <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
+                <div class="end-model-content">
+                    <h2>Trò chơi kết thúc!</h2>
+                    <h3 id="end-model-score">Điểm của bạn: <span id="endpoint"></span> </h3>
                 </div>
-                <div class="point-gain">
-                    <h2 class="point">
-                        Điểm nhận được
-                    </h2>
-                </div>
-                <button class="nextroundBtn">Vòng tiếp theo</button>
+                <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
             </div>
-            <div class="modal-wrong-answer">
-                <h2 class="label">
-                    Bạn đã đoán sai tên bài hát
-                </h2>
-                <div class="gif-img">
-                    {{!-- <img src="https://giphy.com/embed/xMFAPwvgAK1Lj1EmEM" alt=""> --}}
-                    <iframe src="https://giphy.com/embed/xMFAPwvgAK1Lj1EmEM" frameBorder="0" class="giphy-embed" style="pointer-events: none;"></iframe>
-                    {{!-- <img src="../../assets/img/200w.gif" alt=""> --}}
-                    {{!-- <p><a href="https://giphy.com/gifs/5VKbvrjxpVJCM">via GIPHY</a></p> --}}
-                </div>
-                <div class="answer-container">
-                    <h2 class="answer">
-                        Đáp án 
-                    </h2>
-                </div>
-                <button class="linksong"><a href="">Thưởng thức bài hát</a></button>
-                <button class="nextroundBtn">Vòng tiếp theo</button>
+            <div class="img-model">
+                <img src="/assets/img/zero-two-02.gif" alt="" id="img-model-ava">
             </div>
-            <div class="modal-end">
-                <h2 class="label">
-                    Trò chơi kết thúc
-                </h2>
-                {{!-- <div class="gif-img">
-                    <iframe src="https://giphy.com/embed/OcG0F2nFdjwBjlPogU" 
-                    frameBorder="0" class="giphy-embed-1" 
-                    style="pointer-events: none;"></iframe>
-                    <iframe src="https://giphy.com/embed/OcG0F2nFdjwBjlPogU" 
-                    frameBorder="0" class="giphy-embed-2" 
-                    style="pointer-events: none;"></iframe>
-                </div> --}}
-                <div class="statistic">
-                    <iframe src="https://giphy.com/embed/OcG0F2nFdjwBjlPogU" 
-                    frameBorder="0" class="giphy-embed-1" 
-                    style="pointer-events: none;"></iframe>
-                    <div class="content">
-                        <h2 class="round">
-                            Số vòng đoán đúng 
-                        </h2>
-                        <h2 class="round-details">
-                            Số vòng đoán đúng 
-                        </h2>
-                        <h2 class="point">
-                            Điểm đạt được
-                        </h2>
-                        <h2 class="point-details">
-                            Điểm đạt được
-                        </h2>
+            <div class="btn-model">
+                <button class="home-btn" id="btn-detail" >
+                    <span id="btn">
+                        <h3>Chi tiết</h3>
+                    <span>
+                </button>
+                <button class="home-btn">
+                    <a href="" class="home-btn-a">
+                        <h3>Chơi tiếp</h3>
+                    </a>
+                </button>
+                <button class="home-btn">
+                    <a href="/home" class="home-btn-a">
+                        <h3>Trang chủ</h3>
+                    </a>
+                </button>
+            </div>
+        </div>
+        <div id="detail-model">
+            <div class="bg-model">
+                <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
+                <div class="header">
+                    <div class="end-model-content">
+                        <h3 id="end-model-score">Điểm của bạn: <span id="detailendpoint"></span> </h3>
                     </div>
-                     <iframe src="https://giphy.com/embed/OcG0F2nFdjwBjlPogU" 
-                    frameBorder="0" class="giphy-embed-2" 
-                    style="pointer-events: none;"></iframe>
+                    <div class="num-ans">
+                        <h3>Đúng: <span id="num-r"></span></h3>
+                        <h3>Sai: <span id="num-w"></span></h3>
+                    </div>
                 </div>
-                <button class="return-home"><a href="/home/:userId">Trở về trang chủ</a></button>
-                <button class="replay">Chơi lại</button>
+                <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
             </div>
-        </div> -->
-        
+            <div class="song-detail">
+                <h2>Thông Tin Bài hát</h2>
+                {{#each infolist}}
+                <div class="songlist">
+                    <a href="{{this.link}}" target="_blank"><p>    {{this.name}} - {{this.singer}}</p></a>
+                </div>
+                {{/each}}
+            </div>
+            <div class="btn-model">
+                <button class="home-btn-1" id="return">
+                    <a href="" class="home-btn-a">
+                        <h3>Trở lại</h3>
+                    </a>
+                </button>
+                <button class="home-btn-1">
+                    <a href="" class="home-btn-a">
+                        <h3>Chơi tiếp</h3>
+                    </a>
+                </button>
+                <button class="home-btn-1">
+                    <a href="/home" class="home-btn-a">
+                        <h3>Trang chủ</h3>
+                    </a>
+                </button>
+            </div>
+        </div>
         <input type="hidden" id="songsInput" data-songs="{{songs}}">
         <script src="playsingleplayer.js"></script>
     </body>

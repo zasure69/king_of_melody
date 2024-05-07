@@ -11,7 +11,11 @@ class playmultiController {
             ])
             .exec()
             .then((songs) => {
-                res.render('playmulti', {songs: JSON.stringify(songs)});
+                const infolist = [];
+                    for (let i = 0; i < songs.length; i++) {
+                    infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
+                }
+                res.render('playmulti', {songs: JSON.stringify(songs), infolist});
                 // const html = fs.readFileSync('../../resources/views/playmulti.hbs', 'utf-8');
                 // const $ = cheerio.load(html);
                 // // Thay đổi thuộc tính của thẻ bất kỳ

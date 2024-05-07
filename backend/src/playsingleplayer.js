@@ -10,6 +10,9 @@ let ctrlIcon = document.querySelector("#ctrlIcon");
 let guessButton = document.getElementById("guessButton");
 let time = document.getElementById("Time_duration");
 let round = document.getElementById("Round_play");
+let endmodal = document.getElementById("end-model");
+let numright = 0;
+let numwrong = 0;
 
 const songsInput = document.getElementById('songsInput');
 const songs = JSON.parse(songsInput.dataset.songs);
@@ -27,6 +30,10 @@ var correct_answer = new Howl({
 })
 var incorrect_answer = new Howl({
   src: ['assets/sound/sound_incorrect_answer.mp3'],
+})
+var endgame = new Howl({
+  src: ['assets/sound/Cheap_Thrills.mp3'],
+  loop: true
 })
 
 let play_song = [];
@@ -145,8 +152,12 @@ List_song.prototype = {
     let answer_song = document.getElementById("answer_song");
     answer_song.value = "";
     index = this.index + 1;
-    round.textContent = (index + 1) + "/10";
-    time.textContent = "0:" + time_song[player.index + 1];
+    if (index < 10){
+      round.textContent = (index + 1) + "/10";
+      time.textContent = "0:" + time_song[player.index + 1];
+      count = -1;
+      ctrlIcon.click();
+    }
     // var time = time_song[index];
     // //totalDuration = 
     // countdown = setInterval(() => {
@@ -155,8 +166,7 @@ List_song.prototype = {
     //   if (time == 0)
     //     clearInterval(countdown);
     // }, 1000)
-    count = -1;
-    ctrlIcon.click();
+  
   },
 
   volume: function(val){
@@ -264,9 +274,9 @@ guessButton.addEventListener('click', () => {
       player.songs[player.index].stop();
     }
     clearInterval(countdown); // Dừng đếm ngược
-
+    numright++;
     const str_time = document.getElementById("Time_duration").innerHTML.split(":");
-    document.getElementById("Point_play").innerHTML = parseInt(document.getElementById("Point_play").innerHTML) + parseInt(str_time[1]);
+    document.getElementById("Point_play").innerHTML = parseInt(document.getElementById("Point_play").innerHTML) + parseInt(str_time[1])*10;
     setTimeout(playNextSong, 1000);
     answer_song.value = "";
   }
@@ -282,9 +292,17 @@ guessButton.addEventListener('click', () => {
       player.songs[player.index].stop();
     }
     clearInterval(countdown); // Dừng đếm ngược
+    numwrong++;
     setTimeout(playNextSong, 1000);
     answer_song.value = songs[player.index].name.toLowerCase();
   }
+  if (index == 9){
+    document.getElementsByClassName("container")[0].style.opacity = "0.35";
+    endmodal.style.display = "flex";
+    document.getElementById("endpoint").innerHTML = document.getElementById("Point_play").innerHTML;
+    endgame.volume(0.5);
+    endgame.play();
+    }
 })
 let answer_song = document.getElementById("answer_song");
 let answer_value = answer_song.value.trim().toLowerCase();
@@ -297,4 +315,15 @@ answer_song.addEventListener('keypress', function(event){
 });
 
 
+let detailmodal = document.getElementById("detail-model");
+document.getElementById("btn-detail").onclick = function(){
+  detailmodal.style.display = "flex";
+  document.getElementById("detailendpoint").innerHTML = document.getElementById("Point_play").innerHTML;
+  document.getElementById("num-r").innerHTML = numright;
+  document.getElementById("num-w").innerHTML = numwrong;
+}
+
+document.getElementById("return").onclick = function(){
+  detailmodal.style.display = "none";
+}
 

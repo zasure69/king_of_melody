@@ -6,6 +6,12 @@
     <title>Profile</title>
     <link rel="stylesheet" href="../assets/profile.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" 
+    integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js" 
+    integrity="sha512-+wqa4/aOL4vwhL637A4p+6epqhUHDqpEfYJa1+PlzlMf908CSOb3xtIeKwZWh5Q0Q/R2nYUKxH4vvcQg+k8KKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js" 
+    integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <div class="layer">
@@ -14,7 +20,7 @@
                 <div class="side_nav">
                     <div class="menu"></div>
                     <div class="back_main">
-                        <a href="/">
+                        <a href="/home/{{userId}}">
                             <span class="material-symbols-outlined">
                                 arrow_back
                             </span>
@@ -26,7 +32,7 @@
                     <div class="player" >
                         <div class="nav">
                             <div class = "username" id = "username">
-                                <img src="assets/img/Avatar_header.jpg" alt="" >
+                                <img src="/assets/img/Avatar_header.jpg" alt="" >
                                 <span id="user_logo">KING_OF_MELODY</span>
                                 <span class="material-symbols-outlined" id="icon_nar">
                                     keyboard_arrow_up
@@ -51,7 +57,7 @@
             <div class="container_ctx">
                 <div class="profile_header">
                     <div class="div_gif">
-                        <img src="assets/img/toothless-dancing-toothless.gif" alt="" class="img_gif">
+                        <img src="/assets/img/toothless-dancing-toothless.gif" alt="" class="img_gif">
                     </div>
                     <div class="profile_header_aside">
                         <div class="profile_userrank">rank</div>
@@ -153,5 +159,6 @@
         </div>
     </div>
     <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <script src="/resources/views/profile.js"></script>
 </body>
 </html>

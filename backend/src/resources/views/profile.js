@@ -32,5 +32,21 @@ function updateProgressBarFromLabel() {
   progressBarInner.style.width = percent + '%';
 }
 
+var song = new Howl({
+  src: ['/assets/sound/toothless.mp3'],
+  loop: true
+})
+document.getElementsByClassName("div_gif")[0].onclick = function()
+{
+  if(song.playing())
+  {
+    song.pause();
+  }
+  else
+  {
+    song.play();
+  }
+}
+
 // Cập nhật thanh kinh nghiệm từ dữ liệu trong progress-bar-label
 updateProgressBarFromLabel();

@@ -1,9 +1,22 @@
 const session = require('express-session');
+const userSchema = require('../models/User');
+const mongooseToObject = require('../../util/mongoose')
 
 class homeController {
     index(req, res) {
         if (req.session.isAuth) {
-            res.render('home')
+            userSchema.findOne({_id: req.params.userId})
+                .then((result) => {
+                    res.render('home', {username: result.username, userId: req.params.userId})
+                })
+                .catch(err => {
+                    console.log('Error: ', err);
+                    res.json({
+                        status: "Failed",
+                        message: "Lỗi xảy ra khi lay thong tin nguoi dung"
+                    })
+                })
+            
         } else {
             res.redirect('/login');
         }

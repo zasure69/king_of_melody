@@ -23,14 +23,15 @@ class playsingleController {
     //             console.log("Error: ", error);
     //         })
         
-
         
         let listsong = await songSchema.aggregate([
             { $match: { mode: req.query.mode } },
             { $sample: { size: 10} },
         ]);
         const numbers = [];
+        const infolist = [];
         for (let i = 0; i < listsong.length; i++) {
+            infolist.push({name: listsong[i].name, singer: listsong[i].singer, link: listsong[i].link});
             numbers.push(listsong[i].index);
         }
         let hintlist = await songSchema.aggregate([
@@ -40,7 +41,7 @@ class playsingleController {
         ])
 
         for (let i = 0; i < listsong.length; i++) {
-            hintlist.push({name: listsong[i].name, singer: listsong[i].singer});
+            hintlist.push({name: listsong[i].name, singer: listsong[i].singer, link: listsong[i].link});
         }
 
         function shuffleArray(arr) {
@@ -52,8 +53,7 @@ class playsingleController {
         }
          
         shuffleArray(hintlist)
-
-        res.render('playsingle', { songs: JSON.stringify(listsong), hintlist})
+        res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist})
     }
     update(req, res, next) {
         songSchema.aggregate([

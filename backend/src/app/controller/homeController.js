@@ -8,7 +8,7 @@ class homeController {
         if (req.session.isAuth) {
             userSchema.findOne({_id: req.params.userId})
                 .then((result) => {
-                    res.render('home', {username: result.username, userId: req.params.userId})
+                    res.render('home', {username: req.session.user.username, userId: req.session.user._id})
                 })
                 .catch(err => {
                     console.log('Error: ', err);

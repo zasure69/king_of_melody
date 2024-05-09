@@ -5,40 +5,76 @@
         <meta http-equiv="X-UA-Compatible" content="IE-edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous" />
-        <link rel="stylesheet" href="sign.css">
+        <link rel="stylesheet" href="./sign.css">
         <title>Signin-Signup</title>
     </head>
 
     <body>
         <div class="container">
             <div class="signin-signup">
-                <form action="" class="sign-in-form">
+                <form method="POST" action="/login/processSignin" class="sign-in-form">
                     <h2 class="title">Đăng nhập</h2>
-                    <div class="input-field">
-                        <i class="fa fa-user"></i>
-                        <input type="text" placeholder="Username">
+                    <div class="form-group">
+                        <div class="input-field">
+                            <i class="fa fa-user"></i>
+                            <input type="text" name="email" placeholder="Email" id="email-sign-in">
+                            
+                        </div>
+                        <span class="form-message"></span>
                     </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password">
+                    <div class="form-group">
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" placeholder="Password" id="password-sign-in">
+                            
+                        </div>
+                        <span class="form-message"></span>
                     </div>
-                    <input type="submit" value="Login" class="btn" id="submitBtn">
+                    <div><a href="/resetPassword" style="color: rgb(223, 74, 223);">Forgot your password?</a></div>
+                     
+                    <button type="submit" class="btn">Sign in</button>
                 </form>
-                <form action="" class="sign-up-form">
+                <form method="POST" action="/login/processSignup" class="sign-up-form">
                     <h2 class="title">Đăng ký</h2>
-                    <div class="input-field">
-                        <i class="fa fa-envelope"></i>
-                        <input type="text" placeholder="Email">
+                    <div class="form-group">
+                        <div class="input-field">
+                            <div class="input-container">
+                                <i class="fa fa-envelope"></i>
+                                <input type="text" rules="required|email" name="email" placeholder="Email" id="email-sign-up">
+                            </div>
+                        </div>
+                        <span class="form-message"></span>
                     </div>
-                    <div class="input-field">
-                        <i class="fa fa-user"></i>
-                        <input type="text" placeholder="Username">
+                    <div class="form-group">
+                        <div class="input-field">
+                            <div class="input-container">
+                                <i class="fa fa-user"></i>
+                                <input type="text" rules="required" name="username" placeholder="Tên người dùng" id="username-sign-up">
+                            </div>
+                            
+                        </div>
+                        <span class="form-message"></span>
                     </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password">
+                    <div class="form-group">
+                        <div class="input-field">
+                            <div class="input-container">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" rules="required|min:6" name="password" placeholder="Mật khẩu" id="password-sign-up">
+                            </div>
+                        </div>
+                        <span class="form-message"></span>
                     </div>
-                    <input type="submit" value="Sign up" class="btn">
+                    <div class="form-group">
+                        <div class="input-field">
+                            <div class="input-container">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" rules="required|confirmed" name="password-comfirmation" placeholder="Nhập lại mật khẩu" id="password-sign-up-comfirmation">
+                            </div>
+                        </div>
+                        <span class="form-message"></span>
+                    </div>
+                    <button type="submit" class="btn">Sign up</button>
+                    <!-- {{!-- <input type="submit" value="Sign up" class="btn"> --}} -->
                 </form>
             </div>
             <div class="panels-container">
@@ -48,7 +84,7 @@
                         <p>Nếu bạn đã có tài khoản, hãy click "Sign in" để đăng nhập vào chơi nhé!</p>
                         <button class="btn" id="sign-in-btn">Sign in</button>
                     </div>
-                    <img src="assets/img/sign-in.svg" alt="" class="image">
+                    <img src="/assets/img/sign-in.svg" alt="" class="image">
                 </div>
                 <div class="panel right-panel">
                     <div class="content">
@@ -56,10 +92,35 @@
                         <p>Nếu bạn chưa có tài khoản, hãy click "Sign up" để đăng ký nhé!</p>
                         <button class="btn" id="sign-up-btn">Sign up</button>
                     </div>
-                    <img src="assets/img/sign-up.svg" alt="" class="image">
+                    <img src="/assets/img/sign-up.svg" alt="" class="image">
                 </div>
             </div>
         </div>
-        <script src="signin.js"></script>
+        <script src="./validator.js"></script>
+        <script>
+            Validator('.sign-up-form')
+        </script>
+        <script>
+            const sign_in_btn = document.querySelector("#sign-in-btn");
+            const sign_up_btn = document.querySelector("#sign-up-btn");
+            const container = document.querySelector(".container");
+            sign_up_btn.addEventListener("click", () => {
+                container.classList.add("sign-up-mode");
+            });
+            sign_in_btn.addEventListener("click", () => {
+                container.classList.remove("sign-up-mode");
+            });
+            /*document.addEventListener('DOMContentLoaded', function() {
+                var submitBtn = document.getElementById('submitBtn');
+                submitBtn.addEventListener('click', redirectToURL);
+            });
+            function redirectToURL(event) {
+                event.preventDefault(); 
+                window.location.href = "/";
+            }*/
+
+        
+        </script>
+        
     </body>
 </html>

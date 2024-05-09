@@ -18,12 +18,17 @@ class verifyController {
                         UserVerification
                             .deleteOne({_id: userId})
                             .then(() => {
-                                let message = "Link xác thực hết hạn";
-                                res.send(message);
+                                res.json({
+                                    status: "Failed",
+                                    message: "Link xác thực hết hạn",
+                                })
                             })
                             .catch((err) => {
-                                let message = "Link xác thực hết hạn";
-                                res.send(message);
+                                console.log("error: ", err);
+                                res.json({
+                                    status: "Failed",
+                                    message: "Lỗi khi xóa link xác thực",
+                                })
                             })
                     } else {
                         // so sánh hash unique string
@@ -38,7 +43,8 @@ class verifyController {
                                                 .deleteOne({userId})
                                                 .then(() => {
                                                     // gửi giao diện xác thực thành công
-                                                    res.send('xác thực thành công');
+                                                    res.render('verifyemail', {layout: false});
+                                                    //res.send('xác thực thành công');
                                                 })
                                                 .catch((err) => {
                                                     console.log(err);

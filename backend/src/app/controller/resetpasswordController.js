@@ -60,10 +60,7 @@ const sendResetEmail = ({_id, email}, redirectUrl, res) => {
                             transporter
                                 .sendMail(mailOptions)
                                 .then(() => {
-                                    res.json({
-                                        status: 'Pending',
-                                        message: 'Mail reset mật khẩu đã được gửi'
-                                    })
+                                    res.render('resetpasswordsend', {email: email, layout: false})
                                 })
                                 .catch(err => {
                                     console.log("error: ", err)
@@ -123,6 +120,7 @@ class resetPasswordController {
                     } else {
                         //email đã verified
                         sendResetEmail(data[0], redirectUrl, res);
+                        
                     }
                 } else {
                     res.json({
@@ -189,10 +187,11 @@ class resetPasswordController {
                                                     passwordResetSchema
                                                         .deleteOne({userId})
                                                         .then(() => {
-                                                            res.json({
-                                                                status: 'Success',
-                                                                message: 'Mật khẩu thay đổi thành công'
-                                                            })
+                                                            // res.json({
+                                                            //     status: 'Success',
+                                                            //     message: 'Mật khẩu thay đổi thành công'
+                                                            // })
+                                                            res.render('changepasswordsuccess', {layout: false})
                                                         })
                                                         .catch(err => {
                                                             console.log("error: ", err)

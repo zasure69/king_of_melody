@@ -1,10 +1,11 @@
 const songSchema = require('../models/Song');
+const settingSchema = require('../models/Setting');
 //const {mongooseToObject} = require('../../util/mongoose');
 const cheerio = require('cheerio');
 const fs = require('fs');
 
 class playmultiController {
-    index(req, res) {
+    async index(req, res) {
         songSchema.aggregate([
             { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
             { $sample: { size: 10} }
@@ -15,7 +16,11 @@ class playmultiController {
                     for (let i = 0; i < songs.length; i++) {
                     infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                 }
-                res.render('playmulti', {songs: JSON.stringify(songs), infolist});
+                settingSchema.findOne({email: req.session.user.email})
+                .then((st) => {
+
+                res.render('playmulti', { songs: JSON.stringify(songs), infolist, efVL: st.EffectVL, msVL: st.MusicVL } );
+                });
                 // const html = fs.readFileSync('../../resources/views/playmulti.hbs', 'utf-8');
                 // const $ = cheerio.load(html);
                 // // Thay đổi thuộc tính của thẻ bất kỳ

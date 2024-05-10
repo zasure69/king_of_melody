@@ -206,7 +206,6 @@ a {
 
 .container_ctx {
     padding: 0 2rem;
-    margin: 0 auto;
 }
 
 .profile_header {
@@ -329,6 +328,7 @@ a {
 }
 
 .mask_des {
+    text-align: center;
     font-size: 12px;
 }
 .space {

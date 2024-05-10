@@ -5,6 +5,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const passwordResetSchema = require('../models/PasswordReset');
 const userVerificationSchema = require('../models/UserVerification');
+const settingSchema = require('../models/Setting');
 //email handler
 const nodemailer = require('nodemailer');
 //unique string
@@ -116,6 +117,10 @@ class loginController {
                                 password: hashPassword,
                                 verified: false
                             });
+                            const setting = new settingSchema({
+                                email: formData.email,
+                            });
+                            setting.save();
                             user.save()
                                 .then((result) => {
                                     sendVerificationEmail(result, res);

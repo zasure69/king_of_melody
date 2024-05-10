@@ -36,6 +36,7 @@ var song = new Howl({
   src: ['/assets/sound/toothless.mp3'],
   loop: true
 })
+song.volume(document.getElementById("vlInput").value);
 document.getElementsByClassName("div_gif")[0].onclick = function()
 {
   if(song.playing())

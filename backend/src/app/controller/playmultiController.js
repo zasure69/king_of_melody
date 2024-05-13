@@ -12,6 +12,11 @@ let listSong = [];
 let loadSong = true;
 let playersdone = {};
 
+const settingSchema = require('../models/Setting');
+//const {mongooseToObject} = require('../../util/mongoose');
+const cheerio = require('cheerio');
+const fs = require('fs');
+
 class Semaphore {
     constructor(initialCount) {
       this.count = initialCount;
@@ -120,7 +125,24 @@ class playmultiController {
     
 }
 
+settingSchema.findOne({email: req.session.user.email})
+                .then((st) => {
 
+                res.render('playmulti', { songs: JSON.stringify(songs), infolist, efVL: st.EffectVL, msVL: st.MusicVL } );
+                });
+                // const html = fs.readFileSync('../../resources/views/playmulti.hbs', 'utf-8');
+                // const $ = cheerio.load(html);
+                // // Thay đổi thuộc tính của thẻ bất kỳ
+                // let targetElement = $('#ctrlIcon'); // Thay 'selector' bằng CSS selector của thẻ cần thay đổi thuộc tính
+                // targetElement.attr('class', 'fa-solid fa-pause'); // Thay 'attribute' bằng tên thuộc tính cần thay đổi, 'new value' là giá trị mới
+                // // Lưu lại nội dung HTML sau khi thay đổi thuộc tính
+                // const modifiedTemplate = $.html();
+                // // Gửi template đã thay đổi về phía client
+                // res.send(modifiedTemplate);
+                // const audioPlayer = document.createElement('audio');
+                // const audioSource = document.createElement('source');
+                // importSongFromBase64(song[0].content, audioPlayer, audioSource);
+                //console.log('Danh sách bài hát: ', song);
 
 io.on("connection", async function(socket) {
     //await sem.acquire();

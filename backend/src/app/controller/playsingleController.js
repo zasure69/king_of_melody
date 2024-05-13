@@ -1,5 +1,5 @@
 const songSchema = require('../models/Song');
-// const settingSchema = require('../models/Setting');
+const settingSchema = require('../models/Setting');
 
 const cheerio = require('cheerio');
 const { resolveSoa } = require('dns');
@@ -51,9 +51,9 @@ class playsingleController {
             }
             return arr;
         }
-         
+        const st = await settingSchema.findOne({email: req.session.user.email});
         shuffleArray(hintlist)
-        res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist})
+        res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL})
     }
     update(req, res, next) {
         songSchema.aggregate([

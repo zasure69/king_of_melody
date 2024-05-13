@@ -16,6 +16,8 @@ let numright = 0;
 let numwrong = 0;
 
 const songsInput = document.getElementById('songsInput');
+const efVL = document.getElementById('efVLInput');
+const msVL = document.getElementById('msVLInput');
 const songs = JSON.parse(songsInput.dataset.songs);
 const length = songs.length;
 
@@ -36,6 +38,9 @@ var endgame = new Howl({
   src: ['assets/sound/Cheap_Thrills.mp3'],
   loop: true
 })
+correct_answer.volume(efVL.value);
+incorrect_answer.volume(efVL.value);
+endgame.volume(msVL.value);
 
 let play_song = [];
 let index = 0;
@@ -155,6 +160,7 @@ List_song.prototype = {
 
   play: function(index){
     if (this.songs[index]) {
+      this.songs[index].volume(msVL.value);
       this.songs[index].play();
       this.index = index;
       

@@ -5,6 +5,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const passwordResetSchema = require('../models/PasswordReset');
 const userVerificationSchema = require('../models/UserVerification');
+const settingSchema = require('../models/Setting');
 //email handler
 const nodemailer = require('nodemailer');
 //unique string
@@ -90,7 +91,9 @@ const sendVerificationEmail = ({_id, email}, res) => {
 
 class loginController {
     index(req, res) {
-        res.render('login')
+        const message1 = req.query.errorsignin || "";
+        const message2 = req.query.errorsignup || "";
+        res.render('login', {messagesignin: message1, messagesignup: message2})
     }
 
     async processSignup(req, res, next) {
@@ -100,10 +103,8 @@ class loginController {
             .findOne({ email: formData.email })
             .then((checkExist) => {
                 if (checkExist) {
-                    res.json({
-                        status: "Failed",
-                        message: "Email đã đăng ký"
-                    })
+                    const errorMessage = 'Email đã đăng ký';
+                    res.redirect('/login?errorsignup=' + encodeURIComponent(errorMessage));
                 } else {
                     const saltRound = 10;
                     bcrypt
@@ -116,10 +117,14 @@ class loginController {
                                 password: hashPassword,
                                 verified: false
                             });
+                            const setting = new settingSchema({
+                                email: formData.email,
+                            });
+                            setting.save();
                             user.save()
                                 .then((result) => {
                                     sendVerificationEmail(result, res);
-                                    res.redirect('/login');
+                                    res.render('sendverify', {email: result.email});
                                 })
                                 .catch(err => {
                                     res.send('Đăng ký thất bại');
@@ -150,19 +155,20 @@ class loginController {
         await userSchema
             .find({email})
             .then(user => {
-                if (!user) {
-                    res.json({
-                        status: "Failed",
-                        message: "Tài khoản không tồn tại"
-                    })
+                if (user.length == 0) {
+                    // res.json({
+                    //     status: "Failed",
+                    //     message: "Tài khoản không tồn tại"
+                    // })
+                    const errorMessage = 'Tài khoản không tồn tại';
+                    console.log(user, !!user, !user)
+                    res.redirect('/login?errorsignin=' + encodeURIComponent(errorMessage));
                 } else {
-                    
+                    console.log('user: ', user)
                     //check verify
                     if (!user[0].verified) {
-                        res.json({
-                            status: "Failed",
-                            message: "Email chưa xác thực"
-                        })
+                        const errorMessage = 'Email chưa xác thực';
+                        res.redirect('/login?errorsignin=' + encodeURIComponent(errorMessage));
                     } else {
                         bcrypt
                             .compare(password, user[0].password)
@@ -172,7 +178,8 @@ class loginController {
                                     req.session.isAuth = true;
                                     res.redirect('/home/' + user[0]._id);
                                 } else {
-                                    res.send('Sai mật khẩu');
+                                    const errorMessage = 'Sai mật khẩu';
+                                    res.redirect('/login?errorsignin=' + encodeURIComponent(errorMessage));
                                 }
                             })
                             .catch((err) => {

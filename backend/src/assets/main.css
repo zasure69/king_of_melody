@@ -1,6 +1,6 @@
 *{
     padding: 0;
-    /* margin: 0; */
+    margin: 0;
     /* margin-bottom: 12px; */
     box-sizing: border-box;
 }
@@ -80,10 +80,14 @@ body{
 #header .nav .username{
     color: white;
     position: relative;
-    margin-top: 4px;
+    width: 150px;
+    height: 25px;
     display: flex;
     flex-direction: row;
     gap: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
 }
 
 #header .nav .username:hover{

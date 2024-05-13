@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const settingSchema = new Schema({
-    username: {
+    email: {
         type: String,
         required: true,
-        maxLength: 255
+        unique: true
     },
     MusicVL: {
         type: Number,
@@ -17,17 +17,13 @@ const settingSchema = new Schema({
         default: 0.5
     },
     IsSoundOn: {
-        type: Boolean,
-        default: true
+        type: String,
+        default: "on"
     },
     IsEffectOn: {
-        type: Boolean,
-        default: true
+        type: String,
+        default: "on"
     },
-    IsFullScreen: {
-        type: Boolean,
-        default: false
-    }
 })
 
 module.exports = mongoose.model("Setting", settingSchema);

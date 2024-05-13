@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h2 class="player1-name">Player1's Name</h2>
+                        <h2 class="player1-name" id="player1name">{{username_player1}}</h2>
                     </div>
                     <div class="round-time">
                         <div class="round-info">
@@ -44,11 +44,11 @@
                             <img src="/assets/img/ava-crop.png" alt="">
                             <div class="score-parallelogram">
                                 <div class="score-wrapper">
-                                    <h2 class="score-label" id="Score_player2">1000</h2> 
+                                    <h2 class="score-label" id="Score_player2">0</h2> 
                                 </div>
                             </div>
                         </div>
-                        <h2 class="player2-name">Player2's Name</h2>
+                        <h2 class="player2-name" id="player2name">Hãy đợi người chơi 2</h2>
                     </div>
                 </div>
                 
@@ -79,7 +79,7 @@
             <div class="bg-model">
                 <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
                 <div class="end-model-content">
-                    <h2>Trò chơi kết thúc!</h2>
+                    <h2 id="end-result">Trò chơi kết thúc!</h2>
                     <h3 id="end-model-score">Điểm của bạn: <span id="endpoint"></span> </h3>
                 </div>
                 <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
@@ -98,8 +98,8 @@
                         <h3>Chơi tiếp</h3>
                     </a>
                 </button>
-                <button class="home-btn">
-                    <a href="/home" class="home-btn-a">
+                <button class="home-btn" id="home-btn">
+                    <a href="/home/{{userid}}" class="home-btn-a" >
                         <h3>Trang chủ</h3>
                     </a>
                 </button>
@@ -138,17 +138,21 @@
                         <h3>Chơi tiếp</h3>
                     </a>
                 </button>
-                <button class="home-btn-1">
-                    <a href="/home" class="home-btn-a">
+                <button class="home-btn-1" id="home_render">
+                    <a href="/home/{{userid}}" class="home-btn-a" >
                         <h3>Trang chủ</h3>
                     </a>
                 </button>
             </div>
         </div>
         <input type="hidden" id="songsInput" data-songs="{{songs}}">
+        <input type="hidden" id="userid" data-user="{{userid}}">
+        
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/playmultiplayer.js"></script>
+        {{!-- <script src= "/multiplayer.js"></script> --}}
         <input type="hidden" id="efVLInput" value="{{efVL}}">
         <input type="hidden" id="msVLInput" value="{{msVL}}">
 
-        <script src="playmultiplayer.js"></script>
     </body>
 </html>

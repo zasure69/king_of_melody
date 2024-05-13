@@ -42,7 +42,6 @@
             <ul>
                 <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
                 <li id = "cd_xep_hang">MULTIPLAYER</li>
-                <li><a href="#avm" >THÀNH TÍCH</a></li>
                 <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
             </ul>
         </div>
@@ -150,10 +149,34 @@
                 <div class="select_rank_mode_return">
                     <span class = "return_xep_hang">TRỞ LẠI</span>
                     <div class="search_room">
-                        <input type="text" placeholder="Mã phòng hoặc tên phòng">
-                        <button class="find">
-                            <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-                        </button>
+                        <form action="/home/search" method="post">
+                            <div class="find_roomid">
+                                <input type="text" id="input_roomid" name="roomID" placeholder="Mã phòng">
+                                <button class="find" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                                </button>
+                            </div>
+                            {{#if full}}
+                            <script>
+                                document.getElementById("team_modal_xep_hang").style.display = "flex";
+                                document.getElementById("Warningroom").style.display = "flex";
+                            </script>
+                            <div class="Warningroom"> 
+                                <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
+                                <div class="fullroom">{{full}}</div>
+                            </div>
+                            {{/if}}
+                            {{#if Notfound}}
+                            <script>
+                                document.getElementById("team_modal_xep_hang").style.display = "flex";
+                                document.getElementById("Warningroom").style.display = "flex";
+                            </script>
+                            <div class="Warningroom">
+                                <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
+                                <div class="notfoundroom">{{Notfound}}</div>
+                            </div>
+                            {{/if}}
+                        </form>
                         
                     </div>
                     <div class="select_rank_mode_information">
@@ -196,8 +219,14 @@
                     </div>
 
                     <div class="select_rank_mode_button">
-                        <button class="createclick" id = "create_room"><b>Tạo phòng</b></button>
-                        <button class="playclick"><b><a href="/playmulti">Vào nhanh</a></b></button>
+                        <form action="/home/roomcreate/" method="post" id = "create_room"><button type="submit" class="createclick" ><b>Tạo phòng</b></button></form>
+                        <form action="/home/playnow/" method="post">
+                            <button class="playclick" id="play_now">
+                                <b>
+                                    Vào nhanh
+                                </b>
+                            </button>
+                        </form>
                     </div>
                 </div>
 
@@ -211,7 +240,7 @@
 
     </div>
 
-    <div class="modal_create_room" id = "team_modal_create_room">
+    {{!-- <div class="modal_create_room" id = "team_modal_create_room">
         <div class="create_room_body">
             <div class="create_room_header">
                 <div class="create_room_return">
@@ -231,7 +260,7 @@
             </div>
         </div>
 
-    </div>
+    </div> --}}
     <!-- Leaderboard -->
     <div class="leaderboard" id="ldtest">
         <div class="overlay">
@@ -347,3 +376,6 @@
     </div> -->
 
     <script src="/modal_normal_rank.js"></script>
+    {{!-- <script src= "/multiplayer.js"></script> --}}
+    {{!-- <script src="/socket.io/socket.io.js"></script> --}}
+    

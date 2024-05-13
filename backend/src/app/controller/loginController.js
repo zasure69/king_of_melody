@@ -168,6 +168,7 @@ class loginController {
                             .compare(password, user[0].password)
                             .then(checkPassword => {
                                 if (checkPassword) {
+                                    req.session.user = user[0];
                                     req.session.isAuth = true;
                                     res.redirect('/home/' + user[0]._id);
                                 } else {

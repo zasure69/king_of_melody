@@ -599,7 +599,12 @@ body{
     display: flex;
     position: absolute;
     align-items: center;
+    flex-direction: column;
     left: 42%;
+}
+.select_rank_mode_body .find_roomid{
+    display: flex;
+    justify-content: space-around;
 }
 .select_rank_mode_body .search_room input{
     overflow: hidden;
@@ -612,6 +617,7 @@ body{
     outline: none;
     border-bottom-left-radius: 8px;
     border-top-left-radius: 8px;
+    padding-left: 2px;
 }
 
 .select_rank_mode_body .search_room .find{
@@ -623,10 +629,27 @@ body{
     height: 2rem;
     background-color: #eee;
     border: none;
+    gap: 0.5rem;
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
 }
-
+.select_rank_mode_body .search_room .Warningroom{
+    display: flex;
+    gap: 0.3rem;
+    margin-top: 5px;
+}
+.select_rank_mode_body .search_room #error_ex{
+    /* display: none; */
+    font-style: normal;
+    font-size: 0.8rem;
+    color: #eee;
+    margin-top: 4px;
+    /* gap: 0.5rem; */
+}
+.select_rank_mode_body .search_room .fullroom, .select_rank_mode_body .search_room .notfoundroom{
+    font-size: 0.8rem;
+    color: #eee;
+}
 .select_rank_mode_body .search_room i{
     background-size: 20px;
 }

@@ -373,9 +373,7 @@ document.getElementById("return").onclick = function(){
   detailmodal.style.display = "none";
 }
 
-// back.addEventListener('click', ()=> {
-//   window.location.href = `home/${iduser}`;
-// })
+
 
 
 // socket.on("connect", function(socket){
@@ -476,6 +474,10 @@ home1.addEventListener('click', (e)=>{
   // });
   // home1.dispatchEvent(clickevent);
   //this.onclick();
+})
+
+back.addEventListener('click', (e)=> {
+  socket.emit("render_home", iduser);
 })
 
 // socket.on("room", function(socket) {

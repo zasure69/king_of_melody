@@ -119,7 +119,7 @@ class loginController {
                             user.save()
                                 .then((result) => {
                                     sendVerificationEmail(result, res);
-                                    res.render('sendverify', {email: result.email});
+                                    res.render('sendverifymail', {email: result.email});
                                 })
                                 .catch(err => {
                                     res.send('Đăng ký thất bại');

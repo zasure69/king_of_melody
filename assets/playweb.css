@@ -39,7 +39,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    font-size: 1.5em;
+    font-size: 1.6vw;
 }
 
 .container .hint{
@@ -61,8 +61,7 @@ body {
 }
 
 .container .hint h2 {
-    margin-top: 0em;
-    font-size: 2em;
+    font-size: 3vw;
 }
 
 .container .hint p {
@@ -78,13 +77,41 @@ body {
 }
 
 .container .play-area img{
-    width: 20%;
+    width: 11vh;
 }
 
 .container .play-area .info {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: center;
+}
+
+.container .play-area .info .btn-back {
+    width: 2.6vw;
+    height: 2.6vw;
+    background-color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #f53192;
+    cursor: pointer;
+}
+
+.container .play-area .info .btn-back:hover {
+    transform: scale(1.5);
+    background-color: #f53192;
+    color: #fff;
+}
+
+.container .play-area .info .player-info {
+    display: flex;
+    align-items: center;
+}
+
+.container .play-area .info .player-info p {
+    font-size: 2vw;
 }
 
 .container .play-area .info .round-info .point-info {
@@ -92,6 +119,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.container .play-area .info .round-info h3{
+    font-size: 1.7vw;
 }
 
 .play-area .info .round-info .point-info h3{
@@ -120,14 +151,16 @@ body {
 }
 
 .container .play-area .info .time-info .point-info h3 {
-    font-size: 2em;
+    font-size: 2vw;
 }
 
 .container .play-area .disc {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2em;
+    margin: 2vh;
+    width: 73vw;
+    height: 71vh;
 }
 
 .container .play-area .disc img {
@@ -216,7 +249,7 @@ body {
     height: 3em;
     border-radius: 36px;
     color: white;
-    font-size: 1em;
+    font-size: 1.3 vw;
     background: linear-gradient(132deg, rgb(168,98,230), rgb(122, 57, 214), rgb(69,6, 191),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(168, 228, 236));
 }
 

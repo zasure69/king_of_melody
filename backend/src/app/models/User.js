@@ -59,6 +59,10 @@ const userSchema = new Schema({
     CurExp: {
         type: Number,
         default: 0
+    },
+    muitiPoint: {
+        type: Number,
+        default: 0
     }
 });
 

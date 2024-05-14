@@ -342,7 +342,7 @@ guessButton.addEventListener('click', () => {
         answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
         
       }
-      if (index == 1){
+      if (index == 9){
         socket.emit("done");
         
         

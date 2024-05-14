@@ -96,7 +96,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     height: 5em;
-    width: 29em;
+    width: 29vw;
 }
 
 .container .play-area .info .round-info {
@@ -211,6 +211,7 @@ body {
 
 .container .play-area .info .player2-info .player2-name {
     text-align: end;
+    font-size: 1.7vw;
 }
 
 .container .play-area .disc {

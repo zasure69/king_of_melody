@@ -318,7 +318,13 @@ body {
     cursor: pointer;
 }
 
-
+.container .disc .discimg{
+    animation-name: rotate;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-play-state: paused;
+}
 
 @keyframes rotate {
     0% {

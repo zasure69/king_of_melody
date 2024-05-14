@@ -1,8 +1,6 @@
 const socket = io();
-// document.addEventListener('DOMContentLoaded', function() {
-  // Lấy các phần tử DOM cần sử dụng
-// import { Howl, Howler } from 'howler';
-// const { Howl, Howler } = require('howler');
+// Lấy các phần tử DOM cần sử dụng
+
 let songSlider = document.querySelector("#progress");
 let increaseVolume = document.querySelector("#increase-volume");
 let decreaseVolume = document.querySelector("#decrease-volume");
@@ -342,10 +340,10 @@ guessButton.addEventListener('click', () => {
         answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
         
       }
-      if (index == 1){
+      if (index == 9){
         socket.emit("done");
         
-        
+          
       }
       click = false;
   }
@@ -373,13 +371,6 @@ document.getElementById("return").onclick = function(){
   detailmodal.style.display = "none";
 }
 
-
-
-
-// socket.on("connect", function(socket){
-//     console.log(socket.rooms)
-// });
-
 socket.on("reconnect", function() {
     console.log('bạn đã kết nối lại thành công');
 })
@@ -387,7 +378,6 @@ socket.on("reconnect", function() {
 socket.on("player1", function(room) {
     if (room.vacant){
       player1_name.textContent = room.player[0].username;
-      // player2_name.textContent = "Hãy đợi người chơi 2";
     }
     else{
       player1_name.textContent = room.player[0].username;
@@ -416,8 +406,6 @@ socket.on("remain_players", function(nameplayer1, nameplayer2){
   
 })
 socket.on("addpointtooppent", (score) =>{
-    // console.log("player2 ",score);
-    // console.log("player2", socket.id);
     score_player2.textContent = score;
 })
 
@@ -453,33 +441,14 @@ socket.on('endgame',() => {
   
 })
 home.addEventListener('click', (e)=>{
- // e.preventDefault();
   socket.emit("render_home", iduser);
-  // const clickeve = new MouseEvent('click', {
-  //   bubbles: true,
-  //   cancelable: true,
-  //   view: window
-  // });
-  // home.dispatchEvent(clickeve);
 
 })
 home1.addEventListener('click', (e)=>{
- // e.preventDefault();
   console.log(userid.dataset);
   socket.emit("render_home", iduser);
-  // const clickevent = new MouseEvent('click', {
-  //   bubbles: true,
-  //   cancelable: true,
-  //   view: window
-  // });
-  // home1.dispatchEvent(clickevent);
-  //this.onclick();
 })
 
 back.addEventListener('click', (e)=> {
   socket.emit("render_home", iduser);
 })
-
-// socket.on("room", function(socket) {
-//     console.log(socket.adapter.rooms);
-// })

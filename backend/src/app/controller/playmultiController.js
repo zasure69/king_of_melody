@@ -263,7 +263,7 @@ io.on("connection", async function(socket) {
                 {
                     user_win.multiPoint += score/10;
                 }
-                else if (user_win.multiPoint <= 2400 )
+                else if (user_win.multiPoint <= 2400)
                 {
                     user_win.multiPoint += parseInt(score/12);
                 }
@@ -306,24 +306,26 @@ io.on("connection", async function(socket) {
                 if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
                 {
                     user_lose.multiPoint -= parseInt(score/60);
+                    if (user_lose.multiPoint < 0)
+                        user_lose.multiPoint = 0;
                 }
-                else if (user_lose.multiPoint <= 2400 )
+                else if (user_lose.multiPoint <= 2400 && user_lose.multiPoint > 1000)
                 {
                     user_lose.multiPoint -= parseInt(score/50);
                 }
-                else if (user_lose.multiPoint <= 4000)
+                else if (user_lose.multiPoint <= 4000 && user_lose.multiPoint > 2400)
                 {
                     user_lose.multiPoint -= parseInt(score/30);
                 }
-                else if (user_lose.multiPoint <= 6000)
+                else if (user_lose.multiPoint <= 6000 && user_lose.multiPoint > 4000)
                 {
                     user_lose.multiPoint -= parseInt(score/25);
                 }
-                else if (user_lose.multiPoint <= 8000)
+                else if (user_lose.multiPoint <= 8000 && user_lose.multiPoint > 6000)
                 {
                     user_lose.multiPoint -= parseInt(score/20);
                 }
-                else if (user_lose.multiPoint <= 12000)
+                else if (user_lose.multiPoint <= 12000 && user_lose.multiPoint > 8000)
                 {
                     user_lose.multiPoint -= parseInt(score/15);
                 }

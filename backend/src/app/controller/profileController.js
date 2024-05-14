@@ -3,7 +3,7 @@ class profileController {
     index(req, res, next) {
         setting.findOne({email: req.session.user.email})
             .then((result) => {
-                res.render('profile', {userId: req.session.user._id, VL: result.MusicVL})
+                res.render('profile', {userId: req.session.user._id, VL: result.EffectVL})
             })
             .catch(next)
     }

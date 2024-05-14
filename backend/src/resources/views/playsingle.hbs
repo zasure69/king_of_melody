@@ -19,7 +19,7 @@
                 <h2>Bài hát gợi ý</h2>
                 {{#each hintlist}}
                 <div class="hintlist-1">
-                    <h3>{{this.name}}</h3>
+                    <h3>{{this.song}}</h3>
                     <p>{{this.singer}}</p>
                 </div>
                 {{/each}}
@@ -32,7 +32,7 @@
                     </div>
                     <div class="player-info">
                         <img src="assets/img/ava-crop.png" alt="">
-                        <p>PlayerName</p>
+                        <p>{{username}}</p>
                     </div>
                     <div class="time-info">
                         Time<br>

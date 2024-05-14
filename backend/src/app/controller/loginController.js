@@ -116,15 +116,20 @@ class loginController {
                                 email: formData.email,
                                 password: hashPassword,
                                 verified: false
-                            });
-                            const setting = new settingSchema({
-                                email: formData.email,
-                            });
-                            setting.save();
+                            }); 
                             user.save()
                                 .then((result) => {
+                                    const setting = new settingSchema({
+                                        email: formData.email,
+                                    });
                                     sendVerificationEmail(result, res);
-                                    res.render('sendverify', {email: result.email});
+                                    res.render('sendverifymail', {email: result.email});
+                                    setting.save()
+                                    .then()
+                                    .catch(err =>{
+                                        console.log("Error: ", err);
+                                    })
+                                    
                                 })
                                 .catch(err => {
                                     res.send('Đăng ký thất bại');

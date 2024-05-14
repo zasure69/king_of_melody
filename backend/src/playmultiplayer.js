@@ -20,12 +20,19 @@ let home = document.getElementById("home_render");
 let home1 = document.getElementById("home-btn");
 let numright = 0;
 let numwrong = 0;
+let back = document.getElementById("btn_back");
 
 const userid = document.getElementById('userid');
 const iduser = userid.dataset.user;
 const songsInput = document.getElementById('songsInput');
-const efVL = document.getElementById('efVLInput');
-const msVL = document.getElementById('msVLInput');
+const efVL = document.getElementById('efInput');
+const msVL = document.getElementById('msInput');
+console.log("ef: ", efVL);
+console.log("ms: ", msVL);
+const ef = efVL.dataset.efvolume;
+
+const ms = msVL.dataset.volume;
+
 const songs = JSON.parse(songsInput.dataset.songs);
 const length = songs.length;
 
@@ -34,10 +41,10 @@ window.addEventListener('load', function() {
   console.log('Trang đã tải xong.');
 });
 
-window.history.pushState(null,null,window.location.href);
-window.onpopstate = function(event) {
-  window.history.forward();
-}
+// window.history.pushState(null,null,window.location.href);
+// window.onpopstate = function(event) {
+//   window.history.forward();
+// }
 
 //Sử dụng biến songs trong các xử lý JavaScript khác
 for(let i = 0; i < length; i++)
@@ -48,21 +55,23 @@ for(let i = 0; i < length; i++)
 
 var correct_answer = new Howl({
   src: ['/assets/sound/sound_correct_answer.mp3'],
-})
+});
 var incorrect_answer = new Howl({
   src: ['/assets/sound/sound_incorrect_answer.mp3'],
-})
+});
 var endgame = new Howl({
   src: ['/assets/sound/Cheap_Thrills.mp3'],
   loop: true
-})
+});
 var endgame_lose = new Howl({
   src: ['/assets/sound/gameover.mp3'],
   loop: true
-})
-correct_answer.volume(efVL.value);
-incorrect_answer.volume(efVL.value);
-endgame.volume(msVL.value);
+});
+
+correct_answer.volume(ef);
+incorrect_answer.volume(ef);
+endgame.volume(ef);
+endgame_lose.volume(ef);
 
 let play_song = [];
 let index = 0;
@@ -174,7 +183,7 @@ List_song.prototype = {
 
   play: function(index){
     if (this.songs[index]) {
-      this.songs[index].volume(msVL.value);
+      this.songs[index].volume(ms);
       this.songs[index].play();
       this.index = index;
     }
@@ -364,7 +373,9 @@ document.getElementById("return").onclick = function(){
   detailmodal.style.display = "none";
 }
 
-
+// back.addEventListener('click', ()=> {
+//   window.location.href = `home/${iduser}`;
+// })
 
 
 // socket.on("connect", function(socket){
@@ -414,6 +425,7 @@ socket.on("addpointtooppent", (score) =>{
 
 socket.on('endgame',() => {
   if (parseInt(score_player1.textContent) >  parseInt(score_player2.textContent)){
+    socket.emit("score_win", score, iduser);
     document.getElementsByClassName("container")[0].style.opacity = "0.35";
     document.getElementById("end-result").textContent = "Bạn đã dành chiến thắng!";
     endmodal.style.display = "flex";
@@ -422,14 +434,17 @@ socket.on('endgame',() => {
     endgame.play();
   }
   else if (parseInt(score_player1.textContent) <  parseInt(score_player2.textContent)){
+    socket.emit("score_lose", score, iduser);
     document.getElementsByClassName("container")[0].style.opacity = "0.35";
     document.getElementById("end-result").textContent = "Bạn đã thua!";
     endmodal.style.display = "flex";
+    document.getElementById("img-model-ava").src = "/assets/img/lose_rain.gif";
     document.getElementById("endpoint").innerHTML = score_player1.innerHTML;
     endgame_lose.volume(0.5);
     endgame_lose.play();
   }
   else {
+    socket.emit("score_draw", score, iduser);
     document.getElementsByClassName("container")[0].style.opacity = "0.35";
     document.getElementById("end-result").textContent = "OMG! Bạn đã vô tình hòa đối thủ!";
     endmodal.style.display = "flex";

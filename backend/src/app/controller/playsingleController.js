@@ -1,5 +1,6 @@
 const songSchema = require('../models/Song');
 const settingSchema = require('../models/Setting');
+const hintsongSchema = require('../models/newsongs');
 
 const cheerio = require('cheerio');
 const { resolveSoa } = require('dns');
@@ -34,14 +35,13 @@ class playsingleController {
             infolist.push({name: listsong[i].name, singer: listsong[i].singer, link: listsong[i].link});
             numbers.push(listsong[i].index);
         }
-        let hintlist = await songSchema.aggregate([
-            { $match: {  mode: { $in: ["hard", "hell", "no hope"] }, index: {$nin: numbers} } },
-            { $sample: { size: 20} },
-            { $project: { _id: 0, name: 1, singer: 2} }
+        let hintlist = await hintsongSchema.aggregate([
+            { $sample: { size: 20} }
+            // { $project: { _id: 0, name: 1, singer: 2} }
         ])
 
         for (let i = 0; i < listsong.length; i++) {
-            hintlist.push({name: listsong[i].name, singer: listsong[i].singer, link: listsong[i].link});
+            hintlist.push({song: listsong[i].name, singer: listsong[i].singer});
         }
 
         function shuffleArray(arr) {
@@ -52,33 +52,32 @@ class playsingleController {
             return arr;
         }
         const st = await settingSchema.findOne({email: req.session.user.email});
-        shuffleArray(hintlist)
-        res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL})
+        shuffleArray(hintlist);
+        res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: req.session.user.username});
     }
-    update(req, res, next) {
-        songSchema.aggregate([
-            { $match: { mode: req.body.mode } },
-            { $sample: { size: 10} }
-            ])
-            .exec()
-            .then((songs) => {
+    // update(req, res, next) {
+    //     songSchema.aggregate([
+    //         { $match: { mode: req.body.mode } },
+    //         { $sample: { size: 10} }
+    //         ])
+    //         .exec()
+    //         .then((songs) => {
                 
-                songSchema.aggregate([
-                    { $match: { mode: ["hard", "hell", "no hope"] } },
-                    { $sample: { size: 20} }
-                ])
-                .exec()
-                .then((hintlist) => {
-                    res.render('playsingle', { songs: JSON.stringify(listsong), hintlist})
-                })
-                .catch(err => {
-                    console.log("Error: ", err);
-                })
-            })
-            .catch(err => {
-                console.log("Error: ", err);
-            })
-    }
+    //             hintsongSchema.aggregate([
+    //                 { $sample: { size: 20} }
+    //             ])
+    //             .exec()
+    //             .then((hintlist) => {
+    //                 res.render('playsingle', { songs: JSON.stringify(listsong), hintlist})
+    //             })
+    //             .catch(err => {
+    //                 console.log("Error: ", err);
+    //             })
+    //         })
+    //         .catch(err => {
+    //             console.log("Error: ", err);
+    //         })
+    // }
 }
 
 module.exports = new playsingleController;

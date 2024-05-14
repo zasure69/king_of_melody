@@ -414,5 +414,24 @@ a {
         font-size: 9px;
     }
 }
-
+@media only screen and (max-height: 450px) {
+    .div_gif {
+        margin: 0;
+        height: 100%;
+        justify-content: center;
+    }
+    .img_gif {
+        height: 15rem;
+        width: 15rem;
+    }
+    .profile_header_aside {
+        padding: 0;
+    }
+    .profile_progress {
+        margin: 0;
+    }
+    .boundary {
+        margin: 10px 0;
+    }
+}
 

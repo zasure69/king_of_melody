@@ -154,3 +154,14 @@
         margin: 1rem 0;   
     }
 }
+@media only screen and (max-height: 450px) {
+    .setting_container .space {
+        margin: 0;   
+    }
+    .setting_container >p {
+        padding: 0;
+    }
+    .setting_container {
+        gap: 1rem;
+    }
+}

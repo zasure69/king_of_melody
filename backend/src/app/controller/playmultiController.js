@@ -1,21 +1,16 @@
 const songSchema = require('../models/Song');
 const Room = require('../models/Room'); 
-//const semaphore = require('../../semaphore');
+const User = require('../models/User');
 const { io, app } = require('../../main');
 let roomid = "";
-//let room_ID = [];
-let room = [];//room[1000]
-// const server = require('http').Server(app);
-// const io = require('socket.io')(server);
-// const SocketServices = require('./app/services/room.service.js');
+let room = [];
+
 let listSong = [];
 let loadSong = true;
 let playersdone = {};
 
 const settingSchema = require('../models/Setting');
-//const {mongooseToObject} = require('../../util/mongoose');
-const cheerio = require('cheerio');
-const fs = require('fs');
+
 
 class Semaphore {
     constructor(initialCount) {
@@ -53,8 +48,6 @@ class playmultiController {
         console.log("count: ", count);
         await sem.acquire();
         roomid = req.params.roomid;
-        //room_ID.push(roomid);
-        //count++;
         console.log("roomid index: ", roomid)
         Room.findOne({roomid})
         .then((rooms) =>{
@@ -75,7 +68,10 @@ class playmultiController {
                             infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                         }
                         loadSong = false;
-                        res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id});
+                        settingSchema.findOne({email: req.session.user.email})
+                        .then((st) => {
+                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
+                        });
                     })
                     .catch(err => {
                         console.log('error: ', err)
@@ -98,7 +94,10 @@ class playmultiController {
                                 infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                             }
                             loadSong = false;
-                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id});
+                            settingSchema.findOne({email: req.session.user.email})
+                            .then((st) => {
+                                res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
+                            });
                         })
                         .catch(err => {
                             console.log('error: ', err)
@@ -110,8 +109,11 @@ class playmultiController {
                     for (let i = 0; i < songs.length; i++) {
                         infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                     }
-                    res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id});
-                    loadSong = true;
+                    settingSchema.findOne({email: req.session.user.email})
+                    .then((st) => {
+                        res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
+                        loadSong = true;
+                    })
                 }
                 
                 
@@ -125,39 +127,14 @@ class playmultiController {
     
 }
 
-settingSchema.findOne({email: req.session.user.email})
-                .then((st) => {
-
-                res.render('playmulti', { songs: JSON.stringify(songs), infolist, efVL: st.EffectVL, msVL: st.MusicVL } );
-                });
-                // const html = fs.readFileSync('../../resources/views/playmulti.hbs', 'utf-8');
-                // const $ = cheerio.load(html);
-                // // Thay đổi thuộc tính của thẻ bất kỳ
-                // let targetElement = $('#ctrlIcon'); // Thay 'selector' bằng CSS selector của thẻ cần thay đổi thuộc tính
-                // targetElement.attr('class', 'fa-solid fa-pause'); // Thay 'attribute' bằng tên thuộc tính cần thay đổi, 'new value' là giá trị mới
-                // // Lưu lại nội dung HTML sau khi thay đổi thuộc tính
-                // const modifiedTemplate = $.html();
-                // // Gửi template đã thay đổi về phía client
-                // res.send(modifiedTemplate);
-                // const audioPlayer = document.createElement('audio');
-                // const audioSource = document.createElement('source');
-                // importSongFromBase64(song[0].content, audioPlayer, audioSource);
-                //console.log('Danh sách bài hát: ', song);
-
 io.on("connection", async function(socket) {
-    //await sem.acquire();
     console.log(`User connected id is ${socket.id}`);
-    //console.log("RoomID[count]",room_ID[count]);
     socket.join(roomid);
-    //socket.join(roomid);
-    //console.log(room._id);
-    //console.log(room.socketid);
     room.socketid.push(socket.id);
     room.count++;
     Room
         .updateOne({roomid: roomid}, {count: room.count, socketid: room.socketid })
         .then(() =>{
-            // console.log(room);
             console.log(room.socketid);
             console.log(socket.adapter.rooms);
             if (room.vacant){
@@ -167,10 +144,6 @@ io.on("connection", async function(socket) {
                 console.log("Mở khóa cho socket");
             }
             else{
-                // socket.emit("player2",room);
-                // socket.id = room.socketid[0];
-                // console.log(socket.id);
-                // socket.emit("player1",room);
                 if (room.count <= 2)
                 {
                     const socketsInRoom = io.sockets.adapter.rooms.get(roomid);
@@ -210,7 +183,6 @@ io.on("connection", async function(socket) {
         Room.findOne({socketid: socket.id})
             .then((send) => {
                 console.log(`from ${socket.id} ${send.roomid}`);
-                // console.log(io.connected[socket.id]);
                 socket.to(send.roomid).emit("addpointtooppent",score);        
             })
             .catch((err) => {
@@ -243,7 +215,6 @@ io.on("connection", async function(socket) {
                 .then((result)=>{
                     room.socketid = newroom;
                     console.log(result);
-                    // console.log(socketid);
                 })
                 .catch((error)=>{
                     console.log("error: ",error);
@@ -252,14 +223,6 @@ io.on("connection", async function(socket) {
         .catch((error)=>{
             console.log("Error: ", error);
         })
-        // Room.findOneAndDelete({socketid: socket.id}, function(err,data){
-        //     if (err){
-        //         console.log(err)
-        //       }
-        //       else{
-        //         console.log("Removed: ", data);
-        //       }
-        // })
     })
     socket.on("reconnect",()=>{
         console.log(socket.id);
@@ -285,23 +248,145 @@ io.on("connection", async function(socket) {
             .catch((err)=>{
                 console.log("Error: ", err);
             })        
-            })
+        })
         .catch((err) => {
             console.log("error",err);
         })
-        
-
     })
+    socket.on("score_win", (score, iduser)=>{
+        User.findOne({_id: iduser})
+            .then((user_win)=>{
+                const win = user_win.multiWinGames++;
+                const round = user_win.multiGames++;
+                user_win.CurExp += score/10;
+                if (user_win.multiPoint <= 1000)
+                {
+                    user_win.multiPoint += score/10;
+                }
+                else if (user_win.multiPoint <= 2400 )
+                {
+                    user_win.multiPoint += parseInt(score/12);
+                }
+                else if (user_win.multiPoint <= 4000)
+                {
+                    user_win.multiPoint += parseInt(score/15);
+                }
+                else if (user_win.multiPoint <= 6000)
+                {
+                    user_win.multiPoint += parseInt(score/18);
+                }
+                else if (user_win.multiPoint <= 8000)
+                {
+                    user_win.multiPoint += parseInt(score/20);
+                }
+                else if (user_win.multiPoint <= 12000)
+                {
+                    user_win.multiPoint += parseInt(score/25);
+                }
+                else if (user_win.multiPoint > 12000)
+                {
+                    user_win.multiPoint += parseInt(score/30);
+                }
+                User.updateOne({_id: iduser}, {multiWinGames: win, multiGames: round, CurExp: user_win.CurExp, multiPoint: user_win.multiPoint})
+                .then()
+                .catch((error)=>{
+                    console.log("Error: ", error);
+                })
+            })
+            .catch((error)=>{
+                console.log("Error: ", error);
+            })
+
+        })
+    socket.on("score_lose", (score, iduser)=>{
+        User.findOne({_id: iduser})
+            .then((user_lose)=>{
+                const round = user_lose.multiGames++;
+                user_lose.CurExp += score/10;
+                if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
+                {
+                    user_lose.multiPoint -= parseInt(score/60);
+                }
+                else if (user_lose.multiPoint <= 2400 )
+                {
+                    user_lose.multiPoint -= parseInt(score/50);
+                }
+                else if (user_lose.multiPoint <= 4000)
+                {
+                    user_lose.multiPoint -= parseInt(score/30);
+                }
+                else if (user_lose.multiPoint <= 6000)
+                {
+                    user_lose.multiPoint -= parseInt(score/25);
+                }
+                else if (user_lose.multiPoint <= 8000)
+                {
+                    user_lose.multiPoint -= parseInt(score/20);
+                }
+                else if (user_lose.multiPoint <= 12000)
+                {
+                    user_lose.multiPoint -= parseInt(score/15);
+                }
+                else if (user_lose.multiPoint > 12000)
+                {
+                    user_lose.multiPoint -= parseInt(score/5);
+                }
+                User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
+                .then()
+                .catch((error)=>{
+                    console.log("Error: ", error);
+                })
+            })
+            .catch((error)=>{
+                console.log("Error: ", error);
+            })
+
+        })
+    socket.on("score_draw", (score, iduser)=>{
+        User.findOne({_id: iduser})
+            .then((user_draw)=>{
+                const round = user_draw.multiGames++;
+                user_draw.CurExp += score/10;
+                if (user_draw.multiPoint <= 1000)
+                {
+                    user_draw.multiPoint += parseInt(score/15);
+                }
+                else if (user_draw.multiPoint <= 2400 )
+                {
+                    user_draw.multiPoint += parseInt(score/18);
+                }
+                else if (user_draw.multiPoint <= 4000)
+                {
+                    user_draw.multiPoint += parseInt(score/20);
+                }
+                else if (user_draw.multiPoint <= 6000)
+                {
+                    user_draw.multiPoint += parseInt(score/25);
+                }
+                else if (user_draw.multiPoint <= 8000)
+                {
+                    user_draw.multiPoint += parseInt(score/30);
+                }
+                else if (user_draw.multiPoint <= 12000)
+                {
+                    user_draw.multiPoint += parseInt(score/40);
+                }
+                else if (user_draw.multiPoint > 12000)
+                {
+                    user_draw.multiPoint += parseInt(score/50);
+                }
+                User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_draw.CurExp, multiPoint: user_draw.multiPoint})
+                .then()
+                .catch((error)=>{
+                    console.log("Error: ", error);
+                })
+            })
+            .catch((error)=>{
+                console.log("Error: ", error);
+            })
+
+        })
 })
 
-// io.on("createRoom", function(roomid){
-//     console.log(roomid);
-//     socket.join(roomid);
-//     console.log(socket.adapter.rooms);
-// })
-
-// io.on("disconnection",function(socket) {
-//     listSob = fasle;
-// })
 
 module.exports = new playmultiController;

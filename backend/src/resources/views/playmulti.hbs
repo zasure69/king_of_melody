@@ -30,6 +30,11 @@
                         <h2 class="player1-name" id="player1name">{{username_player1}}</h2>
                     </div>
                     <div class="round-time">
+                        <div class="btn-back" id="btn_back">
+                            <a href="/home/{{userid}}">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
                         <div class="round-info">
                             Round<br>
                             <h3 id="Round_play">1/10</h3>
@@ -37,6 +42,10 @@
                         <div class="time-info">
                             Time<br>
                             <h3 id="Time_duration">12:30</h3>
+                        </div>
+                        <div class="room-info" id="room">
+                            Room<br>
+                            <h3>{{rom}}</h3>
                         </div>
                     </div>
                     <div class="player2-info">
@@ -129,9 +138,7 @@
             </div>
             <div class="btn-model">
                 <button class="home-btn-1" id="return">
-                    <a href="" class="home-btn-a">
-                        <h3>Trở lại</h3>
-                    </a>
+                    <h3>Trở lại</h3>
                 </button>
                 <button class="home-btn-1">
                     <a href="" class="home-btn-a">
@@ -147,12 +154,11 @@
         </div>
         <input type="hidden" id="songsInput" data-songs="{{songs}}">
         <input type="hidden" id="userid" data-user="{{userid}}">
-        
+        <input type="hidden" id="efInput" data-efvolume="{{efVL}}">
+        <input type="hidden" id="msInput" data-volume="{{msVL}}">
         <script src="/socket.io/socket.io.js"></script>
         <script src="/playmultiplayer.js"></script>
-        {{!-- <script src= "/multiplayer.js"></script> --}}
-        <input type="hidden" id="efVLInput" value="{{efVL}}">
-        <input type="hidden" id="msVLInput" value="{{msVL}}">
+
 
     </body>
 </html>

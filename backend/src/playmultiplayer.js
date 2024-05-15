@@ -230,53 +230,56 @@ decreaseVolume.addEventListener('click', () =>{
   }
   player.volume(volume);
 });
-
+let start = true;
 let tmp = 0;
 ctrlIcon.addEventListener('click', ()=>{
-  if (ctrlIcon.classList.contains("fa-pause"))
-  {
-    player.play(index);
-    count++;
-    if (count == 1){
-      var time = time_song[player.index];
-      tmp = time;
-      countdown = setInterval(() => {
-        time--;
+  if (start == true){
+    if (ctrlIcon.classList.contains("fa-pause"))
+    {
+      player.play(index);
+      count++;
+      if (count == 1){
+        var time = time_song[player.index];
         tmp = time;
-        calculate_time_song(time);
-        if (time == 0){
-          clearInterval(countdown);
-          guessButton.click();
-        }
-          
-      }, 1000)
+        countdown = setInterval(() => {
+          time--;
+          tmp = time;
+          calculate_time_song(time);
+          if (time == 0){
+            clearInterval(countdown);
+            guessButton.click();
+          }
+            
+        }, 1000)
+      }
+      ctrlIcon.classList.remove("fa-pause");
+      ctrlIcon.classList.add("fa-play");
+      click = true;
+      dem_tg = setInterval(updateSlider, 1000);
     }
-    ctrlIcon.classList.remove("fa-pause");
-    ctrlIcon.classList.add("fa-play");
-    click = true;
-    dem_tg = setInterval(updateSlider, 1000);
-  }
-  else
-  {
-    player.pause();
-    count++;
-    if (count == 1){
-      time = time_song[player.index];
-      tmp = time;
-      countdown = setInterval(() => {
-        time--;
+    else
+    {
+      player.pause();
+      count++;
+      if (count == 1){
+        time = time_song[player.index];
         tmp = time;
-        calculate_time_song(time);
-        if (time == 0){
-          clearInterval(countdown);
-          guessButton.click();
-        }
-      }, 1000)
+        countdown = setInterval(() => {
+          time--;
+          tmp = time;
+          calculate_time_song(time);
+          if (time == 0){
+            clearInterval(countdown);
+            guessButton.click();
+          }
+        }, 1000)
+      }
+      ctrlIcon.classList.remove("fa-play");
+      ctrlIcon.classList.add("fa-pause");
+      clearInterval(dem_tg);
     }
-    ctrlIcon.classList.remove("fa-play");
-    ctrlIcon.classList.add("fa-pause");
-    clearInterval(dem_tg);
   }
+  
 });
 function updateSlider() {
   var currentTime = play_song[index].seek();
@@ -371,6 +374,14 @@ document.getElementById("return").onclick = function(){
   detailmodal.style.display = "none";
 }
 
+socket.on("wait", function() {
+  start = false;
+})
+
+socket.on("start", function(){
+  start = true;
+})
+
 socket.on("reconnect", function() {
     console.log('bạn đã kết nối lại thành công');
 })
@@ -378,6 +389,7 @@ socket.on("reconnect", function() {
 socket.on("player1", function(room) {
     if (room.vacant){
       player1_name.textContent = room.player[0].username;
+      player2_name.textContent = "Hãy đợi người chơi 2";
     }
     else{
       player1_name.textContent = room.player[0].username;
@@ -405,6 +417,7 @@ socket.on("remain_players", function(nameplayer1, nameplayer2){
   }
   
 })
+
 socket.on("addpointtooppent", (score) =>{
     score_player2.textContent = score;
 })

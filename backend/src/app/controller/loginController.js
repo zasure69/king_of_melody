@@ -7,6 +7,8 @@ const passwordResetSchema = require('../models/PasswordReset');
 const userVerificationSchema = require('../models/UserVerification');
 //email handler
 const nodemailer = require('nodemailer');
+//google auth
+const passport = require('passport');
 //unique string
 const {v4: uuidv4} = require('uuid');
 //env variables
@@ -170,8 +172,9 @@ class loginController {
                             .then(checkPassword => {
                                 if (checkPassword) {
                                     req.session.user = user[0];
+                                    req.session.type = "default";
                                     req.session.isAuth = true;
-                                    res.redirect('/home/' + user[0]._id);
+                                    res.redirect('/home');
                                 } else {
                                     const errorMessage = 'Sai mật khẩu';
                                     res.redirect('/login?errorsignin=' + encodeURIComponent(errorMessage));
@@ -190,6 +193,12 @@ class loginController {
                 console.log("Error: ", error);
                 res.send('Lỗi trong khi kiểm tra người dùng có tồn tại không');
             }) 
+    }
+
+    processGoogleSiginCallback(req, res) {
+        req.session.isAuth = true;
+        req.session.type = 'google';
+        res.redirect('/home');
     }
 }
 

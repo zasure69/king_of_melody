@@ -1,3 +1,4 @@
+
 const express = require('express')
 const morgan = require('morgan')
 const path = require('path')
@@ -8,7 +9,33 @@ const passport = require('passport')
 const MongoDBSession = require('connect-mongodb-session')(session)
 const app = express()
 const port = 3000
+const fs = require('fs');
 
+// const https = require('https');
+
+
+// Đọc chứng chỉ SSL
+// const privateKey = fs.readFileSync('path/to/key.pem', 'utf8');
+// const certificate = fs.readFileSync('path/to/cert.pem', 'utf8');
+// const credentials = { key: privateKey, cert: certificate };
+
+// const httpsServer = https.createServer(credentials, app);
+
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+// const SocketServices = require('./app/services/room.service.js');
+// global._io = io; 
+
+module.exports = { io, app };
+
+// global._io.on('connection', SocketServices.connection);
+
+// _io.on('connection',(socket) => {
+//   console.log(`User disconnect id is ${socket.id}`);
+//   global._io = socket;
+// })
+
+server.listen(port);
 const route = require('./routes');
 const db = require('./config/db');
 
@@ -67,6 +94,6 @@ app.use(passport.session())
 
 route(app);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`)
+// })

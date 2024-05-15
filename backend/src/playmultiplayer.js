@@ -1,8 +1,6 @@
+const socket = io();
+// Lấy các phần tử DOM cần sử dụng
 
-// document.addEventListener('DOMContentLoaded', function() {
-  // Lấy các phần tử DOM cần sử dụng
-// import { Howl, Howler } from 'howler';
-// const { Howl, Howler } = require('howler');
 let songSlider = document.querySelector("#progress");
 let increaseVolume = document.querySelector("#increase-volume");
 let decreaseVolume = document.querySelector("#decrease-volume");
@@ -13,13 +11,39 @@ let time = document.getElementById("Time_duration");
 let round = document.getElementById("Round_play");
 let score_player1 = document.getElementById("Score_player1");
 let score_player2 = document.getElementById("Score_player2");
+let player1_name = document.getElementById("player1name");
+let player2_name = document.getElementById("player2name");
 let endmodal = document.getElementById("end-model");
+let home = document.getElementById("home_render");
+let home1 = document.getElementById("home-btn");
 let numright = 0;
 let numwrong = 0;
+let back = document.getElementById("btn_back");
 
+const userid = document.getElementById('userid');
+const iduser = userid.dataset.user;
 const songsInput = document.getElementById('songsInput');
+const efVL = document.getElementById('efInput');
+const msVL = document.getElementById('msInput');
+console.log("ef: ", efVL);
+console.log("ms: ", msVL);
+const ef = efVL.dataset.efvolume;
+
+const ms = msVL.dataset.volume;
+
 const songs = JSON.parse(songsInput.dataset.songs);
 const length = songs.length;
+
+window.addEventListener('load', function() {
+  // Mã JavaScript để xác nhận rằng trang đã tải hoàn chỉnh
+  console.log('Trang đã tải xong.');
+});
+
+// window.history.pushState(null,null,window.location.href);
+// window.onpopstate = function(event) {
+//   window.history.forward();
+// }
+
 //Sử dụng biến songs trong các xử lý JavaScript khác
 for(let i = 0; i < length; i++)
 {
@@ -28,16 +52,24 @@ for(let i = 0; i < length; i++)
  // In danh sách bài hát trong console
 
 var correct_answer = new Howl({
-  src: ['assets/sound/sound_correct_answer.mp3'],
-})
+  src: ['/assets/sound/sound_correct_answer.mp3'],
+});
 var incorrect_answer = new Howl({
-  src: ['assets/sound/sound_incorrect_answer.mp3'],
-})
+  src: ['/assets/sound/sound_incorrect_answer.mp3'],
+});
 var endgame = new Howl({
-  src: ['assets/sound/Cheap_Thrills.mp3'],
+  src: ['/assets/sound/Cheap_Thrills.mp3'],
   loop: true
-})
+});
+var endgame_lose = new Howl({
+  src: ['/assets/sound/gameover.mp3'],
+  loop: true
+});
 
+correct_answer.volume(ef);
+incorrect_answer.volume(ef);
+endgame.volume(ef);
+endgame_lose.volume(ef);
 
 let play_song = [];
 let index = 0;
@@ -142,13 +174,14 @@ var List_song = function (songs) {
   this.songs = songs;
   this.index = 0;
 }
-let countdown = 0, count = 0, click = true, score = 0;
+let countdown = 0, count = 0, click = false, score = 0;
 
 
 List_song.prototype = {
 
   play: function(index){
     if (this.songs[index]) {
+      this.songs[index].volume(ms);
       this.songs[index].play();
       this.index = index;
     }
@@ -197,51 +230,56 @@ decreaseVolume.addEventListener('click', () =>{
   }
   player.volume(volume);
 });
-
+let start = true;
 let tmp = 0;
 ctrlIcon.addEventListener('click', ()=>{
-  if (ctrlIcon.classList.contains("fa-pause"))
-  {
-    player.play(index);
-    count++;
-    if (count == 1){
-      var time = time_song[player.index];
-      countdown = setInterval(() => {
-        time--;
+  if (start == true){
+    if (ctrlIcon.classList.contains("fa-pause"))
+    {
+      player.play(index);
+      count++;
+      if (count == 1){
+        var time = time_song[player.index];
         tmp = time;
-        calculate_time_song(time);
-        if (time == 0){
-          clearInterval(countdown);
-          guessButton.click();
-        }
-          
-      }, 1000)
+        countdown = setInterval(() => {
+          time--;
+          tmp = time;
+          calculate_time_song(time);
+          if (time == 0){
+            clearInterval(countdown);
+            guessButton.click();
+          }
+            
+        }, 1000)
+      }
+      ctrlIcon.classList.remove("fa-pause");
+      ctrlIcon.classList.add("fa-play");
+      click = true;
+      dem_tg = setInterval(updateSlider, 1000);
     }
-    ctrlIcon.classList.remove("fa-pause");
-    ctrlIcon.classList.add("fa-play");
-    click = true;
-    dem_tg = setInterval(updateSlider, 1000);
-  }
-  else
-  {
-    player.pause();
-    count++;
-    if (count == 1){
-      time = time_song[player.index];
-      countdown = setInterval(() => {
-        time--;
+    else
+    {
+      player.pause();
+      count++;
+      if (count == 1){
+        time = time_song[player.index];
         tmp = time;
-        calculate_time_song(time);
-        if (time == 0){
-          clearInterval(countdown);
-          guessButton.click();
-        }
-      }, 1000)
+        countdown = setInterval(() => {
+          time--;
+          tmp = time;
+          calculate_time_song(time);
+          if (time == 0){
+            clearInterval(countdown);
+            guessButton.click();
+          }
+        }, 1000)
+      }
+      ctrlIcon.classList.remove("fa-play");
+      ctrlIcon.classList.add("fa-pause");
+      clearInterval(dem_tg);
     }
-    ctrlIcon.classList.remove("fa-play");
-    ctrlIcon.classList.add("fa-pause");
-    clearInterval(dem_tg);
   }
+  
 });
 function updateSlider() {
   var currentTime = play_song[index].seek();
@@ -284,6 +322,8 @@ guessButton.addEventListener('click', () => {
         else
           score += 10;
         score_player1.textContent = score;
+        console.log(socket.id);
+        socket.emit("addpointtooppent",score);
         setTimeout(playNextSong, 1000);
         answer_song.value = "";
       }
@@ -304,12 +344,10 @@ guessButton.addEventListener('click', () => {
         
       }
       if (index == 9){
-        document.getElementsByClassName("container")[0].style.opacity = "0.35";
-        endmodal.style.display = "flex";
-        document.getElementById("endpoint").innerHTML = score_player1.innerHTML;
-        endgame.volume(0.5);
-        endgame.play();
-        }
+        socket.emit("done");
+        
+          
+      }
       click = false;
   }
 })
@@ -336,4 +374,94 @@ document.getElementById("return").onclick = function(){
   detailmodal.style.display = "none";
 }
 
+socket.on("wait", function() {
+  start = false;
+})
 
+socket.on("start", function(){
+  start = true;
+})
+
+socket.on("reconnect", function() {
+    console.log('bạn đã kết nối lại thành công');
+})
+
+socket.on("player1", function(room) {
+    if (room.vacant){
+      player1_name.textContent = room.player[0].username;
+      player2_name.textContent = "Hãy đợi người chơi 2";
+    }
+    else{
+      player1_name.textContent = room.player[0].username;
+      player2_name.textContent = room.player[1].username;
+      console.log("player 1:",room.player[0]);
+      console.log("player 2:",room.player[1]);
+    }
+
+})
+
+socket.on("player2", function(room){
+    player2_name.textContent = room.player[0].username;
+    player1_name.textContent = room.player[1].username;
+})
+
+socket.on("remain_players", function(nameplayer1, nameplayer2){
+  console.log(nameplayer1," ",nameplayer2);
+  if (player1_name.textContent != nameplayer1)
+  {
+    player2_name.textContent = nameplayer1;
+  }
+  else
+  {
+    player2_name.textContent = nameplayer2;
+  }
+  
+})
+
+socket.on("addpointtooppent", (score) =>{
+    score_player2.textContent = score;
+})
+
+socket.on('endgame',() => {
+  if (parseInt(score_player1.textContent) >  parseInt(score_player2.textContent)){
+    socket.emit("score_win", score, iduser);
+    document.getElementsByClassName("container")[0].style.opacity = "0.35";
+    document.getElementById("end-result").textContent = "Bạn đã dành chiến thắng!";
+    endmodal.style.display = "flex";
+    document.getElementById("endpoint").innerHTML = score_player1.innerHTML;
+    endgame.volume(0.5);
+    endgame.play();
+  }
+  else if (parseInt(score_player1.textContent) <  parseInt(score_player2.textContent)){
+    socket.emit("score_lose", score, iduser);
+    document.getElementsByClassName("container")[0].style.opacity = "0.35";
+    document.getElementById("end-result").textContent = "Bạn đã thua!";
+    endmodal.style.display = "flex";
+    document.getElementById("img-model-ava").src = "/assets/img/lose_rain.gif";
+    document.getElementById("endpoint").innerHTML = score_player1.innerHTML;
+    endgame_lose.volume(0.5);
+    endgame_lose.play();
+  }
+  else {
+    socket.emit("score_draw", score, iduser);
+    document.getElementsByClassName("container")[0].style.opacity = "0.35";
+    document.getElementById("end-result").textContent = "OMG! Bạn đã vô tình hòa đối thủ!";
+    endmodal.style.display = "flex";
+    document.getElementById("endpoint").innerHTML = score_player1.innerHTML;
+    endgame.volume(0.5);
+    endgame.play();
+  }
+  
+})
+home.addEventListener('click', (e)=>{
+  socket.emit("render_home", iduser);
+
+})
+home1.addEventListener('click', (e)=>{
+  console.log(userid.dataset);
+  socket.emit("render_home", iduser);
+})
+
+back.addEventListener('click', (e)=> {
+  socket.emit("render_home", iduser);
+})

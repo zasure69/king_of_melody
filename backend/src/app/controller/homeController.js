@@ -1,5 +1,6 @@
 const session = require('express-session');
 const userSchema = require('../models/User');
+const userGoogleSchema = require('../models/UserGoogle');
 const setting = require('../models/Setting');
 const mongooseToObject = require('../../util/mongoose')
 const Room = require('../models/Room'); 
@@ -40,7 +41,21 @@ function generateRoomId() {
 class homeController{
     index(req, res) {
         if (req.session.isAuth) {
-            userSchema.findOne({_id: req.params.userId})
+            if (req.session.type == 'google') {
+                console.log('đã vào đây')
+                userGoogleSchema.findOne({_id: req.session.passport.user})
+                .then((result) => {
+                    res.render('home', {username: result.username, userId: result._id})
+                })
+                .catch(err => {
+                    console.log('Error: ', err);
+                    res.json({
+                        status: "Failed",
+                        message: "Lỗi xảy ra khi lay thong tin nguoi dung"
+                    })
+                })
+            } else {
+                userSchema.findOne({_id: req.session.user._id})
                 .then((result) => {
                     res.render('home', {username: result.username, userId: req.params.userId, full: full, Notfound: Notfound})
                     full = "";
@@ -53,23 +68,28 @@ class homeController{
                         message: "Lỗi xảy ra khi lay thong tin nguoi dung"
                     })
                 })
+            }
+            
         } else {
             res.redirect('/login');
         }
     }
 
     del(req, res, next) {
+        
         req.session
-            .destroy((err) => {
-                if (err) {
-                    console.log("err: ",err);
-                    res.json({
-                        status:"Failed",
-                        message: "Lỗi xảy ra khi đăng xuất"
-                    })
-                }
-                res.redirect('/login');
-            })
+        .destroy((err) => {
+            if (err) {
+                console.log("err: ",err);
+                res.json({
+                    status:"Failed",
+                    message: "Lỗi xảy ra khi đăng xuất"
+                })
+            }
+            res.redirect('/login');
+        })
+        
+        
     }
     update(req, res, next) {
         if (!req.body.IsSoundOn){

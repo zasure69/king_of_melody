@@ -4,9 +4,11 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE-edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-signin-client_id" content="541338446541-o5o37464275mbciiklur6bqf02mor9ma.apps.googleusercontent.com">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" crossorigin="anonymous" />
         <link rel="stylesheet" href="/assets/sign.css">
-        <title>Signin-Signup</title>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <title>King of Melody</title>
     </head>
 
     <body>
@@ -37,9 +39,19 @@
                         <span class="form-message"></span>
                     </div>
                     <div><a href="/resetPassword" style="color: rgb(223, 74, 223);">Quên mật khẩu?</a></div>
-                     
+                    
                     <button type="submit" class="btn">Sign in</button>
+
+                    <div class="google-sign-in">
+                        <a href="/login/google" class="btn-google">
+                            <div class="icon-gg">
+                                <i class="fa-brands fa-google"></i>
+                            </div>
+                            Đăng nhập với Google
+                        </a>
+                    </div>
                 </form>
+
                 <form method="POST" action="/login/processSignup" class="sign-up-form">
                     <h2 class="title">Đăng ký</h2>
                     {{#if messagesignup}}

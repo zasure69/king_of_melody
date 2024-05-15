@@ -138,6 +138,29 @@ form.sign-up-form {
     font-size: 1em;
 }
 
+.sign-in-form .google-sign-in .btn-google{
+    color: #df4adf;
+    padding: 0 2.5vw;
+    width: 100%;
+    height: 50px;
+    background: #f0f0f0;
+    margin: 10px 0;
+    border: 2px solid #df4adf;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.sign-in-form .google-sign-in .btn-google:hover {
+    color: #fff;
+    background-color: #df4adf;
+}
+
+.sign-in-form .google-sign-in .btn-google .icon-gg {
+    margin-right: 1vw;
+} 
+
 .btn {
     width: 150px;
     height: 50px;

@@ -1,12 +1,14 @@
-const express = require('express');
-const morgan = require('morgan');
-const path = require('path');
-const handlebars = require('express-handlebars');
-const MenthodOverride = require('method-override');
-const session = require('express-session');
-const MongoDBSession = require('connect-mongodb-session')(session);
-const app = express();
-const port = 3000;
+
+const express = require('express')
+const morgan = require('morgan')
+const path = require('path')
+const handlebars = require('express-handlebars')
+const MenthodOverride = require('method-override')
+const session = require('express-session')
+const passport = require('passport')
+const MongoDBSession = require('connect-mongodb-session')(session)
+const app = express()
+const port = 3000
 const fs = require('fs');
 
 // const https = require('https');
@@ -46,6 +48,9 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 
+//passport config
+require('./config/passport')(passport);
+
 //static files
 app.use(express.static(path.join(__dirname)))
 
@@ -65,6 +70,9 @@ app.engine('hbs', handlebars.engine({
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'resources/views'))
 
+
+
+//session
 const store = new MongoDBSession({
   uri: 'mongodb+srv://zasureh69:HD8d2ZNETWZlpXl0@cluster0.eglftpe.mongodb.net/king_of_melody',
   collection: 'sessions'
@@ -79,6 +87,10 @@ app.use(session({
   },
   store: store
 }))
+
+//passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
 
 route(app);
 

@@ -219,7 +219,8 @@
                     </div>
 
                     <div class="select_rank_mode_button">
-                        <form action="/home/roomcreate/" method="post" id = "create_room"><button type="submit" class="createclick" ><b>Tạo phòng</b></button></form>
+                        {{!-- <form action="/home/roomcreate/" method="post" id = "create_room"><button type="submit" class="createclick" ><b>Tạo phòng</b></button></form> --}}
+                        <button type="submit" class="createclick" ><b>Tạo phòng</b></button>
                         <form action="/home/playnow/" method="post">
                             <button class="playclick" id="play_now">
                                 <b>
@@ -240,7 +241,7 @@
 
     </div>
 
-    {{!-- <div class="modal_create_room" id = "team_modal_create_room">
+    <div class="modal_create_room" id = "team_modal_create_room">
         <div class="create_room_body">
             <div class="create_room_header">
                 <div class="create_room_return">
@@ -249,18 +250,20 @@
             </div>
 
             <div class="create_room_content">
-                <div class="create_room_input">
-                    <label for="Name">Tên phòng</label><br>
-                    <input type="text" placeholder="Tên phòng">
-                </div>
+                <form action="/home/roomcreate/" method="post" id="create_room">
+                    <div class="create_room_input">
+                        <label for="Name">Số vòng chơi:</label><br>
+                        <input type="text" id="round" name="roundNumber" placeholder="Số vòng">
+                    </div>
 
-                <div class="create_room_create">
-                    <button class="create"><a href="indexsingle">index</a></button>
-                </div>
+                    <div class="create_room_create">
+                        <button type="submit" class="create">Play</button>
+                    </div>
+                </form>
             </div>
         </div>
 
-    </div> --}}
+    </div>
     <!-- Leaderboard -->
     <div class="leaderboard" id="ldtest">
         <div class="overlay">

@@ -5,8 +5,10 @@ const { io, app } = require('../../main');
 let roomid = "";
 let room = [];
 
+//let listSong = {};
 let listSong = [];
-let loadSong = true;
+let loadSong = {};
+// let loadSong = true;
 let playersdone = {};
 
 const settingSchema = require('../models/Setting');
@@ -52,8 +54,8 @@ class playmultiController {
         Room.findOne({roomid})
         .then((rooms) =>{
             room = rooms;
-            console.log(room._id);
-            if (rooms.vacant)
+            console.log("number of player in room: ",rooms.player.length);
+            if (rooms.vacant == true || rooms.count == 0)
             {
                 playersdone[roomid] = 0;
                 songSchema.aggregate([
@@ -63,11 +65,14 @@ class playmultiController {
                     .exec()
                     .then((songs) => {
                         listSong = songs;
+                        //listSong[rooms.roomid] = songs;
+                        //console.log("Songs 1: ", listSong[rooms.roomid]);
                         const infolist = [];
                         for (let i = 0; i < songs.length; i++) {
                             infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                         }
-                        loadSong = false;
+                        loadSong[rooms.roomid] = false;
+                        // loadSong = false;
                         settingSchema.findOne({email: req.session.user.email})
                         .then((st) => {
                             res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
@@ -81,19 +86,23 @@ class playmultiController {
                 
             else
             {
-                if (loadSong){
+                if (loadSong[rooms.roomid]){
+                // if (loadSong){
+                    console.log("load song");
                     songSchema.aggregate([
                         { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
                         { $sample: { size: 10} }
                         ])
                         .exec()
                         .then((songs) => {
+                            //listSong[rooms.roomid] = songs;
                             listSong = songs;
                             const infolist = [];
                             for (let i = 0; i < songs.length; i++) {
                                 infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                             }
-                            loadSong = false;
+                            loadSong[rooms.roomid] = false;
+                            // loadSong = false;
                             settingSchema.findOne({email: req.session.user.email})
                             .then((st) => {
                                 res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
@@ -105,14 +114,17 @@ class playmultiController {
                 }
                 else {
                     let songs = listSong;
+                    //let songs = listSong[rooms.roomid];
                     const infolist = [];
+                    //console.log("Songs: ", songs);
                     for (let i = 0; i < songs.length; i++) {
                         infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                     }
                     settingSchema.findOne({email: req.session.user.email})
                     .then((st) => {
                         res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
-                        loadSong = true;
+                        loadSong[rooms.roomid] = true;
+                        // loadSong = true;
                     })
                 }
                 
@@ -135,6 +147,14 @@ io.on("connection", async function(socket) {
     Room
         .updateOne({roomid: roomid}, {count: room.count, socketid: room.socketid })
         .then(() =>{
+            Room.findOne({socketid: socket.id})
+            .then((send) => {
+                if (send.socketid.length != 2 || loadSong[send.roomid] == false) socket.emit("wait");
+                else io.to(send.roomid).emit("start"); 
+            })
+            .catch((err) => {
+                console.log("error",err);
+            })
             console.log(room.socketid);
             console.log(socket.adapter.rooms);
             if (room.vacant){
@@ -154,6 +174,7 @@ io.on("connection", async function(socket) {
                             // Sử dụng socket tại đây
                             if(socketId === room.socketid[0]){
                                 socket.emit("player1",room);
+                                console.log("Mở khóa cho socket");
                                 sem.release();
                             }
                             else{
@@ -208,17 +229,19 @@ io.on("connection", async function(socket) {
     socket.on("disconnect",() =>
     {
         console.log(`${socket.id} has disconnect!`);
-        const newroom = room.socketid.filter(item => item != socket.id);
         Room.findOne({socketid: socket.id})
         .then((send) => {
-            Room.updateOne({roomid: send.roomid},{$set: {socketid: newroom}})
-                .then((result)=>{
-                    room.socketid = newroom;
-                    console.log(result);
-                })
-                .catch((error)=>{
-                    console.log("error: ",error);
-                })
+            if (send){
+                const newroom = send.socketid.filter(item => item != socket.id);
+                Room.updateOne({roomid: send.roomid},{$set: {socketid: newroom}})
+                    .then(()=>{
+                        room.socketid = newroom;
+                    })
+                    .catch((error)=>{
+                        console.log("error: ",error);
+                    })
+            }
+            
         })
         .catch((error)=>{
             console.log("Error: ", error);
@@ -229,18 +252,31 @@ io.on("connection", async function(socket) {
     })
     socket.on("render_home", async (iduser)=>{
         await sem1.acquire();
+        console.log(socket.id);
         Room.findOne({socketid: socket.id})
             .then((send) => {
                 console.log("id: ",iduser);
                 const player = send.player.filter(item => item.userid != iduser);
                 console.log(player);
                 Room.updateOne({roomid: send.roomid},{$set: {player: player, vacant: true}})
+                // Room.updateOne({roomid: send.roomid},{$set: {player: player, vacant: false}})
                 .then(() =>{
                     if ( player.length == 0 ) {
                         Room.deleteOne({roomid: send.roomid})
                         .then()
                         .catch((err) =>{
                             console.log("error: ",err);
+                        })
+                    }
+                    else {
+                        loadSong[send.roomid] = false;
+                        Room.findOne({roomid: send.roomid})
+                        .then((newroom) => {
+                        socket.to(newroom.roomid).emit("player1", newroom);
+                        console.log("test what happern!");
+                        })
+                        .catch((err) => {
+                            console.log("error",err);
                         })
                     }
                     sem1.release();

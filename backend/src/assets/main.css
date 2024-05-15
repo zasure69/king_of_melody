@@ -845,10 +845,10 @@ body{
     justify-content: flex-end;
 }
 
-.modal_create_room .create_room_content .create_room_create a{
+/* .modal_create_room .create_room_content .create_room_create a{
     text-decoration: none;
     color: white;
-}
+} */
 
 
 .modal_create_room .create_room_content .create_room_create .create{

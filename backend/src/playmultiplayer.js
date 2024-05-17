@@ -367,31 +367,33 @@ toggle.onclick = function(){
 }
 
 let intervalID = 0, opacity = 0, chat_click = false;
-let chat = document.querySelector(".send-field");
-chat.addEventListener('click', () => {
+let chat_player = document.getElementById("chat_multi");
+chat_player.addEventListener('click', () => {
   if (chat_click == false)
   {
-    chat_click = true;
+    console.log("false");
     fadein();
+    chat_click = true;
   }
   else
   {
-    chat_click = false;
+    console.log("true");
     fadeout();
+    chat_click = false;
   }
 })
 function fadein()
 {
-    intervalID = setInterval(show, 10);
+  intervalID = setInterval(show, 20);
 }
 function fadeout()
 {
-    intervalID = setInterval(hide, 10);
+  intervalID = setInterval(hide, 20);
 }
 
 function show()
 {
-  
+  let chat = document.querySelector(".send-field");
   opacity = Number(window.getComputedStyle(chat).getPropertyValue("opacity"));
   if (opacity < 1)
   {
@@ -407,7 +409,7 @@ function hide()
 {
   let chat = document.querySelector(".send-field");
   opacity = Number(window.getComputedStyle(chat).getPropertyValue("opacity"));
-  if (opacity < 1)
+  if (opacity > 0)
   {
     opacity = opacity - 0.1;
     chat.style.opacity = opacity;

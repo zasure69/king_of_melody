@@ -25,6 +25,8 @@ const iduser = userid.dataset.user;
 const songsInput = document.getElementById('songsInput');
 const efVL = document.getElementById('efInput');
 const msVL = document.getElementById('msInput');
+const roundNum = document.getElementById("roundNum");
+const Numround = roundNum.dataset.round; 
 console.log("ef: ", efVL);
 console.log("ms: ", msVL);
 const ef = efVL.dataset.efvolume;
@@ -125,8 +127,8 @@ function calculateDuration() {
   calculate_time(totalDuration);
 }
 function calculate_time(totalDuration){
-  let minutes = Math.floor((totalDuration + 300) / 60) || 0;
-  let second = Math.ceil(totalDuration + 300 - minutes * 60) || 0;
+  let minutes = Math.floor((totalDuration + Numround*30) / 60) || 0;
+  let second = Math.ceil(totalDuration + Numround*30 - minutes * 60) || 0;
   //minutes += 5;
   if (second < 10)
     second = "0" + second;
@@ -197,8 +199,8 @@ List_song.prototype = {
     let answer_song = document.getElementById("answer_song");
     answer_song.value = "";
     index = this.index + 1;
-    if (index < 10){
-      round.textContent = (index + 1) + "/10";
+    if (index < Numround){
+      round.textContent = (index + 1) + "/" + Numround;
       calculate_time_song(time_song[player.index + 1]);
       count = -1;
       ctrlIcon.click();
@@ -340,9 +342,8 @@ guessButton.addEventListener('click', () => {
         answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
         
       }
-      if (index == 9){
+      if (index == Numround - 1){
         socket.emit("done");
-        
           
       }
       click = false;
@@ -452,3 +453,4 @@ home1.addEventListener('click', (e)=>{
 back.addEventListener('click', (e)=> {
   socket.emit("render_home", iduser);
 })
+

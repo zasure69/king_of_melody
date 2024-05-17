@@ -3,6 +3,6 @@ const router = express.Router();
 
 const playmultiController = require('../app/controller/playmultiController');
 
-router.get('/:roomid', playmultiController.index);
+router.get('/:roomid/:round', playmultiController.index);
 
 module.exports = router;

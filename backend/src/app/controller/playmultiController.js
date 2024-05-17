@@ -46,9 +46,12 @@ const sem1 = new Semaphore(1);
 class playmultiController {
     async index(req, res) {
         console.log("count: ", count);
+        console.log("sem value: ", sem.count);
         await sem.acquire();
         roomid = req.params.roomid;
-        console.log("roomid index: ", roomid)
+        let round = parseInt(req.params.round);
+        console.log("Round multi: ", round);
+        console.log("roomid index: ", roomid);
         Room.findOne({roomid})
         .then((rooms) =>{
             room = rooms;
@@ -58,7 +61,7 @@ class playmultiController {
                 playersdone[roomid] = 0;
                 songSchema.aggregate([
                     { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
-                    { $sample: { size: 10} }
+                    { $sample: { size: round} }
                     ])
                     .exec()
                     .then((songs) => {
@@ -70,21 +73,20 @@ class playmultiController {
                         loadSong = false;
                         settingSchema.findOne({email: req.session.user.email})
                         .then((st) => {
-                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
+                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
                         });
                     })
                     .catch(err => {
                         console.log('error: ', err)
                     })
             }
-            
                 
             else
             {
                 if (loadSong){
                     songSchema.aggregate([
                         { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
-                        { $sample: { size: 10} }
+                        { $sample: { size: round} }
                         ])
                         .exec()
                         .then((songs) => {
@@ -96,7 +98,7 @@ class playmultiController {
                             loadSong = false;
                             settingSchema.findOne({email: req.session.user.email})
                             .then((st) => {
-                                res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
+                                res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
                             });
                         })
                         .catch(err => {
@@ -111,12 +113,10 @@ class playmultiController {
                     }
                     settingSchema.findOne({email: req.session.user.email})
                     .then((st) => {
-                        res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
+                        res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
                         loadSong = true;
                     })
                 }
-                
-                
             }
         })
         .catch((error) =>{

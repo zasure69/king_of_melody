@@ -818,18 +818,18 @@ body{
     padding: 1rem 0;
 }
 
-.modal_create_room .create_room_content{
+.modal_create_room #create_room{
     display: flex;
     gap: 1rem;
 }
 
-.modal_create_room .create_room_content .create_room_input label{
+.modal_create_room #create_room .create_room_input label{
     font-size: 1.1rem;
     color: white;
     text-shadow: 0 0.0625rem 0.125rem #09090b;
 }
 
-.modal_create_room .create_room_content .create_room_input input{
+.modal_create_room #create_room .create_room_input input{
     border-radius: 12px;
     margin-top: 10px;
     padding: 4px;
@@ -840,30 +840,30 @@ body{
     outline: none;
 }
 
-.modal_create_room .create_room_content .create_room_create{
+.modal_create_room #create_room .create_room_create{
     display: flex;
     justify-content: flex-end;
 }
 
-.modal_create_room .create_room_content .create_room_create a{
-    text-decoration: none;
-    color: white;
-}
-
-
-.modal_create_room .create_room_content .create_room_create .create{
+.modal_create_room #create_room .create_room_create .create{
     border-radius: 16px;
     text-transform: uppercase;
     background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
+    color: aliceblue;
     box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
-    background-color: rgb(61, 7, 185);
+    background-color: rgba(61, 7, 185, .6);
     padding: 8px 16px;
     font-style: italic;
     font-weight: 550;
     font-size: 0.8rem;
     text-shadow: 0 0.0625rem 0.125rem #131314;
     border: none;
+    cursor: pointer;
 }
+.modal_create_room #create_room .create_room_create .create:hover{
+    padding: 8px 16px;
+    transform: scale(1.15);
+} 
 
 .modal_create_room .create_room_return .return_create_room {
     text-decoration: none;
@@ -875,11 +875,125 @@ body{
     color: white;
 }
 
-.modal_create_room .create_room_content{
+.modal_create_room #create_room{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-content: center;
+}
+
+.modal_playnow_room{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 102;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal_playnow_room .playnow_room_body{
+    background-image: var(--background);
+    margin: auto;
+    padding: 10px 20px;
+    z-index: 103;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.modal_playnow_room .playnow_room_return{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    padding: 1rem 0;
+}
+
+.modal_playnow_room #playnow_room{
+    display: flex;
+    gap: 1rem;
+}
+
+.modal_playnow_room #playnow_room .playnow_room_input label{
+    font-size: 1.1rem;
+    color: white;
+    text-shadow: 0 0.0625rem 0.125rem #09090b;
+}
+
+.modal_playnow_room #playnow_room .playnow_room_input input{
+    border-radius: 12px;
+    margin-top: 10px;
+    padding: 4px;
+    font-size: 1rem;
+    color: rgb(104, 101, 101);
+    font-style: italic;
+    border: none;
+    outline: none;
+}
+
+.modal_playnow_room #playnow_room .playnow_room_create{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal_playnow_room #playnow_room .playnow_room_create .playnow{
+    border-radius: 16px;
+    text-transform: uppercase;
+    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
+    color: aliceblue;
+    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
+    background-color: rgba(61, 7, 185, .6);
+    padding: 8px 16px;
+    font-style: italic;
+    font-weight: 550;
+    font-size: 0.8rem;
+    text-shadow: 0 0.0625rem 0.125rem #131314;
+    border: none;
+    cursor: pointer;
+}
+.modal_playnow_room #playnow_room .playnow_room_create .playnow:hover{
+    padding: 8px 16px;
+    transform: scale(1.15);
+} 
+
+.modal_playnow_room .playnow_room_return .return_playnow_room {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_playnow_room .playnow_room_return .return_playnow_room:hover,
+.modal_playnow_room .playnow_room_return .return_playnow_room:focus{
+    color: white;
+}
+
+.modal_playnow_room #playnow_room{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.modal_create_room #create_room .Exceedroom, .modal_playnow_room #playnow_room .Exceedroom{
+    display: flex;
+    gap: 0.3rem;
+     /* margin-top: 5px; */
+}
+.create_room_body #create_room #exceed_ex, .playnow_room_body #playnow_room #exceed_ex1{
+    /* display: none; */
+    font-style: normal;
+    font-size: 0.9rem;
+    color: #eee;
+    margin-top: 4px;
+    /* gap: 0.5rem; */
+}
+.create_room_body #create_room .exceed_value, .playnow_room_body #playnow_room .exceed_value{
+    font-size: 0.9rem;
+    color: #eee;
 }
 
 .leaderboard{

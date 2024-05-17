@@ -25,13 +25,13 @@ body{
 }
 
 #header {
-    height: 80px;
+    height: 16vh;
     display: flex;
     /* width: 100%; */
     position: sticky;
     justify-content: space-between;
-    padding: 0 10px 0 10px;
     z-index: 4;
+    padding-right: 2vw;
 }
 #header .left_header{
     position: relative;
@@ -85,9 +85,7 @@ body{
     display: flex;
     flex-direction: row;
     gap: 10px;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.25rem;
+    font-size: 1.5vw;
 }
 
 #header .nav .username:hover{
@@ -125,16 +123,19 @@ body{
 #header .nav .subnav{
     background-color: rgba(16, 16, 28, .5);
     border-radius: .6rem;
-    padding: 10px;
     margin: 0 auto;
     position: absolute;
     top: 80%;
     transition: .15s ease;
+    right: 0;
     display: none;
 }
 #header .nav .subnav .background{
-    padding: 12px;
-    width: 100%;
+    display: flex;
+    height: 10vh;
+    width: 8vw;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #header .subnav .profile, #header .subnav .signout{
@@ -145,7 +146,13 @@ body{
     border: none;
     font-family: neosans;
     color: white;
-    font-size: 1em;
+    font-size: 1.2vw;
+}
+
+#header .subnav .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #header .subnav .profile:hover, 
@@ -193,19 +200,24 @@ body{
 
 #content {
     display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
+    justify-content: center;
+    flex-direction: column;
     color: white;
     font-size: 3.5vw;
-    height: 76vh;
     position: relative;
+}
+
+#content .container-btn {
+    height: 72vh;
+    display: flex;
+    flex-direction: row;
 }
 
 #content .menubtn {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     position: relative;
-    padding-top: 3%;
     padding-left: 6%;
     width: 40%;
 }
@@ -243,13 +255,9 @@ body{
 
 
 #content .button .speaker{
-    width: 100%;
-    height: auto;
+    width: 100vh;
     position: relative;
-    top: 7%;
-    margin-left: -3%;
-    margin-top: 2%;
-    z-index: 0;
+    margin-left: 4%;
 }
 
 #content .button .girl{
@@ -263,39 +271,38 @@ body{
 }
 
 
-#content .button .playclick{
-    display: block;
-    background-color: rgba(14,59,132,255);
-    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
-    padding: 1% 5%;
-
-    position: absolute;
-    right: 42%;
-    font-size: 70%;
-    color: aliceblue;
-    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
+#content .button .play-button-link{
     text-decoration: none;
-    margin-bottom: 16%;
-    margin-right: 0%;
-    z-index: 10;
-    border-radius: 8px;
-    transition-property: padding;
-    transition-duration: 0.5s;
-    
 }
 
-#content .playclick:hover{
-    padding: 16px 38px;
-    transform: scale(1.15);
-} 
+#content .button .play-button-wrapper {
+    display: flex;
+    align-items: center;
+    height: 2vh;
+    justify-content: center;
+}
+
+#content .button .play-button-label {
+    max-width: 11vw;
+    padding: 0.5em 1.5em;
+    background-color: #6cb928;
+    background-image: radial-gradient(150% 160% at 50% 15%, #fff 0, transparent 30%);
+    color: white;
+    border-radius: 40px;
+    font-size: 2vw;
+    text-transform: uppercase;
+    text-shadow: 0 0.125em 0.4em black;
+}
+
+#content .button .play-button-label:hover {
+    transform: scale(1.05);
+}
 
 #footer{
+    margin: 0 1vw;
     display: flex;
-    flex-wrap: wrap;
-    align-content: center;
     justify-content: space-between;
     text-align: end;
-    position: sticky;
 }
 #footer .menu_btn{
     padding-left: 23px;
@@ -341,8 +348,8 @@ body{
     font-family: neosans;
 }
 #footer .para{
-    padding: 8px 10px 10px;
-    font-size: 130%;
+    margin-top: 1vh;
+    font-size: 5vh;
     color: rgb(208, 80, 255);
     font-family: neosans;
 }
@@ -531,18 +538,11 @@ body{
 
 .modal_thuong .select_normal_mode_play_button .playclick,
 .modal_thuong .select_normal_mode_play_button .resumeclick{
-    border: 0;
-    background-color: rgba(61, 7, 185, .6);
-    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
-    padding: 12px 24px;
-    font-size: 1.25rem;
-    color: aliceblue;
-    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
-    text-decoration: none;
-    border-radius: 8px;
-    transition-property: padding;
-    transition-duration: 0.5s;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    margin-top: 2em;
     
 }
 

@@ -5,6 +5,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const passwordResetSchema = require('../models/PasswordReset');
 const userVerificationSchema = require('../models/UserVerification');
+const settingSchema = require('../models/Setting');
 //email handler
 const nodemailer = require('nodemailer');
 //google auth
@@ -117,11 +118,20 @@ class loginController {
                                 email: formData.email,
                                 password: hashPassword,
                                 verified: false
-                            });
+                            }); 
                             user.save()
                                 .then((result) => {
+                                    const setting = new settingSchema({
+                                        email: formData.email,
+                                    });
                                     sendVerificationEmail(result, res);
                                     res.render('sendverifymail', {email: result.email});
+                                    setting.save()
+                                    .then()
+                                    .catch(err =>{
+                                        console.log("Error: ", err);
+                                    })
+                                    
                                 })
                                 .catch(err => {
                                     res.send('Đăng ký thất bại');

@@ -38,15 +38,13 @@
 
 
     <div id="content">
-        <div class="container-btn">
-            <div class="menubtn">
-                <ul>
-                    <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
-                    <li id = "cd_xep_hang">MULTIPLAYER</li>
-                    <li><a href="#avm" >THÀNH TÍCH</a></li>
-                    <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
-                </ul>
-            </div>
+        <div class="menubtn">
+            <ul>
+                <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
+                <li id = "cd_xep_hang">MULTIPLAYER</li>
+                <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
+            </ul>
+        </div>
 
             <div class="button">
                 <img src="/assets/img/convitdj.png"  alt="Speaker" class="speaker">
@@ -94,7 +92,7 @@
                         <img src="/assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
                         <div class="information">
                             <div class="username">
-                                King_Of_Melody
+                                {{username}}
                             </div>
                             <div class="point_number">
                                 <div class="point">
@@ -124,7 +122,7 @@
             </div>
             <form action="/playsingle" method="get">
             <div class="select_normal_mode_radio">
-                <label  class="container">Khó
+                <label  class="container" id="mode_hard">Khó
                     <input type="radio"  name ="mode" value="hard" checked="checked" >
                     <span class="checkmark"></span>
                 </label>
@@ -134,7 +132,7 @@
                     <span class="checkmark"></span>
                 </label>
                 
-                <label class="container">Tuyệt vọng
+                <label class="container" id="mode_no_hope">Tuyệt vọng
                     <input type="radio" name ="mode" value="no hope">
                     <span class="checkmark"></span>
                 </label>
@@ -158,17 +156,49 @@
                 <div class="select_rank_mode_return">
                     <span class = "return_xep_hang">TRỞ LẠI</span>
                     <div class="search_room">
-                        <input type="text" placeholder="Mã phòng hoặc tên phòng">
-                        <button class="find">
-                            <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-                        </button>
+                        <form action="/home/search" method="post">
+                            <div class="find_roomid">
+                                <input type="text" id="input_roomid" name="roomID" placeholder="Mã phòng" oninput="hideWarningroom()">
+                                <button class="find" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                                </button>
+                            </div>
+                            {{#if full}}
+                                <script>
+                                    document.getElementById("team_modal_xep_hang").style.display = "flex";
+                                    document.getElementById("Warningroom").style.display = "flex";
+                                    function hideWarningroom()
+                                    {
+                                        document.querySelector(".Warningroom").style.display = "none";
+                                    }
+                                </script>
+                                <div class="Warningroom"> 
+                                    <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
+                                    <div class="fullroom">{{full}}</div>
+                                </div>
+                            {{/if}}
+                            {{#if Notfound}}
+                                <script>
+                                    document.getElementById("team_modal_xep_hang").style.display = "flex";
+                                    document.querySelector(".Warningroom").style.display = "flex";
+                                    function hideWarningroom()
+                                    {
+                                        document.querySelector(".Warningroom").style.display = "none";
+                                    }
+                                </script>
+                                <div class="Warningroom">
+                                    <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
+                                    <div class="notfoundroom">{{Notfound}}</div>
+                                </div>
+                            {{/if}}
+                        </form>
                         
                     </div>
                     <div class="select_rank_mode_information">
                         <img src="/assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
                         <div class="information">
                             <div class="username">
-                                King_Of_Melody
+                                {{username}}
                             </div>
                             
                         </div>
@@ -204,13 +234,14 @@
                     </div>
 
                     <div class="select_rank_mode_button">
-                        <button class="createclick" id = "create_room"><b>Tạo phòng</b></button>
-                        <button class="playclick"><b><a href="/playmulti">Vào nhanh</a></b></button>
+                        {{!-- <form action="/home/roomcreate/" method="post" id = "create_room"><button type="submit" class="createclick" ><b>Tạo phòng</b></button></form> --}}
+                        <button class="createclick" id="Roomcreate"><b>Tạo phòng</b></button>
+                        <button class="playclick" id="play_now"> <b>Vào nhanh </b></button>
                     </div>
                 </div>
 
                 <div class="select_rank_mode_center_right_rank">
-                    <img src="/assets/img/bronzerank.png" alt="" class="rank">
+                    <img src="/assets/img/Bronze.png" alt="" class="rank">
                 </div>
 
             </div>
@@ -219,7 +250,7 @@
 
     </div>
 
-    <div class="modal_create_room" id = "team_modal_create_room">
+    <div class="modal_create_room" id="team_modal_create_room">
         <div class="create_room_body">
             <div class="create_room_header">
                 <div class="create_room_return">
@@ -227,16 +258,67 @@
                 </div>
             </div>
 
-            <div class="create_room_content">
+            <form action="/home/roomcreate/" method="post" id="create_room">
                 <div class="create_room_input">
-                    <label for="Name">Tên phòng</label><br>
-                    <input type="text" placeholder="Tên phòng">
+                    <label for="Name">Số vòng chơi:</label><br>
+                    <input type="text" id="round" name="roundNumber" placeholder="Số vòng" oninput="hideExceed()">
                 </div>
 
                 <div class="create_room_create">
-                    <button class="create"><a href="indexsingle">index</a></button>
+                    <button class="create" id="create_play">Play</button>
+                </div>  
+                {{#if exceed}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_create_room").style.display = "flex";
+                        document.querySelector(".Exceedroom").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Exceedroom").style.display = "none";
+                        }
+                    </script>
+                    <div class="Exceedroom"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex"></i>
+                        <div class="exceed_value">{{exceed}}</div>
+                    </div>
+                {{/if}} 
+            </form>
+        </div>
+
+    </div>
+    <div class="modal_playnow_room" id = "team_modal_playnow_room">
+        <div class="playnow_room_body">
+            <div class="playnow_room_header">
+                <div class="playnow_room_return">
+                    <span class = "return_playnow_room">TRỞ LẠI</span>
                 </div>
             </div>
+
+            <form action="/home/playnow/" method="post" id="playnow_room">
+                <div class="playnow_room_input">
+                    <label for="Name">Số vòng chơi:</label><br>
+                    <input type="text" id="round1" name="roundNumber1" placeholder="Số vòng" oninput="hideExceed()">
+                </div>
+
+                <div class="playnow_room_create">
+                    <button class="playnow" id="playnow_play">Play</button>
+                </div>  
+                {{#if exceed1}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_playnow_room").style.display = "flex";
+                        document.querySelector(".Exceedroom").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Exceedroom").style.display = "none";
+                        }
+                    </script>
+                    <div class="Exceedroom"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex1"></i>
+                        <div class="exceed_value">{{exceed1}}</div>
+                    </div>
+                {{/if}}  
+            </form>
         </div>
 
     </div>
@@ -355,3 +437,6 @@
     </div> -->
 
     <script src="/modal_normal_rank.js"></script>
+    {{!-- <script src= "/multiplayer.js"></script> --}}
+    {{!-- <script src="/socket.io/socket.io.js"></script> --}}
+    

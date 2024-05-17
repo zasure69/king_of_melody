@@ -363,6 +363,325 @@ answer_song.addEventListener('keypress', function(event){
   }
 });
 
+let toggle = document.querySelector('.toggle');
+let circle = document.querySelector('.circle');
+toggle.onclick = function(){
+    circle.classList.toggle('active');
+}
+
+let intervalID = 0, opacity = 0, chat_click = false;
+let chat_player = document.getElementById("chat_multi");
+chat_player.addEventListener('click', () => {
+  if (chat_click == false)
+  {
+    console.log("false");
+    fadein();
+    chat_click = true;
+  }
+  else
+  {
+    console.log("true");
+    fadeout();
+    chat_click = false;
+  }
+})
+function fadein()
+{
+  intervalID = setInterval(show, 20);
+}
+function fadeout()
+{
+  intervalID = setInterval(hide, 20);
+}
+
+function show()
+{
+  let chat = document.querySelector(".send-field");
+  opacity = Number(window.getComputedStyle(chat).getPropertyValue("opacity"));
+  if (opacity < 1)
+  {
+    opacity = opacity + 0.1;
+    chat.style.opacity = opacity;
+  }
+  else
+  {
+    clearInterval(intervalID);
+  }
+}
+function hide()
+{
+  let chat = document.querySelector(".send-field");
+  opacity = Number(window.getComputedStyle(chat).getPropertyValue("opacity"));
+  if (opacity > 0)
+  {
+    opacity = opacity - 0.1;
+    chat.style.opacity = opacity;
+  }
+  else
+  {
+    clearInterval(intervalID);
+  }
+}
+
+let width = 5;
+let difference = 0.25;
+let interval = 0;
+let timeout = 0;
+let like = document.querySelector(".like");
+let dislike = document.querySelector(".dislike");
+let sad = document.querySelector(".sad");
+let smile = document.querySelector(".smile");
+let angry = document.querySelector(".angry");
+let heart = document.querySelector(".heart");
+let icon_ = document.getElementById("icon_");
+like.onclick = function(){
+    clearTimeout(timeout);
+    if (icon_.classList.contains("fa-thumbs-down"))
+    {
+        icon_.classList.remove("fa-thumbs-down");
+        icon_.classList.add("fa-thumbs-up");
+    }
+    else if (icon_.classList.contains("fa-face-sad-cry"))
+    {
+        icon_.classList.remove("fa-face-sad-cry");
+        icon_.classList.add("fa-thumbs-up");
+    }
+    else if (icon_.classList.contains("fa-face-laugh-beam"))
+    {
+        icon_.classList.remove("fa-face-laugh-beam");
+        icon_.classList.add("fa-thumbs-up");
+    }
+    else if (icon_.classList.contains("fa-face-angry"))
+    {
+        icon_.classList.remove("fa-face-angry");
+        icon_.classList.add("fa-thumbs-up");
+    }
+    else if (icon_.classList.contains("fa-face-grin-hearts"))
+    {
+        icon_.classList.remove("fa-face-grin-hearts");
+        icon_.classList.add("fa-thumbs-up");
+    }
+    //console.log("Chạy được", window.getComputedStyle(icon_).getPropertyValue("font-size"));
+    icon_.style.display = "flex";
+    timeout = setTimeout(function() {
+        icon_.style.display = "none";
+    }, 5000);
+    increase();
+}
+dislike.onclick = function(){
+    clearTimeout(timeout);
+    if (icon_.classList.contains("fa-thumbs-up"))
+    {
+        icon_.classList.remove("fa-thumbs-up");
+        icon_.classList.add("fa-thumbs-down");
+    }
+    else if (icon_.classList.contains("fa-face-sad-cry"))
+    {
+        icon_.classList.remove("fa-face-sad-cry");
+        icon_.classList.add("fa-thumbs-down");
+    }
+    else if (icon_.classList.contains("fa-face-laugh-beam"))
+    {
+        icon_.classList.remove("fa-face-laugh-beam");
+        icon_.classList.add("fa-thumbs-down");
+    }
+    else if (icon_.classList.contains("fa-face-angry"))
+    {
+        icon_.classList.remove("fa-face-angry");
+        icon_.classList.add("fa-thumbs-down");
+    }
+    else if (icon_.classList.contains("fa-face-grin-hearts"))
+    {
+        icon_.classList.remove("fa-face-grin-hearts");
+        icon_.classList.add("fa-thumbs-down");
+    }
+    //console.log("Chạy được", window.getComputedStyle(icon_).getPropertyValue("font-size"));
+    icon_.style.display = "flex";
+    timeout = setTimeout(function() {
+        icon_.style.display = "none";
+    }, 5000);
+    
+    increase();
+}
+sad.onclick = function(){
+    clearTimeout(timeout);
+    if (icon_.classList.contains("fa-thumbs-up"))
+    {
+        icon_.classList.remove("fa-thumbs-up");
+        icon_.classList.add("fa-face-sad-cry");
+    }
+    else if (icon_.classList.contains("fa-thumbs-down"))
+    {
+        icon_.classList.remove("fa-thumbs-down");
+        icon_.classList.add("fa-face-sad-cry");
+    }
+    else if (icon_.classList.contains("fa-face-laugh-beam"))
+    {
+        icon_.classList.remove("fa-face-laugh-beam");
+        icon_.classList.add("fa-face-sad-cry");
+    }
+    else if (icon_.classList.contains("fa-face-angry"))
+    {
+        icon_.classList.remove("fa-face-angry");
+        icon_.classList.add("fa-face-sad-cry");
+    }
+    else if (icon_.classList.contains("fa-face-grin-hearts"))
+    {
+        icon_.classList.remove("fa-face-grin-hearts");
+        icon_.classList.add("fa-face-sad-cry");
+    }
+    //console.log("Chạy được", window.getComputedStyle(icon_).getPropertyValue("font-size"));
+    icon_.style.display = "flex";
+    timeout = setTimeout(function() {
+        icon_.style.display = "none";
+    }, 5000);
+    increase();
+}
+smile.onclick = function(){
+    clearTimeout(timeout);
+    if (icon_.classList.contains("fa-thumbs-up"))
+    {
+        icon_.classList.remove("fa-thumbs-up");
+        icon_.classList.add("fa-face-laugh-beam");
+    }
+    else if (icon_.classList.contains("fa-thumbs-down"))
+    {
+        icon_.classList.remove("fa-thumbs-down");
+        icon_.classList.add("fa-face-laugh-beam");
+    }
+    else if (icon_.classList.contains("fa-face-sad-cry"))
+    {
+        icon_.classList.remove("fa-face-sad-cry");
+        icon_.classList.add("fa-face-laugh-beam");
+    }
+    else if (icon_.classList.contains("fa-face-angry"))
+    {
+        icon_.classList.remove("fa-face-angry");
+        icon_.classList.add("fa-face-laugh-beam");
+    }
+    else if (icon_.classList.contains("fa-face-grin-hearts"))
+    {
+        icon_.classList.remove("fa-face-grin-hearts");
+        icon_.classList.add("fa-face-laugh-beam");
+    }
+    //console.log("Chạy được", window.getComputedStyle(icon_).getPropertyValue("font-size"));
+    icon_.style.display = "flex";
+    timeout = setTimeout(function() {
+        icon_.style.display = "none";
+    }, 5000);
+    increase();
+}
+angry.onclick = function(){
+    clearTimeout(timeout);
+    if (icon_.classList.contains("fa-thumbs-up"))
+    {
+        icon_.classList.remove("fa-thumbs-up");
+        icon_.classList.add("fa-face-angry");
+    }
+    else if (icon_.classList.contains("fa-thumbs-down"))
+    {
+        icon_.classList.remove("fa-thumbs-down");
+        icon_.classList.add("fa-face-angry");
+    }
+    else if (icon_.classList.contains("fa-face-sad-cry"))
+    {
+        icon_.classList.remove("fa-face-sad-cry");
+        icon_.classList.add("fa-face-angry");
+    }
+    else if (icon_.classList.contains("fa-face-laugh-beam"))
+    {
+        icon_.classList.remove("fa-face-laugh-beam");
+        icon_.classList.add("fa-face-angry");
+    }
+    else if (icon_.classList.contains("fa-face-grin-hearts"))
+    {
+        icon_.classList.remove("fa-face-grin-hearts");
+        icon_.classList.add("fa-face-angry");
+    }
+    //console.log("Chạy được", window.getComputedStyle(icon_).getPropertyValue("font-size"));
+    icon_.style.display = "flex";
+    timeout = setTimeout(function() {
+        icon_.style.display = "none";
+    }, 5000);
+    increase();
+}
+heart.onclick = function(){
+    clearTimeout(timeout);
+    if (icon_.classList.contains("fa-thumbs-up"))
+    {
+        icon_.classList.remove("fa-thumbs-up");
+        icon_.classList.add("fa-face-grin-hearts");
+    }
+    else if (icon_.classList.contains("fa-thumbs-down"))
+    {
+        icon_.classList.remove("fa-thumbs-down");
+        icon_.classList.add("fa-face-grin-hearts");
+    }
+    else if (icon_.classList.contains("fa-face-sad-cry"))
+    {
+        icon_.classList.remove("fa-face-sad-cry");
+        icon_.classList.add("fa-face-grin-hearts");
+    }
+    else if (icon_.classList.contains("fa-face-laugh-beam"))
+    {
+        icon_.classList.remove("fa-face-laugh-beam");
+        icon_.classList.add("fa-face-grin-hearts");
+    }
+    else if (icon_.classList.contains("fa-face-angry"))
+    {
+        icon_.classList.remove("fa-face-angry");
+        icon_.classList.add("fa-face-grin-hearts");
+    }
+    //console.log("Chạy được", window.getComputedStyle(icon_).getPropertyValue("font-size"));
+    icon_.style.display = "flex";
+    timeout = setTimeout(function() {
+        icon_.style.display = "none";
+    }, 5000);
+    increase();
+}
+function increase()
+{
+    clearInterval(interval);
+    interval = setInterval(expand, 10);
+    //clearInterval(intervalID);
+}
+function decrease()
+{
+    clearInterval(interval);
+    interval = setInterval(shrink, 10);
+    //clearInterval(intervalID);
+}
+function expand()
+{
+    console.log("expand");
+    if (width < 15)
+    {
+        console.log("expand1");
+        width = width + difference;
+        icon_.style.fontSize = width + "vw";
+    }
+    else
+    {
+        console.log("expand2");
+        decrease();
+    }
+}
+function shrink()
+{
+    console.log("shrink");
+    if (width > 5)
+    {
+        console.log("shrink1");
+        width = width - difference;
+        icon_.style.fontSize = width + "vw";
+    }
+    else
+    {
+        console.log("shrink2");
+        increase();
+    }
+}
+
 let detailmodal = document.getElementById("detail-model");
 document.getElementById("btn-detail").onclick = function(){
   detailmodal.style.display = "flex";

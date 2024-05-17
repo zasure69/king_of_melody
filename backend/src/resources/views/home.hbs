@@ -38,41 +38,49 @@
 
 
     <div id="content">
-        <div class="menubtn">
-            <ul>
-                <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
-                <li id = "cd_xep_hang">MULTIPLAYER</li>
-                <li><a href="#avm" >THÀNH TÍCH</a></li>
-                <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
-            </ul>
-        </div>
+        <div class="container-btn">
+            <div class="menubtn">
+                <ul>
+                    <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
+                    <li id = "cd_xep_hang">MULTIPLAYER</li>
+                    <li><a href="#avm" >THÀNH TÍCH</a></li>
+                    <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
+                </ul>
+            </div>
 
-        <div class="button">
-            <img src="/assets/img/Speaker.png"  alt="Speaker" class="speaker">
-            <img src="/assets/img/lonelygirl.jpg" alt="Lonely Girl" class="girl">
-            <a href="playsingle" class="playclick"><b>PLAY</b></a>
-            
+            <div class="button">
+                <img src="/assets/img/convitdj.png"  alt="Speaker" class="speaker">
+                <a href="/playsingle?mode=hard" class="play-button-link">
+                    <div class="play-button-wrapper">
+                        <span class="play-button-label">Play</span>
+                    </div>
+                </a>
+                
+            </div>
+        </div>
+        
+
+        <div id="footer">
+            <div class="menu_btn">
+                    <button type="submit" class="menu_btn_btn" >
+                        <a href="/setting/{{userId}}" class="menu_btn_dt">
+                            <i class="fa-solid fa-gear"></i>
+                            <span><b>CÀI ĐẶT</b></span>
+                        </a>
+                    </button>
+                    <button class="menu_btn_btn">
+                        <a href="#" class="menu_btn_dt">
+                            <i class="fa-solid fa-book"></i>
+                            <span><b>HƯỚNG DẪN</b></span>
+                        </a>
+                    </button>   
+            </div>
+            <div class="para"><b> A product of team11!</b></div>
         </div>
         
     </div>
 
-    <div id="footer">
-        <div class="menu_btn">
-                <button type="submit" class="menu_btn_btn" >
-                    <a href="/setting/{{userId}}" class="menu_btn_dt">
-                        <i class="fa-solid fa-gear"></i>
-                        <span><b>CÀI ĐẶT</b></span>
-                    </a>
-                </button>
-                <button class="menu_btn_btn">
-                    <a href="#" class="menu_btn_dt">
-                        <i class="fa-solid fa-book"></i>
-                        <span><b>HƯỚNG DẪN</b></span>
-                    </a>
-                </button>   
-        </div>
-        <div class="para"><b> A product of team11!</b></div>
-    </div>
+    
 
     <div class="modal_thuong" id ="team_modal_thuong">
         <!-- <div class="select_mode_overlay"></div> -->

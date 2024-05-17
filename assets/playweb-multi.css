@@ -39,21 +39,25 @@ body {
 .container .play-area .info .player1-info {
     display: flex;
     flex-direction: column;
-    line-height: 2em;
-    width: 27em;
+    line-height: 5vh;
+    width: 28vw;
+}
+
+.container .play-area .info .player1-info h2 {
+    font-size: 1.7vw;
 }
 
 .container .play-area .info .player1-info .player1-info-illustrator {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 1em;
+    margin-top: 1vh;
     position: relative;
 }
 
 .container .play-area .info .player1-info .player1-info-illustrator .score-parallelogram {
-    width: 10em;
-    height: 3em;
+    width: 11vw;
+    height: 3vw;
     background-color: #f53192;
     transform: skew(-20deg);
     border-radius: 10px;
@@ -65,24 +69,25 @@ body {
 }
 
 .container .play-area .info .player1-info .player1-info-illustrator .score-wrapper {
-    width: 8em;
-    height: 2em;
+    width: 9vw;
+    height: 2vw;
     background-color: green;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    margin-left: 1em;
+    margin-left: 1vw;
 }
 
 .container .play-area .info .player1-info .player1-info-illustrator .score-parallelogram .score-label {
     transform: skew(20deg);
     text-transform: none;
+    font-size: 3.3 vh;
 }
 
 .container .play-area .info .player1-info .player1-info-illustrator>img {
     z-index: 1;
-    width: 6em;
+    width: 15vh;
 }
 
 .container .play-area .info .round-time {
@@ -91,52 +96,83 @@ body {
     justify-content: space-evenly;
     align-items: center;
     height: 5em;
-    width: 20em;
+    width: 29em;
 }
 
 .container .play-area .info .round-info {
-    line-height: 2em;
+    line-height: 5vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-right: 1vw;
+    border-left: 1px solid white;
+    padding-left: 1.7vw;
 }
 
 .play-area .info .round-info h3{
-    font-size: 2em;
+    font-size: 2vw;
 }
 
 .container .play-area .info .time-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    line-height: 2em;
+    line-height: 5vh;
     border-left: 1px solid white;
-    padding-left: 2em;
+    padding-left: 1.7vw;
+    padding-right: 1vw;
+}
+
+.container .play-area .info .btn-back {
+    width: 2.6vw;
+    height: 2.6vw;
+    background-color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #f53192;
+    cursor: pointer;
+}
+
+.container .play-area .info .btn-back:hover {
+    transform: scale(1.5);
+    background-color: #f53192;
+    color: #fff;
+}
+
+.container .play-area .info .room-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 5vh;
+    border-left: 1px solid white;
+    padding-left: 1.vw;
 }
 
 .container .play-area .info .time-info h3 {
-    font-size: 2em;
+    font-size: 2vw;
 }
 
 .container .play-area .info .player2-info {
     display: flex;
     flex-direction: column;
-    line-height: 2em;
-    width: 27em;
-    padding-left: 3.2em;
+    line-height: 5vh;
+    width: 28vw;
+    padding-left: 3.2vw;
 }
 
 .container .play-area .info .player2-info .player2-info-illustrator {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    margin-top: 1em;
+    margin-top: 1vh;
     position: relative;
 }
 
 .container .play-area .info .player2-info .player2-info-illustrator .score-parallelogram {
-    width: 10em;
-    height: 3em;
+    width: 11vw;
+    height: 3vw;
     background-color: #f53192;
     transform: skew(20deg);
     border-radius: 10px;
@@ -148,24 +184,25 @@ body {
 }
 
 .container .play-area .info .player2-info .player2-info-illustrator .score-wrapper {
-    width: 8em;
-    height: 2em;
+    width: 9vw;
+    height: 2vw;
     background-color: green;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    margin-right: 1em;
+    margin-right: 1vw;
 }
 
 .container .play-area .info .player2-info .player2-info-illustrator .score-parallelogram .score-label {
     transform: skew(-20deg);
     text-transform: none;
+    font-size: 3.3vh;
 }
 
 .container .play-area .info .player2-info .player2-info-illustrator>img {
     z-index: 1;
-    width: 6em;
+    width: 15vh;
 }
 
 .container .play-area .info .player2-info .player2-name {
@@ -176,7 +213,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2em;
+    margin: 2vh;
 }
 
 .container .play-area .disc img {
@@ -191,7 +228,7 @@ body {
 
 .container .disc .btn #progress {
     -webkit-appearance: none;
-    width: 20em;
+    width: 51vh;
     height: 0.3em;
     background: #f53192;
     border-radius: 4px;
@@ -265,7 +302,7 @@ body {
     height: 3em;
     border-radius: 36px;
     color: white;
-    font-size: 1.2em;
+    font-size: 1.6vw;
     text-shadow: 0 0.125em 0.4em black;
     background-color: #6cb928;
     background-image: radial-gradient(150% 160% at 50% 15%, #fff 0, transparent 30%);

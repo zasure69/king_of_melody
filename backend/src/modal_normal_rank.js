@@ -10,6 +10,7 @@ var text_thuong = document.getElementById("cd_thuong");
 var text_xep_hang = document.getElementById("cd_xep_hang");
 var create_click = document.getElementById("Roomcreate");
 var playnow_click = document.getElementById("play_now");
+
 //var username = document.getElementById("username");
 
 // Get the <span> element that closes the modal
@@ -17,6 +18,7 @@ var span_thuong = document.getElementsByClassName("return_thuong")[0];
 var span_xep_hang = document.getElementsByClassName("return_xep_hang")[0];
 var span_create_room = document.getElementsByClassName("return_create_room")[0];
 var span_playnow_room = document.getElementsByClassName("return_playnow_room")[0];
+
 
 let create_room = document.getElementById("create_room");
 let round = document.getElementById("round");
@@ -87,6 +89,7 @@ span_xep_hang.onclick = function() {
 span_create_room.onclick = function() {
   modal_create_room.style.display = "none";
 }
+
 span_playnow_room.onclick = function() {
   modal_playnow_room.style.display = "none";
 }
@@ -104,4 +107,5 @@ window.onclick = function(event) {
   if (event.target == modal_playnow_room) {
     modal_playnow_room.style.display = "none";
   }
+
 }

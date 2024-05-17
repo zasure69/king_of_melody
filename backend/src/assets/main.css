@@ -845,6 +845,7 @@ body{
     justify-content: flex-end;
 }
 
+
 .modal_create_room #create_room .create_room_create .create{
     border-radius: 16px;
     text-transform: uppercase;
@@ -935,6 +936,7 @@ body{
     border: none;
     outline: none;
 }
+
 
 .modal_playnow_room #playnow_room .playnow_room_create{
     display: flex;

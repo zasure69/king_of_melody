@@ -151,30 +151,38 @@
                     <div class="search_room">
                         <form action="/home/search" method="post">
                             <div class="find_roomid">
-                                <input type="text" id="input_roomid" name="roomID" placeholder="Mã phòng">
+                                <input type="text" id="input_roomid" name="roomID" placeholder="Mã phòng" oninput="hideWarningroom()">
                                 <button class="find" type="submit">
                                     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
                                 </button>
                             </div>
                             {{#if full}}
-                            <script>
-                                document.getElementById("team_modal_xep_hang").style.display = "flex";
-                                document.getElementById("Warningroom").style.display = "flex";
-                            </script>
-                            <div class="Warningroom"> 
-                                <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
-                                <div class="fullroom">{{full}}</div>
-                            </div>
+                                <script>
+                                    document.getElementById("team_modal_xep_hang").style.display = "flex";
+                                    document.getElementById("Warningroom").style.display = "flex";
+                                    function hideWarningroom()
+                                    {
+                                        document.querySelector(".Warningroom").style.display = "none";
+                                    }
+                                </script>
+                                <div class="Warningroom"> 
+                                    <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
+                                    <div class="fullroom">{{full}}</div>
+                                </div>
                             {{/if}}
                             {{#if Notfound}}
-                            <script>
-                                document.getElementById("team_modal_xep_hang").style.display = "flex";
-                                document.getElementById("Warningroom").style.display = "flex";
-                            </script>
-                            <div class="Warningroom">
-                                <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
-                                <div class="notfoundroom">{{Notfound}}</div>
-                            </div>
+                                <script>
+                                    document.getElementById("team_modal_xep_hang").style.display = "flex";
+                                    document.querySelector(".Warningroom").style.display = "flex";
+                                    function hideWarningroom()
+                                    {
+                                        document.querySelector(".Warningroom").style.display = "none";
+                                    }
+                                </script>
+                                <div class="Warningroom">
+                                    <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
+                                    <div class="notfoundroom">{{Notfound}}</div>
+                                </div>
                             {{/if}}
                         </form>
                         
@@ -220,14 +228,8 @@
 
                     <div class="select_rank_mode_button">
                         {{!-- <form action="/home/roomcreate/" method="post" id = "create_room"><button type="submit" class="createclick" ><b>Tạo phòng</b></button></form> --}}
-                        <button type="submit" class="createclick" ><b>Tạo phòng</b></button>
-                        <form action="/home/playnow/" method="post">
-                            <button class="playclick" id="play_now">
-                                <b>
-                                    Vào nhanh
-                                </b>
-                            </button>
-                        </form>
+                        <button class="createclick" id="Roomcreate"><b>Tạo phòng</b></button>
+                        <button class="playclick" id="play_now"> <b>Vào nhanh </b></button>
                     </div>
                 </div>
 
@@ -241,7 +243,7 @@
 
     </div>
 
-    <div class="modal_create_room" id = "team_modal_create_room">
+    <div class="modal_create_room" id="team_modal_create_room">
         <div class="create_room_body">
             <div class="create_room_header">
                 <div class="create_room_return">
@@ -249,18 +251,67 @@
                 </div>
             </div>
 
-            <div class="create_room_content">
-                <form action="/home/roomcreate/" method="post" id="create_room">
-                    <div class="create_room_input">
-                        <label for="Name">Số vòng chơi:</label><br>
-                        <input type="text" id="round" name="roundNumber" placeholder="Số vòng">
-                    </div>
+            <form action="/home/roomcreate/" method="post" id="create_room">
+                <div class="create_room_input">
+                    <label for="Name">Số vòng chơi:</label><br>
+                    <input type="text" id="round" name="roundNumber" placeholder="Số vòng" oninput="hideExceed()">
+                </div>
 
-                    <div class="create_room_create">
-                        <button type="submit" class="create">Play</button>
+                <div class="create_room_create">
+                    <button class="create" id="create_play">Play</button>
+                </div>  
+                {{#if exceed}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_create_room").style.display = "flex";
+                        document.querySelector(".Exceedroom").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Exceedroom").style.display = "none";
+                        }
+                    </script>
+                    <div class="Exceedroom"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex"></i>
+                        <div class="exceed_value">{{exceed}}</div>
                     </div>
-                </form>
+                {{/if}} 
+            </form>
+        </div>
+
+    </div>
+    <div class="modal_playnow_room" id = "team_modal_playnow_room">
+        <div class="playnow_room_body">
+            <div class="playnow_room_header">
+                <div class="playnow_room_return">
+                    <span class = "return_playnow_room">TRỞ LẠI</span>
+                </div>
             </div>
+
+            <form action="/home/playnow/" method="post" id="playnow_room">
+                <div class="playnow_room_input">
+                    <label for="Name">Số vòng chơi:</label><br>
+                    <input type="text" id="round1" name="roundNumber1" placeholder="Số vòng" oninput="hideExceed()">
+                </div>
+
+                <div class="playnow_room_create">
+                    <button class="playnow" id="playnow_play">Play</button>
+                </div>  
+                {{#if exceed1}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_playnow_room").style.display = "flex";
+                        document.querySelector(".Exceedroom").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Exceedroom").style.display = "none";
+                        }
+                    </script>
+                    <div class="Exceedroom"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex1"></i>
+                        <div class="exceed_value">{{exceed1}}</div>
+                    </div>
+                {{/if}}  
+            </form>
         </div>
 
     </div>

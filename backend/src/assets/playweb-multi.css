@@ -214,7 +214,232 @@ body {
     font-size: 1.7vw;
 }
 
+.player2_icon
+{
+    position: absolute;
+    top: 7vh;
+    right: 28vw;
+}
+
+.container .play-area .info .player2-info .subnav::before{
+    background: transparent;
+    border-bottom: .6rem solid rgba(16, 16, 28, .5);
+    border-left: .4rem solid transparent;
+    border-right: .4rem solid transparent;
+    border-top: 0;
+    content: "";
+    display: block;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: -.59rem;
+    width: 0;
+}
+
+.container .play-area .info .player2-info .subnav{
+    background: rgba(16, 16, 28, .5);
+    border-radius: .6rem;
+    padding: 10px;
+    margin: 0 auto;
+    position: absolute;
+    top: 23vh;
+    right: 4vw;
+    transition: .15s ease;
+    /* transition-delay: 7s; */
+    display: none;
+}
+.container .play-area .info .player2-info .subnav .background{
+    padding: 6px;
+    width: 20vw;
+}
+
+.container .play-area .info .player2-info .chat{
+    width: 100%;
+    line-height: 3vh;
+    cursor: pointer;
+    background: none;
+    text-decoration: none;
+    border: none;
+    font-family: neosans;
+    color: white;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
 .container .play-area .disc {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 2vh;
+}
+
+.container .play-area .disc .button{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2vh;
+    margin-bottom: 2vh;
+    /* gap: 5vh; */
+}
+
+.chat_
+{
+    position: relative;
+    top: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat_player{
+    width: 4vw;
+    height: 4vw;
+    border: 0;
+    background-color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #ff1252;
+    cursor: pointer;
+    z-index: 100;
+    /* margin: 1em; */
+    font-size: 1.5em;
+    position: relative;
+    
+    /* top: 5vh; */
+}
+.send-field {
+    position: fixed;
+    padding: 0 1em;
+    width: 22vw;
+    height: 6vh;
+    background: #f0f0f0;
+    margin: 10px 0;
+    border: 2px solid #df4adf;
+    border-radius: 50px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    left: -27vw;
+    bottom: 64vh;
+}
+.send-field i {
+    flex: 1;
+    text-align: center;
+    color: #666;
+    font-size: 18px;
+    cursor: pointer;
+    rotate: 45deg;
+}
+
+.send-field i:hover {
+    flex: 1;
+    text-align: center;
+    color: #ff1252;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.send-field i:active {
+    flex: 1;
+    text-align: center;
+    color: #ff1252;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.send-field input {
+    /* flex: 5; */
+    background: none;
+    border: none;
+    outline: none;
+    width: 17vw;
+    font-size: 2vh;
+    font-weight: 400;
+    color: #444;
+}
+.send-field .send-container {
+    display: flex;
+    align-items: center;
+}
+
+.container .play-area .circle
+{
+    position: relative;
+    top: 6vh;
+    width: 16vw;
+    height: 19vw;
+    /* background: #0f0; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container .play-area .circle li
+{
+    position: absolute;
+    left: 0;
+    list-style: none;
+    transform-origin: 100px;
+    transition: 0.5s;
+    transition-delay: calc(0.1s * var(--i));
+    transform: rotate(0deg) translateX(80px); 
+}
+
+.container .play-area .circle.active li
+{
+    transform: rotate(calc(360deg / 6 * var(--i)));
+}
+
+.container .play-area .circle li a
+{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3vw;
+    height: 3vw;
+    background: #fff;
+    border-radius: 50%;
+    transform: rotate(calc(360deg / -6 * var(--i)));
+    box-shadow: 0 3px 4px rgba(0, 0, 0 , 0.15);
+    color: #111;
+    transition: 0.5s;
+}
+
+.container .play-area .circle li a:hover
+{
+    color: #ff1252;
+}
+
+.container .play-area .toggle
+{
+    position: absolute;
+    color: #ff1252;
+    width: 4vw;
+    height: 4vw;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); 
+    font-size: 2em;
+    transition: transform 1.25s;
+}
+
+.container .play-area .circle.active .toggle
+{
+    transform: rotate(360deg);
+} 
+
+.container .play-area .disc_progress {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -222,7 +447,7 @@ body {
 }
 
 .container .play-area .disc img {
-    width: 28%;
+    width: 36%;
 }
 
 .container .play-area .disc .btn {
@@ -515,3 +740,4 @@ body {
     transform: scale(1.05);
     cursor: pointer;
 }
+

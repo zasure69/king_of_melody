@@ -94,14 +94,6 @@
                             <div class="username">
                                 {{username}}
                             </div>
-                            <div class="point_number">
-                                <div class="point">
-                                    Điểm
-                                </div>
-                                <div class="number">
-                                    1000
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,7 +158,7 @@
                             {{#if full}}
                                 <script>
                                     document.getElementById("team_modal_xep_hang").style.display = "flex";
-                                    document.getElementById("Warningroom").style.display = "flex";
+                                    document.querySelector(".Warningroom").style.display = "flex";
                                     function hideWarningroom()
                                     {
                                         document.querySelector(".Warningroom").style.display = "none";
@@ -218,9 +210,31 @@
                         <div class="select_rank_mode_rank_img">
                             <img src="/assets/img/rank.png" alt="" class="rank_img">
                             <div class="select_rank_mode_rank">
-                                <b>bronze</b>
+                                <b>
+                                {{#if (lt multipoint 1000)}}
+                                Bronze
+                                {{else}}
+                                    {{#if (lt multipoint 2400)}}
+                                    silver
+                                    {{else}}
+                                        {{#if (lt multipoint 4000)}}
+                                            gold
+                                        {{else}}
+                                            {{#if (lt multipoint 6000)}}
+                                                platinum
+                                            {{else}}
+                                                {{#if (lt multipoint 8000)}}
+                                                    diamond
+                                                {{else}}
+                                                    {{#if (lt multipoint 12000)}}
+                                                        emerald
+                                                    {{else}}
+                                                        ruby
+                                {{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}
+                                </b>
                             </div>
                             <img src="/assets/img/rank.png" alt="" class="rank_img">
+                            
                         </div>
 
                         <div class="point_number">
@@ -228,7 +242,7 @@
                                 Điểm
                             </div>
                             <div class="number">
-                                1000
+                                {{multipoint}}
                             </div>
                         </div>
                     </div>
@@ -241,7 +255,26 @@
                 </div>
 
                 <div class="select_rank_mode_center_right_rank">
-                    <img src="/assets/img/Bronze.png" alt="" class="rank">
+                    {{#if (lt multipoint 1000)}}
+                                <img src="/assets/img/Bronze.png" alt="" class="rank">
+                                {{else}}
+                                    {{#if (lt multipoint 2400)}}
+                                    <img src="/assets/img/Silver.png" alt="" class="rank">
+                                    {{else}}
+                                        {{#if (lt multipoint 4000)}}
+                                            <img src="/assets/img/Gold.png" alt="" class="rank">
+                                        {{else}}
+                                            {{#if (lt multipoint 6000)}}
+                                                <img src="/assets/img/Platinum.png" alt="" class="rank">
+                                            {{else}}
+                                                {{#if (lt multipoint 8000)}}
+                                                    <img src="/assets/img/Diamond.png" alt="" class="rank">
+                                                {{else}}
+                                                    {{#if (lt multipoint 12000)}}
+                                                        <img src="/assets/img/Emeral.png" alt="" class="rank">
+                                                    {{else}}
+                                                        <img src="/assets/img/Ruby.png" alt="" class="rank">
+                                {{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}
                 </div>
 
             </div>
@@ -258,7 +291,7 @@
                 </div>
             </div>
 
-            <form action="/home/roomcreate/" method="post" id="create_room">
+            <form action="/home/roomcreate/" method="post" id="create_room" onsubmit="return disable('create_play');">
                 <div class="create_room_input">
                     <label for="Name">Số vòng chơi:</label><br>
                     <input type="text" id="round" name="roundNumber" placeholder="Số vòng" oninput="hideExceed()">
@@ -266,6 +299,7 @@
 
                 <div class="create_room_create">
                     <button class="create" id="create_play">Play</button>
+                    
                 </div>  
                 {{#if exceed}}
                     <script>
@@ -282,6 +316,21 @@
                         <div class="exceed_value">{{exceed}}</div>
                     </div>
                 {{/if}} 
+                {{#if input_round}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_create_room").style.display = "flex";
+                        document.querySelector(".Warninground").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Warninground").style.display = "none";
+                        }
+                    </script>
+                    <div class="Warninground"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex"></i>
+                        <div class="inputround">{{input_round}}</div>
+                    </div>
+                {{/if}}
             </form>
         </div>
 
@@ -294,7 +343,7 @@
                 </div>
             </div>
 
-            <form action="/home/playnow/" method="post" id="playnow_room">
+            <form action="/home/playnow/" method="post" id="playnow_room" onsubmit="return disable('playnow_play');">
                 <div class="playnow_room_input">
                     <label for="Name">Số vòng chơi:</label><br>
                     <input type="text" id="round1" name="roundNumber1" placeholder="Số vòng" oninput="hideExceed()">
@@ -318,6 +367,21 @@
                         <div class="exceed_value">{{exceed1}}</div>
                     </div>
                 {{/if}}  
+                {{#if input_round1}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_playnow_room").style.display = "flex";
+                        document.querySelector(".Warninground").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Warninground").style.display = "none";
+                        }
+                    </script>
+                    <div class="Warninground"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex1"></i>
+                        <div class="inputround">{{input_round1}}</div>
+                    </div>
+                {{/if}}
             </form>
         </div>
 
@@ -435,8 +499,16 @@
             </div>
         </div>
     </div> -->
-
+    
     <script src="/modal_normal_rank.js"></script>
+    <script>
+        function disable(id) {
+            let waitbtn = document.getElementById(id);
+            waitbtn.disabled = true;
+            waitbtn.innerText = "Đang vào phòng ... ";
+            return true;
+        }
+    </script>
     {{!-- <script src= "/multiplayer.js"></script> --}}
     {{!-- <script src="/socket.io/socket.io.js"></script> --}}
     

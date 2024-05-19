@@ -31,7 +31,7 @@
                     </div>
                     <div class="round-time">
                         <div class="btn-back" id="btn_back">
-                            <a href="/home/{{userid}}">
+                            <a href="/home">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </a>
                         </div>
@@ -60,7 +60,7 @@
                         <h2 class="player2-name" id="player2name">Hãy đợi người chơi 2</h2>
                         <div class="subnav" id = "subnav">
                             <div class="background">
-                                <div class="chat">HỒ SƠ</div>
+                                <div class="chat" id="message">HỒ SƠ</div>
                             </div>
                             
                         </div>  
@@ -75,12 +75,12 @@
                         
                         <div class="circle">
                             <div class="toggle"><i class="fa-solid fa-face-smile"></i></div>
-                            <li style="--i:0" class="like"><a href="#"><i class="fa-solid fa-thumbs-up"></i></a></li>
-                            <li style="--i:1" class="dislike"><a href="#"><i class="fa-solid fa-thumbs-down"></i></a></li>
-                            <li style="--i:2" class="sad"><a href="#"><i class="fa-solid fa-face-sad-cry"></i></a></li>
-                            <li style="--i:3" class="smile"><a href="#"><i class="fa-solid fa-face-laugh-beam"></i></a></li>
-                            <li style="--i:4" class="angry"><a href="#"><i class="fa-solid fa-face-angry"></i></i></a></li>
-                            <li style="--i:5" class="heart"><a href="#"><i class="fa-solid fa-face-grin-hearts"></i></a></li>
+                            <li style="--i:0" class="like"><div><i class="fa-solid fa-thumbs-up"></i></div></li>
+                            <li style="--i:1" class="dislike"><div><i class="fa-solid fa-thumbs-down"></i></div></li>
+                            <li style="--i:2" class="sad"><div><i class="fa-solid fa-face-sad-cry"></i></div></li>
+                            <li style="--i:3" class="smile"><div><i class="fa-solid fa-face-laugh-beam"></i></div></li>
+                            <li style="--i:4" class="angry"><div><i class="fa-solid fa-face-angry"></i></div></li>
+                            <li style="--i:5" class="heart"><div><i class="fa-solid fa-face-grin-hearts"></i></div></li>
                         </div>
                     </div>
                     
@@ -125,13 +125,13 @@
                         <h3>Chi tiết</h3>
                     <span>
                 </button>
-                <button class="home-btn">
-                    <a href="" class="home-btn-a">
+                <button class="home-btn" id="play_again" onclick="buttondisable('.home-btn-a','play_again')">
+                    {{!-- <a href="" class="home-btn-a" > --}}
                         <h3>Chơi tiếp</h3>
-                    </a>
+                    {{!-- </a> --}}
                 </button>
                 <button class="home-btn" id="home-btn">
-                    <a href="/home/{{userid}}" class="home-btn-a" >
+                    <a href="/home" class="home-btn-a">
                         <h3>Trang chủ</h3>
                     </a>
                 </button>
@@ -163,13 +163,13 @@
                 <button class="home-btn-1" id="return">
                     <h3>Trở lại</h3>
                 </button>
-                <button class="home-btn-1">
-                    <a href="" class="home-btn-a">
+                <button class="home-btn-1" id="play-again">
+                    {{!-- <a href="" class="home-btn-a"> --}}
                         <h3>Chơi tiếp</h3>
-                    </a>
+                    {{!-- </a> --}}
                 </button>
                 <button class="home-btn-1" id="home_render">
-                    <a href="/home/{{userid}}" class="home-btn-a" >
+                    <a href="/home" class="home-btn-a">
                         <h3>Trang chủ</h3>
                     </a>
                 </button>
@@ -178,20 +178,32 @@
         <div class="send-field" style="opacity: 0;">
             <div class="send-container">
                 <input type="text" name="chat" placeholder="Nhập tin nhắn" maxlength="60" id="chat_play">
-                <i class="fa-solid fa-paper-plane"></i>
+                <button id="sendbtn"><i class="fa-solid fa-circle-right" ></i></button>
             </div>
         </div>
 
-        <div class="player2_icon"><i class="fa-solid fa-thumbs-up" id="icon_" style="display: flex; color: #48f1eb;"></i></div>
+        <div class="player2_icon"><i class="fa-solid fa-thumbs-up" id="icon_" style="display: none; color: #48f1eb;"></i></div>
 
         <input type="hidden" id="songsInput" data-songs="{{songs}}">
         <input type="hidden" id="userid" data-user="{{userid}}">
         <input type="hidden" id="efInput" data-efvolume="{{efVL}}">
         <input type="hidden" id="msInput" data-volume="{{msVL}}">
         <input type="hidden" id="roundNum" data-round="{{round1}}">
+        <script>
+            function buttondisable(qs, id) {
+                let waita = document.querySelector(qs);
+                let waitbtn = document.getElementById(id);
+                waitbtn.disabled = true;
+                
+                waita.removeAttribute("href");
+                console.log(waita)
+                waita.style.pointerEvents = "none";
+                return false;
+            }
+        </script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/playmultiplayer.js"></script>
-
+        
         
     </body>
 </html>

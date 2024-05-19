@@ -10,6 +10,8 @@ var text_thuong = document.getElementById("cd_thuong");
 var text_xep_hang = document.getElementById("cd_xep_hang");
 var create_click = document.getElementById("Roomcreate");
 var playnow_click = document.getElementById("play_now");
+var playnowbtn = document.getElementById("playnow_play");
+var createbtn = document.getElementById("create_play");
 
 //var username = document.getElementById("username");
 
@@ -24,9 +26,16 @@ let create_room = document.getElementById("create_room");
 let round = document.getElementById("round");
 let play_now = document.getElementById("playnow_room");
 let input_roomid = document.getElementById("input_roomid");
+let roomID_list = new Set();
 
 function generateRoomId() {
-    return Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+  var room = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+  while (roomID_list.has(room))
+  {
+    room = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+  }
+  roomID_list.add(room);
+  return room;
 }
 // When the user clicks the button, open the modal 
 text_thuong.onclick = function() {
@@ -64,17 +73,28 @@ document.getElementById("username").onclick = function()
 create_room.addEventListener("submit", function(e) {
   //round.preventDefault();
   e.preventDefault();
+
   var roomID = generateRoomId().toString();
+  
   console.log(typeof roomID);
   console.log("hello");
   this.setAttribute("action",`/home/roomcreate/${roomID}`);
   this.submit(); 
 })
+
+
+
+
 play_now.addEventListener("submit", function(e) {
   e.preventDefault();
   console.log("hello");
   this.submit(); 
 })
+
+
+// playnowbtn.addEventListener("dblclick", function(event) {
+// event.preventDefault(); // Ngăn chặn sự kiện double click mặc định
+// });
 // username.onclick = function(){
 //   subnav.style.display = "block";
 // }

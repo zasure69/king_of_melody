@@ -7,9 +7,19 @@ const Room = require('../models/Room');
 const semaphore = require('../../semaphore');
 let full = "";
 let Notfound = "";
+let Notinputround = "";
+let Notinputround1 = "";
 let exceed_permitted_value = "";
+let exceed_permitted_value1 = "";
+let roomID_list = new Set();
 function generateRoomId() {
-    return Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+    var room = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+    while (roomID_list.has(room))
+    {
+      room = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+    }
+    roomID_list.add(room);
+    return room;
 }
 
 // class Semaphore {
@@ -46,7 +56,14 @@ class homeController{
                 console.log('đã vào đây')
                 userGoogleSchema.findOne({_id: req.session.passport.user})
                 .then((result) => {
-                    res.render('home', {username: result.username, userId: result._id})
+                    req.session.user = result
+                    res.render('home', {username: result.username, userId: result._id, full: full, Notfound: Notfound, multipoint: result.multiPoint, exceed: exceed_permitted_value, exceed1: exceed_permitted_value1, input_round: Notinputround, input_round1: Notinputround1})
+                    full = "";
+                    Notfound = "";
+                    exceed_permitted_value = "";
+                    exceed_permitted_value1 = "";
+                    Notinputround = "";
+                    Notinputround1 = "";
                 })
                 .catch(err => {
                     console.log('Error: ', err);
@@ -58,9 +75,13 @@ class homeController{
             } else {
                 userSchema.findOne({_id: req.session.user._id})
                 .then((result) => {
-                    res.render('home', {username: result.username, userId: req.params.userId, full: full, Notfound: Notfound})
+                    res.render('home', {username: result.username, userId: req.params.userId, full: full, Notfound: Notfound, multipoint: result.multiPoint, exceed: exceed_permitted_value, exceed1: exceed_permitted_value1, input_round: Notinputround, input_round1: Notinputround1})
                     full = "";
                     Notfound = "";
+                    exceed_permitted_value = "";
+                    exceed_permitted_value1 = "";
+                    Notinputround = "";
+                    Notinputround1 = "";
                 })
                 .catch(err => {
                     console.log('Error: ', err);
@@ -111,7 +132,13 @@ class homeController{
     create(req,res){
         const {roomID} = req.params;
         const roundnumber = req.body.roundNumber;
-        if (roundnumber <= 30)
+        console.log("roundnumber: ", typeof roundnumber);
+        if (roundnumber == "")
+        {
+            Notinputround = "Hãy nhập số vòng chơi!";
+            res.redirect('/home');
+        }
+        else if (roundnumber <= 30)
         {
             console.log("room: ",roomID);
             req.session.roomid = roomID; 
@@ -130,18 +157,21 @@ class homeController{
         else if (roundnumber > 30)
         {
             exceed_permitted_value = "Giá trị nhập vào cao hơn 30";
-            res.render('home', {exceed: exceed_permitted_value});
-            exceed_permitted_value = "";
+            res.redirect('/home');
         }
         else
         {
             exceed_permitted_value = "Giá trị nhập vào phải là số";
-            res.render('home', {exceed: exceed_permitted_value});
-            exceed_permitted_value = "";
+            res.redirect('/home');
         }
     }
     playnow(req, res) {
-        if (req.body.roundNumber1 <= 30)
+        if (req.body.roundNumber1 == "")
+        {
+            Notinputround1 = "Hãy nhập số vòng chơi!";
+            res.redirect('/home');
+        }
+        else if (req.body.roundNumber1 <= 30)
         {
             Room.aggregate([{ $match: { vacant: true, round : parseInt(req.body.roundNumber1)} }])
             .exec()
@@ -174,13 +204,15 @@ class homeController{
                 } 
                 else {
                     let roomID = generateRoomId().toString();
+                    let id = req.session.user._id;
+                    let username = req.session.user.username;
                     
                     const newRoom = new Room({
                         roomid: roomID,
                         vacant: true,
                         round: round1,
                         count: 0,
-                        player: [{ userid: req.session.user._id, username: req.session.user.username}]
+                        player: [{ userid: id, username: username}]
                     });
                     newRoom.save();
                     res.redirect('/playmulti/' + newRoom.roomid + "/" + round1);
@@ -193,15 +225,13 @@ class homeController{
         }
         else if (req.body.roundNumber1 > 30)
         {
-            exceed_permitted_value = "Giá trị nhập vào cao hơn 30";
-            res.render('home', {exceed1: exceed_permitted_value});
-            exceed_permitted_value = "";
+            exceed_permitted_value1 = "Giá trị nhập vào cao hơn 30";
+            res.redirect('/home');
         }
         else
         {
-            exceed_permitted_value = "Giá trị nhập vào phải là số";
-            res.render('home', {exceed1: exceed_permitted_value});
-            exceed_permitted_value = "";
+            exceed_permitted_value1 = "Giá trị nhập vào phải là số";
+            res.redirect('/home');
         }    
     }
     searchroom(req,res){
@@ -240,13 +270,13 @@ class homeController{
                 {
                     console.log("room đầy");
                     full = "Phòng đã đầy";
-                    res.redirect("/home/" + req.session.user._id);
+                    res.redirect("/home");
                 }
             })
             .catch(err => {
                 Notfound = "Không thể tìm thấy phòng";
                 console.log("room không tồn tại ", err);
-                res.redirect("/home/" + req.session.user._id);
+                res.redirect("/home");
             })
     }
 }

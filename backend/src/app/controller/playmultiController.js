@@ -124,7 +124,7 @@ class playmultiController {
                     }
                     settingSchema.findOne({email: req.session.user.email})
                     .then((st) => {
-                        res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid});
+                        res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
                         loadSong[rooms.roomid] = true;
                         // loadSong = true;
                     })
@@ -142,63 +142,70 @@ class playmultiController {
 io.on("connection", async function(socket) {
     console.log(`User connected id is ${socket.id}`);
     socket.join(roomid);
-    room.socketid.push(socket.id);
-    room.count++;
-    Room
-        .updateOne({roomid: roomid}, {count: room.count, socketid: room.socketid })
-        .then(() =>{
-            Room.findOne({socketid: socket.id})
-            .then((send) => {
-                if (send.socketid.length != 2 || loadSong[send.roomid] == false) socket.emit("wait");
-                else io.to(send.roomid).emit("start"); 
-            })
-            .catch((err) => {
-                console.log("error",err);
-            })
-            console.log(room.socketid);
-            console.log(socket.adapter.rooms);
-            if (room.vacant){
-                socket.emit("player1",room);
-                
-                sem.release();
-                console.log("Mở khóa cho socket");
-            }
-            else{
-                if (room.count <= 2)
-                {
-                    const socketsInRoom = io.sockets.adapter.rooms.get(roomid);
-                    if (socketsInRoom) {
-                        // Lặp qua danh sách socket trong room
-                        socketsInRoom.forEach((socketId) => {
-                            const socket = io.sockets.sockets.get(socketId);
-                            // Sử dụng socket tại đây
-                            if(socketId === room.socketid[0]){
-                                socket.emit("player1",room);
-                                console.log("Mở khóa cho socket");
-                                sem.release();
-                            }
-                            else{
-                                socket.emit("player2",room);
-                            }
-                            console.log(`Socket ID: ${socketId}`);
-                            
-                        });
-                    } else {
-                        console.log(`Không có socket nào trong room "${roomName}"`);
-                    }
-                }
-                else
-                {
-                    console.log("roomid: ",room.roomid);
-                    io.in(room.roomid).emit("remain_players", room.player[0].username, room.player[1].username);
+    Room.findOne({roomid: roomid})
+    .then((loadroom) => {
+        loadroom.socketid.push(socket.id);
+        loadroom.count++;
+        Room
+            .updateOne({roomid: loadroom.roomid}, {count: loadroom.count, socketid: loadroom.socketid })
+            .then(() =>{
+                Room.findOne({socketid: socket.id})
+                .then((send) => {
+                    if (send.socketid.length != 2 || loadSong[send.roomid] == false) socket.emit("wait");
+                    else io.to(send.roomid).emit("start"); 
+                })
+                .catch((err) => {
+                    console.log("error",err);
+                })
+                console.log(loadroom.socketid);
+                console.log(socket.adapter.rooms);
+                if (room.vacant){
+                    socket.emit("player1",loadroom);
+                    
                     sem.release();
+                    console.log("Mở khóa cho socket");
                 }
-                
-            }
-        })
-        .catch(err => {
-            console.log("error: ",err);
-        })
+                else{
+                    if (loadroom.count <= 2)
+                    {
+                        const socketsInRoom = io.sockets.adapter.rooms.get(loadroom.roomid);
+                        if (socketsInRoom) {
+                            // Lặp qua danh sách socket trong room
+                            socketsInRoom.forEach((socketId) => {
+                                const socket = io.sockets.sockets.get(socketId);
+                                // Sử dụng socket tại đây
+                                if(socketId === loadroom.socketid[0]){
+                                    socket.emit("player1",loadroom);
+                                    console.log("Mở khóa cho socket");
+                                    sem.release();
+                                }
+                                else{
+                                    socket.emit("player2",loadroom);
+                                }
+                                console.log(`Socket ID: ${socketId}`);
+                                
+                            });
+                        } else {
+                            console.log(`Không có socket nào trong room`);
+                        }
+                    }
+                    else
+                    {
+                        // console.log("roomid: ",room.roomid);
+                        io.in(loadroom.roomid).emit("remain_players", loadroom.player[0].username, loadroom.player[1].username);
+                        sem.release();
+                    }
+                    
+                }
+            })
+            .catch(err => {
+                console.log("error: ",err);
+            })
+    })
+    .catch((err) => {
+        console.log("error",err);
+    })
+    
     
     socket.on("addpointtooppent", function(score) {
         Room.findOne({socketid: socket.id})
@@ -216,6 +223,7 @@ io.on("connection", async function(socket) {
             .then((send) => {
                 console.log(playersdone[send.roomid]);
                 playersdone[send.roomid]++;
+                socket.emit("wait");
                 if (playersdone[send.roomid] == 2) {
                     io.in(send.roomid).emit('endgame');
                     playersdone[send.roomid] = 0;
@@ -226,12 +234,12 @@ io.on("connection", async function(socket) {
             })
         
     })
-    socket.on("disconnect",() =>
+    socket.on("disconnect", async() =>
     {
         console.log(`${socket.id} has disconnect!`);
         Room.findOne({socketid: socket.id})
         .then((send) => {
-            if (send){
+            // if (send){
                 const newroom = send.socketid.filter(item => item != socket.id);
                 Room.updateOne({roomid: send.roomid},{$set: {socketid: newroom}})
                     .then(()=>{
@@ -240,7 +248,8 @@ io.on("connection", async function(socket) {
                     .catch((error)=>{
                         console.log("error: ",error);
                     })
-            }
+            // }
+            
             
         })
         .catch((error)=>{
@@ -273,6 +282,7 @@ io.on("connection", async function(socket) {
                         Room.findOne({roomid: send.roomid})
                         .then((newroom) => {
                         socket.to(newroom.roomid).emit("player1", newroom);
+                        socket.to(newroom.roomid).emit("wait");
                         console.log("test what happern!");
                         })
                         .catch((err) => {
@@ -424,6 +434,70 @@ io.on("connection", async function(socket) {
             })
 
         })
+    socket.on("likeicon",function() {
+        Room.findOne({socketid: socket.id})
+        .then((send) => {
+            socket.to(send.roomid).emit("likeicon");
+        })
+        .catch((err) => {
+            console.log("error",err);
+        })
+    })
+    socket.on("dislikeicon",function() {
+        Room.findOne({socketid: socket.id})
+        .then((send) => {
+            socket.to(send.roomid).emit("dislikeicon");
+        })
+        .catch((err) => {
+            console.log("error",err);
+        })
+    })
+    socket.on("sadicon",function() {
+        Room.findOne({socketid: socket.id})
+        .then((send) => {
+            socket.to(send.roomid).emit("sadicon");
+        })
+        .catch((err) => {
+            console.log("error",err);
+        })
+    })
+    socket.on("smileicon",function() {
+        Room.findOne({socketid: socket.id})
+        .then((send) => {
+            socket.to(send.roomid).emit("smileicon");
+        })
+        .catch((err) => {
+            console.log("error",err);
+        })
+    })
+    socket.on("angryicon",function() {
+        Room.findOne({socketid: socket.id})
+        .then((send) => {
+            socket.to(send.roomid).emit("angryicon");
+        })
+        .catch((err) => {
+            console.log("error",err);
+        })
+    })
+    socket.on("hearticon",function() {
+        Room.findOne({socketid: socket.id})
+        .then((send) => {
+            socket.to(send.roomid).emit("hearticon");
+        })
+        .catch((err) => {
+            console.log("error",err);
+        })
+    })
+    socket.on("sendmess", function(mess) {
+        Room.findOne({socketid: socket.id})
+        .then((send) => {
+            console.log("send success");
+            socket.to(send.roomid).emit("sendmess",mess);
+        })
+        .catch((err) => {
+            console.log("error",err);
+        })
+    })
 })
 
 

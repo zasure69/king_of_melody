@@ -19,6 +19,10 @@ let home1 = document.getElementById("home-btn");
 let numright = 0;
 let numwrong = 0;
 let back = document.getElementById("btn_back");
+let sendButton = document.getElementById("sendbtn");
+let chat = document.getElementById("chat_play");
+let subnav = document.getElementById("subnav");
+let chatmess = document.getElementById("message");
 
 const userid = document.getElementById('userid');
 const iduser = userid.dataset.user;
@@ -36,15 +40,29 @@ const ms = msVL.dataset.volume;
 const songs = JSON.parse(songsInput.dataset.songs);
 const length = songs.length;
 
+var isClicked = false;
+
+function handleClick() {
+  if (!isClicked) {
+    isClicked = true;
+
+    // Thực hiện hành động của bạn tại đây
+
+    setTimeout(function() {
+      isClicked = false;
+    }, 60000); // Đặt thời gian để cấu hình double click (ví dụ: 1000ms)
+  }
+}
+
 window.addEventListener('load', function() {
   // Mã JavaScript để xác nhận rằng trang đã tải hoàn chỉnh
   console.log('Trang đã tải xong.');
 });
 
-// window.history.pushState(null,null,window.location.href);
-// window.onpopstate = function(event) {
-//   window.history.forward();
-// }
+// window.history.pushState(null,null,"/home");
+window.onbeforeunload = function(event) {
+  socket.emit("render_home", iduser);
+}
 
 //Sử dụng biến songs trong các xử lý JavaScript khác
 for(let i = 0; i < length; i++)
@@ -53,6 +71,8 @@ for(let i = 0; i < length; i++)
 }
  // In danh sách bài hát trong console
 
+
+ 
 var correct_answer = new Howl({
   src: ['/assets/sound/sound_correct_answer.mp3'],
 });
@@ -284,6 +304,7 @@ ctrlIcon.addEventListener('click', ()=>{
   
 });
 function updateSlider() {
+  clearInterval(dem_tg);
   var currentTime = play_song[index].seek();
   var duration = play_song[index].duration();
   songSlider.max = duration;
@@ -299,6 +320,8 @@ songSlider.addEventListener("input", function() {
 function playNextSong() {
   player.next();
 };
+
+let isClicked1 = false;
 // Hàm để kiểm tra đoán đúng tên bài hát
 guessButton.addEventListener('click', () => {
   let answer_song = document.getElementById("answer_song");
@@ -346,10 +369,42 @@ guessButton.addEventListener('click', () => {
         
       }
       if (index == Numround - 1){
-        socket.emit("done");
-          
+        socket.emit("addpointtooppent",score);
+        setTimeout(function() {
+          socket.emit("done");
+        }, 1000);
+        isClicked1 = false;
       }
       click = false;
+  }
+})
+
+sendButton.addEventListener('click', () => {
+  // e.preventDefault();
+  console.log("send");
+  if (chat.value) {
+    socket.emit("sendmess", chat.value);
+    chat.value = "";
+  }
+  
+})
+
+socket.on("sendmess", function(mess) {
+  console.log(mess);
+  chatmess.textContent = mess;
+  subnav.style.display = "flex";
+  clearTimeout(timeout);
+  timeout = setTimeout(function() {
+      subnav.style.display = "none";
+      chatmess.textContent = "";
+  }, 10000);
+  
+})
+
+chat.addEventListener('keypress', function(event) {
+  if (event.key == "Enter") {
+    event.preventDefault();
+    sendButton.click();
   }
 })
 
@@ -423,7 +478,7 @@ function hide()
   }
 }
 
-let width = 5;
+let width = 3;
 let difference = 0.25;
 let interval = 0;
 let timeout = 0;
@@ -435,41 +490,48 @@ let angry = document.querySelector(".angry");
 let heart = document.querySelector(".heart");
 let icon_ = document.getElementById("icon_");
 like.onclick = function(){
-    clearTimeout(timeout);
-    if (icon_.classList.contains("fa-thumbs-down"))
-    {
-        icon_.classList.remove("fa-thumbs-down");
-        icon_.classList.add("fa-thumbs-up");
-    }
-    else if (icon_.classList.contains("fa-face-sad-cry"))
-    {
-        icon_.classList.remove("fa-face-sad-cry");
-        icon_.classList.add("fa-thumbs-up");
-    }
-    else if (icon_.classList.contains("fa-face-laugh-beam"))
-    {
-        icon_.classList.remove("fa-face-laugh-beam");
-        icon_.classList.add("fa-thumbs-up");
-    }
-    else if (icon_.classList.contains("fa-face-angry"))
-    {
-        icon_.classList.remove("fa-face-angry");
-        icon_.classList.add("fa-thumbs-up");
-    }
-    else if (icon_.classList.contains("fa-face-grin-hearts"))
-    {
-        icon_.classList.remove("fa-face-grin-hearts");
-        icon_.classList.add("fa-thumbs-up");
-    }
-    //console.log("Chạy được", window.getComputedStyle(icon_).getPropertyValue("font-size"));
-    icon_.style.display = "flex";
-    timeout = setTimeout(function() {
-        icon_.style.display = "none";
-    }, 5000);
-    increase();
+    socket.emit("likeicon");
 }
+socket.on("likeicon", function() {
+  clearTimeout(timeout);
+  if (icon_.classList.contains("fa-thumbs-down"))
+  {
+      icon_.classList.remove("fa-thumbs-down");
+      icon_.classList.add("fa-thumbs-up");
+  }
+  else if (icon_.classList.contains("fa-face-sad-cry"))
+  {
+      icon_.classList.remove("fa-face-sad-cry");
+      icon_.classList.add("fa-thumbs-up");
+  }
+  else if (icon_.classList.contains("fa-face-laugh-beam"))
+  {
+      icon_.classList.remove("fa-face-laugh-beam");
+      icon_.classList.add("fa-thumbs-up");
+  }
+  else if (icon_.classList.contains("fa-face-angry"))
+  {
+      icon_.classList.remove("fa-face-angry");
+      icon_.classList.add("fa-thumbs-up");
+  }
+  else if (icon_.classList.contains("fa-face-grin-hearts"))
+  {
+      icon_.classList.remove("fa-face-grin-hearts");
+      icon_.classList.add("fa-thumbs-up");
+  }
+  //console.log("Chạy được", window.getComputedStyle(icon_).getPropertyValue("font-size"));
+  icon_.style.display = "flex";
+  timeout = setTimeout(function() {
+      icon_.style.display = "none";
+  }, 5000);
+  increase();
+});
+    
 dislike.onclick = function(){
-    clearTimeout(timeout);
+  socket.emit("dislikeicon");
+}
+socket.on("dislikeicon", function(){
+  clearTimeout(timeout);
     if (icon_.classList.contains("fa-thumbs-up"))
     {
         icon_.classList.remove("fa-thumbs-up");
@@ -502,9 +564,14 @@ dislike.onclick = function(){
     }, 5000);
     
     increase();
-}
+})
+    
 sad.onclick = function(){
-    clearTimeout(timeout);
+  socket.emit("sadicon");
+}
+
+socket.on("sadicon",function(){
+  clearTimeout(timeout);
     if (icon_.classList.contains("fa-thumbs-up"))
     {
         icon_.classList.remove("fa-thumbs-up");
@@ -536,9 +603,12 @@ sad.onclick = function(){
         icon_.style.display = "none";
     }, 5000);
     increase();
-}
+})
 smile.onclick = function(){
-    clearTimeout(timeout);
+  socket.emit("smileicon");
+}
+socket.on("smileicon", function(){
+  clearTimeout(timeout);
     if (icon_.classList.contains("fa-thumbs-up"))
     {
         icon_.classList.remove("fa-thumbs-up");
@@ -570,9 +640,12 @@ smile.onclick = function(){
         icon_.style.display = "none";
     }, 5000);
     increase();
-}
+})
 angry.onclick = function(){
-    clearTimeout(timeout);
+  socket.emit("angryicon");
+}
+socket.on("angryicon", function(){
+  clearTimeout(timeout);
     if (icon_.classList.contains("fa-thumbs-up"))
     {
         icon_.classList.remove("fa-thumbs-up");
@@ -604,9 +677,13 @@ angry.onclick = function(){
         icon_.style.display = "none";
     }, 5000);
     increase();
-}
+})
+  
 heart.onclick = function(){
-    clearTimeout(timeout);
+  socket.emit("hearticon");
+}
+socket.on("hearticon", function(){
+  clearTimeout(timeout);
     if (icon_.classList.contains("fa-thumbs-up"))
     {
         icon_.classList.remove("fa-thumbs-up");
@@ -638,7 +715,8 @@ heart.onclick = function(){
         icon_.style.display = "none";
     }, 5000);
     increase();
-}
+})
+    
 function increase()
 {
     clearInterval(interval);
@@ -653,31 +731,25 @@ function decrease()
 }
 function expand()
 {
-    console.log("expand");
-    if (width < 15)
+    if (width < 10)
     {
-        console.log("expand1");
         width = width + difference;
         icon_.style.fontSize = width + "vw";
     }
     else
     {
-        console.log("expand2");
         decrease();
     }
 }
 function shrink()
 {
-    console.log("shrink");
     if (width > 5)
     {
-        console.log("shrink1");
         width = width - difference;
         icon_.style.fontSize = width + "vw";
     }
     else
     {
-        console.log("shrink2");
         increase();
     }
 }
@@ -739,7 +811,7 @@ socket.on("remain_players", function(nameplayer1, nameplayer2){
 })
 
 socket.on("addpointtooppent", (score) =>{
-    score_player2.textContent = score;
+   score_player2.textContent = score;
 })
 
 socket.on('endgame',() => {
@@ -762,7 +834,7 @@ socket.on('endgame',() => {
     endgame_lose.volume(0.5);
     endgame_lose.play();
   }
-  else {
+  else if (parseInt(score_player1.textContent) ==  parseInt(score_player2.textContent)) {
     socket.emit("score_draw", score, iduser);
     document.getElementsByClassName("container")[0].style.opacity = "0.35";
     document.getElementById("end-result").textContent = "OMG! Bạn đã vô tình hòa đối thủ!";
@@ -773,16 +845,44 @@ socket.on('endgame',() => {
   }
   
 })
-home.addEventListener('click', (e)=>{
+home.addEventListener('click', (e)=>{;
   socket.emit("render_home", iduser);
-
+  home.disabled = true;
 })
 home1.addEventListener('click', (e)=>{
-  console.log(userid.dataset);
   socket.emit("render_home", iduser);
+  home1.disabled = true;
 })
 
 back.addEventListener('click', (e)=> {
   socket.emit("render_home", iduser);
+  back.disabled = true;
 })
+
+let again = document.getElementById("play_again");
+let again1 = document.getElementById("play-again");
+
+again1.addEventListener('click', (e) =>{
+  console.log(isClicked1);
+  if (!isClicked1) {
+    //again.disabled = true;
+    // linkagain.style.pointerEvents = 'none';
+    isClicked1 = true;
+    location.reload();
+  }
+  e.preventDefault();
+})
+
+again.addEventListener('click', (e) =>{
+  console.log(isClicked1);
+  if (!isClicked1) {
+    //again.disabled = true;
+    // linkagain.style.pointerEvents = 'none';
+    isClicked1 = true;
+    location.reload();
+  }
+  e.preventDefault();
+})
+
+
 

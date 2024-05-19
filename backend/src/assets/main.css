@@ -782,8 +782,8 @@ body{
 }
 
 .modal_xep_hang .select_rank_mode_center .select_rank_mode_center_right_rank .rank{
-    width: 300px;
-    height: 300px;
+    width: 17vw;
+    height: 40vh
 }
 
 .modal_create_room{
@@ -980,7 +980,8 @@ body{
     align-content: center;
 }
 
-.modal_create_room #create_room .Exceedroom, .modal_playnow_room #playnow_room .Exceedroom{
+.modal_create_room #create_room .Exceedroom, .modal_create_room #create_room .Warninground,
+ .modal_playnow_room #playnow_room .Exceedroom, .modal_playnow_room #playnow_room .Warninground{
     display: flex;
     gap: 0.3rem;
      /* margin-top: 5px; */
@@ -993,7 +994,8 @@ body{
     margin-top: 4px;
     /* gap: 0.5rem; */
 }
-.create_room_body #create_room .exceed_value, .playnow_room_body #playnow_room .exceed_value{
+.create_room_body #create_room .exceed_value, .create_room_body #create_room .inputround, 
+.playnow_room_body #playnow_room .exceed_value, .playnow_room_body #playnow_room .inputround{
     font-size: 0.9rem;
     color: #eee;
 }

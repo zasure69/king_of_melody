@@ -673,3 +673,26 @@ body {
     transform: scale(1.05);
     cursor: pointer;
 }
+
+@media screen and (max-height: 450px) {
+    .container .hint h2 {
+        font-size: 30px;
+        margin: 3vh auto;
+    }
+    .container > .hint > .hintlist-1 > h3 {
+        font-size: 20px;
+    }
+    .container .play-area .disc img {
+        width: 35%;
+    }
+    .container .disc .btn #progress {
+        width: 50vh;
+    }
+    .container .play-area .answer button {
+        width: 20vh;
+        height: 10vh;
+    }
+    .container .play-area .disc {
+        margin: 5vh;
+    }
+}

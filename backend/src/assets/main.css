@@ -44,7 +44,7 @@ body{
 }
 
 #header .logo >img {
-    width: 100%;
+    width: 120%;
     height: 150%;
 }
 #header .right_header{
@@ -80,8 +80,7 @@ body{
 #header .nav .username{
     color: white;
     position: relative;
-    width: 150px;
-    height: 25px;
+    margin-top: 4px;
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -686,8 +685,7 @@ body{
 }
 
 .modal_xep_hang .select_rank_mode_center .select_rank_mode_img .img{
-    width: 300px;
-    height: 300px;
+    width: 20vw;
     margin-left: 16px;
 }
 
@@ -782,8 +780,8 @@ body{
 }
 
 .modal_xep_hang .select_rank_mode_center .select_rank_mode_center_right_rank .rank{
-    width: 17vw;
-    height: 40vh
+    width: 20vw;
+    height: 45vh;
 }
 
 .modal_create_room{

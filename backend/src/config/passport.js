@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const UserGoogle = require('../app/models/UserGoogle');
 
 
+
 module.exports = function (passport) {
 
     passport.use(new GoogleStrategy({
@@ -34,6 +35,7 @@ module.exports = function (passport) {
         }
         )
     );
+
 
     passport.serializeUser((user, done) => {
         done(null, user.id);

@@ -11,6 +11,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    empty: {
+        type: Number,
+        default: 25,
+    },
     username: {
         type: String,
         required: true
@@ -55,7 +59,7 @@ const userSchema = new Schema({
         type: Number,
         default: 0
     },
-    muitiPoint: {
+    multiPoint: {
         type: Number,
         default: 0
     }

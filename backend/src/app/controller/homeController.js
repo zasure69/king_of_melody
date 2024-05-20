@@ -56,7 +56,7 @@ class homeController{
                 console.log('đã vào đây')
                 userGoogleSchema.findOne({_id: req.session.passport.user})
                 .then((result) => {
-                    req.session.user = result
+                    req.session.user = result;
                     res.render('home', {username: result.username, userId: result._id, full: full, Notfound: Notfound, multipoint: result.multiPoint, exceed: exceed_permitted_value, exceed1: exceed_permitted_value1, input_round: Notinputround, input_round1: Notinputround1})
                     full = "";
                     Notfound = "";

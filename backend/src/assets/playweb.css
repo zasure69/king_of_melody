@@ -496,7 +496,7 @@ body {
 
 #end-model {
     background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
-    display: none;
+    display: flex;
     width: 60%;
     height: 75%;
     position: absolute;
@@ -515,7 +515,7 @@ body {
 
 #detail-model {
     background-image: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%);
-    display: none;
+    display: flex;
     width: 60%;
     height: 75%;
     position: absolute;
@@ -613,9 +613,11 @@ body {
     color: white;
     width: 80%;
     gap: 0.5em;
+    overflow-y: scroll;
 }
 
-.song-detail > h2 {
+.song-detail > .songlist h2 {
+
     font-size: 2.5rem;
     color: aquamarine;
 }

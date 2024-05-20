@@ -18,8 +18,8 @@
             <div class="hint">
                 <h2>Bài hát gợi ý</h2>
                 {{#each hintlist}}
-                <div class="hintlist-1">
-                    <h3>{{this.song}}</h3>
+                <div class="hintlist-1" >
+                    <h3 id="hintname">{{this.song}}</h3> 
                     <p>{{this.singer}}</p>
                 </div>
                 {{/each}}
@@ -110,7 +110,9 @@
                 <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
             </div>
             <div class="song-detail">
-                <h2>Thông Tin Bài hát</h2>
+                <div class="songlist">
+                    <h2>Thông Tin Bài hát</h2>
+                </div>
                 {{#each infolist}}
                 <div class="songlist">
                     <a href="{{this.link}}" target="_blank"><p>    {{this.name}} - {{this.singer}}</p></a>
@@ -136,8 +138,11 @@
             </div>
         </div>
         <input type="hidden" id="songsInput" data-songs="{{songs}}">
+        <input type="hidden" id="userid" data-user="{{userid}}">
+        <input type="hidden" id="mode" data-mode="{{mode}}">
         <input type="hidden" id="efVLInput" value="{{efVL}}">
         <input type="hidden" id="msVLInput" value="{{msVL}}">
+        <script src="/socket.io/socket.io.js"></script>
         <script src="playsingleplayer.js"></script>
     </body>
 </html>

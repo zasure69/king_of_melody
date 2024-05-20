@@ -1,6 +1,7 @@
 const songSchema = require('../models/Song');
 const Room = require('../models/Room'); 
 const User = require('../models/User');
+const UserGoogle = require('../models/UserGoogle');
 const { io, app } = require('../../main');
 let roomid = "";
 let room = [];
@@ -299,7 +300,54 @@ io.on("connection", async function(socket) {
         })
     })
     socket.on("score_win", (score, iduser)=>{
-        User.findOne({_id: iduser})
+        if (req.session.type == 'google') 
+        {
+            UserGoogle.findOne({_id: iduser})
+            .then((user_win)=>{
+                const win = user_win.multiWinGames++;
+                const round = user_win.multiGames++;
+                user_win.CurExp += score/10;
+                if (user_win.multiPoint <= 1000)
+                {
+                    user_win.multiPoint += score/10;
+                }
+                else if (user_win.multiPoint <= 2400)
+                {
+                    user_win.multiPoint += parseInt(score/12);
+                }
+                else if (user_win.multiPoint <= 4000)
+                {
+                    user_win.multiPoint += parseInt(score/15);
+                }
+                else if (user_win.multiPoint <= 6000)
+                {
+                    user_win.multiPoint += parseInt(score/18);
+                }
+                else if (user_win.multiPoint <= 8000)
+                {
+                    user_win.multiPoint += parseInt(score/20);
+                }
+                else if (user_win.multiPoint <= 12000)
+                {
+                    user_win.multiPoint += parseInt(score/25);
+                }
+                else if (user_win.multiPoint > 12000)
+                {
+                    user_win.multiPoint += parseInt(score/30);
+                }
+                UserGoogle.updateOne({_id: iduser}, {multiWinGames: win, multiGames: round, CurExp: user_win.CurExp, multiPoint: user_win.multiPoint})
+                .then()
+                .catch((error)=>{
+                    console.log("Error: ", error);
+                })
+            })
+            .catch((error)=>{
+                console.log("Error: ", error);
+            })
+        } 
+        else 
+        {
+            User.findOne({_id: iduser})
             .then((user_win)=>{
                 const win = user_win.multiWinGames++;
                 const round = user_win.multiGames++;
@@ -341,10 +389,60 @@ io.on("connection", async function(socket) {
             .catch((error)=>{
                 console.log("Error: ", error);
             })
+        }
+        
 
         })
     socket.on("score_lose", (score, iduser)=>{
-        User.findOne({_id: iduser})
+        if (req.session.type == 'google') 
+        {
+            UserGoogle.findOne({_id: iduser})
+            .then((user_lose)=>{
+                const round = user_lose.multiGames++;
+                user_lose.CurExp += score/10;
+                if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
+                {
+                    user_lose.multiPoint -= parseInt(score/60);
+                    if (user_lose.multiPoint < 0)
+                        user_lose.multiPoint = 0;
+                }
+                else if (user_lose.multiPoint <= 2400 && user_lose.multiPoint > 1000)
+                {
+                    user_lose.multiPoint -= parseInt(score/50);
+                }
+                else if (user_lose.multiPoint <= 4000 && user_lose.multiPoint > 2400)
+                {
+                    user_lose.multiPoint -= parseInt(score/30);
+                }
+                else if (user_lose.multiPoint <= 6000 && user_lose.multiPoint > 4000)
+                {
+                    user_lose.multiPoint -= parseInt(score/25);
+                }
+                else if (user_lose.multiPoint <= 8000 && user_lose.multiPoint > 6000)
+                {
+                    user_lose.multiPoint -= parseInt(score/20);
+                }
+                else if (user_lose.multiPoint <= 12000 && user_lose.multiPoint > 8000)
+                {
+                    user_lose.multiPoint -= parseInt(score/15);
+                }
+                else if (user_lose.multiPoint > 12000)
+                {
+                    user_lose.multiPoint -= parseInt(score/5);
+                }
+                UserGoogle.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
+                .then()
+                .catch((error)=>{
+                    console.log("Error: ", error);
+                })
+            })
+            .catch((error)=>{
+                console.log("Error: ", error);
+            })
+        } 
+        else 
+        {
+            User.findOne({_id: iduser})
             .then((user_lose)=>{
                 const round = user_lose.multiGames++;
                 user_lose.CurExp += score/10;
@@ -387,10 +485,57 @@ io.on("connection", async function(socket) {
             .catch((error)=>{
                 console.log("Error: ", error);
             })
+        }
 
         })
     socket.on("score_draw", (score, iduser)=>{
-        User.findOne({_id: iduser})
+        if (req.session.type == 'google')
+        {
+            UserGoogle.findOne({_id: iduser})
+            .then((user_draw)=>{
+                const round = user_draw.multiGames++;
+                user_draw.CurExp += score/10;
+                if (user_draw.multiPoint <= 1000)
+                {
+                    user_draw.multiPoint += parseInt(score/15);
+                }
+                else if (user_draw.multiPoint <= 2400 )
+                {
+                    user_draw.multiPoint += parseInt(score/18);
+                }
+                else if (user_draw.multiPoint <= 4000)
+                {
+                    user_draw.multiPoint += parseInt(score/20);
+                }
+                else if (user_draw.multiPoint <= 6000)
+                {
+                    user_draw.multiPoint += parseInt(score/25);
+                }
+                else if (user_draw.multiPoint <= 8000)
+                {
+                    user_draw.multiPoint += parseInt(score/30);
+                }
+                else if (user_draw.multiPoint <= 12000)
+                {
+                    user_draw.multiPoint += parseInt(score/40);
+                }
+                else if (user_draw.multiPoint > 12000)
+                {
+                    user_draw.multiPoint += parseInt(score/50);
+                }
+                UserGoogle.updateOne({_id: iduser}, {multiGames: round, CurExp: user_draw.CurExp, multiPoint: user_draw.multiPoint})
+                .then()
+                .catch((error)=>{
+                    console.log("Error: ", error);
+                })
+            })
+            .catch((error)=>{
+                console.log("Error: ", error);
+            })
+        }
+        else
+        {
+            User.findOne({_id: iduser})
             .then((user_draw)=>{
                 const round = user_draw.multiGames++;
                 user_draw.CurExp += score/10;
@@ -431,6 +576,8 @@ io.on("connection", async function(socket) {
             .catch((error)=>{
                 console.log("Error: ", error);
             })
+        }
+        
 
         })
     socket.on("likeicon",function() {

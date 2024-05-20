@@ -1,5 +1,6 @@
 const setting = require('../models/Setting')
 const User = require('../models/User')
+const UserGoogle = require('../models/UserGoogle')
 const userSong = require('../models/SongUser')
 const fs = require('fs');
 const convertToBase64 = (filePath, callback) => {
@@ -27,11 +28,20 @@ class profileController {
     index(req, res, next) {
         setting.findOne({email: req.session.user.email})
             .then((result) => {
-                User.findOne({email: req.session.user.email})
+                if (req.session.type == 'google') {
+                    UserGoogle.findOne({email: req.session.user.email})
                     .then((user) => {
-                        res.render('profile', {empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
+                        res.render('profile', {username: req.session.user.username, empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
                         //res.json({user: user, VL: result.EffectVL})
                     })
+                } else {
+                    User.findOne({email: req.session.user.email})
+                    .then((user) => {
+                        res.render('profile', {username: req.session.user.username, empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
+                        //res.json({user: user, VL: result.EffectVL})
+                    })
+                }
+                
             })
             .catch(next)
     }
@@ -53,7 +63,20 @@ class profileController {
                 .then(() => {
                     setting.findOne({email: req.session.user.email})
                         .then((result) => {
-                            User.findOne({email: req.session.user.email})
+                            if (req.session.type == 'google') {
+                                UserGoogle.findOne({email: req.session.user.email})
+                                .then((user) => {
+                                        user.empty = user.empty - 1;
+                                    UserGoogle.updateOne({email: req.session.user.email}, user)
+                                        .then((us) => {
+                                            res.render('profile', {empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
+                                        })
+                                        .catch(next)
+                                    //res.json({user: user, VL: result.EffectVL})
+                                })
+                                .catch(next)
+                            } else {
+                                User.findOne({email: req.session.user.email})
                                 .then((user) => {
                                         user.empty = user.empty - 1;
                                     User.updateOne({email: req.session.user.email}, user)
@@ -64,6 +87,8 @@ class profileController {
                                     //res.json({user: user, VL: result.EffectVL})
                                 })
                                 .catch(next)
+                            }
+                           
                         })
                         .catch(next)
                 })

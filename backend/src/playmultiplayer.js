@@ -323,6 +323,7 @@ function playNextSong() {
 
 let isClicked1 = false;
 // Hàm để kiểm tra đoán đúng tên bài hát
+// guessButton.addEventListener('click', 
 guessButton.addEventListener('click', () => {
   let answer_song = document.getElementById("answer_song");
   let answer_value = answer_song.value.trim().toLowerCase();

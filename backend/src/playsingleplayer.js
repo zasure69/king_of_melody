@@ -1,4 +1,4 @@
-
+const socket = io();
 // document.addEventListener('DOMContentLoaded', function() {
   // Lấy các phần tử DOM cần sử dụng
 // import { Howl, Howler } from 'howler';
@@ -12,9 +12,14 @@ let guessButton = document.getElementById("guessButton");
 let time = document.getElementById("Time_duration");
 let round = document.getElementById("Round_play");
 let endmodal = document.getElementById("end-model");
+let btnhint = document.querySelector("#hintname");
 let numright = 0;
 let numwrong = 0;
 
+const userid = document.getElementById('userid');
+const iduser = userid.dataset.user;
+const mode_player = document.getElementById('mode');
+const mode = mode_player.dataset.mode;
 const songsInput = document.getElementById('songsInput');
 const efVL = document.getElementById('efVLInput');
 const msVL = document.getElementById('msVLInput');
@@ -41,6 +46,10 @@ var endgame = new Howl({
 correct_answer.volume(efVL.value);
 incorrect_answer.volume(efVL.value);
 endgame.volume(efVL.value);
+
+btnhint.addEventListener('click', () => {
+  document.getElementById("answer_song").textContent = btnhint.textContent;
+})
 
 let play_song = [];
 let index = 0;
@@ -329,11 +338,13 @@ guessButton.addEventListener('click', () => {
         answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
       }
       if (index == 9){
-      document.getElementsByClassName("container")[0].style.opacity = "0.35";
-      endmodal.style.display = "flex";
-      document.getElementById("endpoint").innerHTML = document.getElementById("Point_play").innerHTML;
-      endgame.volume(0.5);
-      endgame.play();
+        document.getElementsByClassName("container")[0].style.opacity = "0.35";
+        endmodal.style.display = "flex";
+        document.getElementById("endpoint").innerHTML = document.getElementById("Point_play").innerHTML;
+        let score = document.getElementById("Point_play").innerHTML;
+        endgame.volume(0.5);
+        endgame.play();
+        socket.emit("score_end", score, iduser, mode, numright);
       }
       click = false;
   }
@@ -349,7 +360,6 @@ answer_song.addEventListener('keypress', function(event){
     guessButton.click();
   }
 });
-
 
 let detailmodal = document.getElementById("detail-model");
 document.getElementById("btn-detail").onclick = function(){

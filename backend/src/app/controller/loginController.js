@@ -210,12 +210,5 @@ class loginController {
         req.session.type = 'google';
         res.redirect('/home');
     }
-
-    processFaceboookSiginCallback(req, res) {
-        req.session.isAuth = true;
-        req.session.type = 'facebook';
-        res.redirect('/home');
-    }
 }
-
 module.exports = new loginController;

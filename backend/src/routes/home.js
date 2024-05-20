@@ -4,7 +4,7 @@ const router = express.Router();
 const homeController = require('../app/controller/homeController');
 
 
-router.put('/:userId', homeController.update);
+router.put('/', homeController.update);
 router.post('/logout', homeController.del);
 router.post('/roomcreate/:roomID', homeController.create);
 router.post('/search', homeController.searchroom);

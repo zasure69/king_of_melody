@@ -522,5 +522,8 @@ input[type="submit"] {
     .boundary {
         margin: 10px 0;
     }
+    .modal_update_song {
+        height: 100%;
+    }
 }
 

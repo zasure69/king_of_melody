@@ -124,7 +124,7 @@ class homeController{
         } else req.body.EffectVL = req.body.EffectVL / 100
         setting.updateOne({email: req.session.user.email}, req.body)
             .then(() => {
-                res.render('home', {userId: req.session.user._id})
+                res.render('home', {userId: req.session.user._id, username: req.session.user.username})
             })
             .catch(next)
     }

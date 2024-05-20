@@ -25,13 +25,13 @@ body{
 }
 
 #header {
-    height: 80px;
+    height: 16vh;
     display: flex;
     /* width: 100%; */
     position: sticky;
     justify-content: space-between;
-    padding: 0 10px 0 10px;
     z-index: 4;
+    padding-right: 2vw;
 }
 #header .left_header{
     position: relative;
@@ -44,7 +44,7 @@ body{
 }
 
 #header .logo >img {
-    width: 100%;
+    width: 120%;
     height: 150%;
 }
 #header .right_header{
@@ -80,14 +80,11 @@ body{
 #header .nav .username{
     color: white;
     position: relative;
-    width: 150px;
-    height: 25px;
+    margin-top: 4px;
     display: flex;
     flex-direction: row;
     gap: 10px;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.25rem;
+    font-size: 1.5vw;
 }
 
 #header .nav .username:hover{
@@ -125,16 +122,19 @@ body{
 #header .nav .subnav{
     background-color: rgba(16, 16, 28, .5);
     border-radius: .6rem;
-    padding: 10px;
     margin: 0 auto;
     position: absolute;
     top: 80%;
     transition: .15s ease;
+    right: 0;
     display: none;
 }
 #header .nav .subnav .background{
-    padding: 12px;
-    width: 100%;
+    display: flex;
+    height: 10vh;
+    width: 8vw;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #header .subnav .profile, #header .subnav .signout{
@@ -145,7 +145,13 @@ body{
     border: none;
     font-family: neosans;
     color: white;
-    font-size: 1em;
+    font-size: 1.2vw;
+}
+
+#header .subnav .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #header .subnav .profile:hover, 
@@ -193,19 +199,24 @@ body{
 
 #content {
     display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
+    justify-content: center;
+    flex-direction: column;
     color: white;
     font-size: 3.5vw;
-    height: 76vh;
     position: relative;
+}
+
+#content .container-btn {
+    height: 72vh;
+    display: flex;
+    flex-direction: row;
 }
 
 #content .menubtn {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     position: relative;
-    padding-top: 3%;
     padding-left: 6%;
     width: 40%;
 }
@@ -243,13 +254,9 @@ body{
 
 
 #content .button .speaker{
-    width: 100%;
-    height: auto;
+    width: 100vh;
     position: relative;
-    top: 7%;
-    margin-left: -3%;
-    margin-top: 2%;
-    z-index: 0;
+    margin-left: 4%;
 }
 
 #content .button .girl{
@@ -263,39 +270,38 @@ body{
 }
 
 
-#content .button .playclick{
-    display: block;
-    background-color: rgba(14,59,132,255);
-    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
-    padding: 1% 5%;
-
-    position: absolute;
-    right: 42%;
-    font-size: 70%;
-    color: aliceblue;
-    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
+#content .button .play-button-link{
     text-decoration: none;
-    margin-bottom: 16%;
-    margin-right: 0%;
-    z-index: 10;
-    border-radius: 8px;
-    transition-property: padding;
-    transition-duration: 0.5s;
-    
 }
 
-#content .playclick:hover{
-    padding: 16px 38px;
-    transform: scale(1.15);
-} 
+#content .button .play-button-wrapper {
+    display: flex;
+    align-items: center;
+    height: 2vh;
+    justify-content: center;
+}
+
+#content .button .play-button-label {
+    max-width: 11vw;
+    padding: 0.5em 1.5em;
+    background-color: #6cb928;
+    background-image: radial-gradient(150% 160% at 50% 15%, #fff 0, transparent 30%);
+    color: white;
+    border-radius: 40px;
+    font-size: 2vw;
+    text-transform: uppercase;
+    text-shadow: 0 0.125em 0.4em black;
+}
+
+#content .button .play-button-label:hover {
+    transform: scale(1.05);
+}
 
 #footer{
+    margin: 0 1vw;
     display: flex;
-    flex-wrap: wrap;
-    align-content: center;
     justify-content: space-between;
     text-align: end;
-    position: sticky;
 }
 #footer .menu_btn{
     padding-left: 23px;
@@ -341,8 +347,8 @@ body{
     font-family: neosans;
 }
 #footer .para{
-    padding: 8px 10px 10px;
-    font-size: 130%;
+    margin-top: 1vh;
+    font-size: 5vh;
     color: rgb(208, 80, 255);
     font-family: neosans;
 }
@@ -531,18 +537,11 @@ body{
 
 .modal_thuong .select_normal_mode_play_button .playclick,
 .modal_thuong .select_normal_mode_play_button .resumeclick{
-    border: 0;
-    background-color: rgba(61, 7, 185, .6);
-    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
-    padding: 12px 24px;
-    font-size: 1.25rem;
-    color: aliceblue;
-    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
-    text-decoration: none;
-    border-radius: 8px;
-    transition-property: padding;
-    transition-duration: 0.5s;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    margin-top: 2em;
     
 }
 
@@ -686,8 +685,7 @@ body{
 }
 
 .modal_xep_hang .select_rank_mode_center .select_rank_mode_img .img{
-    width: 300px;
-    height: 300px;
+    width: 20vw;
     margin-left: 16px;
 }
 
@@ -782,8 +780,8 @@ body{
 }
 
 .modal_xep_hang .select_rank_mode_center .select_rank_mode_center_right_rank .rank{
-    width: 300px;
-    height: 300px;
+    width: 20vw;
+    height: 45vh;
 }
 
 .modal_create_room{
@@ -818,18 +816,18 @@ body{
     padding: 1rem 0;
 }
 
-.modal_create_room .create_room_content{
+.modal_create_room #create_room{
     display: flex;
     gap: 1rem;
 }
 
-.modal_create_room .create_room_content .create_room_input label{
+.modal_create_room #create_room .create_room_input label{
     font-size: 1.1rem;
     color: white;
     text-shadow: 0 0.0625rem 0.125rem #09090b;
 }
 
-.modal_create_room .create_room_content .create_room_input input{
+.modal_create_room #create_room .create_room_input input{
     border-radius: 12px;
     margin-top: 10px;
     padding: 4px;
@@ -840,30 +838,31 @@ body{
     outline: none;
 }
 
-.modal_create_room .create_room_content .create_room_create{
+.modal_create_room #create_room .create_room_create{
     display: flex;
     justify-content: flex-end;
 }
 
-.modal_create_room .create_room_content .create_room_create a{
-    text-decoration: none;
-    color: white;
-}
 
-
-.modal_create_room .create_room_content .create_room_create .create{
+.modal_create_room #create_room .create_room_create .create{
     border-radius: 16px;
     text-transform: uppercase;
     background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
+    color: aliceblue;
     box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
-    background-color: rgb(61, 7, 185);
+    background-color: rgba(61, 7, 185, .6);
     padding: 8px 16px;
     font-style: italic;
     font-weight: 550;
     font-size: 0.8rem;
     text-shadow: 0 0.0625rem 0.125rem #131314;
     border: none;
+    cursor: pointer;
 }
+.modal_create_room #create_room .create_room_create .create:hover{
+    padding: 8px 16px;
+    transform: scale(1.15);
+} 
 
 .modal_create_room .create_room_return .return_create_room {
     text-decoration: none;
@@ -875,11 +874,128 @@ body{
     color: white;
 }
 
-.modal_create_room .create_room_content{
+.modal_create_room #create_room{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-content: center;
+}
+
+.modal_playnow_room{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 102;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal_playnow_room .playnow_room_body{
+    background-image: var(--background);
+    margin: auto;
+    padding: 10px 20px;
+    z-index: 103;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.modal_playnow_room .playnow_room_return{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    padding: 1rem 0;
+}
+
+.modal_playnow_room #playnow_room{
+    display: flex;
+    gap: 1rem;
+}
+
+.modal_playnow_room #playnow_room .playnow_room_input label{
+    font-size: 1.1rem;
+    color: white;
+    text-shadow: 0 0.0625rem 0.125rem #09090b;
+}
+
+.modal_playnow_room #playnow_room .playnow_room_input input{
+    border-radius: 12px;
+    margin-top: 10px;
+    padding: 4px;
+    font-size: 1rem;
+    color: rgb(104, 101, 101);
+    font-style: italic;
+    border: none;
+    outline: none;
+}
+
+
+.modal_playnow_room #playnow_room .playnow_room_create{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal_playnow_room #playnow_room .playnow_room_create .playnow{
+    border-radius: 16px;
+    text-transform: uppercase;
+    background-image: radial-gradient(150% 160% at 50% 15%, hsla(0, 0%, 100%, 0.4), transparent 30%);
+    color: aliceblue;
+    box-shadow:  inset 0 0.0625rem 0 hsla(0, 0%, 100%, .2), inset 0 -0.125rem 0 rgba(0, 0, 0, .3);
+    background-color: rgba(61, 7, 185, .6);
+    padding: 8px 16px;
+    font-style: italic;
+    font-weight: 550;
+    font-size: 0.8rem;
+    text-shadow: 0 0.0625rem 0.125rem #131314;
+    border: none;
+    cursor: pointer;
+}
+.modal_playnow_room #playnow_room .playnow_room_create .playnow:hover{
+    padding: 8px 16px;
+    transform: scale(1.15);
+} 
+
+.modal_playnow_room .playnow_room_return .return_playnow_room {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal_playnow_room .playnow_room_return .return_playnow_room:hover,
+.modal_playnow_room .playnow_room_return .return_playnow_room:focus{
+    color: white;
+}
+
+.modal_playnow_room #playnow_room{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.modal_create_room #create_room .Exceedroom, .modal_create_room #create_room .Warninground,
+ .modal_playnow_room #playnow_room .Exceedroom, .modal_playnow_room #playnow_room .Warninground{
+    display: flex;
+    gap: 0.3rem;
+     /* margin-top: 5px; */
+}
+.create_room_body #create_room #exceed_ex, .playnow_room_body #playnow_room #exceed_ex1{
+    /* display: none; */
+    font-style: normal;
+    font-size: 0.9rem;
+    color: #eee;
+    margin-top: 4px;
+    /* gap: 0.5rem; */
+}
+.create_room_body #create_room .exceed_value, .create_room_body #create_room .inputround, 
+.playnow_room_body #playnow_room .exceed_value, .playnow_room_body #playnow_room .inputround{
+    font-size: 0.9rem;
+    color: #eee;
 }
 
 .leaderboard{

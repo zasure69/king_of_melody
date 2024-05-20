@@ -14,6 +14,9 @@ const roomSchema = new Schema({
     socketid:{
         type:  Array,
     },
+    round:{
+        type: Number,
+    },
     count:{
         type: Number,
         required: true,

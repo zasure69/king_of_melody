@@ -8,6 +8,8 @@ const userVerificationSchema = require('../models/UserVerification');
 const settingSchema = require('../models/Setting');
 //email handler
 const nodemailer = require('nodemailer');
+//google auth
+const passport = require('passport');
 //unique string
 const {v4: uuidv4} = require('uuid');
 //env variables
@@ -116,15 +118,20 @@ class loginController {
                                 email: formData.email,
                                 password: hashPassword,
                                 verified: false
-                            });
-                            const setting = new settingSchema({
-                                email: formData.email,
-                            });
-                            setting.save();
+                            }); 
                             user.save()
                                 .then((result) => {
+                                    const setting = new settingSchema({
+                                        email: formData.email,
+                                    });
                                     sendVerificationEmail(result, res);
-                                    res.render('sendverify', {email: result.email});
+                                    res.render('sendverifymail', {email: result.email});
+                                    setting.save()
+                                    .then()
+                                    .catch(err =>{
+                                        console.log("Error: ", err);
+                                    })
+                                    
                                 })
                                 .catch(err => {
                                     res.send('Đăng ký thất bại');
@@ -175,8 +182,9 @@ class loginController {
                             .then(checkPassword => {
                                 if (checkPassword) {
                                     req.session.user = user[0];
+                                    req.session.type = "default";
                                     req.session.isAuth = true;
-                                    res.redirect('/home/' + user[0]._id);
+                                    res.redirect('/home');
                                 } else {
                                     const errorMessage = 'Sai mật khẩu';
                                     res.redirect('/login?errorsignin=' + encodeURIComponent(errorMessage));
@@ -195,6 +203,18 @@ class loginController {
                 console.log("Error: ", error);
                 res.send('Lỗi trong khi kiểm tra người dùng có tồn tại không');
             }) 
+    }
+
+    processGoogleSiginCallback(req, res) {
+        req.session.isAuth = true;
+        req.session.type = 'google';
+        res.redirect('/home');
+    }
+
+    processFaceboookSiginCallback(req, res) {
+        req.session.isAuth = true;
+        req.session.type = 'facebook';
+        res.redirect('/home');
     }
 }
 

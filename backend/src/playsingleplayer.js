@@ -40,7 +40,7 @@ var endgame = new Howl({
 })
 correct_answer.volume(efVL.value);
 incorrect_answer.volume(efVL.value);
-endgame.volume(msVL.value);
+endgame.volume(efVL.value);
 
 let play_song = [];
 let index = 0;

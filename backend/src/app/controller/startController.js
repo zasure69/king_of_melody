@@ -1,6 +1,13 @@
+const session = require('express-session')
+
 class startController {
     index(req, res) {
-        res.render('start')
+        if (req.session.isAuth == true) {
+            res.redirect('/home')
+        } else {
+            res.render('start')
+        }
+        
     }
 }
 

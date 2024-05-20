@@ -1,25 +1,69 @@
 const session = require('express-session');
 const userSchema = require('../models/User');
+const userGoogleSchema = require('../models/UserGoogle');
 const setting = require('../models/Setting');
 const mongooseToObject = require('../../util/mongoose')
 const Room = require('../models/Room'); 
 const semaphore = require('../../semaphore');
 let full = "";
 let Notfound = "";
-// const socket = _io();
-// const server = require('http').Server(app);
-// const io = require('socket.io')(server);
+let Notinputround = "";
+let Notinputround1 = "";
+let exceed_permitted_value = "";
+let exceed_permitted_value1 = "";
+let roomID_list = new Set();
 function generateRoomId() {
-    return Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+    var room = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+    while (roomID_list.has(room))
+    {
+      room = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+    }
+    roomID_list.add(room);
+    return room;
 }
+
+// class Semaphore {
+//     constructor(initialCount) {
+//       this.count = initialCount;
+//       this.queue = [];
+//     }
+  
+//     acquire() {
+//       return new Promise((resolve) => {
+//         if (this.count > 0) {
+//           this.count--;
+//           resolve();
+//         } else {
+//           this.queue.push(resolve);
+//         }
+//       });
+//     }
+  
+//     release() {
+//       if (this.queue.length > 0) {
+//         const resolve = this.queue.shift();
+//         resolve();
+//       } else {
+//         this.count++;
+//       }
+//     }
+// }
+// const sem = new Semaphore(1);
 class homeController{
     index(req, res) {
         if (req.session.isAuth) {
-            userSchema.findOne({_id: req.params.userId})
+            if (req.session.type == 'google') {
+                console.log('đã vào đây')
+                userGoogleSchema.findOne({_id: req.session.passport.user})
                 .then((result) => {
-                    res.render('home', {username: result.username, userId: req.params.userId, full: full, Notfound: Notfound})
+                    req.session.user = result
+                    res.render('home', {username: result.username, userId: result._id, full: full, Notfound: Notfound, multipoint: result.multiPoint, exceed: exceed_permitted_value, exceed1: exceed_permitted_value1, input_round: Notinputround, input_round1: Notinputround1})
                     full = "";
                     Notfound = "";
+                    exceed_permitted_value = "";
+                    exceed_permitted_value1 = "";
+                    Notinputround = "";
+                    Notinputround1 = "";
                 })
                 .catch(err => {
                     console.log('Error: ', err);
@@ -28,23 +72,46 @@ class homeController{
                         message: "Lỗi xảy ra khi lay thong tin nguoi dung"
                     })
                 })
+            } else {
+                userSchema.findOne({_id: req.session.user._id})
+                .then((result) => {
+                    res.render('home', {username: result.username, userId: req.params.userId, full: full, Notfound: Notfound, multipoint: result.multiPoint, exceed: exceed_permitted_value, exceed1: exceed_permitted_value1, input_round: Notinputround, input_round1: Notinputround1})
+                    full = "";
+                    Notfound = "";
+                    exceed_permitted_value = "";
+                    exceed_permitted_value1 = "";
+                    Notinputround = "";
+                    Notinputround1 = "";
+                })
+                .catch(err => {
+                    console.log('Error: ', err);
+                    res.json({
+                        status: "Failed",
+                        message: "Lỗi xảy ra khi lấy thông tin người dùng"
+                    })
+                })
+            }
+            
         } else {
             res.redirect('/login');
         }
     }
 
     del(req, res, next) {
+        
         req.session
-            .destroy((err) => {
-                if (err) {
-                    console.log("err: ",err);
-                    res.json({
-                        status:"Failed",
-                        message: "Lỗi xảy ra khi đăng xuất"
-                    })
-                }
-                res.redirect('/login');
-            })
+        .destroy((err) => {
+            if (err) {
+                console.log("err: ",err);
+                res.json({
+                    status:"Failed",
+                    message: "Lỗi xảy ra khi đăng xuất"
+                })
+            }
+            res.redirect('/login');
+        })
+        
+        
     }
     update(req, res, next) {
         if (!req.body.IsSoundOn){
@@ -60,181 +127,158 @@ class homeController{
                 res.render('home', {userId: req.session.user._id})
             })
             .catch(next)
-
-        // res.render('home', {username: req.session.user.username, userId: req.session.user._id})
-        // res.json(req.body);
-        // res.json(req.session)
     }
 
     create(req,res){
         const {roomID} = req.params;
-        console.log("room: ",roomID);
-        req.session.roomid = roomID; 
-        const newRoom = new Room({
-            roomid: roomID,
-            vacant: true,
-            count: 0,
-            player: [{userid: req.session.user._id, username: req.session.user.username , win: false, score: 0}]
-        });
-        console.log(newRoom.roomid);
-        newRoom.save();
-        res.redirect('/playmulti/' + newRoom.roomid);
-
-
-        // Xử lý khi người dùng ngắt kết nối
-        // socket.on('disconnect', async () => {
-        //     console.log('User disconnected');
-        //     // Cập nhật trạng thái phòng và người chơi trong cơ sở dữ liệu khi cần
-        // });
-        // });
-        
+        const roundnumber = req.body.roundNumber;
+        console.log("roundnumber: ", typeof roundnumber);
+        if (roundnumber == "")
+        {
+            Notinputround = "Hãy nhập số vòng chơi!";
+            res.redirect('/home');
+        }
+        else if (roundnumber <= 30)
+        {
+            console.log("room: ",roomID);
+            req.session.roomid = roomID; 
+            const newRoom = new Room({
+                roomid: roomID,
+                vacant: true,
+                round: roundnumber,
+                count: 0,
+                player: [{userid: req.session.user._id, username: req.session.user.username}]
+            });
+            console.log(newRoom.roomid);
+            newRoom.save();
+            console.log("round: ", roundnumber);
+            res.redirect('/playmulti/' + newRoom.roomid + "/" + roundnumber);
+        }
+        else if (roundnumber > 30)
+        {
+            exceed_permitted_value = "Giá trị nhập vào cao hơn 30";
+            res.redirect('/home');
+        }
+        else
+        {
+            exceed_permitted_value = "Giá trị nhập vào phải là số";
+            res.redirect('/home');
+        }
     }
     playnow(req, res) {
-        Room.aggregate([{ $match: { vacant: true } }])
-        .exec()
-        .then((Room1) =>{
-            console.log(Room1);
-            if (Room1[0]) {
-                Room1[0].vacant = false;
-                Room
-                    .updateOne({roomid: Room1[0].roomid}, {vacant: false})
-                    .then(() => {
-                        console.log(`Phòng ${Room1[0].roomid} trống. Đang vào phòng...`);
-            
-                        Room1[0].player.push({
-                            userid: req.session.user._id,
-                            username: req.session.user.username,
-                            win: false,
-                            score: 0
-                        });
+        if (req.body.roundNumber1 == "")
+        {
+            Notinputround1 = "Hãy nhập số vòng chơi!";
+            res.redirect('/home');
+        }
+        else if (req.body.roundNumber1 <= 30)
+        {
+            Room.aggregate([{ $match: { vacant: true, round : parseInt(req.body.roundNumber1)} }])
+            .exec()
+            .then((Room1) =>{
+                console.log(Room1);
+                const round1 = parseInt(req.body.roundNumber1);
+                if (Room1[0]) {
+                    Room1[0].vacant = false;
+                    Room
+                        .updateOne({roomid: Room1[0].roomid}, {vacant: false})
+                        .then(() => {
+                            console.log(`Phòng ${Room1[0].roomid} trống. Đang vào phòng...`);
                 
-                        Room
-                            .updateOne({_id: Room1[0]._id},{player: Room1[0].player })
-                            .then(() => {
-                                res.redirect('/playmulti/' + Room1[0].roomid);
-                            })
-                            .catch(err => {
-                                console.log('error: ', err)
-                            })
-                        
-                    })
-                    .catch(err => {
-                        console.log('error: ', err)
-                    })
-
-            } 
-            else {
-                let roomID = generateRoomId().toString();
-                
-                const newRoom = new Room({
-                    roomid: roomID,
-                    vacant: true,
-                    count: 0,
-                    player: [{ userid: req.session.user._id, username: req.session.user.username, win: false, score: 0 }]
-                });
-            
-                newRoom.save();
-            
-                res.redirect('/playmulti/' + newRoom.roomid);
-            }
-        })
-        .catch((error) => {
-            res.send("Không thể truy cập phòng.");
-            console.log("Error: ",error);
-        })
-        
+                            Room1[0].player.push({
+                                userid: req.session.user._id,
+                                username: req.session.user.username,
+                            });               
+                            Room
+                                .updateOne({_id: Room1[0]._id},{player: Room1[0].player })
+                                .then(() => {
+                                    res.redirect('/playmulti/' + Room1[0].roomid + "/" + Room1[0].round);
+                                })
+                                .catch(err => {
+                                    console.log('error: ', err)
+                                })                       
+                        })
+                        .catch(err => {
+                            console.log('error: ', err)
+                        })
+                } 
+                else {
+                    let roomID = generateRoomId().toString();
+                    let id = req.session.user._id;
+                    let username = req.session.user.username;
+                    
+                    const newRoom = new Room({
+                        roomid: roomID,
+                        vacant: true,
+                        round: round1,
+                        count: 0,
+                        player: [{ userid: id, username: username}]
+                    });
+                    newRoom.save();
+                    res.redirect('/playmulti/' + newRoom.roomid + "/" + round1);
+                }         
+            })
+            .catch((error) => {
+                res.send("Không thể truy cập phòng.");
+                console.log("Error: ",error);
+            })
+        }
+        else if (req.body.roundNumber1 > 30)
+        {
+            exceed_permitted_value1 = "Giá trị nhập vào cao hơn 30";
+            res.redirect('/home');
+        }
+        else
+        {
+            exceed_permitted_value1 = "Giá trị nhập vào phải là số";
+            res.redirect('/home');
+        }    
     }
     searchroom(req,res){
-        let search = req.body.roomID;
+        let search = req.body.roomID.toString();
         console.log("Search: ", search);
         Room
             .findOne({roomid: search})
-            .then((room_vacant)=>{
-                if (room_vacant.vacant)
+            .then((Room1)=>{
+                console.log("Room1: ", Room1);
+                if (Room1.vacant)
                 {
-                    Room.aggregate([{ $match: { vacant: true } }])
-                    .exec()
-                    .then((Room1) =>{
-                        if (Room1[0]) {
-                            Room1[0].vacant = false;
+                    Room1.vacant = false;
+                    Room
+                        .updateOne({roomid: Room1.roomid}, {vacant: false})
+                        .then(() => {
+                            console.log(`Phòng ${Room1.roomid} trống. Đang vào phòng...`);
+                            Room1.player.push({
+                                userid: req.session.user._id,
+                                username: req.session.user.username,
+                            });
+                    
                             Room
-                                .updateOne({roomid: Room1[0].roomid}, {vacant: false})
+                                .updateOne({_id: Room1._id},{player: Room1.player })
                                 .then(() => {
-                                    console.log(`Phòng ${Room1[0].roomid} trống. Đang vào phòng...`);
-                        
-                                    Room1[0].player.push({
-                                        userid: req.session.user._id,
-                                        username: req.session.user.username,
-                                        win: false,
-                                        score: 0
-                                    });
-                            
-                                    Room
-                                        .updateOne({_id: Room1[0]._id},{player: Room1[0].player })
-                                        .then(() => {
-                                            res.redirect('/playmulti/' + Room1[0].roomid);
-                                        })
-                                        .catch(err => {
-                                            console.log('error: ', err)
-                                        })
-                                    
+                                    res.redirect('/playmulti/' + Room1.roomid + "/" + Room1.round);
                                 })
                                 .catch(err => {
                                     console.log('error: ', err)
                                 })
-
-                        } 
-                    })
-                    .catch((error) => {
-                        res.send("Không thể truy cập phòng.");
-                    })
+                        })
+                        .catch(err => {
+                            console.log('error: ', err)
+                        })
                 }
                 else
                 {
-                    // res.send("Phòng đã đầy");
                     console.log("room đầy");
                     full = "Phòng đã đầy";
-                    res.redirect("/home/" + req.session.user._id);
+                    res.redirect("/home");
                 }
             })
             .catch(err => {
-                //res.send("Không thể tìm thấy phòng");
                 Notfound = "Không thể tìm thấy phòng";
-                console.log("room không tồn tại");
-                res.redirect("/home/" + req.session.user._id);
+                console.log("room không tồn tại ", err);
+                res.redirect("/home");
             })
     }
-    // playnow(req,res){
-    //     // Kiểm tra từng phòng
-    //     //const rooms = Room.find().lean();
-
-    //     const Room1 = Room.findOne({ vacant: true });
-    //     if (Room1) {
-    //         Room1.vacant = false;
-    //         Room1.save();
-    //             console.log(`Phòng ${Room.roomid} trống. Đang vào phòng...`);
-    //                 // Thực hiện hành động khi có phòng trống
-    //                 // Ví dụ: Gọi hàm vào phòng
-    //                 //socket.join(room.roomid);
-    //         //     // Thêm người chơi vào phòng trong cơ sở dữ liệu
-    //         Room1.player.push({userid: req.session.user._id, username: req.session.user.username , win: false, score: 0});
-    //         Room1.save();
-    //         res.redirect('/playmulti/' + Room1.roomid);
-    //     }
-    //     else{
-    //         let roomID = generateRoomId().toString();
-    //         // console.log(typeof roomID);
-    //         const newRoom = new Room({
-    //             roomid: roomID,
-    //             vacant: true,
-    //             player: [{userid: req.session.user._id, username: req.session.user.username , win: false, score: 0}]
-    //         });
-    //         newRoom.save();
-    //         res.redirect('/playmulti/' + newRoom.roomid);
-    //     }
-            
-        
-    // }
 }
 
 module.exports = new homeController;

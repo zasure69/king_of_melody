@@ -13,7 +13,7 @@
                 <div class="indexer" >
                     <div class="nav">
                         <p class = "username" id = "username">
-                            Duy
+                            {{username}}
                             <i class="nav-arrow-down fa-solid fa-angle-down" onclick="icon_arrow(this)"></i>
                         </p>
                         <div class="subnav" id = "subnav">
@@ -38,40 +38,48 @@
 
 
     <div id="content">
-        <div class="menubtn">
-            <ul>
-                <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
-                <li id = "cd_xep_hang">MULTIPLAYER</li>
-                <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
-            </ul>
+        <div class="container-btn">
+            <div class="menubtn">
+                <ul>
+                    <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
+                    <li id = "cd_xep_hang">MULTIPLAYER</li>
+                    <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
+                </ul>
+            </div>
+
+            <div class="button">
+                <img src="/assets/img/convitdj.png"  alt="Speaker" class="speaker">
+                <a href="/playsingle?mode=hard" class="play-button-link">
+                    <div class="play-button-wrapper">
+                        <span class="play-button-label">Play</span>
+                    </div>
+                </a>
+
+            </div>
         </div>
 
-        <div class="button">
-            <img src="/assets/img/Speaker.png"  alt="Speaker" class="speaker">
-            <img src="/assets/img/lonelygirl.jpg" alt="Lonely Girl" class="girl">
-            <a href="playsingle" class="playclick"><b>PLAY</b></a>
-            
+
+        <div id="footer">
+            <div class="menu_btn">
+                    <button type="submit" class="menu_btn_btn" >
+                        <a href="/setting/{{userId}}" class="menu_btn_dt">
+                            <i class="fa-solid fa-gear"></i>
+                            <span><b>CÀI ĐẶT</b></span>
+                        </a>
+                    </button>
+                    <button class="menu_btn_btn">
+                        <a href="#" class="menu_btn_dt">
+                            <i class="fa-solid fa-book"></i>
+                            <span><b>HƯỚNG DẪN</b></span>
+                        </a>
+                    </button>
+            </div>
+            <div class="para"><b> A product of team11!</b></div>
         </div>
-        
+
     </div>
 
-    <div id="footer">
-        <div class="menu_btn">
-                <button type="submit" class="menu_btn_btn" >
-                    <a href="/setting/{{userId}}" class="menu_btn_dt">
-                        <i class="fa-solid fa-gear"></i>
-                        <span><b>CÀI ĐẶT</b></span>
-                    </a>
-                </button>
-                <button class="menu_btn_btn">
-                    <a href="#" class="menu_btn_dt">
-                        <i class="fa-solid fa-book"></i>
-                        <span><b>HƯỚNG DẪN</b></span>
-                    </a>
-                </button>   
-        </div>
-        <div class="para"><b> A product of team11!</b></div>
-    </div>
+    
 
     <div class="modal_thuong" id ="team_modal_thuong">
         <!-- <div class="select_mode_overlay"></div> -->
@@ -85,15 +93,7 @@
                         <img src="/assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
                         <div class="information">
                             <div class="username">
-                                King_Of_Melody
-                            </div>
-                            <div class="point_number">
-                                <div class="point">
-                                    Điểm
-                                </div>
-                                <div class="number">
-                                    1000
-                                </div>
+                                {{username}}
                             </div>
                         </div>
                     </div>
@@ -151,30 +151,38 @@
                     <div class="search_room">
                         <form action="/home/search" method="post">
                             <div class="find_roomid">
-                                <input type="text" id="input_roomid" name="roomID" placeholder="Mã phòng">
+                                <input type="text" id="input_roomid" name="roomID" placeholder="Mã phòng" oninput="hideWarningroom()">
                                 <button class="find" type="submit">
                                     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
                                 </button>
                             </div>
                             {{#if full}}
-                            <script>
-                                document.getElementById("team_modal_xep_hang").style.display = "flex";
-                                document.getElementById("Warningroom").style.display = "flex";
-                            </script>
-                            <div class="Warningroom"> 
-                                <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
-                                <div class="fullroom">{{full}}</div>
-                            </div>
+                                <script>
+                                    document.getElementById("team_modal_xep_hang").style.display = "flex";
+                                    document.querySelector(".Warningroom").style.display = "flex";
+                                    function hideWarningroom()
+                                    {
+                                        document.querySelector(".Warningroom").style.display = "none";
+                                    }
+                                </script>
+                                <div class="Warningroom"> 
+                                    <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
+                                    <div class="fullroom">{{full}}</div>
+                                </div>
                             {{/if}}
                             {{#if Notfound}}
-                            <script>
-                                document.getElementById("team_modal_xep_hang").style.display = "flex";
-                                document.getElementById("Warningroom").style.display = "flex";
-                            </script>
-                            <div class="Warningroom">
-                                <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
-                                <div class="notfoundroom">{{Notfound}}</div>
-                            </div>
+                                <script>
+                                    document.getElementById("team_modal_xep_hang").style.display = "flex";
+                                    document.querySelector(".Warningroom").style.display = "flex";
+                                    function hideWarningroom()
+                                    {
+                                        document.querySelector(".Warningroom").style.display = "none";
+                                    }
+                                </script>
+                                <div class="Warningroom">
+                                    <i class="fa-solid fa-circle-exclamation" id="error_ex"></i>
+                                    <div class="notfoundroom">{{Notfound}}</div>
+                                </div>
                             {{/if}}
                         </form>
                         
@@ -183,7 +191,7 @@
                         <img src="/assets/img/Avatar_header.jpg" alt="Avatar" class="avatar">
                         <div class="information">
                             <div class="username">
-                                King_Of_Melody
+                                {{username}}
                             </div>
                             
                         </div>
@@ -203,9 +211,31 @@
                         <div class="select_rank_mode_rank_img">
                             <img src="/assets/img/rank.png" alt="" class="rank_img">
                             <div class="select_rank_mode_rank">
-                                <b>bronze</b>
+                                <b>
+                                {{#if (lt multipoint 1000)}}
+                                Bronze
+                                {{else}}
+                                    {{#if (lt multipoint 2400)}}
+                                    silver
+                                    {{else}}
+                                        {{#if (lt multipoint 4000)}}
+                                            gold
+                                        {{else}}
+                                            {{#if (lt multipoint 6000)}}
+                                                platinum
+                                            {{else}}
+                                                {{#if (lt multipoint 8000)}}
+                                                    diamond
+                                                {{else}}
+                                                    {{#if (lt multipoint 12000)}}
+                                                        emerald
+                                                    {{else}}
+                                                        ruby
+                                {{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}
+                                </b>
                             </div>
                             <img src="/assets/img/rank.png" alt="" class="rank_img">
+                            
                         </div>
 
                         <div class="point_number">
@@ -213,25 +243,39 @@
                                 Điểm
                             </div>
                             <div class="number">
-                                1000
+                                {{multipoint}}
                             </div>
                         </div>
                     </div>
 
                     <div class="select_rank_mode_button">
-                        <form action="/home/roomcreate/" method="post" id = "create_room"><button type="submit" class="createclick" ><b>Tạo phòng</b></button></form>
-                        <form action="/home/playnow/" method="post">
-                            <button class="playclick" id="play_now">
-                                <b>
-                                    Vào nhanh
-                                </b>
-                            </button>
-                        </form>
+                        {{!-- <form action="/home/roomcreate/" method="post" id = "create_room"><button type="submit" class="createclick" ><b>Tạo phòng</b></button></form> --}}
+                        <button class="createclick" id="Roomcreate"><b>Tạo phòng</b></button>
+                        <button class="playclick" id="play_now"> <b>Vào nhanh </b></button>
                     </div>
                 </div>
 
                 <div class="select_rank_mode_center_right_rank">
-                    <img src="/assets/img/bronzerank.png" alt="" class="rank">
+                    {{#if (lt multipoint 1000)}}
+                                <img src="/assets/img/Bronze.png" alt="" class="rank">
+                                {{else}}
+                                    {{#if (lt multipoint 2400)}}
+                                    <img src="/assets/img/Silver.png" alt="" class="rank">
+                                    {{else}}
+                                        {{#if (lt multipoint 4000)}}
+                                            <img src="/assets/img/Gold.png" alt="" class="rank">
+                                        {{else}}
+                                            {{#if (lt multipoint 6000)}}
+                                                <img src="/assets/img/Platinum.png" alt="" class="rank">
+                                            {{else}}
+                                                {{#if (lt multipoint 8000)}}
+                                                    <img src="/assets/img/Diamond.png" alt="" class="rank">
+                                                {{else}}
+                                                    {{#if (lt multipoint 12000)}}
+                                                        <img src="/assets/img/Emeral.png" alt="" class="rank">
+                                                    {{else}}
+                                                        <img src="/assets/img/Ruby.png" alt="" class="rank">
+                                {{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}
                 </div>
 
             </div>
@@ -240,7 +284,7 @@
 
     </div>
 
-    {{!-- <div class="modal_create_room" id = "team_modal_create_room">
+    <div class="modal_create_room" id="team_modal_create_room">
         <div class="create_room_body">
             <div class="create_room_header">
                 <div class="create_room_return">
@@ -248,19 +292,101 @@
                 </div>
             </div>
 
-            <div class="create_room_content">
+            <form action="/home/roomcreate/" method="post" id="create_room" onsubmit="return disable('create_play');">
                 <div class="create_room_input">
-                    <label for="Name">Tên phòng</label><br>
-                    <input type="text" placeholder="Tên phòng">
+                    <label for="Name">Số vòng chơi:</label><br>
+                    <input type="text" id="round" name="roundNumber" placeholder="Số vòng" oninput="hideExceed()">
                 </div>
 
                 <div class="create_room_create">
-                    <button class="create"><a href="indexsingle">index</a></button>
-                </div>
-            </div>
+                    <button class="create" id="create_play">Play</button>
+                    
+                </div>  
+                {{#if exceed}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_create_room").style.display = "flex";
+                        document.querySelector(".Exceedroom").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Exceedroom").style.display = "none";
+                        }
+                    </script>
+                    <div class="Exceedroom"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex"></i>
+                        <div class="exceed_value">{{exceed}}</div>
+                    </div>
+                {{/if}} 
+                {{#if input_round}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_create_room").style.display = "flex";
+                        document.querySelector(".Warninground").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Warninground").style.display = "none";
+                        }
+                    </script>
+                    <div class="Warninground"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex"></i>
+                        <div class="inputround">{{input_round}}</div>
+                    </div>
+                {{/if}}
+            </form>
         </div>
 
-    </div> --}}
+    </div>
+    <div class="modal_playnow_room" id = "team_modal_playnow_room">
+        <div class="playnow_room_body">
+            <div class="playnow_room_header">
+                <div class="playnow_room_return">
+                    <span class = "return_playnow_room">TRỞ LẠI</span>
+                </div>
+            </div>
+
+            <form action="/home/playnow/" method="post" id="playnow_room" onsubmit="return disable('playnow_play');">
+                <div class="playnow_room_input">
+                    <label for="Name">Số vòng chơi:</label><br>
+                    <input type="text" id="round1" name="roundNumber1" placeholder="Số vòng" oninput="hideExceed()">
+                </div>
+
+                <div class="playnow_room_create">
+                    <button class="playnow" id="playnow_play">Play</button>
+                </div>  
+                {{#if exceed1}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_playnow_room").style.display = "flex";
+                        document.querySelector(".Exceedroom").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Exceedroom").style.display = "none";
+                        }
+                    </script>
+                    <div class="Exceedroom"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex1"></i>
+                        <div class="exceed_value">{{exceed1}}</div>
+                    </div>
+                {{/if}}  
+                {{#if input_round1}}
+                    <script>
+                        document.getElementById("team_modal_xep_hang").style.display = "flex";
+                        document.getElementById("team_modal_playnow_room").style.display = "flex";
+                        document.querySelector(".Warninground").style.display = "flex";
+                        function hideExceed()
+                        {
+                            document.querySelector(".Warninground").style.display = "none";
+                        }
+                    </script>
+                    <div class="Warninground"> 
+                        <i class="fa-solid fa-circle-exclamation" id="exceed_ex1"></i>
+                        <div class="inputround">{{input_round1}}</div>
+                    </div>
+                {{/if}}
+            </form>
+        </div>
+
+    </div>
     <!-- Leaderboard -->
     <div class="leaderboard" id="ldtest">
         <div class="overlay">
@@ -374,8 +500,16 @@
             </div>
         </div>
     </div> -->
-
+    
     <script src="/modal_normal_rank.js"></script>
+    <script>
+        function disable(id) {
+            let waitbtn = document.getElementById(id);
+            waitbtn.disabled = true;
+            waitbtn.innerText = "Đang vào phòng ... ";
+            return true;
+        }
+    </script>
     {{!-- <script src= "/multiplayer.js"></script> --}}
     {{!-- <script src="/socket.io/socket.io.js"></script> --}}
     

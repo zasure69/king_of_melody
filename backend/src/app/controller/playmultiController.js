@@ -138,7 +138,6 @@ class playmultiController {
     }
     
 }
-
 io.on("connection", async function(socket) {
     console.log(`User connected id is ${socket.id}`);
     socket.join(roomid);

@@ -11,6 +11,4 @@ router.post('/search', homeController.searchroom);
 router.post('/playnow', homeController.playnow);
 router.get('/', homeController.index);
 
-router.put('/', homeController.update);
-
 module.exports = router;

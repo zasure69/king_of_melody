@@ -125,11 +125,10 @@ class playmultiController {
     
 }
 
-settingSchema.findOne({email: req.session.user.email})
-                .then((st) => {
-
-                res.render('playmulti', { songs: JSON.stringify(songs), infolist, efVL: st.EffectVL, msVL: st.MusicVL } );
-                });
+// settingSchema.findOne({email: req.session.user.email})
+//                 .then((st) => {
+//                 res.render('playmulti', { songs: JSON.stringify(songs), infolist, efVL: st.EffectVL, msVL: st.MusicVL } );
+//                 });
                 // const html = fs.readFileSync('../../resources/views/playmulti.hbs', 'utf-8');
                 // const $ = cheerio.load(html);
                 // // Thay đổi thuộc tính của thẻ bất kỳ

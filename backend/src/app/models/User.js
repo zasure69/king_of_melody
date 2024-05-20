@@ -20,6 +20,10 @@ const userSchema = new Schema({
     verified: {
         type: Boolean,
     },
+    empty: {
+        type: Number,
+        default: 25,
+    },
     hardGames: {
         type: Number,
         default: 0

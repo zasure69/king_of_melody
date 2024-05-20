@@ -10,6 +10,4 @@ router.post('/roomcreate/:roomID', homeController.create);
 router.post('/search', homeController.searchroom);
 router.post('/playnow', homeController.playnow);
 
-router.put('/', homeController.update);
-
 module.exports = router;

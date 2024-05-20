@@ -18,7 +18,7 @@
             <div class="hint">
                 <h2>Bài hát gợi ý</h2>
                 {{#each hintlist}}
-                <div class="hintlist-1" >
+                <div class="{{this.song}}" onclick="clicknamesong(this)" >
                     <h3 id="hintname">{{this.song}}</h3> 
                     <p>{{this.singer}}</p>
                 </div>

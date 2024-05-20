@@ -134,7 +134,11 @@ body {
     color: #f53192;
     cursor: pointer;
 }
-
+.container .play-area .info .btn-back a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
 .container .play-area .info .btn-back:hover {
     transform: scale(1.5);
     background-color: #f53192;
@@ -318,7 +322,7 @@ body {
     margin: 10px 0;
     border: 2px solid #df4adf;
     border-radius: 50px;
-    z-index: 10000;
+    z-index: 999;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -603,6 +607,16 @@ body {
     gap: 1rem;
 }
 
+.song-detail::-webkit-scrollbar {
+    width: 0.2em;
+}
+
+.song-detail::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    width: 2em;
+    border-radius: 18px;
+}
+
 .end-model-content {
     display: flex;
     flex-direction: column;
@@ -680,10 +694,11 @@ body {
 .song-detail {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     color: white;
     width: 80%;
-    gap: 0.25em;
+    gap: 0.5em;
+    overflow-y: scroll;
 }
 
 .song-detail > h2 {
@@ -744,4 +759,24 @@ body {
     transform: scale(1.05);
     cursor: pointer;
 }
+@media screen and (max-height: 450px) {
 
+    .song-detail {
+        justify-content:flex-start;
+    }
+    #detail-model {
+        height: 90%;
+    }
+    #end-model {
+        height: 90%;
+    }
+    .btn-model {
+        margin: 1% auto;
+    }
+    .song-detail > .songlist h2 {
+        font-size: 1.5rem;
+    }
+    .container .play-area .disc img {
+        width: 32%;
+    }
+}

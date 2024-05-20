@@ -85,7 +85,6 @@ io.on("connection", function (socket){
         console.log("Single score: ", score, iduser, mode, numright);
         UserGoogle.findOne({_id: iduser})
         .then((user)=>{
-            console.log("User: ", user, user.length);
             if (user) 
             {
                 if (mode == "hard")

@@ -12,7 +12,6 @@ let guessButton = document.getElementById("guessButton");
 let time = document.getElementById("Time_duration");
 let round = document.getElementById("Round_play");
 let endmodal = document.getElementById("end-model");
-let btnhint = document.querySelector("#hintname");
 let numright = 0;
 let numwrong = 0;
 
@@ -47,9 +46,6 @@ correct_answer.volume(efVL.value);
 incorrect_answer.volume(efVL.value);
 endgame.volume(efVL.value);
 
-btnhint.addEventListener('click', () => {
-  document.getElementById("answer_song").textContent = btnhint.textContent;
-})
 
 let play_song = [];
 let index = 0;
@@ -373,3 +369,6 @@ document.getElementById("return").onclick = function(){
   detailmodal.style.display = "none";
 }
 
+function clicknamesong(div){
+  document.getElementById("answer_song").value = div.querySelector("#hintname").textContent;
+}

@@ -425,7 +425,8 @@ toggle.onclick = function(){
     circle.classList.toggle('active');
 }
 
-let intervalID = 0, opacity = 0, chat_click = false;
+let intervalID = 0, opacity = 0;
+let chat_click = false;
 let chat_player = document.getElementById("chat_multi");
 chat_player.addEventListener('click', () => {
   if (chat_click == false)
@@ -443,10 +444,12 @@ chat_player.addEventListener('click', () => {
 })
 function fadein()
 {
+  clearInterval(intervalID);
   intervalID = setInterval(show, 20);
 }
 function fadeout()
 {
+  clearInterval(intervalID);
   intervalID = setInterval(hide, 20);
 }
 

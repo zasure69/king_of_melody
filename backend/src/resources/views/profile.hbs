@@ -53,7 +53,7 @@
                 </div>
             </header>
         </div>
-        <main class="_main">
+        <main class="_main" >
             <div class="container_ctx">
                 <div class="profile_header">
                     <div class="div_gif">
@@ -69,6 +69,7 @@
                                     <div class="progress-bar-inner"></div>
                                     <span class="progress-bar-label">80/150</span>
                                 </div>
+                                <div class="up_song_user">Thêm bài hát</div>
                             </div>
                         </div>
                     </div>
@@ -156,6 +157,21 @@
                     <div class="boundary" style="margin: 0;"></div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="team_modal">
+        <div class="modal_update_song" id="modal_update_song">
+            <div class="album">Thêm bài hát</div>
+            <div class="numofsong">Còn trống: <span id="empty">{{empty}}</span></div>
+            <form id="songForm" method="POST" action="/profile" enctype="multipart/form-data">
+                <label for="songName">Tên Bài Hát:</label><br>
+                <input type="text" class="Input" id="songName" name="songName" required><br>
+                <label for="artist">Ca Sĩ:</label><br>
+                <input type="text" class="Input" id="artist" name="artist" required><br>
+                <label for="audioFile">Tệp .mp3:</label><br>
+                <input type="file" id="audioFile" name="audioFile" accept="audio/mp3" required><br>
+                <input type="submit" id="submit" value="Thêm">
+            </form>
         </div>
     </div>
     <input type="hidden" id="vlInput" value="{{VL}}">

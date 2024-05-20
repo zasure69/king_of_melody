@@ -3,6 +3,10 @@ const router = express.Router();
 
 const profileController = require('../app/controller/profileController');
 
-router.get('/:userId', profileController.index);
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
+router.get('/', profileController.index);
+router.post('/', upload.single('audioFile'), profileController.update);
 
 module.exports = router;

@@ -49,5 +49,28 @@ document.getElementsByClassName("div_gif")[0].onclick = function()
   }
 }
 
-// Cập nhật thanh kinh nghiệm từ dữ liệu trong progress-bar-label
 updateProgressBarFromLabel();
+
+if (document.getElementById("empty").textContent == "0"){
+  document.getElementById("submit").style.display = "none";
+}
+
+let modal = document.getElementById("team_modal")
+window.onclick = function(event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+}
+
+document.querySelector(".up_song_user").onclick = function()
+{
+  document.querySelector("#team_modal").style.display = "flex";
+  document.querySelector(".modal_update_song").style.display = "flex";
+}
+
+document.getElementById("audioFile").addEventListener("change", function() {
+  if (this.files[0].size > 500000) {
+    alert("Kích thước tệp phải nhỏ hơn 500KB.");
+    this.value = ""; // Xóa lựa chọn tệp
+  }
+});

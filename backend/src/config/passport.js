@@ -13,7 +13,7 @@ module.exports = function (passport) {
     },
         async (accessToken, refreshToken, email, profile, done) => {
             let username = profile.displayName.replace(/\s/g, '_');
-            console.log(username)
+            console.log(profile)
             const newUserGoogle = {
                 googleId: profile.id,
                 username: username,

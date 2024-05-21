@@ -34,11 +34,17 @@ class profileController {
                         res.render('profile', {username: req.session.user.username, empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
                         //res.json({user: user, VL: result.EffectVL})
                     })
+                    .catch(err => {
+                        console.log('Error: ', err);
+                    })
                 } else {
                     User.findOne({email: req.session.user.email})
                     .then((user) => {
                         res.render('profile', {username: req.session.user.username, empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
                         //res.json({user: user, VL: result.EffectVL})
+                    })
+                    .catch(err => {
+                        console.log('Error: ', err);
                     })
                 }
                 

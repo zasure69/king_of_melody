@@ -1,3 +1,3 @@
-const {io, app } = require('./src/index.js')
+const {io, app } = require('./src')
 
 module.exports(app);

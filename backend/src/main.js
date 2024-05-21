@@ -8,7 +8,7 @@ const session = require('express-session')
 const passport = require('passport')
 const MongoDBSession = require('connect-mongodb-session')(session)
 const app = express()
-const port = 3000
+const port = (process.env.PORT || 3000)
 const fs = require('fs');
 
 // const https = require('https');

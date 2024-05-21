@@ -7,9 +7,7 @@ const songSchema = new Schema({
     name: String,
     singer: String,
     link: String,
-    index: Number,
     mode: String,
-    lyric: Boolean
 })
 
 module.exports = mongoose.model("Song", songSchema);

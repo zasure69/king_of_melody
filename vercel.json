@@ -6,7 +6,7 @@
   "routes": [
     { "src": "/(.)", "dest": "backend/src/index.js" }
   ],
-  "files": [
+  "include": [
     "backend/src/**/*", "backend/src/index.js"
   ]
 }

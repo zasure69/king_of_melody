@@ -6,8 +6,8 @@
   "routes": [
     { "src": "/(.)", "dest": "backend/src/index.js" }
   ],
-  "files": {
-    "backend/**/*", "backend/src/index.js"
-  }
+  "files": [
+    "backend/src/**/*", "backend/src/index.js"
+  ]
 }
 

@@ -26,7 +26,7 @@ const io = require('socket.io')(server);
 // const SocketServices = require('./app/services/room.service.js');
 // global._io = io; 
 
-module.exports = { io, app };
+module.exports = { io };
 
 // global._io.on('connection', SocketServices.connection);
 
@@ -96,7 +96,7 @@ app.use(passport.session())
 route(app);
 
 
-
+module.exports = app;
 // app.listen(port, () => {
 //   console.log(`Example app listening on port ${port}`)
 // })

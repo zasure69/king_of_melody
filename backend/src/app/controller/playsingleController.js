@@ -29,11 +29,9 @@ class playsingleController {
             { $match: { mode: req.query.mode } },
             { $sample: { size: 10} },
         ]);
-        const numbers = [];
         const infolist = [];
         for (let i = 0; i < listsong.length; i++) {
             infolist.push({name: listsong[i].name, singer: listsong[i].singer, link: listsong[i].link});
-            numbers.push(listsong[i].index);
         }
         let hintlist = await hintsongSchema.aggregate([
             { $sample: { size: 20} }
@@ -55,30 +53,6 @@ class playsingleController {
         shuffleArray(hintlist);
         res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: req.session.user.username, userid: req.session.user._id, mode : req.query.mode});
     }
-
-    // update(req, res, next) {
-    //     songSchema.aggregate([
-    //         { $match: { mode: req.body.mode } },
-    //         { $sample: { size: 10} }
-    //         ])
-    //         .exec()
-    //         .then((songs) => {
-                
-    //             hintsongSchema.aggregate([
-    //                 { $sample: { size: 20} }
-    //             ])
-    //             .exec()
-    //             .then((hintlist) => {
-    //                 res.render('playsingle', { songs: JSON.stringify(listsong), hintlist})
-    //             })
-    //             .catch(err => {
-    //                 console.log("Error: ", err);
-    //             })
-    //         })
-    //         .catch(err => {
-    //             console.log("Error: ", err);
-    //         })
-    // }
 }
 io.on("connection", function (socket){
     socket.on("score_end", function(score, iduser, mode, numright){

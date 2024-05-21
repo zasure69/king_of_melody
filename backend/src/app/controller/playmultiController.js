@@ -69,14 +69,11 @@ class playmultiController {
                     .exec()
                     .then((songs) => {
                         listSong = songs;
-                        //listSong[rooms.roomid] = songs;
-                        //console.log("Songs 1: ", listSong[rooms.roomid]);
                         const infolist = [];
                         for (let i = 0; i < songs.length; i++) {
                             infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                         }
                         loadSong[rooms.roomid] = false;
-                        // loadSong = false;
                         settingSchema.findOne({email: req.session.user.email})
                         .then((st) => {
                             res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
@@ -127,7 +124,6 @@ class playmultiController {
                     .then((st) => {
                         res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
                         loadSong[rooms.roomid] = true;
-                        // loadSong = true;
                     })
                 }
             }

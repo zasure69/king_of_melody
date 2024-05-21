@@ -6,6 +6,7 @@ const UsersongSchema = new Schema({
     email: String,
     name: String,
     singer: String,
+    link: String,
     content: String,
 });
 

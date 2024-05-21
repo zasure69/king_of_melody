@@ -57,6 +57,7 @@ class profileController {
                 email: req.session.user.email,
                 name: req.body.songName,
                 singer: req.body.artist,
+                link: req.body.link,
                 content: base64String,
             })
             upsong.save()

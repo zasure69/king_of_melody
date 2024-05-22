@@ -50,6 +50,8 @@ function generateRoomId() {
 // }
 // const sem = new Semaphore(1);
 class homeController{
+    //Merge Users và UsersGG
+    /*
     index(req, res) {
         if (req.session.isAuth) {
             if (req.session.type == 'google') {
@@ -92,6 +94,111 @@ class homeController{
                 })
             }
             
+        } else {
+            res.redirect('/login');
+        }
+    }*/
+    index(req, res) {
+        if (req.session.isAuth) {
+            let leaderboardQuery = [
+                {
+                    $unionWith: {
+                        coll: 'usergoogles',
+                        pipeline: [
+                            {
+                                $project: {
+                                    _id: 1,
+                                    username: 1,
+                                    multiPoint: 1
+                                }
+                            },
+                        ]
+                    }
+                },
+                {
+                    $sort: {
+                        multiPoint: -1
+                    }
+                },
+                {
+                    $limit: 10
+                }
+            ];
+    
+            Promise.all([
+                userSchema.aggregate(leaderboardQuery),
+                req.session.type == 'google'
+                    ? userGoogleSchema.findOne({ _id: req.session.passport.user })
+                    : userSchema.findOne({ _id: req.session.user._id })
+            ])
+            .then(([leaderboard, result]) => {
+                leaderboard = leaderboard.map((item, index) => {
+                    if (item.multiPoint < 1000) {
+                        item.rank = 'Đồng';
+                    } else if (item.multiPoint < 2400) {
+                        item.rank = 'Bạc';
+                    } else if (item.multiPoint < 4000) {
+                        item.rank = 'Vàng';
+                    } else if (item.multiPoint < 6000) {
+                        item.rank = 'Bạch Kim';
+                    } else if (item.multiPoint < 8000) {
+                        item.rank = 'Kim Cương';
+                    } else if (item.multiPoint < 12000) {
+                        item.rank = 'Lục Bảo';
+                    } else {
+                        item.rank = 'Ruby Đỏ';
+                    }
+                    item.index = index + 1;
+                    return item;
+                });
+                let rank;
+            if (req.session.type == 'google') {
+                rank = result.rank;
+            } else {
+                if (result.multiPoint < 1000) {
+                    rank = 'Đồng';
+                } else if (result.multiPoint < 2400) {
+                    rank = 'Bạc';
+                } else if (result.multiPoint < 4000) {
+                    rank = 'Vàng';
+                } else if (result.multiPoint < 6000) {
+                    rank = 'Bạch Kim';
+                } else if (result.multiPoint < 8000) {
+                    rank = 'Kim Cương';
+                } else if (result.multiPoint < 12000) {
+                    rank = 'Lục Bảo';
+                } else {
+                    rank = 'Ruby Đỏ';
+                }
+            }
+
+                res.render('home', {
+                    username: result.username,
+                    userId: result._id,
+                    multiPoint: result.multiPoint,
+                    rank: rank,
+                    full: full,
+                    Notfound: Notfound,
+                    exceed: exceed_permitted_value,
+                    exceed1: exceed_permitted_value1,
+                    input_round: Notinputround,
+                    input_round1: Notinputround1,
+                    leaderboard: leaderboard
+                })
+                    full = "";
+                    Notfound = "";
+                    exceed_permitted_value = "";
+                    exceed_permitted_value1 = "";
+                    Notinputround = "";
+                    Notinputround1 = "";
+            })
+            .catch((err) => {
+                console.log('Error: ', err);
+                res.json({
+                    status: "Failed",
+                    message: "Lỗi xảy ra khi lấy dữ liệu bảng xếp hạng"
+                });
+            });
         } else {
             res.redirect('/login');
         }

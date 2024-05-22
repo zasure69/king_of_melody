@@ -35,7 +35,7 @@ module.exports = io;
 //   global._io = socket;
 // })
 
-server.listen(port);
+
 const route = require('./routes');
 const db = require('./config/db');
 
@@ -95,7 +95,7 @@ app.use(passport.session())
 
 route(app);
 
-
+server.listen(port);
 module.exports = app;
 // app.listen(port, () => {
 //   console.log(`Example app listening on port ${port}`)

@@ -397,15 +397,15 @@
                 <h1 class = "ldheader">Leaderboard</h1>
                 <table class="rank" ><a href="#">Trở lại</a>
                     <tr id="lr">
-                        <thead>
-                        <th id="lr">Xếp hạng</th>
-                        <th id="lr">Tên tài khoản</th>
-                        <th id="lr">Rank</th>
-                        <th id="lr">Điểm</th>
+                        <thead class="top1">
+                        <th class="top11" id="lr">Xếp hạng</th>
+                        <th class="top11" id="lr">Tên tài khoản</th>
+                        <th class="top11" id="lr">Rank</th>
+                        <th class="top11" id="lr">Điểm</th>
                         </thead>
                     </tr>
                     <tbody>
-                    <tr>
+                    <!--tr>
                         <th class="top1">1</th>
                         <th class="top1" id="usr">username</th>
                         <th class="top1">challenger</th>
@@ -464,7 +464,16 @@
                         <th id="usr">username</th>
                         <th>challenger</th>
                         <th>1000đ</th>
-                    </tr>
+                    </tr-->
+
+                    {{#each leaderboard}}
+        <tr class="mem">
+            <th>{{index}}</th>
+            <th id="usr">{{username}}</th>
+            <th>{{rank}}</th>
+            <th>{{multiPoint}}</th>
+        </tr>
+        {{/each}}
                     
                     </tbody>
                     
@@ -473,6 +482,7 @@
             
         </div>
     </div>
+
     <!-- Thành tích -->
     <!-- <div class="achievement" id="avm">
         <div class="overlay">

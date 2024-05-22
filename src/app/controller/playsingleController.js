@@ -3,7 +3,7 @@ const settingSchema = require('../models/Setting');
 const hintsongSchema = require('../models/newsongs');
 const User = require('../models/User');
 const UserGoogle = require('../models/UserGoogle');
-const { io } = require('../../index');
+const io  = require('../../index');
 const { resolveSoa } = require('dns');
 
 class playsingleController {

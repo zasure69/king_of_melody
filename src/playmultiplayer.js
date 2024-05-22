@@ -394,8 +394,8 @@ socket.on("sendmess", function(mess) {
   console.log(mess);
   chatmess.textContent = mess;
   subnav.style.display = "flex";
-  clearTimeout(timeout);
-  timeout = setTimeout(function() {
+  clearTimeout(timeout_chat);
+  timeout_chat = setTimeout(function() {
       subnav.style.display = "none";
       chatmess.textContent = "";
   }, 10000);
@@ -485,7 +485,7 @@ function hide()
 let width = 3;
 let difference = 0.25;
 let interval = 0;
-let timeout = 0;
+let timeout = 0, timeout_chat = 0;
 let like = document.querySelector(".like");
 let dislike = document.querySelector(".dislike");
 let sad = document.querySelector(".sad");
@@ -851,16 +851,16 @@ socket.on('endgame',() => {
 })
 home.addEventListener('click', (e)=>{;
   socket.emit("render_home", iduser);
-  home.disabled = true;
+  // home.disabled = true;
 })
 home1.addEventListener('click', (e)=>{
   socket.emit("render_home", iduser);
-  home1.disabled = true;
+  // home1.disabled = true;
 })
 
 back.addEventListener('click', (e)=> {
   socket.emit("render_home", iduser);
-  back.disabled = true;
+  // back.disabled = true;
 })
 
 let again = document.getElementById("play_again");

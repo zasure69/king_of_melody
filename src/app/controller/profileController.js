@@ -3,6 +3,7 @@ const User = require('../models/User')
 const UserGoogle = require('../models/UserGoogle')
 const userSong = require('../models/SongUser')
 const fs = require('fs');
+const { execArgv } = require('process');
 const convertToBase64 = (filePath, callback) => {
     // Đọc tệp MP3 từ đường dẫn tạm thời
     fs.readFile(filePath, (err, data) => {
@@ -23,7 +24,6 @@ const convertToBase64 = (filePath, callback) => {
         callback(null, base64String);
     });
 };
-
 class profileController {
     index(req, res, next) {
         setting.findOne({email: req.session.user.email})
@@ -31,20 +31,190 @@ class profileController {
                 if (req.session.type == 'google') {
                     UserGoogle.findOne({email: req.session.user.email})
                     .then((user) => {
-                        res.render('profile', {username: req.session.user.username, empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
+                        let rateHard;
+                        if (user.hardGames > 0) {
+                            rateHard = (user.hardWinGames / user.hardGames) * 100;
+                            rateHard = parseFloat(rateHard.toFixed(2));
+                        } else {
+                            rateHard = 0;
+                        }
+
+                        let rateHell;
+                        if (user.hellGames > 0) {
+                            rateHell = (user.hellWinGames / user.hellGames) * 100;
+                            rateHell = parseFloat(rateHell.toFixed(2));
+                        } else {
+                            rateHell = 0;
+                        }
+
+                        let rateNohope;
+                        if (user.nohopeGames > 0) {
+                            rateNohope = (user.nohopeWinGames / user.nohopeGames) * 100;
+                            rateNohope = parseFloat(rateNohope.toFixed(2));
+                        } else {
+                            rateNohope = 0;
+                        }
+
+                        let rateMul;
+                        if (user.multiGames > 0) {
+                            rateMul = (user.multiWinGames / user.multiGames) * 100;
+                            rateMul = parseFloat(rateMul.toFixed(2));
+                        } else {
+                            rateMul = 0;
+                        }
+
+                        let complete;
+                        complete = user.hardGames + user.hellGames + user.nohopeGames;
+
+                        let best;
+                        best = user.hardWinGames + user.hellWinGames + user.nohopeWinGames;
+
+                        let rank;
+                        if(user.multiPoint < 1000) rank="Đồng";
+                        else if(user.multiPoint < 2400) rank="Bạc";
+                        else if(user.multiPoint < 4000) rank="Vàng";
+                        else if(user.multiPoint < 6000) rank="Bạch Kim";
+                        else if(user.multiPoint < 8000) rank="Kim Cương";
+                        else if(user.multiPoint < 12000) rank="Lục Bảo";
+                        else if(user.multiPoint >= 12000) rank="Ruby Đỏ";
+
+                        let avg;
+                        if (complete > 0) {
+                            avg = (best / complete) * 100;
+                            avg = parseFloat(avg.toFixed(2));
+                        } else {
+                            avg = 0;
+                        }
+
+                        let exe;
+                        if(user.CurExp < 1000) {user.Level = 1; exe = user.CurExp + "/1000";}
+                        else if(user.CurExp < 2000) {user.Level = 2; exe = user.CurExp + "/2000";}
+                        else if(user.CurExp < 5000) {user.Level = 3; exe = user.CurExp + "/3000";}
+                        else if(user.CurExp < 10000) {user.Level = 4; exe = user.CurExp + "/10000";}
+                        else if(user.CurExp < 20000) {user.Level = 5; exe = user.CurExp + "/20000";}
+                        else if(user.CurExp < 50000) {user.Level = 6; exe = user.CurExp + "/50000";}
+                        else if(user.CurExp >= 50000) {user.Level = 7; exe = user.CurExp + "";}
+
+                        res.render('profile', 
+                        {
+                            username: req.session.user.username,
+                            rank: rank,
+                            complete: complete,
+                            level: user.Level,
+                            exe: exe,
+                            best: best,
+                            avg: avg,
+                            hardGames: user.hardGames,
+                            hardWinGames: user.hardWinGames,
+                            rateHard: rateHard,
+                            hellGames: user.hellGames,
+                            hellWinGames: user.hellWinGames,
+                            rateHell: rateHell,
+                            nohopeGames: user.nohopeGames,
+                            nohopeWinGames: user.nohopeWinGames,
+                            rateNohope: rateNohope,
+                            multiGames: user.multiGames,
+                            multiWinGames: user.multiWinGames,
+                            rateMul: rateMul,
+                            empty: user.empty, 
+                            userId: req.session.user._id, 
+                            VL: result.EffectVL
+                        })
                         //res.json({user: user, VL: result.EffectVL})
-                    })
-                    .catch(err => {
-                        console.log('Error: ', err);
                     })
                 } else {
                     User.findOne({email: req.session.user.email})
                     .then((user) => {
-                        res.render('profile', {username: req.session.user.username, empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
+                        let rateHard;
+                        if (user.hardGames > 0) {
+                            rateHard = (user.hardWinGames / user.hardGames) * 100;
+                            rateHard = parseFloat(rateHard.toFixed(2));
+                        } else {
+                            rateHard = 0;
+                        }
+
+                        let rateHell;
+                        if (user.hellGames > 0) {
+                            rateHell = (user.hellWinGames / user.hellGames) * 100;
+                            rateHell = parseFloat(rateHell.toFixed(2));
+                        } else {
+                            rateHell = 0;
+                        }
+
+                        let rateNohope;
+                        if (user.nohopeGames > 0) {
+                            rateNohope = (user.nohopeWinGames / user.nohopeGames) * 100;
+                            rateNohope = parseFloat(rateNohope.toFixed(2));
+                        } else {
+                            rateNohope = 0;
+                        }
+
+                        let rateMul;
+                        if (user.multiGames > 0) {
+                            rateMul = (user.multiWinGames / user.multiGames) * 100;
+                            rateMul = parseFloat(rateMul.toFixed(2));
+                        } else {
+                            rateMul = 0;
+                        }
+
+                        let complete;
+                        complete = user.hardGames + user.hellGames + user.nohopeGames;
+
+                        let best;
+                        best = user.hardWinGames + user.hellWinGames + user.nohopeWinGames;
+
+                        let rank;
+                        if(user.multiPoint < 1000) rank="Đồng";
+                        else if(user.multiPoint < 2400) rank="Bạc";
+                        else if(user.multiPoint < 4000) rank="Vàng";
+                        else if(user.multiPoint < 6000) rank="Bạch Kim";
+                        else if(user.multiPoint < 8000) rank="Kim Cương";
+                        else if(user.multiPoint < 12000) rank="Lục Bảo";
+                        else if(user.multiPoint >= 12000) rank="Ruby Đỏ";
+
+                        let avg;
+                        if (complete > 0) {
+                            avg = (best / complete) * 100;
+                            avg = parseFloat(avg.toFixed(2));
+                        } else {
+                            avg = 0;
+                        }
+
+                        let exe;
+                        if(user.CurExp < 1000) {user.Level = 1; exe = user.CurExp + "/1000";}
+                        else if(user.CurExp < 2000) {user.Level = 2; exe = user.CurExp + "/2000";}
+                        else if(user.CurExp < 5000) {user.Level = 3; exe = user.CurExp + "/3000";}
+                        else if(user.CurExp < 10000) {user.Level = 4; exe = user.CurExp + "/10000";}
+                        else if(user.CurExp < 20000) {user.Level = 5; exe = user.CurExp + "/20000";}
+                        else if(user.CurExp < 50000) {user.Level = 6; exe = user.CurExp + "/50000";}
+                        else if(user.CurExp >= 50000) {user.Level = 7; exe = user.CurExp + "";}
+
+                        res.render('profile', 
+                        {
+                            username: req.session.user.username,
+                            rank: rank,
+                            complete: complete,
+                            level: user.Level,
+                            exe: exe,
+                            best: best,
+                            avg: avg,
+                            hardGames: user.hardGames,
+                            hardWinGames: user.hardWinGames,
+                            rateHard: rateHard,
+                            hellGames: user.hellGames,
+                            hellWinGames: user.hellWinGames,
+                            rateHell: rateHell,
+                            nohopeGames: user.nohopeGames,
+                            nohopeWinGames: user.nohopeWinGames,
+                            rateNohope: rateNohope,
+                            multiGames: user.multiGames,
+                            multiWinGames: user.multiWinGames,
+                            rateMul: rateMul,
+                            empty: user.empty, 
+                            userId: req.session.user._id, 
+                            VL: result.EffectVL
+                        })
                         //res.json({user: user, VL: result.EffectVL})
-                    })
-                    .catch(err => {
-                        console.log('Error: ', err);
                     })
                 }
                 

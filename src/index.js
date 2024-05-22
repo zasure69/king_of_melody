@@ -26,7 +26,7 @@ const io = require('socket.io')(server);
 // const SocketServices = require('./app/services/room.service.js');
 // global._io = io; 
 
-module.exports = io;
+module.exports = {io, server};
 
 // global._io.on('connection', SocketServices.connection);
 

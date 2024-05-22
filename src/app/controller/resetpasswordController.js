@@ -103,7 +103,7 @@ class resetPasswordController {
     //password reset stuff
     process (req, res) {
         const {email} = req.body;
-        const redirectUrl = 'http://localhost:3000/resetPassword/change'
+        const redirectUrl = 'https://localhost:3000/resetPassword/change'
         //check email exist
         userSchema
             .find({email})

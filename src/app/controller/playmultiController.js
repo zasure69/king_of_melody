@@ -2,7 +2,7 @@ const songSchema = require('../models/Song');
 const Room = require('../models/Room'); 
 const User = require('../models/User');
 const UserGoogle = require('../models/UserGoogle');
-const { io, app } = require('../..');
+const io  = require('../../index');
 let roomid = "";
 let room = [];
 
@@ -137,6 +137,7 @@ class playmultiController {
 }
 io.on("connection", async function(socket) {
     console.log(`User connected id is ${socket.id}`);
+    console.log(socket.adapter.rooms);
     socket.join(roomid);
     Room.findOne({roomid: roomid})
     .then((loadroom) => {
@@ -147,6 +148,7 @@ io.on("connection", async function(socket) {
             .then(() =>{
                 Room.findOne({socketid: socket.id})
                 .then((send) => {
+                    console.log(send.socketid);
                     if (send.socketid.length != 2 || loadSong[send.roomid] == false) socket.emit("wait");
                     else io.to(send.roomid).emit("start"); 
                 })
@@ -239,7 +241,7 @@ io.on("connection", async function(socket) {
                 const newroom = send.socketid.filter(item => item != socket.id);
                 Room.updateOne({roomid: send.roomid},{$set: {socketid: newroom}})
                     .then(()=>{
-                        room.socketid = newroom;
+                        send.socketid = newroom;
                     })
                     .catch((error)=>{
                         console.log("error: ",error);
@@ -259,33 +261,33 @@ io.on("connection", async function(socket) {
         await sem1.acquire();
         console.log(socket.id);
         Room.findOne({socketid: socket.id})
-            .then((send) => {
-                console.log("id: ",iduser);
-                const player = send.player.filter(item => item.userid != iduser);
-                console.log(player);
-                Room.updateOne({roomid: send.roomid},{$set: {player: player, vacant: true}})
-                // Room.updateOne({roomid: send.roomid},{$set: {player: player, vacant: false}})
-                .then(() =>{
-                    if ( player.length == 0 ) {
-                        Room.deleteOne({roomid: send.roomid})
-                        .then()
-                        .catch((err) =>{
-                            console.log("error: ",err);
-                        })
-                    }
-                    else {
-                        loadSong[send.roomid] = false;
-                        Room.findOne({roomid: send.roomid})
-                        .then((newroom) => {
-                        socket.to(newroom.roomid).emit("player1", newroom);
-                        socket.to(newroom.roomid).emit("wait");
-                        console.log("test what happern!");
-                        })
-                        .catch((err) => {
-                            console.log("error",err);
-                        })
-                    }
-                    sem1.release();
+        .then((send) => {
+            console.log("id: ",iduser);
+            const player = send.player.filter(item => item.userid != iduser);
+            console.log(player);
+            Room.updateOne({roomid: send.roomid},{$set: {player: player, vacant: true}})
+            // Room.updateOne({roomid: send.roomid},{$set: {player: player, vacant: false}})
+            .then(() =>{
+                if ( player.length == 0 ) {
+                    Room.deleteOne({roomid: send.roomid})
+                    .then()
+                    .catch((err) =>{
+                        console.log("error: ",err);
+                    })
+                }
+                else {
+                    loadSong[send.roomid] = false;
+                    Room.findOne({roomid: send.roomid})
+                    .then((newroom) => {
+                    socket.to(newroom.roomid).emit("player1", newroom);
+                    socket.to(newroom.roomid).emit("wait");
+                    console.log("test what happern!");
+                    })
+                    .catch((err) => {
+                        console.log("error",err);
+                    })
+                }
+                sem1.release();
             })
             .catch((err)=>{
                 console.log("Error: ", err);

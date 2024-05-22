@@ -95,8 +95,12 @@ app.use(passport.session())
 
 route(app);
 
+
 server.listen(port);
-module.exports = app;
+
+
+module.exports = server;
+
 // app.listen(port, () => {
 //   console.log(`Example app listening on port ${port}`)
 // })

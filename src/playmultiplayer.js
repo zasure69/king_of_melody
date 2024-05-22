@@ -56,12 +56,15 @@ function handleClick() {
 
 window.addEventListener('load', function() {
   // Mã JavaScript để xác nhận rằng trang đã tải hoàn chỉnh
+  isClicked1 = false;
   console.log('Trang đã tải xong.');
 });
 
 // window.history.pushState(null,null,"/home");
 window.onbeforeunload = function(event) {
-  socket.emit("render_home", iduser);
+  if (!isClicked1) {
+    socket.emit("render_home", iduser);
+  }
 }
 
 //Sử dụng biến songs trong các xử lý JavaScript khác

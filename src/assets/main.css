@@ -1071,7 +1071,7 @@ body{
     /* right: 10px; */
     width: 300px;
     border-radius: 5px;
-    background-color:gold;
+    background-image: linear-gradient(-225deg, #69EACB 0%, #EACCF8 48%, #6654F1 100%);
 }
 
 /* .ld{
@@ -1086,7 +1086,7 @@ body{
     /*  display: flex; */
     justify-content: center;
     align-items: center;
-    border: 10px solid black;
+    border: 8px solid whitesmoke;
     border-collapse: collapse;
     /* overflow-y: scroll; */
     text-align: center;
@@ -1127,20 +1127,29 @@ table, th, tr{
 
 .top1{
     /* color: black; */
-    background-color: rgb(214, 175, 54);
+    background-image: linear-gradient(to right,#12c2e9, #c471ed, #f64f59);
     bottom: 100px;
+    border: 1px solid #FFF;
+    /* width: 50px; */
+}
+.top11{
+    /* color: black; */
+    bottom: 100px;
+    border: 1px solid #FFF;
     /* width: 50px; */
 }
 
 .top2{
     /* color: black; */
-    background-color: rgb(167, 167, 173);
+    background-image: linear-gradient(-225deg, #69EACB 0%, #EACCF8 48%, #6654F1 100%);
     bottom: 50px;
 }
 
-.top3{
+.mem{
     /* color: black; */
-    background-color: rgb(167, 112, 68);
+    background-color: rgba(229, 229, 229, 0.403);
+    border: 1px solid #FFF;
+    margin: 10px;
 }
 
 .leaderboard #usr{

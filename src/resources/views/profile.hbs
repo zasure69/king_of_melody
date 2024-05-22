@@ -61,13 +61,13 @@
                     </div>
                     <div class="profile_header_aside">
                         <div class="profile_userrank">rank</div>
-                        <div class="profile_username">name</div>
+                        <div class="profile_username">{{rank}}</div>
                         <div class="profile_progress">
                             <div class="progress_bar">
-                                <div class="progress_lv" style="color: mediumspringgreen;">Lv 1</div>
+                                <div class="progress_lv" style="color: mediumspringgreen;">Lv {{level}}</div>
                                 <div class="progress-bar">
                                     <div class="progress-bar-inner"></div>
-                                    <span class="progress-bar-label">80/150</span>
+                                    <span class="progress-bar-label">{{exe}}</span>
                                 </div>
                                 <div class="up_song_user">Thêm bài hát</div>
                             </div>
@@ -80,15 +80,15 @@
                         <div class="main_label">Stastics</div>
                         <div class="main_mask">
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{complete}}</div>
                                 <div class="mask_des">COMPLETED GAMES</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{best}}</div>
                                 <div class="mask_des">BEST GAME</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{avg}}</div>
                                 <div class="mask_des">Avg. GAME SCORE</div>
                             </div>
                         </div>
@@ -96,43 +96,43 @@
                         <div class="main_label">Duels</div>
                         <div class="main_mask">
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{hardGames}}</div>
                                 <div class="mask_des">HARD MODE GAME PLAYED</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{hardWinGames}}</div>
                                 <div class="mask_des">HARD MODE GAME WINS</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0.00%</div>
+                                <div class="mask_number">{{rateHard}}%</div>
                                 <div class="mask_des">HARD MODE WIN RATIO</div>
                             </div>
                         </div>
                         <div class="main_mask">
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{hellGames}}</div>
                                 <div class="mask_des">HELL MODE GAME PLAYED</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{hellWinGames}}</div>
                                 <div class="mask_des">HELL MODE GAME WINS</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0.00%</div>
+                                <div class="mask_number">{{rateHell}}%</div>
                                 <div class="mask_des">HELL MODE WIN RATIO</div>
                             </div>
                         </div>
                         <div class="main_mask">
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{nohopeGames}}</div>
                                 <div class="mask_des">NO HOPE MODE GAME PLAYED</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{nohopeWinGames}}</div>
                                 <div class="mask_des">NO HOPE MODE GAME WINS</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0.00%</div>
+                                <div class="mask_number">{{rateNohope}}%</div>
                                 <div class="mask_des">NO HOPE MODE WIN RATIO</div>
                             </div>
                         </div>
@@ -140,15 +140,15 @@
                         <div class="main_label">Multiplayer</div>
                         <div class="main_mask">
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{multiGames}}</div>
                                 <div class="mask_des">GAME PLAYED</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{multiWinGames}}</div>
                                 <div class="mask_des">GAME WINS</div>
                             </div>
                             <div class="mask_item">
-                                <div class="mask_number">0</div>
+                                <div class="mask_number">{{rateMul}}%</div>
                                 <div class="mask_des">WIN RATIO</div>
                             </div>
                         </div>

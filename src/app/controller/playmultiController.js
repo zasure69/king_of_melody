@@ -225,7 +225,8 @@ io.on("connection", async function(socket) {
                 if (playersdone[send.roomid] == 2) {
                     io.in(send.roomid).emit('endgame');
                     playersdone[send.roomid] = 0;
-                }      
+                }     
+                 
             })
             .catch((error)=>{
                 console.log("Error: ", error);
@@ -401,33 +402,33 @@ io.on("connection", async function(socket) {
                 user_lose.CurExp += score/10;
                 if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
                 {
-                    user_lose.multiPoint -= parseInt(score/60);
+                    user_lose.multiPoint -= parseInt(user_lose.multiPoint/80);
                     if (user_lose.multiPoint < 0)
                         user_lose.multiPoint = 0;
                 }
                 else if (user_lose.multiPoint <= 2400 && user_lose.multiPoint > 1000)
                 {
-                    user_lose.multiPoint -= parseInt(score/50);
+                    user_lose.multiPoint -= parseInt(user_lose.multiPoint/70);
                 }
                 else if (user_lose.multiPoint <= 4000 && user_lose.multiPoint > 2400)
                 {
-                    user_lose.multiPoint -= parseInt(score/30);
+                    user_lose.multiPoint -= parseInt(user_lose.multiPoint/60);
                 }
                 else if (user_lose.multiPoint <= 6000 && user_lose.multiPoint > 4000)
                 {
-                    user_lose.multiPoint -= parseInt(score/25);
+                    user_lose.multiPoint -= parseInt(user_lose.multiPoint/50);
                 }
                 else if (user_lose.multiPoint <= 8000 && user_lose.multiPoint > 6000)
                 {
-                    user_lose.multiPoint -= parseInt(score/20);
+                    user_lose.multiPoint -= parseInt(user_lose.multiPoint/40);
                 }
                 else if (user_lose.multiPoint <= 12000 && user_lose.multiPoint > 8000)
                 {
-                    user_lose.multiPoint -= parseInt(score/15);
+                    user_lose.multiPoint -= parseInt(user_lose.multiPoint/30);
                 }
                 else if (user_lose.multiPoint > 12000)
                 {
-                    user_lose.multiPoint -= parseInt(score/5);
+                    user_lose.multiPoint -= parseInt(user_lose.multiPoint/20);
                 }
                 UserGoogle.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
                 .then()
@@ -444,33 +445,33 @@ io.on("connection", async function(socket) {
                     user_lose.CurExp += score/10;
                     if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
                     {
-                        user_lose.multiPoint -= parseInt(score/60);
+                        user_lose.multiPoint -= parseInt(user_lose.multiPoint/80);
                         if (user_lose.multiPoint < 0)
                             user_lose.multiPoint = 0;
                     }
                     else if (user_lose.multiPoint <= 2400 && user_lose.multiPoint > 1000)
                     {
-                        user_lose.multiPoint -= parseInt(score/50);
+                        user_lose.multiPoint -= parseInt(user_lose.multiPoint/70);
                     }
                     else if (user_lose.multiPoint <= 4000 && user_lose.multiPoint > 2400)
                     {
-                        user_lose.multiPoint -= parseInt(score/30);
+                        user_lose.multiPoint -= parseInt(user_lose.multiPoint/60);
                     }
                     else if (user_lose.multiPoint <= 6000 && user_lose.multiPoint > 4000)
                     {
-                        user_lose.multiPoint -= parseInt(score/25);
+                        user_lose.multiPoint -= parseInt(user_lose.multiPoint/50);
                     }
                     else if (user_lose.multiPoint <= 8000 && user_lose.multiPoint > 6000)
                     {
-                        user_lose.multiPoint -= parseInt(score/20);
+                        user_lose.multiPoint -= parseInt(user_lose.multiPoint/40);
                     }
                     else if (user_lose.multiPoint <= 12000 && user_lose.multiPoint > 8000)
                     {
-                        user_lose.multiPoint -= parseInt(score/15);
+                        user_lose.multiPoint -= parseInt(user_lose.multiPoint/30);
                     }
                     else if (user_lose.multiPoint > 12000)
                     {
-                        user_lose.multiPoint -= parseInt(score/5);
+                        user_lose.multiPoint -= parseInt(user_lose.multiPoint/20);
                     }
                     User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
                     .then()
@@ -642,6 +643,87 @@ io.on("connection", async function(socket) {
         })
         .catch((err) => {
             console.log("error",err);
+        })
+    })
+    socket.on("exit", function(iduser, score){
+        User.findOne({_id: iduser})
+        .then((user_lose)=>{
+            user_lose.multiGames++;
+            const round = user_lose.multiGames;
+            user_lose.CurExp += score/10;
+            if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
+            {
+                user_lose.multiPoint -= parseInt(user_lose.multiPoint/50);
+                if (user_lose.multiPoint < 0)
+                    user_lose.multiPoint = 0;
+            }
+            else if (user_lose.multiPoint <= 2400 && user_lose.multiPoint > 1000)
+            {
+                user_lose.multiPoint -= parseInt(user_lose.multiPoint/45);
+            }
+            else if (user_lose.multiPoint <= 4000 && user_lose.multiPoint > 2400)
+            {
+                user_lose.multiPoint -= parseInt(user_lose.multiPoint/40);
+            }
+            else if (user_lose.multiPoint <= 6000 && user_lose.multiPoint > 4000)
+            {
+                user_lose.multiPoint -= parseInt(user_lose.multiPoint/35);
+            }
+            else if (user_lose.multiPoint <= 8000 && user_lose.multiPoint > 6000)
+            {
+                user_lose.multiPoint -= parseInt(user_lose.multiPoint/30);
+            }
+            else if (user_lose.multiPoint <= 12000 && user_lose.multiPoint > 8000)
+            {
+                user_lose.multiPoint -= parseInt(user_lose.multiPoint/25);
+            }
+            else if (user_lose.multiPoint > 12000)
+            {
+                user_lose.multiPoint -= parseInt(user_lose.multiPoint/15);
+            }
+            User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
+            .then( () => {
+                Room.findOne({socketid: socket.id})
+                .then((send) => {
+                    socket.to(send.roomid).emit("endgame_exit");
+                })
+                .catch((err) => {
+                    console.log("error",err);
+                })
+            })
+            .catch((error)=>{
+                console.log("Error: ", error);
+            })
+        })
+        .catch((error)=>{
+            console.log("Error: ", error);
+        })
+    })
+    socket.on("afk", function(iduser, score){
+        User.findOne({_id: iduser})
+        .then((user_lose)=>{
+            user_lose.multiGames++;
+            const round = user_lose.multiGames;
+            user_lose.CurExp += score/10;
+            user_lose.multiPoint -= 1000;
+            if (user_lose.multiPoint < 0)
+                user_lose.multiPoint = 0;
+            User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
+            .then( () => {
+                Room.findOne({socketid: socket.id})
+                .then((send) => {
+                    socket.to(send.roomid).emit("endgame_exit");
+                })
+                .catch((err) => {
+                    console.log("error",err);
+                })
+            })
+            .catch((error)=>{
+                console.log("Error: ", error);
+            })
+        })
+        .catch((error)=>{
+            console.log("Error: ", error);
         })
     })
 })

@@ -18,7 +18,10 @@ let home = document.getElementById("home_render");
 let home1 = document.getElementById("home-btn");
 let numright = 0;
 let numwrong = 0;
+let guess_buttonclick = 0;
+let score = 0;
 let back = document.getElementById("btn_back");
+let href_back = document.getElementById("href_back");
 let sendButton = document.getElementById("sendbtn");
 let chat = document.getElementById("chat_play");
 let subnav = document.getElementById("subnav");
@@ -39,6 +42,8 @@ const ms = msVL.dataset.volume;
 
 const songs = JSON.parse(songsInput.dataset.songs);
 const length = songs.length;
+let index = 0;
+let start = true;
 
 var isClicked = false;
 
@@ -47,15 +52,23 @@ function handleClick() {
     isClicked = true;
 
     // Thực hiện hành động của bạn tại đây
-
     setTimeout(function() {
       isClicked = false;
     }, 60000); // Đặt thời gian để cấu hình double click (ví dụ: 1000ms)
   }
 }
-
+let AFK_time = 0, afk = false;
 window.addEventListener('load', function() {
   // Mã JavaScript để xác nhận rằng trang đã tải hoàn chỉnh
+  this.clearTimeout(AFK_time);
+  AFK_time = this.setTimeout(function() {
+    if (start == true)
+    {
+      afk = true;
+      socket.emit("afk", iduser, score);
+      window.location.href = href_back.href;
+    }
+  }, 30000); 
   isClicked1 = false;
   console.log('Trang đã tải xong.');
 });
@@ -63,19 +76,33 @@ window.addEventListener('load', function() {
 // window.history.pushState(null,null,"/home");
 window.onbeforeunload = function(event) {
   if (!isClicked1) {
+    console.log("exit", guess_buttonclick, index + 1);
+    if (guess_buttonclick != index + 1 && afk == false)
+    {
+      socket.emit("exit", iduser, score);
+    }
     socket.emit("render_home", iduser);
   }
 }
 
+// window.addEventListener('click', function(){
+//   this.clearTimeout(AFK_time);
+//   AFK_time = this.setTimeout(function() {
+//     if (start == true)
+//     {
+//       afk = true;
+//       socket.emit("afk", iduser, score);
+//       window.location.href = href_back.href;
+//     }
+//   }, 120000); 
+
+// })
 //Sử dụng biến songs trong các xử lý JavaScript khác
 for(let i = 0; i < length; i++)
 {
   console.log(songs[i].name);
 }
  // In danh sách bài hát trong console
-
-
- 
 var correct_answer = new Howl({
   src: ['/assets/sound/sound_correct_answer.mp3'],
 });
@@ -97,7 +124,6 @@ endgame.volume(ef);
 endgame_lose.volume(ef);
 
 let play_song = [];
-let index = 0;
 let totalDuration = 0, dem_tg = 0;
 let time_song = [];
 function loadSongs() {
@@ -199,7 +225,7 @@ var List_song = function (songs) {
   this.songs = songs;
   this.index = 0;
 }
-let countdown = 0, count = 0, click = false, score = 0;
+let countdown = 0, count = 0, click = false;
 
 
 List_song.prototype = {
@@ -255,9 +281,18 @@ decreaseVolume.addEventListener('click', () =>{
   }
   player.volume(volume);
 });
-let start = true;
+
 let tmp = 0;
 ctrlIcon.addEventListener('click', ()=>{
+  this.clearTimeout(AFK_time);
+  AFK_time = this.setTimeout(function() {
+    if (start == true)
+    {
+      afk = true;
+      socket.emit("afk", iduser, score);
+      window.location.href = href_back.href;
+    }
+  }, 30000); 
   if (start == true){
     if (ctrlIcon.classList.contains("fa-pause"))
     {
@@ -335,51 +370,53 @@ guessButton.addEventListener('click', () => {
   if (click == true)
   {
     if (answer_value == songs[index].name.toLowerCase())
-      {
-        correct_answer.play();
-        if (ctrlIcon.classList.contains("fa-pause")){
-          ctrlIcon.classList.remove("fa-pause");
-          ctrlIcon.classList.add("fa-play");
-        }
-        if (player.songs[player.index]){
-          player.songs[player.index].stop();
-        }
-        clearInterval(countdown); // Dừng đếm ngược
-        numright++;
-        if (tmp != 0)
-          score += tmp * 10;
-        else
-          score += 10;
-        score_player1.textContent = score;
-        console.log(socket.id);
-        socket.emit("addpointtooppent",score);
-        setTimeout(playNextSong, 1000);
-        answer_song.value = "";
+    {
+      correct_answer.play();
+      if (ctrlIcon.classList.contains("fa-pause")){
+        ctrlIcon.classList.remove("fa-pause");
+        ctrlIcon.classList.add("fa-play");
       }
-      else if ( answer_value != songs[index].name.toLowerCase() || answer_song.value == "")
-      {
-        incorrect_answer.play();
-        if (ctrlIcon.classList.contains("fa-pause")){
-          ctrlIcon.classList.remove("fa-pause");
-          ctrlIcon.classList.add("fa-play");
-        }
-        if (player.songs[player.index]){
-          player.songs[player.index].stop();
-        }
-        clearInterval(countdown); // Dừng đếm ngược
-        numwrong++;
-        setTimeout(playNextSong, 1000);
-        answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
-        
+      if (player.songs[player.index]){
+        player.songs[player.index].stop();
       }
-      if (index == Numround - 1){
-        socket.emit("addpointtooppent",score);
-        setTimeout(function() {
-          socket.emit("done");
-        }, 1000);
-        isClicked1 = false;
+      clearInterval(countdown); // Dừng đếm ngược
+      numright++;
+      if (tmp != 0)
+        score += tmp * 10;
+      else
+        score += 10;
+      score_player1.textContent = score;
+      console.log(socket.id);
+      socket.emit("addpointtooppent",score);
+      setTimeout(playNextSong, 1000);
+      answer_song.value = "";
+    }
+    else if ( answer_value != songs[index].name.toLowerCase() || answer_song.value == "")
+    {
+      incorrect_answer.play();
+      if (ctrlIcon.classList.contains("fa-pause")){
+        ctrlIcon.classList.remove("fa-pause");
+        ctrlIcon.classList.add("fa-play");
       }
-      click = false;
+      if (player.songs[player.index]){
+        player.songs[player.index].stop();
+      }
+      clearInterval(countdown); // Dừng đếm ngược
+      numwrong++;
+      setTimeout(playNextSong, 1000);
+      answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
+      
+    }
+    if (index == Numround - 1)
+    {
+      socket.emit("addpointtooppent",score);
+      setTimeout(function() {
+        socket.emit("done");
+      }, 1000);
+      isClicked1 = false;
+    }
+    guess_buttonclick++;
+    click = false;
   }
 })
 
@@ -852,6 +889,15 @@ socket.on('endgame',() => {
   }
   
 })
+socket.on("endgame_exit", ()=>{
+  socket.emit("score_win", score, iduser);
+  document.getElementsByClassName("container")[0].style.opacity = "0.35";
+  document.getElementById("end-result").textContent = "Bạn đã dành chiến thắng!";
+  endmodal.style.display = "flex";
+  document.getElementById("endpoint").innerHTML = score_player1.innerHTML;
+  endgame.volume(0.5);
+  endgame.play();
+}) 
 home.addEventListener('click', (e)=>{;
   socket.emit("render_home", iduser);
   // home.disabled = true;

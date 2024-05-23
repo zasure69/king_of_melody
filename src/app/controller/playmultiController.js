@@ -258,7 +258,6 @@ io.on("connection", async function(socket) {
         console.log(socket.id);
     })
     socket.on("render_home", async (iduser)=>{
-        await sem1.acquire();
         console.log(socket.id);
         Room.findOne({socketid: socket.id})
         .then((send) => {
@@ -287,7 +286,6 @@ io.on("connection", async function(socket) {
                         console.log("error",err);
                     })
                 }
-                sem1.release();
             })
             .catch((err)=>{
                 console.log("Error: ", err);
@@ -302,8 +300,10 @@ io.on("connection", async function(socket) {
         .then((user_win)=>{
             if (user_win)
             {
-                const win = user_win.multiWinGames++;
-                const round = user_win.multiGames++;
+                user_win.multiWinGames++;
+                const win = user_win.multiWinGames;
+                user_win.multiGames++;
+                const round = user_win.multiGames;
                 user_win.CurExp += score/10;
                 if (user_win.multiPoint <= 1000)
                 {
@@ -343,8 +343,10 @@ io.on("connection", async function(socket) {
             {
                 User.findOne({_id: iduser})
                 .then((user_win)=>{
-                const win = user_win.multiWinGames++;
-                const round = user_win.multiGames++;
+                user_win.multiWinGames++;
+                const win = user_win.multiWinGames;
+                user_win.multiGames++;
+                const round = user_win.multiGames;
                 user_win.CurExp += score/10;
                 if (user_win.multiPoint <= 1000)
                 {
@@ -394,7 +396,8 @@ io.on("connection", async function(socket) {
         .then((user_lose)=>{
             if (user_lose)
             {
-                const round = user_lose.multiGames++;
+                user_lose.multiGames++;
+                const round = user_lose.multiGames;
                 user_lose.CurExp += score/10;
                 if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
                 {
@@ -436,7 +439,8 @@ io.on("connection", async function(socket) {
             {
                 User.findOne({_id: iduser})
                 .then((user_lose)=>{
-                    const round = user_lose.multiGames++;
+                    user_lose.multiGames++;
+                    const round = user_lose.multiGames;
                     user_lose.CurExp += score/10;
                     if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
                     {
@@ -488,7 +492,8 @@ io.on("connection", async function(socket) {
         UserGoogle.findOne({_id: iduser})
         .then((user_draw)=>{
             if (user_draw) {
-                const round = user_draw.multiGames++;
+                user_draw.multiGames++;
+                const round = user_draw.multiGames;
                 user_draw.CurExp += score/10;
                 if (user_draw.multiPoint <= 1000)
                 {
@@ -528,7 +533,8 @@ io.on("connection", async function(socket) {
             {
                 User.findOne({_id: iduser})
                 .then((user_draw)=>{
-                    const round = user_draw.multiGames++;
+                    user_draw.multiGames++;
+                    const round = user_draw.multiGames;
                     user_draw.CurExp += score/10;
                     if (user_draw.multiPoint <= 1000)
                     {

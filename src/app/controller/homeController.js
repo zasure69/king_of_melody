@@ -175,7 +175,7 @@ class homeController{
                 res.render('home', {
                     username: result.username,
                     userId: result._id,
-                    multiPoint: result.multiPoint,
+                    multipoint: result.multiPoint,
                     rank: rank,
                     full: full,
                     Notfound: Notfound,

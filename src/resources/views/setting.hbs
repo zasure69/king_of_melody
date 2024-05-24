@@ -8,12 +8,12 @@
     </head>
 <body>
     <form method="POST" action="/home?_method=PUT" class="setting_container">
-        <p>SETTING</p>
+        <p>CÀI ĐẶT</p>
         <div class="menu">
 
             <div class="selc">
                 <div class="ef_volume">
-                    <p class="name">MUSIC VOLUME</p>
+                    <p class="name">ÂM LƯỢNG NHẠC</p>
                     <div class="set">
                         <div class="icon">
                             <span class="material-symbols-outlined">
@@ -27,7 +27,7 @@
 
             <div class="selc">
                 <div class="ef_volume">
-                    <p class="name">EFFECT VOLUME</p>
+                    <p class="name">ÂM LƯỢNG HIỆU ỨNG</p>
                     <div class="set">
                         <div class="icon">
                             <span class="material-symbols-outlined">
@@ -46,7 +46,7 @@
                     <span class="material-symbols-outlined" id="icon_sound">
                         volume_up
                     </span> 
-                    <p class="text_bot" id="text_sound">SOUND ON</p>
+                    <p class="text_bot" id="text_sound">BẬT ÂM LƯỢNG</p>
                     <div class="ani_bot">
                         <input name="IsSoundOn" type="checkbox" class="toggle" id="check_sound">
                     </div>
@@ -56,7 +56,7 @@
                     <span class="material-symbols-outlined" id="icon_eff">
                         blur_on
                     </span>
-                    <p class="text_bot" id="text_eff">EFFECT ON</p>
+                    <p class="text_bot" id="text_eff">BẬT HIỆU ỨNG</p>
                     <div class="ani_bot">
                         <input name="IsEffectOn" type="checkbox" class="toggle" id="check_eff">
                     </div>
@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="space"></div>
-        <button type ="submit" id="back_home">CLOSE</button>
+        <button type ="submit" id="back_home">ĐÓNG</button>
     </form>
     <input type="hidden" id="soundInput" value="{{IsSoundOn}}">
     <input type="hidden" id="effectInput" value="{{IsEffectOn}}">

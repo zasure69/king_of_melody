@@ -152,25 +152,25 @@ class homeController{
                     return item;
                 });
                 let rank;
-            if (req.session.type == 'google') {
-                rank = result.rank;
-            } else {
-                if (result.multiPoint < 1000) {
-                    rank = 'Đồng';
-                } else if (result.multiPoint < 2400) {
-                    rank = 'Bạc';
-                } else if (result.multiPoint < 4000) {
-                    rank = 'Vàng';
-                } else if (result.multiPoint < 6000) {
-                    rank = 'Bạch Kim';
-                } else if (result.multiPoint < 8000) {
-                    rank = 'Kim Cương';
-                } else if (result.multiPoint < 12000) {
-                    rank = 'Lục Bảo';
+                if (req.session.type == 'google') {
+                    rank = result.rank;
                 } else {
-                    rank = 'Ruby Đỏ';
+                    if (result.multiPoint < 1000) {
+                        rank = 'Đồng';
+                    } else if (result.multiPoint < 2400) {
+                        rank = 'Bạc';
+                    } else if (result.multiPoint < 4000) {
+                        rank = 'Vàng';
+                    } else if (result.multiPoint < 6000) {
+                        rank = 'Bạch Kim';
+                    } else if (result.multiPoint < 8000) {
+                        rank = 'Kim Cương';
+                    } else if (result.multiPoint < 12000) {
+                        rank = 'Lục Bảo';
+                    } else {
+                        rank = 'Ruby Đỏ';
+                    }
                 }
-            }
 
                 res.render('home', {
                     username: result.username,

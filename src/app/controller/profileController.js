@@ -89,7 +89,7 @@ class profileController {
                         let exe;
                         if(user.CurExp < 1000) {user.Level = 1; exe = user.CurExp + "/1000";}
                         else if(user.CurExp < 2000) {user.Level = 2; exe = user.CurExp + "/2000";}
-                        else if(user.CurExp < 3000) {user.Level = 3; exe = user.CurExp + "/3000";}
+                        else if(user.CurExp < 5000) {user.Level = 3; exe = user.CurExp + "/5000";}
                         else if(user.CurExp < 10000) {user.Level = 4; exe = user.CurExp + "/10000";}
                         else if(user.CurExp < 20000) {user.Level = 5; exe = user.CurExp + "/20000";}
                         else if(user.CurExp < 50000) {user.Level = 6; exe = user.CurExp + "/50000";}
@@ -183,7 +183,7 @@ class profileController {
                         let exe;
                         if(user.CurExp < 1000) {user.Level = 1; exe = user.CurExp + "/1000";}
                         else if(user.CurExp < 2000) {user.Level = 2; exe = user.CurExp + "/2000";}
-                        else if(user.CurExp < 3000) {user.Level = 3; exe = user.CurExp + "/3000";}
+                        else if(user.CurExp < 5000) {user.Level = 3; exe = user.CurExp + "/5000";}
                         else if(user.CurExp < 10000) {user.Level = 4; exe = user.CurExp + "/10000";}
                         else if(user.CurExp < 20000) {user.Level = 5; exe = user.CurExp + "/20000";}
                         else if(user.CurExp < 50000) {user.Level = 6; exe = user.CurExp + "/50000";}

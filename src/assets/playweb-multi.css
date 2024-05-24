@@ -697,6 +697,7 @@ body {
     justify-content: flex-start;
     color: white;
     width: 80%;
+    height: 48vh;
     gap: 0.5em;
     overflow-y: scroll;
 }
@@ -766,10 +767,17 @@ body {
     }
     #detail-model {
         height: 90%;
+        width: 75vw;
     }
     #end-model {
         height: 90%;
+        width: 75vw;
+        gap: 0;
     }
+    .end-model-content {
+        padding-bottom: 4vh;
+    }
+
     .btn-model {
         margin: 1% auto;
     }
@@ -778,6 +786,21 @@ body {
     }
     .container .play-area .disc img {
         width: 32%;
+    }
+    .container .play-area .answer input {
+        height: 9vh;
+    }
+    .container .play-area .answer button {
+        height: 9vh;
+    }
+    .container .play-area .disc {
+        margin: 0;
+    }
+    .chat_player {
+        font-size: 2vw;
+    }
+    .container .play-area .toggle {
+        font-size: 2vw;
     }
 }
 

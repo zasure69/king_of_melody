@@ -259,8 +259,8 @@ a {
 }
 @media (max-width:779px) {
     .container {
-        width: 100vw;
-        height: 100vh;
+        width: 94vw;
+        height: 90vh;
     }
 }
 @media (max-width:635px) {

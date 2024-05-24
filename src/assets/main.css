@@ -349,7 +349,7 @@ body{
 #footer .para{
     margin-top: 1vh;
     font-size: 5vh;
-    color: rgb(208, 80, 255);
+    color: white;
     font-family: neosans;
 }
 
@@ -376,6 +376,8 @@ body{
     margin: auto;
     z-index: 101;
     border-radius: 8px;
+    height: 95vh;
+    width: 84vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1263,7 +1265,48 @@ table, th, tr{
             /* z-index: 10; */
     /* border-radius: 8px;
 }*/ 
-
+.modal-help {
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    display: none;
+    width: 60%;
+    height: 75%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    z-index: 1000;
+    border-radius: 16px;
+    box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+    isolation: isolate;
+    overflow-y: scroll;
+}
+.modal-help::-webkit-scrollbar {
+    width: 1em;
+}
+.modal-help::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    width: 1em;
+    border-radius: 16px;
+}
+.out-modal-help {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+.help {
+    position: absolute;
+    top: 0vh;
+    padding: 5vh;
+    color: white;
+}
 
 @media only screen and (max-height: 450px) {
     /* #content .button .speaker {
@@ -1284,7 +1327,8 @@ table, th, tr{
         gap: 5vh;
     }
     .select_rank_mode_body .search_room {
-        left: 38.7%;
+        left: 46.5%;
+        width: 10vw;
     }
     .modal_thuong .Hell, .Heaven, .Waste_land {
         width: 150px;
@@ -1310,6 +1354,22 @@ table, th, tr{
     }
     th {
         padding: 10px 20px;
+    }
+    .select_rank_mode_body .select_rank_mode_information {
+        justify-content: center;
+        gap: 0;
+    }
+    .modal_xep_hang .select_rank_mode_information .information {
+        margin: 0;
+    }
+    .select_rank_mode_body .search_room input {
+        width: 13vw;
+    }
+    .help {
+        font-size: 0.75em;
+    }
+    #header .nav .username {
+        font-size: 2.5vw;
     }
 }
 

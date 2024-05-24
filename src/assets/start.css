@@ -96,7 +96,7 @@
 }
 
 .body .content .body-content .start-page-headline {
-    font-size: 5em;
+    font-size: 8vw;
     font-weight: 700;
     text-shadow: 0 0.125em 0.5em black;
     text-transform: uppercase;
@@ -126,9 +126,11 @@
     background-image: radial-gradient(150% 160% at 50% 15%, #fff 0, transparent 30%);
     color: white;
     border-radius: 40px;
-    font-size: 2em;
+    font-size: 2vw;
     text-transform: uppercase;
     text-shadow: 0 0.125em 0.4em black;
+    width: 18vw;
+    height: 11vh;
 }
 
 .body .content .body-content .play-button-label:hover {
@@ -147,33 +149,34 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 1em 10em 0 18em;
+    justify-content: center;
     border-bottom: 1px solid rgb(68, 66, 66);
 }
 
 .body .below-content .below-content-container .teaser1>img {
-    width: 53%;
+    width: 45vw;
 }
 
 .body .below-content .below-content-container .content-teaser1 {
-    padding: 4em;
+    padding: 2vw;
     width: 43%;
+    text-align: end;
 }
 
 .body .below-content .below-content-container .teaser2 {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    margin: 1em 13em 0 10em;
+    justify-content: center;
     border-bottom: 1px solid rgb(68, 66, 66);
 }
 
 .body .below-content .below-content-container .teaser2>img {
-    width: 53%;
+    width: 45vw;
 }
 
 .body .below-content .below-content-container .content-teaser2 {
-    padding: 4em;
+    padding: 2vw;
     width: 43%;
 }
 
@@ -181,17 +184,18 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 1em 10em 0 18em;
+    justify-content: center;
     border-bottom: 1px solid rgb(68, 66, 66);
 }
 
 .body .below-content .below-content-container .teaser3>img {
-    width: 53%;
+    width: 45vw;
 }
 
 .body .below-content .below-content-container .content-teaser3 {
-    padding: 4em;
+    padding: 2vw;
     width: 43%;
+    text-align: end;
 }
 
 .footer {

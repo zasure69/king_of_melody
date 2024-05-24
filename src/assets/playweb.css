@@ -23,7 +23,6 @@ body {
     height: 100%;
     color: white;
     /* flex-grow: 1; */
-    gap: 3rem;
 }
 
 .container .hint {
@@ -124,26 +123,31 @@ body {
     line-height: 2em;
 }
 
+.container .play-area .info .point-info h3{
+    font-size: 3vw;
+}
+
 .play-area .info .time-info h3{
-    font-size: 2em;
+    font-size: 3vw;
 }
 
 .play-area .info .player-info h3{
-    font-size: 2em;
+    font-size: 3vw;
 }
 
 .play-area .info .round-info h3{
-    font-size: 2em;
+    font-size: 3vw;
 }
 
 .container .play-area .info .player-info {
     display: flex;
-    width: 16em;
+    width: 26vw;
     line-height: 4em;
+    justify-content: center;
 }
 
 .container .play-area .info .player-info p {
-    font-size: 2em;
+    font-size: 3vw;
 }
 
 .container .play-area .info .player-info img{
@@ -158,14 +162,14 @@ body {
 }
 
 .container .play-area .info .time-info h3 {
-    font-size: 2em;
+    font-size: 3vw;
 }
 
 .container .play-area .disc {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2em;
+    margin: 2vh;
 }
 
 .container .play-area .disc img {
@@ -701,14 +705,14 @@ body {
 
 @media screen and (max-height: 450px) {
     .container .hint h2 {
-        font-size: 30px;
+        font-size: 4vw;
         margin: 3vh auto;
     }
     .container > .hint h3 {
         font-size: 20px;
     }
     .container .play-area .disc img {
-        width: 35%;
+        width: 40%;
     }
     .container .disc .btn #progress {
         width: 50vh;
@@ -718,22 +722,35 @@ body {
         height: 10vh;
     }
     .container .play-area .disc {
-        margin: 5vh;
+        margin: 2vh;
+        margin-left: 6vw;
     }
     .song-detail {
         justify-content:flex-start;
     }
     #detail-model {
         height: 90%;
+        width: 75vw;
     }
     #end-model {
         height: 90%;
+        width: 75vw;
+        gap: 0;
+    }
+    .end-model-content {
+        padding-bottom: 5vh;
     }
     .btn-model {
         margin: 1% auto;
     }
     .song-detail > .songlist h2 {
         font-size: 1.5rem;
+    }
+    .container .play-area .disc .btn {
+        width: 29vw;
+    }
+    .container .play-area .answer {
+        padding-right: 10vw;
     }
 }
 

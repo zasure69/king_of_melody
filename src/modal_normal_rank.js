@@ -4,6 +4,8 @@ var modal_xep_hang = document.getElementById("team_modal_xep_hang");
 var error_ex = document.getElementById("error_ex");
 var modal_create_room = document.getElementById("team_modal_create_room");
 var modal_playnow_room = document.getElementById("team_modal_playnow_room");
+let out_modal_help = document.querySelector(".out-modal-help");
+let modal_help = document.querySelector(".modal-help");
 
 // Get the button that opens the modal
 var text_thuong = document.getElementById("cd_thuong");
@@ -127,5 +129,13 @@ window.onclick = function(event) {
   if (event.target == modal_playnow_room) {
     modal_playnow_room.style.display = "none";
   }
+  if (event.target == out_modal_help) {
+    out_modal_help.style.display = "none";
+    modal_help.style.display = "none";
+  }
+}
 
+document.getElementById("btnHelp").onclick = function(){
+  out_modal_help.style.display = "flex";
+  modal_help.style.display = "flex";
 }

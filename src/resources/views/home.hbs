@@ -42,7 +42,7 @@
             <div class="menubtn">
                 <ul>
                     <li id = "cd_thuong">CHẾ ĐỘ THƯỜNG</li>
-                    <li id = "cd_xep_hang">MULTIPLAYER</li>
+                    <li id = "cd_xep_hang">CHẾ ĐỘ XẾP HẠNG</li>
                     <li><a href="#ldtest" >BẢNG XẾP HẠNG</a></li>
                 </ul>
             </div>
@@ -51,7 +51,7 @@
                 <img src="/assets/img/convitdj.png"  alt="Speaker" class="speaker">
                 <a href="/playsingle?mode=hard" class="play-button-link">
                     <div class="play-button-wrapper">
-                        <span class="play-button-label">Play</span>
+                        <span class="play-button-label">Chơi</span>
                     </div>
                 </a>
 
@@ -67,14 +67,14 @@
                             <span><b>CÀI ĐẶT</b></span>
                         </a>
                     </button>
-                    <button class="menu_btn_btn">
-                        <a href="#" class="menu_btn_dt">
+                    <button class="menu_btn_btn" id="btnHelp">
+                        <div class="menu_btn_dt">
                             <i class="fa-solid fa-book"></i>
                             <span><b>HƯỚNG DẪN</b></span>
-                        </a>
+                        </div>
                     </button>
             </div>
-            <div class="para"><b> A product of team11!</b></div>
+            <div class="para"><b>Một sản phẩm của Nhóm 11</b></div>
         </div>
 
     </div>
@@ -132,7 +132,7 @@
             </div>
 
             <div class="select_normal_mode_play_button">
-                <button type="submit" class="playclick" href="/playsingle"><b>PLAY</b></button>
+                <button type="submit" class="playclick" href="/playsingle"><b>Chơi</b></button>
             </div>
 
             </form>
@@ -394,7 +394,7 @@
         </div>
         <div class="ldboardbody">
             <div class="ld">
-                <h1 class = "ldheader">Leaderboard</h1>
+                <h1 class = "ldheader">Bảng xếp hạng</h1>
                 <table class="rank" ><a href="#">Trở lại</a>
                     <tr id="lr">
                         <thead class="top1">
@@ -467,19 +467,58 @@
                     </tr-->
 
                     {{#each leaderboard}}
-        <tr class="mem">
-            <th>{{index}}</th>
-            <th id="usr">{{username}}</th>
-            <th>{{rank}}</th>
-            <th>{{multiPoint}}</th>
-        </tr>
-        {{/each}}
+                        <tr class="mem">
+                        <th>{{index}}</th>
+                        <th id="usr">{{username}}</th>
+                        <th>{{rank}}</th>
+                        <th>{{multiPoint}}</th>
+                    </tr>
+                    {{/each}}
                     
                     </tbody>
                     
                 </table>
             </div>
             
+        </div>
+    </div>
+    <div class="out-modal-help">
+        <div class="modal-help">
+            <p class="help">
+                *Các chế độ chơi:<br>
+                <span style="padding-left: 5vh;">- Chế độ thường:<br></span>
+                    <span style="padding-left: 10vh;">+ Để bắt đầu chơi, bạn cần ấn nút "Play" để phát bài nhạc, thời gian sẽ bắt đầu đếm ngược, mỗi bài nhạc sẽ có một lượng thời gian phát nhạc khác nhau. Bạn cần phải trả lời đúng tên bài nhạc đang phát.<br></span>
+                    <span style="padding-left: 10vh;">+ Để trả lời thuận tiện và nhanh chóng, bên trái sẽ hiện ra danh sách các bài nhạc gợi ý, bạn chỉ cần click chọn bài hát đó, câu trả lời của bạn sẽ tự động được điền, bạn chỉ cần nhấn "Đoán" để nộp câu trả lời. Trả lời càng nhanh, điểm đạt được sẽ càng cao.<br></span>
+                <br>
+                <span style="padding-left: 5vh;"></span>- Chế độ nhiều người cùng chơi (MultiPlayer):<br></span>
+                    <span style="padding-left: 10vh;">+ Bạn có thể gọi mời bạn bè cùng chơi cùng hoặc thách thức cùng người lạ! Bạn cần nhập số vòng chơi (số bài nhạc bạn muốn thách đấu). Bạn có thể tự tạo phòng, tìm kiếm phòng đang có hoặc vào chơi nhanh cùng người lạ.<br></span>
+                    <span style="padding-left: 10vh;">+ Ở chế độ chơi này, cách thức chơi giống như ở  “Chế độ thường”. Tuy nhiên, lúc này bạn cần phải tự tay nhập đáp án, trả lời càng nhanh thì điểm đạt được càng cao.<br></span>
+                    <span style="padding-left: 10vh;">+ Sau khi kết thúc vòng chơi, ai cao điểm hơn sẽ là người thắng cuộc, số điểm đạt được sẽ tính vào điểm bảng xếp hạng.<br></span>
+                    <span style="padding-left: 10vh;">+ LƯU Ý: Tên bài hát nhập vào cần phải đúng chính tả, các ký tự nhập là các chữ cái La-tinh, các bài nhạc Nhật Bản, Trung Quốc, Hàn Quốc cần nhập tên theo chữ cái La-tinh (tên đã Việt hóa hoặc tên theo phiên âm La-tinh). Các bài hát tiếng Việt cần nhập đúng chính tả!<br></span>
+                <br>
+                *Cơ chế tính điểm:<br>
+                <span style="padding-left: 5vh;"></span>- Xếp hạng: điểm xếp hạng được lấy từ điểm của chế độ MultiPlayer, được phân cấp như sau:<br></span>
+                    <span style="padding-left: 10vh;">+ Dưới 1000 điểm: Đồng.<br></span>
+                    <span style="padding-left: 10vh;">+Từ 1000 đến dưới 2400 điểm: Bạc. <br></span>
+                    <span style="padding-left: 10vh;">+Từ 2400 đến dưới 4000 điểm: Vàng. <br></span>
+                    <span style="padding-left: 10vh;">+Từ 4000 đến dưới 6000 điểm: Bạch Kim. <br></span>
+                    <span style="padding-left: 10vh;">+Từ 6000 đến dưới 8000 điểm: Kim Cương. <br></span>
+                    <span style="padding-left: 10vh;">+Từ 8000 đến dưới 12000 điểm: Ngọc Lục Bảo. <br></span>
+                    <span style="padding-left: 10vh;">+Từ 12000 trở lên điểm: Ruby Đỏ. <br></span>
+            <span style="padding-left: 5vh;"></span>- Cấp độ: điểm cấp độ được lấy từ “Chế độ thường”, được phân cấp như sau:<br></span>
+                    <span style="padding-left: 10vh;">+ Level 1: Điểm dưới 1000.<br></span>
+                    <span style="padding-left: 10vh;">+ Level 2: Điểm từ 1000 đến dưới 2000.<br></span>
+                    <span style="padding-left: 10vh;">+ Level 3: Điểm từ 2000 đến dưới 5000.<br></span>
+                    <span style="padding-left: 10vh;">+ Level 4: Điểm từ 5000 đến dưới 10.000.<br></span>
+                    <span style="padding-left: 10vh;">+ Level 5: Điểm từ 10.000 đến dưới 20.000.<br></span>
+                    <span style="padding-left: 10vh;">+ Level 6: Điểm từ 20.000 đến dưới 50.000.<br></span>
+                    <span style="padding-left: 10vh;">+ Level 7: Điểm từ 50.000 trở lên.<br></span>
+                <br>
+                *Thêm bài hát: Nếu bạn có mong muốn góp ý bổ sung bài hát. Bạn có thể vào Hồ sơ -> Thêm bài hát, điền thông tin theo form đã đưa ra để đóng góp thêm bài hát cho web nhé!<br>
+                <br>
+                *Help: Nếu bạn có thắc mắc, bạn có thể liên hệ qua gmail king.of.melody.nhom.11@gmail.com để được hỗ trợ nhé!
+                <br>
+            </p>
         </div>
     </div>
 
@@ -510,6 +549,7 @@
             </div>
         </div>
     </div> -->
+    
     
     <script src="/modal_normal_rank.js"></script>
     <script>

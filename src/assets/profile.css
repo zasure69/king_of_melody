@@ -109,7 +109,7 @@ a {
     flex-direction: row;
     gap: 0.5rem;
     align-items: center;
-
+    padding-right: 2vw;
 }
 
 .username:hover {
@@ -527,6 +527,7 @@ input[type="submit"] {
         overflow-y: scroll;
         justify-content: flex-start;
     }
+    
 }
 @media screen and (max-width: 425px) {
     body {

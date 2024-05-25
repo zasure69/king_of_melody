@@ -6,10 +6,8 @@ const io  = require('../../index');
 let roomid = "";
 let room = [];
 
-//let listSong = {};
 let listSong = [];
 let loadSong = {};
-// let loadSong = true;
 let playersdone = {};
 
 const settingSchema = require('../models/Setting');
@@ -87,7 +85,6 @@ class playmultiController {
             else
             {
                 if (loadSong[rooms.roomid]){
-                // if (loadSong){
                     console.log("load song");
                     songSchema.aggregate([
                         { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
@@ -95,14 +92,12 @@ class playmultiController {
                         ])
                         .exec()
                         .then((songs) => {
-                            //listSong[rooms.roomid] = songs;
                             listSong = songs;
                             const infolist = [];
                             for (let i = 0; i < songs.length; i++) {
                                 infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                             }
                             loadSong[rooms.roomid] = false;
-                            // loadSong = false;
                             settingSchema.findOne({email: req.session.user.email})
                             .then((st) => {
                                 res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
@@ -114,9 +109,7 @@ class playmultiController {
                 }
                 else {
                     let songs = listSong;
-                    //let songs = listSong[rooms.roomid];
                     const infolist = [];
-                    //console.log("Songs: ", songs);
                     for (let i = 0; i < songs.length; i++) {
                         infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                     }
@@ -189,7 +182,6 @@ io.on("connection", async function(socket) {
                     }
                     else
                     {
-                        // console.log("roomid: ",room.roomid);
                         io.in(loadroom.roomid).emit("remain_players", loadroom.player[0].username, loadroom.player[1].username);
                         sem.release();
                     }
@@ -266,7 +258,6 @@ io.on("connection", async function(socket) {
             const player = send.player.filter(item => item.userid != iduser);
             console.log(player);
             Room.updateOne({roomid: send.roomid},{$set: {player: player, vacant: true}})
-            // Room.updateOne({roomid: send.roomid},{$set: {player: player, vacant: false}})
             .then(() =>{
                 if ( player.length == 0 ) {
                     Room.deleteOne({roomid: send.roomid})

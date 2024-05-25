@@ -9,8 +9,6 @@ class settingController {
                 res.render('setting', {userId: req.session.user._id,
                      efVL: result.EffectVL, musicVL: result.MusicVL,
                      IsEffectOn: result.IsEffectOn, IsSoundOn: result.IsSoundOn})
-                // res.render('setting', {userId: req.session.user._id, result: mongooseToObject(result)})
-                // res.json(result)
             })
             .catch(next)
     }

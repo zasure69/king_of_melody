@@ -235,8 +235,3 @@
     text-align: center;
     padding: 2em;
 }
-@media screen and (max-width: 425px) {
-    body {
-      orientation: landscape;
-    }
-}

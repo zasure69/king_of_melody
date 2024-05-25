@@ -120,7 +120,6 @@ class profileController {
                             userId: req.session.user._id, 
                             VL: result.EffectVL
                         })
-                        //res.json({user: user, VL: result.EffectVL})
                     })
                 } else {
                     User.findOne({email: req.session.user.email})
@@ -214,7 +213,6 @@ class profileController {
                             userId: req.session.user._id, 
                             VL: result.EffectVL
                         })
-                        //res.json({user: user, VL: result.EffectVL})
                     })
                 }
                 
@@ -249,7 +247,6 @@ class profileController {
                                             res.render('profile', {empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
                                         })
                                         .catch(next)
-                                    //res.json({user: user, VL: result.EffectVL})
                                 })
                                 .catch(next)
                             } else {
@@ -261,7 +258,6 @@ class profileController {
                                             res.render('profile', {empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
                                         })
                                         .catch(next)
-                                    //res.json({user: user, VL: result.EffectVL})
                                 })
                                 .catch(next)
                             }

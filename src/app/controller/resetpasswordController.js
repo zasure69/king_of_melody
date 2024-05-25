@@ -187,10 +187,6 @@ class resetPasswordController {
                                                     passwordResetSchema
                                                         .deleteOne({userId})
                                                         .then(() => {
-                                                            // res.json({
-                                                            //     status: 'Success',
-                                                            //     message: 'Mật khẩu thay đổi thành công'
-                                                            // })
                                                             res.render('changepasswordsuccess', {layout: false})
                                                         })
                                                         .catch(err => {

@@ -1,5 +1,6 @@
 “King of melody” là một website giải trí dưới hình thức giải câu đố về âm nhạc được thiết kế bởi Nhóm 11 thuộc lớp NT208.O23.ANTT. Web được tạo ra xuất phát từ yêu cầu giải trí, thư giãn của con người và lấy nguồn cảm hứng từ chủ đề âm nhạc. Chi tiết về tổng quan và chức năng của trang web như sau:<br><br>
-![image](https://github.com/zasure69/king_of_melody/assets/162142037/aa063fae-9784-4b89-a899-21c94d77d4a6)
+<img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/60498230/25333577-7418-42d1-870a-84db8b698f00">
+
 
 <h3>**TỔNG QUAN</h3>
 <ul>

@@ -163,10 +163,6 @@ class loginController {
             .find({email})
             .then(user => {
                 if (user.length == 0) {
-                    // res.json({
-                    //     status: "Failed",
-                    //     message: "Tài khoản không tồn tại"
-                    // })
                     const errorMessage = 'Tài khoản không tồn tại';
                     console.log(user, !!user, !user)
                     res.redirect('/login?errorsignin=' + encodeURIComponent(errorMessage));

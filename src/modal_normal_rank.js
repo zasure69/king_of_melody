@@ -15,7 +15,6 @@ var playnow_click = document.getElementById("play_now");
 var playnowbtn = document.getElementById("playnow_play");
 var createbtn = document.getElementById("create_play");
 
-//var username = document.getElementById("username");
 
 // Get the <span> element that closes the modal
 var span_thuong = document.getElementsByClassName("return_thuong")[0];
@@ -73,13 +72,10 @@ document.getElementById("username").onclick = function()
   }
 }
 create_room.addEventListener("submit", function(e) {
-  //round.preventDefault();
   e.preventDefault();
 
   var roomID = generateRoomId().toString();
   
-  console.log(typeof roomID);
-  console.log("hello");
   this.setAttribute("action",`/home/roomcreate/${roomID}`);
   this.submit(); 
 })
@@ -89,19 +85,10 @@ create_room.addEventListener("submit", function(e) {
 
 play_now.addEventListener("submit", function(e) {
   e.preventDefault();
-  console.log("hello");
   this.submit(); 
 })
 
 
-// playnowbtn.addEventListener("dblclick", function(event) {
-// event.preventDefault(); // Ngăn chặn sự kiện double click mặc định
-// });
-// username.onclick = function(){
-//   subnav.style.display = "block";
-// }
-
-// When the user clicks on <span> (TRỞ LẠI), close the modal
 span_thuong.onclick = function() {
   modal_thuong.style.display = "none";
 }

@@ -8,23 +8,6 @@ const { resolveSoa } = require('dns');
 
 class playsingleController {
     async index(req, res) {
-    //     const document = fs.readFileSync('../../resources/views/playsingle.hbs', 'utf8');
-    //     const $ = cheerio.load(document);
-    //     songsSchema.aggregate([
-    //         { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
-    //         { $sample: { size: 10} }
-    //         ])
-    //         .exec()
-    //         .then((songs) => {
-    //             res.render('playmulti')
-    //             console.log('Danh sách bài hát: ', songs);
-                
-    //         })
-    //         .catch((error) => {
-    //             console.log("Error: ", error);
-    //         })
-        
-        
         let listsong = await songSchema.aggregate([
             { $match: { mode: req.query.mode } },
             { $sample: { size: 10} },
@@ -35,7 +18,6 @@ class playsingleController {
         }
         let hintlist = await hintsongSchema.aggregate([
             { $sample: { size: 20} }
-            // { $project: { _id: 0, name: 1, singer: 2} }
         ])
 
         for (let i = 0; i < listsong.length; i++) {

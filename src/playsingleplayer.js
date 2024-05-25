@@ -1,8 +1,6 @@
 const socket = io();
-// document.addEventListener('DOMContentLoaded', function() {
   // Lấy các phần tử DOM cần sử dụng
-// import { Howl, Howler } from 'howler';
-// const { Howl, Howler } = require('howler');
+
 let songSlider = document.querySelector("#progress");
 let increaseVolume = document.querySelector("#increase-volume");
 let decreaseVolume = document.querySelector("#decrease-volume");
@@ -25,12 +23,6 @@ const msVL = document.getElementById('msVLInput');
 const songs = JSON.parse(songsInput.dataset.songs);
 const length = songs.length;
 
-// Sử dụng biến songs trong các xử lý JavaScript khác
-for(let i = 0; i < length; i++)
-{
-  console.log(songs[i].name);
-}
- // In danh sách bài hát trong console
 
 var correct_answer = new Howl({
   src: ['assets/sound/sound_correct_answer.mp3'],
@@ -99,7 +91,6 @@ function calculateDuration() {
     totalDuration += Math.ceil(play_song[j].duration());
     time_song.push(Math.ceil(play_song[j].duration() + 30));
   }
-  //console.log("Tổng thời lượng của các bài hát:", totalDuration);
   calculate_time(totalDuration);
 }
 function calculate_time(totalDuration){
@@ -120,7 +111,6 @@ function calculate_time(totalDuration){
 function calculate_time_song(totalDuration){
   let minutes = Math.floor((totalDuration) / 60) || 0;
   let second = Math.ceil(totalDuration - minutes * 60) || 0;
-  //minutes += 5;
   if (second < 10)
     second = "0" + second;
   else if (second == 60)
@@ -130,7 +120,6 @@ function calculate_time_song(totalDuration){
   }
   time.textContent = minutes + ":" + second;
   totalDuration = parseInt(minutes * 60) + parseInt(second);
- // return totalDuration;
 }
 
 loadSongs()
@@ -143,17 +132,12 @@ loadSongs()
     });
   })
   .then(function() {
-    console.log("Kết quả duration:", totalDuration);
+    
     })
   .catch(function(error) {
     console.log("Đã xảy ra lỗi:", error);
   });
 
-
-// function countdown(time_songs)
-// {
-
-// }
 var List_song = function (songs) {
   this.songs = songs;
   this.index = 0;
@@ -199,14 +183,6 @@ List_song.prototype = {
       count = -1;
       ctrlIcon.click();
     }
-    // var time = time_song[index];
-    // //totalDuration = 
-    // countdown = setInterval(() => {
-    //   time--;
-    //   calculate_time_song(time);
-    //   if (time == 0)
-    //     clearInterval(countdown);
-    // }, 1000)
   
   },
 
@@ -237,7 +213,6 @@ decreaseVolume.addEventListener('click', () =>{
 });
 
 ctrlIcon.addEventListener('click', ()=>{
-  //console.log(time_song);
   if (ctrlIcon.classList.contains("fa-pause"))
   {
     player.play(index);

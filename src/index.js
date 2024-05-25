@@ -11,30 +11,12 @@ const app = express()
 const port = (process.env.PORT || 3000)
 const fs = require('fs');
 
-// const https = require('https');
-
-
-// Đọc chứng chỉ SSL
-// const privateKey = fs.readFileSync('path/to/key.pem', 'utf8');
-// const certificate = fs.readFileSync('path/to/cert.pem', 'utf8');
-// const credentials = { key: privateKey, cert: certificate };
-
-// const httpsServer = https.createServer(credentials, app);
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-// const SocketServices = require('./app/services/room.service.js');
-// global._io = io; 
+
 
 module.exports = io;
-
-// global._io.on('connection', SocketServices.connection);
-
-// _io.on('connection',(socket) => {
-//   console.log(`User disconnect id is ${socket.id}`);
-//   global._io = socket;
-// })
-
 
 const route = require('./routes');
 const db = require('./config/db');
@@ -101,6 +83,3 @@ server.listen(port);
 
 module.exports = server;
 
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })

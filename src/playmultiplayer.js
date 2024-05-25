@@ -66,7 +66,7 @@ window.addEventListener('load', function() {
       socket.emit("afk", iduser, score);
       window.location.href = href_back.href;
     }
-  }, 30000); 
+  }, 120000); 
   isClicked1 = false;
 });
 
@@ -266,7 +266,7 @@ ctrlIcon.addEventListener('click', ()=>{
       socket.emit("afk", iduser, score);
       window.location.href = href_back.href;
     }
-  }, 30000); 
+  }, 120000); 
   if (start == true){
     if (ctrlIcon.classList.contains("fa-pause"))
     {

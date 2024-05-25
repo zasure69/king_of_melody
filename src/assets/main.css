@@ -401,12 +401,12 @@ body{
     margin: auto;
     z-index: 101;
     border-radius: 8px;
-    height: 95vh;
+    height: 85vh;
     width: 84vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    row-gap: 9vh;
+    row-gap: 5vh;
 }
 
 .modal_thuong .select_normal_mode_return{
@@ -435,8 +435,8 @@ body{
 }
 
 .modal_thuong .select_normal_mode_information >img {
-    height: 50px;
-    width: 50px;
+    height: 5vw;
+    width: 5vw;
     border-radius: 50%;
 }
 
@@ -447,7 +447,7 @@ body{
     padding: 5px;
     margin-right: 25px;
     gap: 5px;
-    font-size: 0.9rem;
+    font-size: 1.9rem;
     color: white;
     background-color: transparent;
 }
@@ -461,9 +461,8 @@ body{
 
 .modal_thuong .select_normal_mode_img{
     display: flex;
-    flex-flow: row wrap;
     justify-content: center;
-    gap: 7vw;
+    gap: 8vw;
 }
 
 .modal_thuong .select_normal_mode_img_Hell, .select_normal_mode_img_Heaven, .select_normal_mode_img_Waste_land{
@@ -1216,6 +1215,9 @@ table, th, tr{
         width: 150px;
         height: 150px;
     }
+    .modal_thuong .select_normal_mode_img{
+        gap: 5vw;
+    }
     #mode_no_hope {
         left: -6vh;
     }
@@ -1239,6 +1241,9 @@ table, th, tr{
     .select_rank_mode_body .select_rank_mode_information {
         justify-content: center;
         gap: 0;
+    }
+    .modal_thuong .select_normal_mode_information .information{
+        font-size: 0.9rem;
     }
     .modal_xep_hang .select_rank_mode_information .information {
         margin: 0;

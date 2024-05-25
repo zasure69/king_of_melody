@@ -148,6 +148,7 @@
 }
 .setting_container #back_home {
     color: aliceblue;
+    margin-top: 4vh;
 }
 @media only screen and (max-width: 450px) {
     .setting_container .space {
@@ -163,10 +164,7 @@
     }
     .setting_container {
         gap: 0.9rem;
-    }
-}
-@media screen and (max-width: 425px) {
-    body {
-      orientation: landscape;
+        overflow-y: scroll ;
+        justify-content: flex-start;
     }
 }

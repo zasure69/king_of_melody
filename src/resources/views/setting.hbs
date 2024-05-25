@@ -5,67 +5,104 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>King of Melody</title>
         <link rel="stylesheet" href="../../assets/setting.css">
+        <style type="text/css">
+        .wrapper-warning > img {
+            width: 50vw;
+        }
+        .wrapper-warning {
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        @media only screen and (orientation:portrait) {
+            .wrapper-warning {
+                display: flex;
+            }
+            .wrapper {
+                display: none;
+            }
+        }
+
+        @media only screen and (orientation:landscape) {
+            .wrapper-warning {
+                display: none;
+            }
+            .wrapper {
+                display: block;
+            }
+        }
+    </style>
     </head>
 <body>
-    <form method="POST" action="/home?_method=PUT" class="setting_container">
-        <p>CÀI ĐẶT</p>
-        <div class="menu">
+    <div class="wrapper">
+        <form method="POST" action="/home?_method=PUT" class="setting_container">
+            <p>CÀI ĐẶT</p>
+            <div class="menu">
 
-            <div class="selc">
-                <div class="ef_volume">
-                    <p class="name">ÂM LƯỢNG NHẠC</p>
-                    <div class="set">
-                        <div class="icon">
-                            <span class="material-symbols-outlined">
-                                music_note
-                            </span>
+                <div class="selc">
+                    <div class="ef_volume">
+                        <p class="name">ÂM LƯỢNG NHẠC</p>
+                        <div class="set">
+                            <div class="icon">
+                                <span class="material-symbols-outlined">
+                                    music_note
+                                </span>
+                            </div>
+                            <input id="msVL" name="MusicVL" type="range" value="{{musicVL}}" class="rangeslider" minlength="0" maxlength="1">
                         </div>
-                        <input id="msVL" name="MusicVL" type="range" value="{{musicVL}}" class="rangeslider" minlength="0" maxlength="1">
                     </div>
                 </div>
-            </div>
 
-            <div class="selc">
-                <div class="ef_volume">
-                    <p class="name">ÂM LƯỢNG HIỆU ỨNG</p>
-                    <div class="set">
-                        <div class="icon">
-                            <span class="material-symbols-outlined">
-                                graphic_eq
-                            </span>
+                <div class="selc">
+                    <div class="ef_volume">
+                        <p class="name">ÂM LƯỢNG HIỆU ỨNG</p>
+                        <div class="set">
+                            <div class="icon">
+                                <span class="material-symbols-outlined">
+                                    graphic_eq
+                                </span>
+                            </div>
+                            <input id="efVL" name="EffectVL" type="range" value="{{efVL}}" class="rangeslider" minlength="0" maxlength="100">
                         </div>
-                        <input id="efVL" name="EffectVL" type="range" value="{{efVL}}" class="rangeslider" minlength="0" maxlength="100">
+                    </div>
+                </div>
+                
+                <div class="space"></div>
+
+                <div class="selc_bot">
+                    <div class="ic_bot">
+                        <span class="material-symbols-outlined" id="icon_sound">
+                            volume_up
+                        </span> 
+                        <p class="text_bot" id="text_sound">BẬT ÂM LƯỢNG</p>
+                        <div class="ani_bot">
+                            <input name="IsSoundOn" type="checkbox" class="toggle" id="check_sound">
+                        </div>
+                    </div>
+
+                    <div class="ic_bot">
+                        <span class="material-symbols-outlined" id="icon_eff">
+                            blur_on
+                        </span>
+                        <p class="text_bot" id="text_eff">BẬT HIỆU ỨNG</p>
+                        <div class="ani_bot">
+                            <input name="IsEffectOn" type="checkbox" class="toggle" id="check_eff">
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="space"></div>
-
-            <div class="selc_bot">
-                <div class="ic_bot">
-                    <span class="material-symbols-outlined" id="icon_sound">
-                        volume_up
-                    </span> 
-                    <p class="text_bot" id="text_sound">BẬT ÂM LƯỢNG</p>
-                    <div class="ani_bot">
-                        <input name="IsSoundOn" type="checkbox" class="toggle" id="check_sound">
-                    </div>
-                </div>
-
-                <div class="ic_bot">
-                    <span class="material-symbols-outlined" id="icon_eff">
-                        blur_on
-                    </span>
-                    <p class="text_bot" id="text_eff">BẬT HIỆU ỨNG</p>
-                    <div class="ani_bot">
-                        <input name="IsEffectOn" type="checkbox" class="toggle" id="check_eff">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="space"></div>
-        <button type ="submit" id="back_home">ĐÓNG</button>
-    </form>
+            <button type ="submit" id="back_home">ĐÓNG</button>
+        </form>
+    </div>
+    <div class="wrapper-warning">
+        <img src="/assets/img/phone-rotate.png" alt="">
+        <div class="warning-content">Xoay ngang màn hình để tiếp tục sử dụng trang web</div>
+    </div>
+    
     <input type="hidden" id="soundInput" value="{{IsSoundOn}}">
     <input type="hidden" id="effectInput" value="{{IsEffectOn}}">
     <script defer src="/setting.js"></script>

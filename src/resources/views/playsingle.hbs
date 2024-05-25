@@ -12,8 +12,40 @@
         integrity="sha512-+wqa4/aOL4vwhL637A4p+6epqhUHDqpEfYJa1+PlzlMf908CSOb3xtIeKwZWh5Q0Q/R2nYUKxH4vvcQg+k8KKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js" 
         integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style type="text/css">
+            .wrapper-warning > img {
+                width: 50vw;
+            }
+            .wrapper-warning {
+                height: 100vh;
+                display: none;
+                flex-direction: column;
+                color: white;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            @media only screen and (orientation:portrait) {
+                .wrapper-warning {
+                    display: flex;
+                }
+                .wrapper {
+                    display: none;
+                }
+            }
+
+            @media only screen and (orientation:landscape) {
+                .wrapper-warning {
+                    display: none;
+                }
+                .wrapper {
+                    display: block;
+                }
+            }
+        </style>
     </head>
     <body>
+    <div class="wrapper">
         <div class="container">
             <div class="hint">
                 <h2>Bài hát gợi ý</h2>
@@ -140,6 +172,11 @@
                 </button>
             </div>
         </div>
+    </div>
+    <div class="wrapper-warning">
+        <img src="/assets/img/phone-rotate.png" alt="">
+        <div class="warning-content">Xoay ngang màn hình để tiếp tục sử dụng trang web</div>
+    </div>
         <input type="hidden" id="songsInput" data-songs="{{songs}}">
         <input type="hidden" id="userid" data-user="{{userid}}">
         <input type="hidden" id="mode" data-mode="{{mode}}">

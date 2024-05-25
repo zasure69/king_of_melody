@@ -63,16 +63,51 @@
                 padding: 10px;
                 text-align: center;
             }
+            .wrapper-warning > img {
+                width: 50vw;
+            }
+            .wrapper-warning {
+                height: 100vh;
+                display: none;
+                flex-direction: column;
+                color: white;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            @media only screen and (orientation:portrait) {
+                .wrapper-warning {
+                    display: flex;
+                }
+                .wrapper {
+                    display: none;
+                }
+            }
+
+            @media only screen and (orientation:landscape) {
+                .wrapper-warning {
+                    display: none;
+                }
+                .wrapper {
+                    display: block;
+                }
+            }
         </style>
     </head>
 
     <body>
-        <div class="container">
-            <div class="input-field">
-                <h2 class="title-1">Mail xác thực đã được gửi đến {{email}}</h2>
-                <i class="fa-solid fa-circle-check"></i>
-                <h3 class="guide">Vui lòng kiểm tra để hoàn tất đăng ký tài khoản</h3>
-            </div>                   
+        <div class="wrapper">
+            <div class="container">
+                <div class="input-field">
+                    <h2 class="title-1">Mail xác thực đã được gửi đến {{email}}</h2>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3 class="guide">Vui lòng kiểm tra để hoàn tất đăng ký tài khoản</h3>
+                </div>                   
+            </div>
+        </div>
+        <div class="wrapper-warning">
+            <img src="/assets/img/phone-rotate.png" alt="">
+            <div class="warning-content">Xoay ngang màn hình để tiếp tục sử dụng trang web</div>
         </div>
     </body>
 </html>

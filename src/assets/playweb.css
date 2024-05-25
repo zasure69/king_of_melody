@@ -74,6 +74,7 @@ body {
     /* left: 50%;
     top: 0; */
     /* width: calc(200/3) %; */
+    overflow-y: scroll;
 }
 
 .container .play-area img{

@@ -22,6 +22,7 @@ body{
     height: 100vh;
     background-repeat: no-repeat; 
     background-size: cover;
+
 }
 
 #header {
@@ -381,14 +382,15 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    row-gap: 9vh;
 }
 
 .modal_thuong .select_normal_mode_return{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.25rem;
-    padding: 1rem 1rem;
+    font-size: 2.25vw;
+    padding: 1vh;
 }
 
 .modal_thuong .select_normal_mode_return .return_thuong {
@@ -436,8 +438,8 @@ body{
 .modal_thuong .select_normal_mode_img{
     display: flex;
     flex-flow: row wrap;
-    gap: 30px;
-    margin: 24px 24px 12px;
+    justify-content: center;
+    gap: 7vw;
 }
 
 .modal_thuong .select_normal_mode_img_Hell, .select_normal_mode_img_Heaven, .select_normal_mode_img_Waste_land{
@@ -1047,12 +1049,12 @@ body{
 }
 
 .leaderboard .ldboardbody::-webkit-scrollbar {
-    width: 1em;
+    width: 1vw;
 }
 
 .leaderboard .ldboardbody::-webkit-scrollbar-thumb {
     background-color: #fff;
-    width: 2em;
+    width: 2vw;
     border-radius: 18px;
 }
 
@@ -1308,12 +1310,15 @@ table, th, tr{
     color: white;
 }
 
-@media only screen and (max-height: 450px) {
+@media only screen and (orientation: landscape) and (max-height: 450px) {
     /* #content .button .speaker {
         width: 90%;
         height: 90%;
         margin-top: -10%;
     } */
+    body {
+        overflow-y: scroll;
+    }
     #header {
         height: 73px;
     }
@@ -1346,7 +1351,6 @@ table, th, tr{
         border-radius: 15px;
     }
     .leaderboard .rank {
-        border: 4px solid black;
         margin: 5vh auto;
     }
     .ldheader {
@@ -1370,6 +1374,9 @@ table, th, tr{
     }
     #header .nav .username {
         font-size: 2.5vw;
+    }
+    .modal_thuong .select_normal_mode_body {
+        row-gap: 0vh;
     }
 }
 

@@ -861,7 +861,7 @@ socket.on("addpointtooppent", (score) =>{
 socket.on('endgame',() => {
   if (parseInt(score_player1.textContent) >  parseInt(score_player2.textContent)){
     socket.emit("score_win", score, iduser);
-    document.getElementsByClassName("container")[0].style.opacity = "0.35";
+    document.getElementsByClassName("play-area")[0].style.opacity = "0.35";
     document.getElementById("end-result").textContent = "Bạn đã dành chiến thắng!";
     endmodal.style.display = "flex";
     document.getElementById("endpoint").innerHTML = score_player1.innerHTML;
@@ -870,7 +870,7 @@ socket.on('endgame',() => {
   }
   else if (parseInt(score_player1.textContent) <  parseInt(score_player2.textContent)){
     socket.emit("score_lose", score, iduser);
-    document.getElementsByClassName("container")[0].style.opacity = "0.35";
+    document.getElementsByClassName("play-area")[0].style.opacity = "0.35";
     document.getElementById("end-result").textContent = "Bạn đã thua!";
     endmodal.style.display = "flex";
     document.getElementById("img-model-ava").src = "/assets/img/lose_rain.gif";
@@ -880,7 +880,7 @@ socket.on('endgame',() => {
   }
   else if (parseInt(score_player1.textContent) ==  parseInt(score_player2.textContent)) {
     socket.emit("score_draw", score, iduser);
-    document.getElementsByClassName("container")[0].style.opacity = "0.35";
+    document.getElementsByClassName("play-area")[0].style.opacity = "0.35";
     document.getElementById("end-result").textContent = "OMG! Bạn đã vô tình hòa đối thủ!";
     endmodal.style.display = "flex";
     document.getElementById("endpoint").innerHTML = score_player1.innerHTML;
@@ -891,7 +891,7 @@ socket.on('endgame',() => {
 })
 socket.on("endgame_exit", ()=>{
   socket.emit("score_win", score, iduser);
-  document.getElementsByClassName("container")[0].style.opacity = "0.35";
+  document.getElementsByClassName("play-area")[0].style.opacity = "0.35";
   document.getElementById("end-result").textContent = "Bạn đã dành chiến thắng!";
   endmodal.style.display = "flex";
   document.getElementById("endpoint").innerHTML = score_player1.innerHTML;

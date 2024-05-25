@@ -13,6 +13,37 @@
 .body  {
     height: 100vh;
 }
+
+.wrapper-warning > img {
+    width: 50vw;
+}
+.wrapper-warning {
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+@media only screen and (orientation:portrait) {
+    .wrapper-warning {
+        display: flex;
+    }
+    .wrapper {
+        display: none;
+    }
+}
+
+@media only screen and (orientation:landscape) {
+    .wrapper-warning {
+        display: none;
+    }
+    .wrapper {
+        display: block;
+    }
+}
+
 .landing-page-layout {
     display: flex;
     flex-direction: column;

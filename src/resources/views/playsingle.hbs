@@ -12,40 +12,9 @@
         integrity="sha512-+wqa4/aOL4vwhL637A4p+6epqhUHDqpEfYJa1+PlzlMf908CSOb3xtIeKwZWh5Q0Q/R2nYUKxH4vvcQg+k8KKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js" 
         integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <style type="text/css">
-            .wrapper-warning > img {
-                width: 50vw;
-            }
-            .wrapper-warning {
-                height: 100vh;
-                display: none;
-                flex-direction: column;
-                color: white;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-            @media only screen and (orientation:portrait) {
-                .wrapper-warning {
-                    display: flex;
-                }
-                .wrapper {
-                    display: none;
-                }
-            }
-
-            @media only screen and (orientation:landscape) {
-                .wrapper-warning {
-                    display: none;
-                }
-                .wrapper {
-                    display: block;
-                }
-            }
-        </style>
     </head>
     <body>
-    <div class="wrapper">
+    {{!-- <div class="wrapper"> --}}
         <div class="container">
             <div class="hint">
                 <h2>Bài hát gợi ý</h2>
@@ -101,78 +70,79 @@
                     <button id="guessButton">Đoán</button>
                 </div>
             </div>
-        </div>
-        <div id="end-model">
-            <div class="bg-model">
-                <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
-                <div class="end-model-content">
-                    <h2>Trò chơi kết thúc!</h2>
-                    <h3 id="end-model-score">Điểm của bạn: <span id="endpoint"></span> </h3>
-                </div>
-                <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
-            </div>
-            <div class="img-model">
-                <img src="/assets/img/zero-two-02.gif" alt="" id="img-model-ava">
-            </div>
-            <div class="btn-model">
-                <button class="home-btn" id="btn-detail" >
-                    <span id="btn">
-                        <h3>Chi tiết</h3>
-                    <span>
-                </button>
-                <button class="home-btn">
-                    <a href="" class="home-btn-a">
-                        <h3>Chơi tiếp</h3>
-                    </a>
-                </button>
-                <button class="home-btn">
-                    <a href="/home" class="home-btn-a">
-                        <h3>Trang chủ</h3>
-                    </a>
-                </button>
-            </div>
-        </div>
-        <div id="detail-model">
-            <div class="bg-model">
-                <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
-                <div class="header">
+            <div id="end-model">
+                <div class="bg-model">
+                    <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
                     <div class="end-model-content">
-                        <h3 id="end-model-score">Điểm của bạn: <span id="detailendpoint"></span> </h3>
+                        <h2>Trò chơi kết thúc!</h2>
+                        <h3 id="end-model-score">Điểm của bạn: <span id="endpoint"></span> </h3>
                     </div>
-                    <div class="num-ans">
-                        <h3>Đúng: <span id="num-r"></span></h3>
-                        <h3>Sai: <span id="num-w"></span></h3>
+                    <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
+                </div>
+                <div class="img-model">
+                    <img src="/assets/img/zero-two-02.gif" alt="" id="img-model-ava">
+                </div>
+                <div class="btn-model">
+                    <button class="home-btn" id="btn-detail" >
+                        <span id="btn">
+                            <h3>Chi tiết</h3>
+                        <span>
+                    </button>
+                    <button class="home-btn">
+                        <a href="" class="home-btn-a">
+                            <h3>Chơi tiếp</h3>
+                        </a>
+                    </button>
+                    <button class="home-btn">
+                        <a href="/home" class="home-btn-a">
+                            <h3>Trang chủ</h3>
+                        </a>
+                    </button>
+                </div>
+            </div>
+            <div id="detail-model">
+                <div class="bg-model">
+                    <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
+                    <div class="header">
+                        <div class="end-model-content">
+                            <h3 id="end-model-score">Điểm của bạn: <span id="detailendpoint"></span> </h3>
+                        </div>
+                        <div class="num-ans">
+                            <h3>Đúng: <span id="num-r"></span></h3>
+                            <h3>Sai: <span id="num-w"></span></h3>
+                        </div>
                     </div>
+                    <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
                 </div>
-                <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
-            </div>
-            <div class="song-detail">
-                <div class="songlist">
-                    <h2>Thông Tin Bài hát</h2>
+                <div class="song-detail">
+                    <div class="songlist">
+                        <h2>Thông Tin Bài hát</h2>
+                    </div>
+                    {{#each infolist}}
+                    <div class="songlist">
+                        <a href="{{this.link}}" target="_blank"><p>    {{this.name}} - {{this.singer}}</p></a>
+                    </div>
+                    {{/each}}
                 </div>
-                {{#each infolist}}
-                <div class="songlist">
-                    <a href="{{this.link}}" target="_blank"><p>    {{this.name}} - {{this.singer}}</p></a>
+                <div class="btn-model">
+                    <button class="home-btn-1" id="return">
+                        <h3>Trở lại</h3>
+                    </button>
+                    <button class="home-btn-1">
+                        <a href="" class="home-btn-a">
+                            <h3>Chơi tiếp</h3>
+                        </a>
+                    </button>
+                    <button class="home-btn-1">
+                        <a href="/home" class="home-btn-a">
+                            <h3>Trang chủ</h3>
+                        </a>
+                    </button>
                 </div>
-                {{/each}}
-            </div>
-            <div class="btn-model">
-                <button class="home-btn-1" id="return">
-                    <h3>Trở lại</h3>
-                </button>
-                <button class="home-btn-1">
-                    <a href="" class="home-btn-a">
-                        <h3>Chơi tiếp</h3>
-                    </a>
-                </button>
-                <button class="home-btn-1">
-                    <a href="/home" class="home-btn-a">
-                        <h3>Trang chủ</h3>
-                    </a>
-                </button>
             </div>
         </div>
-    </div>
+        
+        
     <div class="wrapper-warning">
         <img src="/assets/img/phone-rotate.png" alt="">
         <div class="warning-content">Xoay ngang màn hình để tiếp tục sử dụng trang web</div>

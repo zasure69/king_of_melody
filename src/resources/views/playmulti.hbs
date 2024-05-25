@@ -12,133 +12,99 @@
         integrity="sha512-+wqa4/aOL4vwhL637A4p+6epqhUHDqpEfYJa1+PlzlMf908CSOb3xtIeKwZWh5Q0Q/R2nYUKxH4vvcQg+k8KKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js" 
         integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <style type="text/css">
-            .wrapper-warning > img {
-                width: 50vw;
-            }
-            .wrapper-warning {
-                height: 100vh;
-                display: none;
-                flex-direction: column;
-                color: white;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-            @media only screen and (orientation:portrait) {
-                .wrapper-warning {
-                    display: flex;
-                }
-                .wrapper {
-                    display: none;
-                }
-            }
-
-            @media only screen and (orientation:landscape) {
-                .wrapper-warning {
-                    display: none;
-                }
-                .wrapper {
-                    display: block;
-                }
-            }
-        </style>
     </head>
     <body>
-        <div class="wrapper">
-            <div class="container">
+        <div class="container">
+            <div class="play-area" style="opacity: 1;">
+                <div class="info">
+                    <div class="player1-info">
+                        <div class="player1-info-illustrator">
+                            <img src="/assets/img/ava-crop.png" alt="">
+                            <div class="score-parallelogram">
+                                <div class="score-wrapper">
+                                    <h2 class="score-label" id="Score_player1">0</h2> 
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="player1-name" id="player1name">{{username_player1}}</h2>
+                    </div>
+                    <div class="round-time">
+                        <div class="btn-back" id="btn_back">
+                            <a href="/home" id="href_back">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                        <div class="round-info">
+                            Vòng<br>
+                            <h3 id="Round_play">1/{{round1}}</h3>
+                        </div>
+                        <div class="time-info">
+                            Thời gian<br>
+                            <h3 id="Time_duration">12:30</h3>
+                        </div>
+                        <div class="room-info" id="room">
+                            Phòng<br>
+                            <h3>{{rom}}</h3>
+                        </div>
+                    </div>
+                    <div class="player2-info">
+                        <div class="player2-info-illustrator">
+                            <img src="/assets/img/ava-crop.png" alt="">
+                            <div class="score-parallelogram">
+                                <div class="score-wrapper">
+                                    <h2 class="score-label" id="Score_player2">0</h2> 
+                                </div>
+                            </div>
+                        </div>
+                        <h2 class="player2-name" id="player2name">Hãy đợi người chơi 2</h2>
+                        <div class="subnav" id = "subnav">
+                            <div class="background">
+                                <div class="chat" id="message">HỒ SƠ</div>
+                            </div>
+                            
+                        </div>  
+                    </div>
+                </div>
                 
-                <div class="play-area">
-                    <div class="info">
-                        <div class="player1-info">
-                            <div class="player1-info-illustrator">
-                                <img src="/assets/img/ava-crop.png" alt="">
-                                <div class="score-parallelogram">
-                                    <div class="score-wrapper">
-                                        <h2 class="score-label" id="Score_player1">0</h2> 
-                                    </div>
-                                </div>
-                            </div>
-                            <h2 class="player1-name" id="player1name">{{username_player1}}</h2>
+                <div class="disc">
+                    <div class="button">
+                        <div class="chat_">
+                            <div class="chat_player" id="chat_multi"><i class="fa-solid fa-message"></i></div>
                         </div>
-                        <div class="round-time">
-                            <div class="btn-back" id="btn_back">
-                                <a href="/home" id="href_back">
-                                    <i class="fa-solid fa-arrow-left"></i>
-                                </a>
-                            </div>
-                            <div class="round-info">
-                                Vòng<br>
-                                <h3 id="Round_play">1/{{round1}}</h3>
-                            </div>
-                            <div class="time-info">
-                                Thời gian<br>
-                                <h3 id="Time_duration">12:30</h3>
-                            </div>
-                            <div class="room-info" id="room">
-                                Phòng<br>
-                                <h3>{{rom}}</h3>
-                            </div>
-                        </div>
-                        <div class="player2-info">
-                            <div class="player2-info-illustrator">
-                                <img src="/assets/img/ava-crop.png" alt="">
-                                <div class="score-parallelogram">
-                                    <div class="score-wrapper">
-                                        <h2 class="score-label" id="Score_player2">0</h2> 
-                                    </div>
-                                </div>
-                            </div>
-                            <h2 class="player2-name" id="player2name">Hãy đợi người chơi 2</h2>
-                            <div class="subnav" id = "subnav">
-                                <div class="background">
-                                    <div class="chat" id="message">HỒ SƠ</div>
-                                </div>
-                                
-                            </div>  
+                        
+                        <div class="circle">
+                            <div class="toggle"><i class="fa-solid fa-face-smile"></i></div>
+                            <li style="--i:0" class="like"><div><i class="fa-solid fa-thumbs-up"></i></div></li>
+                            <li style="--i:1" class="dislike"><div><i class="fa-solid fa-thumbs-down"></i></div></li>
+                            <li style="--i:2" class="sad"><div><i class="fa-solid fa-face-sad-cry"></i></div></li>
+                            <li style="--i:3" class="smile"><div><i class="fa-solid fa-face-laugh-beam"></i></div></li>
+                            <li style="--i:4" class="angry"><div><i class="fa-solid fa-face-angry"></i></div></li>
+                            <li style="--i:5" class="heart"><div><i class="fa-solid fa-face-grin-hearts"></i></div></li>
                         </div>
                     </div>
                     
-                    <div class="disc">
-                        <div class="button">
-                            <div class="chat_">
-                                <div class="chat_player" id="chat_multi"><i class="fa-solid fa-message"></i></div>
-                            </div>
+                    <div class="disc_progress">
+                        <img src="/assets/img/dianhac2.png" class="discimg" id="music_disc" alt="disc">
+                        <div class="btn">
+                            <div><input type="range" value="0" id="progress"></div>
                             
-                            <div class="circle">
-                                <div class="toggle"><i class="fa-solid fa-face-smile"></i></div>
-                                <li style="--i:0" class="like"><div><i class="fa-solid fa-thumbs-up"></i></div></li>
-                                <li style="--i:1" class="dislike"><div><i class="fa-solid fa-thumbs-down"></i></div></li>
-                                <li style="--i:2" class="sad"><div><i class="fa-solid fa-face-sad-cry"></i></div></li>
-                                <li style="--i:3" class="smile"><div><i class="fa-solid fa-face-laugh-beam"></i></div></li>
-                                <li style="--i:4" class="angry"><div><i class="fa-solid fa-face-angry"></i></div></li>
-                                <li style="--i:5" class="heart"><div><i class="fa-solid fa-face-grin-hearts"></i></div></li>
+                            <div id="progress-control">
+                                <div><i class="fa-solid fa-volume-low" id="decrease-volume"></i></div>
+                                <div><i class="fa-solid fa-pause" id="ctrlIcon"></i></div>
+                                <div><i class="fa-solid fa-volume-high" id="increase-volume"></i></div>
                             </div>
                         </div>
-                        
-                        <div class="disc_progress">
-                            <img src="/assets/img/dianhac2.png" class="discimg" id="music_disc" alt="disc">
-                            <div class="btn">
-                                <div><input type="range" value="0" id="progress"></div>
-                                
-                                <div id="progress-control">
-                                    <div><i class="fa-solid fa-volume-low" id="decrease-volume"></i></div>
-                                    <div><i class="fa-solid fa-pause" id="ctrlIcon"></i></div>
-                                    <div><i class="fa-solid fa-volume-high" id="increase-volume"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
                     </div>
-                    <div class="answer">
-                        <input type="text" id="answer_song" placeholder="Nhập tên bài hát">
-                        
-                        <button id="guessButton">Đoán</button>
-                    </div>
+                    
+                    
+                </div>
+                <div class="answer">
+                    <input type="text" id="answer_song" placeholder="Nhập tên bài hát">
+                    
+                    <button id="guessButton">Đoán</button>
                 </div>
             </div>
-            
+
             <div id="end-model">
                 <div class="bg-model">
                     <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
@@ -212,6 +178,8 @@
 
             <div class="player2_icon"><i class="fa-solid fa-thumbs-up" id="icon_" style="display: none; color: #48f1eb;"></i></div>
         </div>
+        
+        
         <div class="wrapper-warning">
             <img src="/assets/img/phone-rotate.png" alt="">
             <div class="warning-content">Xoay ngang màn hình để tiếp tục sử dụng trang web</div>

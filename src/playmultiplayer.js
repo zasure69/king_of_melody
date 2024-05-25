@@ -26,6 +26,7 @@ let sendButton = document.getElementById("sendbtn");
 let chat = document.getElementById("chat_play");
 let subnav = document.getElementById("subnav");
 let chatmess = document.getElementById("message");
+let roomid = document.getElementById("roomid-info");
 
 const userid = document.getElementById('userid');
 const iduser = userid.dataset.user;
@@ -363,6 +364,7 @@ guessButton.addEventListener('click', () => {
       socket.emit("addpointtooppent",score);
       setTimeout(playNextSong, 1000);
       answer_song.value = "";
+      socket.emit("check_player", score, iduser, roomid.textContent);
     }
     else if ( answer_value != songs[index].name.toLowerCase() || answer_song.value == "")
     {
@@ -378,7 +380,7 @@ guessButton.addEventListener('click', () => {
       numwrong++;
       setTimeout(playNextSong, 1000);
       answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
-      
+      socket.emit("check_player", score, iduser, roomid.textContent);
     }
     if (index == Numround - 1)
     {
@@ -856,6 +858,9 @@ socket.on("endgame_exit", ()=>{
   endgame.volume(0.5);
   endgame.play();
 }) 
+socket.on("pull_roomid", () =>{
+  socket.emit("push_roomid", roomid.textContent);
+})
 home.addEventListener('click', (e)=>{;
   socket.emit("render_home", iduser);
 })

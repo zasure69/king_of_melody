@@ -4,10 +4,10 @@
 
 <h3>**TỔNG QUAN</h3>
 <ul>
-  <li>Ngôn ngữ cấu tạo của web: HTML/CSS, JAVASCRIPT.</li>
-  <li>Framework: REACJS.</li>
+  <li>Frontend: HTML/CSS, JAVASCRIPT.</li>
+  <li>Backend: NODEJS, EXPRESSJS.</li>
   <li>Cách thức thao tác bên người dùng: thao tác trên giao diện được thiết kế sẵn.</li>
-  <li>Database: có database lưu trữ (MySQL).</li>
+  <li>Database: có database lưu trữ (Mongodb).</li>
 </ul>
 
 <h3>**VỀ CHỨC NĂNG</h3>
@@ -17,12 +17,14 @@
   <ul>
     <li>Giao diện đăng nhập, đăng ký: người chơi chỉ cần điền thông tin cơ bản như gmail, họ tên và tự tạo cho mình mật khẩu là đã có một tài khoản để chơi/ lưu trữ.</li>
     <li>Giao diện setting: được cài đặt một số tính năng cơ bản về âm lượng, tắt/ bật âm,… người chơi chỉ cần thao tác kéo thả hoặc click là có thể điều chỉnh được.</li>
-    <li>Giao diện chơi game: nghe câu đố chỉ cần ấn nút “Play” là có thể phát, giải đố bằng cách nhập thông tin câu trả lời vào ô được bố trí sẵn và submit là đã xong giải đố.</li>
+    <li>Giao diện chơi game: nghe câu đố chỉ cần ấn nút “Play” là có thể phát, giải đố bằng cách nhập thông tin câu trả lời vào ô được bố trí sẵn và nút "Đoán" là đã xong giải đố.</li>
   </ul>
   </li>
-  <li>Người chơi có thể xem các thông tin về số điểm, thứ hạng của bản thân tại các giao diện “Thành tích” và “Xếp hạng”. Số điểm của bản thân trong quá trình chơi sẽ được tích lũy một cách tự động và được lưu trữ tại giao diện “Thành tích”, điểm của bạn cũng sẽ được sắp xếp lên bảng xếp hạng một cách tự động (nếu bạn được điểm cao).</li>
+  <li>Người chơi có thể xem các thông tin về số điểm, thứ hạng của bản thân tại các giao diện “Hồ sơ” và “Bảng xếp hạng”. Số điểm của bản thân trong quá trình chơi sẽ được tích lũy một cách tự động và được lưu trữ tại giao diện “Hồ sơ”, điểm của bạn cũng sẽ được sắp xếp lên bảng xếp hạng một cách tự động (nếu bạn được điểm cao).</li>
   <li>Website cho phép người chơi được tham gia nhiều chế độ, nhiều mức độ khác nhau. Về mức độ chơi, người chơi có thể tham các mức độ “Khó” < “Tuyệt vọng” < “Địa ngục”, mỗi mức độ sẽ có độ khó và mức độ thú vị khác nhau để người chơi có thể trải nghiệm sự đa dạng và phong phú của âm nhạc, sẽ được trải nghiệm cảm giác “tuy lạ mà quen” trong giới âm nhạc. Về chế độ chơi, người chơi có thể tích lũy kinh nghiệm, kiến thức về bài hát tại chế độ “Thường”, hoặc có thể solo kinh nghiệm tại chế độ “Xếp hạng”.</li>
-  <li>Về vấn đề tài khoản và bảo mật: website sẽ đảm bảo an toàn và bảo mật về thông tin của những người chơi, chỉ hiển thị công khai một số thông tin cần thiết như “Username”. Người chơi có thể tạo nhiều tài khoản chỉ từ một tài khoản gmail để phòng trường hợp người chơi quên vĩnh viễn tài khoản hoặc muốn trải nghiệm “chơi mới” trò chơi này nhưng chỉ có một gmail.</li>
+  <li>Trong chế độ "Xếp hạng", người chơi có thể gửi tin nhắn và icon đến người chơi đối diện.</li>
+  <li> Trong giao diện "Hồ sơ", người chơi có thể thêm bài hát thông qua khi ấn nút "Thêm bài hát". Lúc này, người dùng cần nhập đầy đủ thông tin cần thiết như: tên bài hát, tên ca sĩ, đường dẫn của bài hát (nếu có) và thêm 1 đoạn nhạc dài 30 giây đối với bài hát không lời và 15 giây đối với bài hát có lời.</li>
+  <li>Về vấn đề tài khoản và bảo mật: website sẽ đảm bảo an toàn và bảo mật về thông tin của những người chơi, chỉ hiển thị công khai một số thông tin cần thiết như “Username”.</li>
 </ul>
 
 <h4><i>* Về phía người quản lý:</i></h4>
@@ -32,8 +34,6 @@
     <li>Thông tin người chơi: Tài khoản, mật khẩu, username hiển thị. Người quản lý phải đảm bảo về bảo mật thông tin người chơi. Có thể mã hóa các thông tin cần thiết.</li>
     <li>Thành tích người chơi: thông tin này sẽ được cập nhật tự động.</li>
     <li>Thông tin bài hát: Tên tác giả, tên bài hát.</li>
-    <li>Âm thanh gây nhiễu.</li>
-    <li>Quá trình chơi của người chơi: Lưu tiến độ người chơi, để khi người chơi quay lại thì có thể tiếp tục quá trình chơi trước đó. Thông tin này sẽ được cập nhật tự động.</li>
   </ul>
   </li>
   <li>Các thao tác mà người quản lý có thể làm:

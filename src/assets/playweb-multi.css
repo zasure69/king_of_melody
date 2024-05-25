@@ -275,7 +275,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin: 2vh;
 }
 
 .container .play-area .disc .button{
@@ -455,7 +454,7 @@ body {
 }
 
 .container .play-area .disc img {
-    width: 36%;
+    width: 35%;
 }
 
 .container .play-area .disc .btn {
@@ -784,6 +783,9 @@ body {
     .song-detail > .songlist h2 {
         font-size: 1.5rem;
     }
+    .container .play-area {
+        overflow-y: scroll;
+    }
     .container .play-area .disc img {
         width: 32%;
     }
@@ -795,6 +797,10 @@ body {
     }
     .container .play-area .disc {
         margin: 0;
+        overflow-y: scroll;
+    }
+    .container .play-area .info .round-time {
+        width: 36vw;
     }
     .chat_player {
         font-size: 2vw;

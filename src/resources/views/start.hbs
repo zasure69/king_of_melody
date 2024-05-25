@@ -5,100 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>King of Melody</title>
     <link rel="stylesheet" href="../assets/start.css">
+    <link rel="icon" href="/assets/img/favicon.png">
+    <style type="text/css">
+        .wrapper-warning > img {
+            width: 50vw;
+        }
+        .wrapper-warning {
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        @media only screen and (orientation:portrait) {
+            .wrapper-warning {
+                display: flex;
+            }
+            .wrapper {
+                display: none;
+            }
+        }
+
+        @media only screen and (orientation:landscape) {
+            .wrapper-warning {
+                display: none;
+            }
+            .wrapper {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="landing-page-layout">
-        <div class="header_container">
-            <div class="header-left">
-                <img src="/assets/img/Logo_LTMCB_fix.png" alt="logo">
-            </div>
-            <div class="header-right">
-                <a href="login" class="btn-sign-in">
-                    <div class="btn-wrapper">
-                        <span class="label">Đăng nhập</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="body">
-            
-            {{!-- <img src="/assets/img/musicparty.png" alt="" class="background-content">  --}}
-            
-            <div class="content">
-                <div class="body-content">
+    <div class="wrapper">
+        <div class="landing-page-layout">
+            <div class="header_container">
+                <div class="header-left">
                     <img src="/assets/img/Logo_LTMCB_fix.png" alt="logo">
-                    <div class="spacer1" style="height: 12px;"></div>
-                    <h1 class="start-page-headline">Chinh phục giai điệu</h1>
-                    <div class="spacer1"></div>
-                    <h2 class="start-page-description">
-                        Lắng nghe giai điệu của bài hát ở các quốc gia khác nhau và chinh phục chúng.
-                        <br>
-                        Hãy tham gia với chúng tôi nào!
+                </div>
+                <div class="header-right">
+                    <a href="login" class="btn-sign-in">
+                        <div class="btn-wrapper">
+                            <span class="label">Đăng nhập</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="body">    
+                <div class="content">
+                    <div class="body-content">
+                        <img src="/assets/img/Logo_LTMCB_fix.png" alt="logo">
+                        <div class="spacer1" style="height: 12px;"></div>
+                        <h1 class="start-page-headline">Chinh phục giai điệu</h1>
+                        <div class="spacer1"></div>
+                        <h2 class="start-page-description">
+                            Lắng nghe giai điệu của bài hát ở các quốc gia khác nhau <br> và chinh phục chúng.
+                            <br>
+                            Hãy tham gia với chúng tôi nào!
+                        </h2>
+                        <div class="play-button">
+                            <a href="login" class="play-button-link">
+                                <div class="play-button-wrapper">
+                                    <span class="play-button-label">Chơi ngay</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="below-content">
+                    <div class="spacer2"></div>
+                    <div class="below-content-container">
+                        <div class="teaser1">
+                            <div class="content-teaser1">
+                                <div class="content-headline1">
+                                    <h2 class="headline-heading1">
+                                        Chinh phục giai điệu
+                                        
+                                    </h2>
+                                </div>
+                                <div class="content-body1">
+                                    <br>
+                                    Lắng nghe giai điệu của bài hát ở các quốc gia khác nhau và chinh phục chúng.
+                                </div>
+                            </div>
+                            <img src="/assets/img/teaser-speaker.png" alt="">
+                        </div>
+                        <div class="teaser2">
+                            <div class="content-teaser2">
+                                <div class="content-headline2">
+                                    <h2 class="headline-heading2">
+                                        Chơi cùng bạn bè
+                                    </h2>
+                                </div>
+                                <div class="content-body2">
+                                    <br>
+                                    Tăng cao khả năng của bản thân khi chơi cùng bạn bè và gia đình. Tạo phòng và so tài với nhau.
+                                </div>
+                            </div>
+                            <img src="/assets/img/teaser-parties.png" alt="">
+                        </div>
+                        <div class="teaser3">
+                            <div class="content-teaser3">
+                                <div class="content-headline3">
+                                    <h2 class="headline-heading3">
+                                        Thách đấu với người chơi khác
+                                    </h2>
+                                </div>
+                                <div class="content-body3">
+                                    <br>
+                                    Đọ sức với các người chơi khác và trở thành một chuyên gia về âm nhạc nào!
+                                </div>
+                            </div>
+                            <img src="/assets/img/teaser-compete.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <h2 class="copyright">
+                        Một sản phẩm của Nhóm 11
                     </h2>
-                    <div class="play-button">
-                        <a href="login" class="play-button-link">
-                            <div class="play-button-wrapper">
-                                <span class="play-button-label">Chơi ngay</span>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
-            <div class="below-content">
-                <div class="spacer2"></div>
-                <div class="below-content-container">
-                    <div class="teaser1">
-                        <div class="content-teaser1">
-                            <div class="content-headline1">
-                                <h2 class="headline-heading1">
-                                    Chinh phục giai điệu
-                                    
-                                </h2>
-                            </div>
-                            <div class="content-body1">
-                                <br>
-                                Lắng nghe giai điệu của bài hát và chinh phục chúng.
-                            </div>
-                        </div>
-                        <img src="/assets/img/teaser-speaker.png" alt="">
-                    </div>
-                    <div class="teaser2">
-                        <div class="content-teaser2">
-                            <div class="content-headline2">
-                                <h2 class="headline-heading2">
-                                    Chơi cùng bạn bè
-                                </h2>
-                            </div>
-                            <div class="content-body2">
-                                <br>
-                                Tăng cao khả năng của bản thân khi chơi cùng bạn bè và gia đình. Tạo phòng và so tài với nhau.
-                            </div>
-                        </div>
-                        <img src="/assets/img/teaser-parties.png" alt="">
-                    </div>
-                    <div class="teaser3">
-                        <div class="content-teaser3">
-                            <div class="content-headline3">
-                                <h2 class="headline-heading3">
-                                    Thách đấu với người chơi khác
-                                </h2>
-                            </div>
-                            <div class="content-body3">
-                                <br>
-                                Đọ sức với các người chơi khác và trở thành một chuyên gia về âm nhạc nào!
-                            </div>
-                        </div>
-                        <img src="/assets/img/teaser-compete.png" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <h2 class="copyright">
-                    Một sản phẩm của Nhóm 11
-                </h2>
-            </div>
+            
         </div>
-        
+    </div>
+    <div class="wrapper-warning">
+        <img src="/assets/img/phone-rotate.png" alt="">
+        <div class="warning-content">Xoay ngang màn hình để tiếp tục sử dụng trang web</div>
     </div>
 </body>
 </html>

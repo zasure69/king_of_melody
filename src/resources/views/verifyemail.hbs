@@ -5,8 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE-edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/d42216d8d0.js" crossorigin="anonymous"></script>
-        {{!-- <link rel="stylesheet" href="../assets/sign.css"> --}}
-        <title>Signin-Signup</title>
+        <title>King of Melody</title>
         <style>
             @font-face {
             font-family: neosans;
@@ -25,7 +24,6 @@
                 align-items: center;
                 justify-content: center;
             }
-
             .container {
                 background: white;
                 display: flex;
@@ -73,17 +71,52 @@
             .btn:hover {
                 background-color: #444;
             }
+            .wrapper-warning > img {
+                width: 50vw;
+            }
+            .wrapper-warning {
+                height: 100vh;
+                display: none;
+                flex-direction: column;
+                color: white;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            @media only screen and (orientation:portrait) {
+                .wrapper-warning {
+                    display: flex;
+                }
+                .wrapper {
+                    display: none;
+                }
+            }
+
+            @media only screen and (orientation:landscape) {
+                .wrapper-warning {
+                    display: none;
+                }
+                .wrapper {
+                    display: block;
+                }
+            }
         </style>
     </head>
 
     <body>
-        <div class="container">
-            <div class="input-field">
-                <h2 class="title-1">Email đã được xác thực thành công</h2>
-                <i class="fa-solid fa-circle-check"></i>
-                <h3 class="guide">Bấm nút bên dưới để đăng nhập</h3>
-            </div>                   
-            <button class="btn"><a href="/login">Đăng nhập</a></button>
+        <div class="wrapper">
+            <div class="container">
+                <div class="input-field">
+                    <h2 class="title-1">Email đã được xác thực thành công</h2>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3 class="guide">Bấm nút bên dưới để đăng nhập</h3>
+                </div>                   
+                <button class="btn"><a href="/login">Đăng nhập</a></button>
+            </div>
+        </div>
+        <div class="wrapper-warning">
+            <img src="/assets/img/phone-rotate.png" alt="">
+            <div class="warning-content">Xoay ngang màn hình để tiếp tục sử dụng trang web</div>
         </div>
     </body>
 </html>

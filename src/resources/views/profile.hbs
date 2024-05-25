@@ -12,156 +12,193 @@
     integrity="sha512-+wqa4/aOL4vwhL637A4p+6epqhUHDqpEfYJa1+PlzlMf908CSOb3xtIeKwZWh5Q0Q/R2nYUKxH4vvcQg+k8KKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js" 
     integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style type="text/css">
+        .wrapper-warning > img {
+            width: 50vw;
+        }
+        .wrapper-warning {
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            color: white;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        @media only screen and (orientation:portrait) {
+            .wrapper-warning {
+                display: flex;
+            }
+            .wrapper {
+                display: none;
+            }
+        }
+
+        @media only screen and (orientation:landscape) {
+            .wrapper-warning {
+                display: none;
+            }
+            .wrapper {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="layer">
-        <div class="_header">
-            <header class="header_header">
-                <div class="side_nav">
-                    <div class="menu"></div>
-                    <div class="back_main">
-                        <a href="/home">
-                            <span class="material-symbols-outlined">
-                                arrow_back
-                            </span>
-                        </a>
+    <div class="wrapper">
+        <div class="layer">
+            <div class="_header">
+                <header class="header_header">
+                    <div class="side_nav">
+                        <div class="menu"></div>
+                        <div class="back_main">
+                            <a href="/home">
+                                <span class="material-symbols-outlined">
+                                    arrow_back
+                                </span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="label">Hồ sơ</div>
-                <div class="right_header">
-                    <div class="player" >
-                        <div class="nav">
-                            <div class = "username" id = "username">
-                                <img src="/assets/img/Avatar_header.jpg" alt="" >
-                                <span id="user_logo">{{username}}</span>
-                            </div>                     
-                        </div>                            
+                    <div class="label">Hồ sơ</div>
+                    <div class="right_header">
+                        <div class="player" >
+                            <div class="nav">
+                                <div class = "username" id = "username">
+                                    <img src="/assets/img/Avatar_header.jpg" alt="" >
+                                    <span id="user_logo">{{username}}</span>
+                                </div>                     
+                            </div>                            
+                        </div>
                     </div>
-                </div>
-            </header>
-        </div>
-        <main class="_main" >
-            <div class="container_ctx">
-                <div class="profile_header">
-                    <div class="div_gif">
-                        <img src="/assets/img/toothless-dancing-toothless.gif" alt="" class="img_gif">
-                    </div>
-                    <div class="profile_header_aside">
-                        <div class="profile_userrank">Hạng</div>
-                        <div class="profile_username">{{rank}}</div>
-                        <div class="profile_progress">
-                            <div class="progress_bar">
-                                <div class="progress_lv" style="color: mediumspringgreen;">Lv {{level}}</div>
-                                <div class="progress-bar">
-                                    <div class="progress-bar-inner"></div>
-                                    <span class="progress-bar-label">{{exe}}</span>
+                </header>
+            </div>
+            <main class="_main" >
+                <div class="container_ctx">
+                    <div class="profile_header">
+                        <div class="div_gif">
+                            <img src="/assets/img/toothless-dancing-toothless.gif" alt="" class="img_gif">
+                        </div>
+                        <div class="profile_header_aside">
+                            <div class="profile_userrank">Hạng</div>
+                            <div class="profile_username">{{rank}}</div>
+                            <div class="profile_progress">
+                                <div class="progress_bar">
+                                    <div class="progress_lv" style="color: mediumspringgreen;">Lv {{level}}</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-bar-inner"></div>
+                                        <span class="progress-bar-label">{{exe}}</span>
+                                    </div>
+                                    <div class="up_song_user">Thêm bài hát</div>
                                 </div>
-                                <div class="up_song_user">Thêm bài hát</div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="profile_main">
-                    <div class="boundary"></div>
-                    <div class="profile_main_inf">
-                        <div class="main_label">THỐNG KÊ</div>
-                        <div class="main_mask">
-                            <div class="mask_item">
-                                <div class="mask_number">{{complete}}</div>
-                                <div class="mask_des">SỐ TRẬN CHƠI</div>
+                    <div class="profile_main">
+                        <div class="boundary"></div>
+                        <div class="profile_main_inf">
+                            <div class="main_label">THỐNG KÊ</div>
+                            <div class="main_mask">
+                                <div class="mask_item">
+                                    <div class="mask_number">{{complete}}</div>
+                                    <div class="mask_des">SỐ TRẬN CHƠI</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{best}}</div>
+                                    <div class="mask_des">TRẬN TỐT NHẤT</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{avg}}</div>
+                                    <div class="mask_des">ĐIỂM TRUNG BÌNH</div>
+                                </div>
                             </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{best}}</div>
-                                <div class="mask_des">TRẬN TỐT NHẤT</div>
+                            <div class="space"></div>
+                            <div class="main_label">CHẾ ĐỘ THƯỜNG</div>
+                            <div class="main_mask">
+                                <div class="mask_item">
+                                    <div class="mask_number">{{hardGames}}</div>
+                                    <div class="mask_des">SỐ TRẬN MỨC ĐỘ KHÓ</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{hardWinGames}}</div>
+                                    <div class="mask_des">SỐ TRẬN THẮNG MỨC ĐỘ KHÓ</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{rateHard}}%</div>
+                                    <div class="mask_des">TỈ LỆ THẮNG MỨC ĐỘ KHÓ</div>
+                                </div>
                             </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{avg}}</div>
-                                <div class="mask_des">ĐIỂM TRUNG BÌNH</div>
+                            <div class="main_mask">
+                                <div class="mask_item">
+                                    <div class="mask_number">{{hellGames}}</div>
+                                    <div class="mask_des">SỐ TRẬN MỨC ĐỘ ĐỊA NGỤC</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{hellWinGames}}</div>
+                                    <div class="mask_des">SỐ TRẬN THẮNG MỨC ĐỊA NGỤỤC</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{rateHell}}%</div>
+                                    <div class="mask_des">TỈ LỆ THẮNG MỨC ĐỘ ĐỊA NGỤC</div>
+                                </div>
                             </div>
+                            <div class="main_mask">
+                                <div class="mask_item">
+                                    <div class="mask_number">{{nohopeGames}}</div>
+                                    <div class="mask_des">SỐ TRẬN MỨC ĐỘ TUYỆT VỌNG</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{nohopeWinGames}}</div>
+                                    <div class="mask_des">SỐ TRẬN THẮNG MỨC TUYỆT VỌNG</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{rateNohope}}%</div>
+                                    <div class="mask_des">TỈ LỆ THẮNG MỨC ĐỘ TUYỆT VỌNG</div>
+                                </div>
+                            </div>
+                            <div class="space"></div>
+                            <div class="main_label">CHẾ ĐỘ XẾP HẠNG</div>
+                            <div class="main_mask">
+                                <div class="mask_item">
+                                    <div class="mask_number">{{multiGames}}</div>
+                                    <div class="mask_des">SỐ TRẬN CHƠI</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{multiWinGames}}</div>
+                                    <div class="mask_des">SỐ TRẬN THẮNG</div>
+                                </div>
+                                <div class="mask_item">
+                                    <div class="mask_number">{{rateMul}}%</div>
+                                    <div class="mask_des">TỈ LỆ THẮNG</div>
+                                </div>
+                            </div>
+                            <div class="space"></div>
                         </div>
-                        <div class="space"></div>
-                        <div class="main_label">CHẾ ĐỘ THƯỜNG</div>
-                        <div class="main_mask">
-                            <div class="mask_item">
-                                <div class="mask_number">{{hardGames}}</div>
-                                <div class="mask_des">SỐ TRẬN MỨC ĐỘ KHÓ</div>
-                            </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{hardWinGames}}</div>
-                                <div class="mask_des">SỐ TRẬN THẮNG MỨC ĐỘ KHÓ</div>
-                            </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{rateHard}}%</div>
-                                <div class="mask_des">TỈ LỆ THẮNG MỨC ĐỘ KHÓ</div>
-                            </div>
-                        </div>
-                        <div class="main_mask">
-                            <div class="mask_item">
-                                <div class="mask_number">{{hellGames}}</div>
-                                <div class="mask_des">SỐ TRẬN MỨC ĐỘ ĐỊA NGỤC</div>
-                            </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{hellWinGames}}</div>
-                                <div class="mask_des">SỐ TRẬN THẮNG MỨC ĐỊA NGỤỤC</div>
-                            </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{rateHell}}%</div>
-                                <div class="mask_des">TỈ LỆ THẮNG MỨC ĐỘ ĐỊA NGỤC</div>
-                            </div>
-                        </div>
-                        <div class="main_mask">
-                            <div class="mask_item">
-                                <div class="mask_number">{{nohopeGames}}</div>
-                                <div class="mask_des">SỐ TRẬN MỨC ĐỘ TUYỆT VỌNG</div>
-                            </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{nohopeWinGames}}</div>
-                                <div class="mask_des">SỐ TRẬN THẮNG MỨC TUYỆT VỌNG</div>
-                            </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{rateNohope}}%</div>
-                                <div class="mask_des">TỈ LỆ THẮNG MỨC ĐỘ TUYỆT VỌNG</div>
-                            </div>
-                        </div>
-                        <div class="space"></div>
-                        <div class="main_label">CHẾ ĐỘ XẾP HẠNG</div>
-                        <div class="main_mask">
-                            <div class="mask_item">
-                                <div class="mask_number">{{multiGames}}</div>
-                                <div class="mask_des">SỐ TRẬN CHƠI</div>
-                            </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{multiWinGames}}</div>
-                                <div class="mask_des">SỐ TRẬN THẮNG</div>
-                            </div>
-                            <div class="mask_item">
-                                <div class="mask_number">{{rateMul}}%</div>
-                                <div class="mask_des">TỈ LỆ THẮNG</div>
-                            </div>
-                        </div>
-                        <div class="space"></div>
+                        <div class="boundary" style="margin: 0;"></div>
                     </div>
-                    <div class="boundary" style="margin: 0;"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="team_modal">
-        <div class="modal_update_song" id="modal_update_song">
-            <div class="album">Thêm bài hát</div>
-            <div class="numofsong">Còn trống: <span id="empty">{{empty}}</span></div>
-            <form id="songForm" method="POST" action="/profile" enctype="multipart/form-data">
-                <label for="songName">Tên Bài Hát:</label><br>
-                <input type="text" class="Input" id="songName" name="songName" required><br>
-                <label for="artist">Ca Sĩ:</label><br>
-                <input type="text" class="Input" id="artist" name="artist" required><br>
-                <label for="link">Link Bài hát:</label><br>
-                <input type="text" class="Input" id="link" name="link"><br>
-                <label for="audioFile">Tệp .mp3:</label><br>
-                <input type="file" id="audioFile" name="audioFile" accept="audio/mp3" required><br>
-                <input type="submit" id="submit" value="Thêm">
-            </form>
+        <div id="team_modal">
+            <div class="modal_update_song" id="modal_update_song">
+                <div class="album">Thêm bài hát</div>
+                <div class="numofsong">Còn trống: <span id="empty">{{empty}}</span></div>
+                <form id="songForm" method="POST" action="/profile" enctype="multipart/form-data">
+                    <label for="songName">Tên Bài Hát:</label><br>
+                    <input type="text" class="Input" id="songName" name="songName" required><br>
+                    <label for="artist">Ca Sĩ:</label><br>
+                    <input type="text" class="Input" id="artist" name="artist" required><br>
+                    <label for="link">Link Bài hát:</label><br>
+                    <input type="text" class="Input" id="link" name="link"><br>
+                    <label for="audioFile">Tệp .mp3:</label><br>
+                    <input type="file" id="audioFile" name="audioFile" accept="audio/mp3" required><br>
+                    <input type="submit" id="submit" value="Thêm">
+                </form>
+            </div>
         </div>
+    </div>
+    <div class="wrapper-warning">
+            <img src="/assets/img/phone-rotate.png" alt="">
+        <div class="warning-content">Xoay ngang màn hình để tiếp tục sử dụng trang web</div>
     </div>
     <input type="hidden" id="vlInput" value="{{VL}}">
     <script type="text/javascript" async src="https://tenor.com/embed.js"></script>

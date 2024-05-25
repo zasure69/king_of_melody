@@ -182,20 +182,23 @@ List_song.prototype = {
     let answer_song = document.getElementById("answer_song");
     answer_song.value = "";
     index = this.index + 1;
-    round.textContent = (index + 1) + "/10";
-    let minutes = Math.floor((time_song[player.index + 1]) / 60) || 0;
-    let second = Math.ceil(time_song[player.index + 1] - minutes * 60) || 0;
-    //minutes += 5;
-    if (second < 10)
-      second = "0" + second;
-    else if (second == 60)
+    if (index < 10)
     {
-      minutes += 1;
-      second = "00";
+      round.textContent = (index + 1) + "/10";
+      let minutes = Math.floor((time_song[player.index + 1]) / 60) || 0;
+      let second = Math.ceil(time_song[player.index + 1] - minutes * 60) || 0;
+      //minutes += 5;
+      if (second < 10)
+        second = "0" + second;
+      else if (second == 60)
+      {
+        minutes += 1;
+        second = "00";
+      }
+      time.textContent = minutes + ":" + second;
+      count = -1;
+      ctrlIcon.click();
     }
-    time.textContent = minutes + ":" + second;
-    count = -1;
-    ctrlIcon.click();
     // var time = time_song[index];
     // //totalDuration = 
     // countdown = setInterval(() => {
@@ -334,7 +337,7 @@ guessButton.addEventListener('click', () => {
         answer_song.value = songs[player.index].name.toLowerCase() + " - " + songs[player.index].singer;
       }
       if (index == 9){
-        document.getElementsByClassName("container")[0].style.opacity = "0.35";
+        document.getElementsByClassName("play-area")[0].style.opacity = "0.35";
         endmodal.style.display = "flex";
         document.getElementById("endpoint").innerHTML = document.getElementById("Point_play").innerHTML;
         let score = document.getElementById("Point_play").innerHTML;

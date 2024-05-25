@@ -401,7 +401,7 @@ body{
     margin: auto;
     z-index: 101;
     border-radius: 8px;
-    height: 85vh;
+    height: 95vh;
     width: 84vw;
     display: flex;
     flex-direction: column;
@@ -1191,7 +1191,7 @@ table, th, tr{
     color: white;
 }
 
-@media only screen and (orientation: landscape) and (max-height: 450px) {
+@media only screen and (orientation: landscape) and (max-height: 400px){
     body {
         overflow-y: scroll;
     }
@@ -1217,6 +1217,77 @@ table, th, tr{
     }
     .modal_thuong .select_normal_mode_img{
         gap: 5vw;
+    }
+    #mode_no_hope {
+        left: -6vh;
+    }
+    #mode_hard {
+        left: -2vh;
+    }
+    .ldboardbody {
+        overflow-y: auto;
+        max-height: 95vh;
+        border-radius: 15px;
+    }
+    .leaderboard .rank {
+        margin: 5vh auto;
+    }
+    .ldheader {
+        margin: 3vh auto;
+    }
+    th {
+        padding: 10px 20px;
+    }
+    .select_rank_mode_body .select_rank_mode_information {
+        justify-content: center;
+        gap: 0;
+    }
+    .modal_thuong .select_normal_mode_information .information{
+        font-size: 0.9rem;
+    }
+    .modal_xep_hang .select_rank_mode_information .information {
+        margin: 0;
+    }
+    .select_rank_mode_body .search_room input {
+        width: 13vw;
+    }
+    .help {
+        font-size: 0.75em;
+    }
+    #header .nav .username {
+        font-size: 2.5vw;
+    }
+    .modal_thuong .select_normal_mode_body {
+        row-gap: 0vh;
+    }
+} 
+
+@media only screen and (orientation: landscape) and (max-height: 450px) and (min-height: 401px) {
+    body {
+        overflow-y: scroll;
+    }
+    #header {
+        height: 73px;
+    }
+    #content {
+        height: 70vh;
+    }
+    #content .button .girl {
+        margin-top: -38%;
+    }
+    #header .right_header {
+        gap: 5vh;
+    }
+    .select_rank_mode_body .search_room {
+        left: 46.5%;
+        width: 10vw;
+    }
+    .modal_thuong .Hell, .Heaven, .Waste_land {
+        width: 150px;
+        height: 150px;
+    }
+    .modal_thuong .select_normal_mode_img{
+        gap: 10vw;
     }
     #mode_no_hope {
         left: -6vh;

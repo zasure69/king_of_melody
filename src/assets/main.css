@@ -380,6 +380,10 @@ body{
     font-size: 5vh;
     color: white;
     font-family: neosans;
+    background: linear-gradient(90deg, #8a2387, #e94057, #f27121);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .modal_thuong{

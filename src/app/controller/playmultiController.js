@@ -59,33 +59,52 @@ class playmultiController {
             console.log("number of player in room: ",rooms.player.length);
             if (rooms.vacant == true || rooms.count == 0)
             {
-                playersdone[roomid] = 0;
-                songSchema.aggregate([
-                    { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
-                    { $sample: { size: round} }
-                    ])
-                    .exec()
-                    .then((songs) => {
-                        listSong = songs;
-                        const infolist = [];
-                        for (let i = 0; i < songs.length; i++) {
-                            infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
-                        }
-                        loadSong[rooms.roomid] = false;
-                        settingSchema.findOne({email: req.session.user.email})
-                        .then((st) => {
-                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
-                        });
-                    })
-                    .catch(err => {
-                        console.log('error: ', err)
-                    })
-            }
+                rooms.count++;
+                Room
+                .updateOne({roomid: rooms.roomid}, {count: rooms.count })
+                .then(() =>{
+                    loadSong[rooms.roomid] = false;
+                    console.log("room count: ",rooms.count);
+                    console.log("loadsong if 1", loadSong[rooms.roomid], req.session.user._id);
+                    playersdone[roomid] = 0;
+                    songSchema.aggregate([
+                        { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
+                        { $sample: { size: round} }
+                        ])
+                        .exec()
+                        .then((songs) => {
+                            listSong = songs;
+                            const infolist = [];
+                            for (let i = 0; i < songs.length; i++) {
+                                infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
+                            }
+                            
+                            // console.log("loadsong if 2", loadSong[rooms.roomid]);
+                            settingSchema.findOne({email: req.session.user.email})
+                            .then((st) => {
+                                res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
+                                sem.release();
+                                while(sem.count > 1)
+                                {
+                                    sem.count--;
+                                    sem.queue.shift();
+                                }
+                            });
+                        })
+                        .catch(err => {
+                            console.log('error: ', err)
+                        })
+                })
+                .catch((err) => {
+                    console.log("error: ",err);
+                })
                 
+            }
             else
             {
                 if (loadSong[rooms.roomid]){
-                    console.log("load song");
+                    rooms.count++;
+                    // console.log("loadsong else if 1", loadSong[rooms.roomid]);
                     songSchema.aggregate([
                         { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
                         { $sample: { size: round} }
@@ -98,9 +117,16 @@ class playmultiController {
                                 infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                             }
                             loadSong[rooms.roomid] = false;
+                            console.log("loadsong else if 2", loadSong[rooms.roomid]);
                             settingSchema.findOne({email: req.session.user.email})
                             .then((st) => {
                                 res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
+                                sem.release();
+                                while(sem.count > 1)
+                                {
+                                    sem.count--;
+                                    sem.queue.shift();
+                                }
                             });
                         })
                         .catch(err => {
@@ -108,6 +134,8 @@ class playmultiController {
                         })
                 }
                 else {
+                    rooms.count++;
+                    console.log("loadsong else else 1", loadSong[rooms.roomid]);
                     let songs = listSong;
                     const infolist = [];
                     for (let i = 0; i < songs.length; i++) {
@@ -116,7 +144,14 @@ class playmultiController {
                     settingSchema.findOne({email: req.session.user.email})
                     .then((st) => {
                         res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
+                        sem.release();
+                        while(sem.count > 1)
+                        {
+                            sem.count--;
+                            sem.queue.shift();
+                        }
                         loadSong[rooms.roomid] = true;
+                        console.log("loadsong else else 2", loadSong[rooms.roomid]);
                     })
                 }
             }
@@ -130,71 +165,95 @@ class playmultiController {
 }
 io.on("connection", async function(socket) {
     console.log(`User connected id is ${socket.id}`);
-    console.log(socket.adapter.rooms);
-    socket.join(roomid);
-    Room.findOne({roomid: roomid})
-    .then((loadroom) => {
-        loadroom.socketid.push(socket.id);
-        loadroom.count++;
-        Room
-            .updateOne({roomid: loadroom.roomid}, {count: loadroom.count, socketid: loadroom.socketid })
-            .then(() =>{
-                Room.findOne({socketid: socket.id})
-                .then((send) => {
-                    console.log(send.socketid);
-                    if (send.socketid.length != 2 || loadSong[send.roomid] == false) socket.emit("wait");
-                    else io.to(send.roomid).emit("start"); 
-                })
-                .catch((err) => {
-                    console.log("error",err);
-                })
-                console.log(loadroom.socketid);
-                console.log(socket.adapter.rooms);
-                if (room.vacant){
-                    socket.emit("player1",loadroom);
-                    
-                    sem.release();
-                    console.log("Mở khóa cho socket");
-                }
-                else{
-                    if (loadroom.count <= 2)
-                    {
-                        const socketsInRoom = io.sockets.adapter.rooms.get(loadroom.roomid);
-                        if (socketsInRoom) {
-                            // Lặp qua danh sách socket trong room
-                            socketsInRoom.forEach((socketId) => {
-                                const socket = io.sockets.sockets.get(socketId);
-                                // Sử dụng socket tại đây
-                                if(socketId === loadroom.socketid[0]){
-                                    socket.emit("player1",loadroom);
-                                    console.log("Mở khóa cho socket");
-                                    sem.release();
-                                }
-                                else{
-                                    socket.emit("player2",loadroom);
-                                }
-                                console.log(`Socket ID: ${socketId}`);
-                                
-                            });
-                        } else {
-                            console.log(`Không có socket nào trong room`);
-                        }
-                    }
-                    else
-                    {
-                        io.in(loadroom.roomid).emit("remain_players", loadroom.player[0].username, loadroom.player[1].username);
+    // await sem.acquire();
+    let ID_room = "";
+    socket.emit("pull_roomid");
+    socket.on("push_roomid", function(roomid){
+        ID_room = roomid;
+        console.log("Roomid 1: ", roomid, typeof roomid);
+        socket.join(ID_room);
+        console.log("ID_room: ", ID_room, typeof ID_room);
+        Room.findOne({roomid: ID_room})
+        .then((loadroom) => {
+            console.log("loadroom ", loadroom);
+            loadroom.socketid.push(socket.id);
+            // loadroom.count++;
+            Room
+                .updateOne({roomid: loadroom.roomid}, { socketid: loadroom.socketid })
+                .then(() =>{
+                    Room.findOne({socketid: socket.id})
+                    .then((send) => {
+                        console.log(send.socketid);
+                        if (send.socketid.length != 2 || loadSong[send.roomid] == false) socket.emit("wait");
+                        else io.to(send.roomid).emit("start"); 
+                    })
+                    .catch((err) => {
+                        console.log("error",err);
+                    })
+                    console.log(loadroom.socketid);
+                    console.log(socket.adapter.rooms);
+                    if (room.vacant){
+                        socket.emit("player1",loadroom);
+                        
                         sem.release();
+                        while(sem.count > 1)
+                        {
+                            sem.count--;
+                            sem.queue.shift();
+                        }
+                        console.log("Mở khóa cho socket");
                     }
-                    
-                }
-            })
-            .catch(err => {
-                console.log("error: ",err);
-            })
+                    else{
+                        if (loadroom.count <= 2)
+                        {
+                            const socketsInRoom = io.sockets.adapter.rooms.get(loadroom.roomid);
+                            if (socketsInRoom) {
+                                // Lặp qua danh sách socket trong room
+                                socketsInRoom.forEach((socketId) => {
+                                    const socket = io.sockets.sockets.get(socketId);
+                                    // Sử dụng socket tại đây
+                                    if(socketId === loadroom.socketid[0]){
+                                        socket.emit("player1",loadroom);
+                                        console.log("Mở khóa cho socket");
+                                        sem.release();
+                                        while(sem.count > 1)
+                                        {
+                                            sem.count--;
+                                            sem.queue.shift();
+                                        }
+                                    }
+                                    else{
+                                        socket.emit("player2",loadroom);
+                                    }
+                                    console.log(`Socket ID: ${socketId}`);
+                                    
+                                });
+                            } else {
+                                console.log(`Không có socket nào trong room`);
+                            }
+                        }
+                        else
+                        {
+                            io.in(loadroom.roomid).emit("remain_players", loadroom.player[0].username, loadroom.player[1].username);
+                            sem.release();
+                            while(sem.count > 1)
+                            {
+                                sem.count--;
+                                sem.queue.shift();
+                            }
+                        }
+                        
+                    }
+                })
+                .catch(err => {
+                    console.log("error: ",err);
+                })
+        })
+        .catch((err) => {
+            console.log("error",err);
+        })
     })
-    .catch((err) => {
-        console.log("error",err);
-    })
+    
     
     
     socket.on("addpointtooppent", function(score) {
@@ -230,16 +289,23 @@ io.on("connection", async function(socket) {
         console.log(`${socket.id} has disconnect!`);
         Room.findOne({socketid: socket.id})
         .then((send) => {
-            // if (send){
                 const newroom = send.socketid.filter(item => item != socket.id);
                 Room.updateOne({roomid: send.roomid},{$set: {socketid: newroom}})
                     .then(()=>{
-                        send.socketid = newroom;
+                        if (newroom.length) {
+                            send.socketid = newroom;
+                        }
+                        else {
+                            Room.deleteOne({roomid: send.roomid})
+                            .then()
+                            .catch((err) =>{
+                                console.log("error: ",err);
+                            })
+                        }
                     })
                     .catch((error)=>{
                         console.log("error: ",error);
                     })
-            // }
             
             
         })
@@ -267,7 +333,7 @@ io.on("connection", async function(socket) {
                     })
                 }
                 else {
-                    loadSong[send.roomid] = false;
+                    loadSong[send.roomid] = true;
                     Room.findOne({roomid: send.roomid})
                     .then((newroom) => {
                     socket.to(newroom.roomid).emit("player1", newroom);
@@ -278,6 +344,7 @@ io.on("connection", async function(socket) {
                         console.log("error",err);
                     })
                 }
+                // sem.release();
             })
             .catch((err)=>{
                 console.log("Error: ", err);
@@ -715,6 +782,67 @@ io.on("connection", async function(socket) {
         })
         .catch((error)=>{
             console.log("Error: ", error);
+        })
+    })
+    socket.on("check_player", function(score, iduser, roomid){
+        Room.findOne({roomid: roomid})
+        .then((rooms)=>{
+            if (rooms.socketid.length < 2)
+            {
+                socket.emit("endgame_exit");
+                let iduser_afkplayer = "";
+                if (rooms.player[0].userid != iduser)
+                {
+                    iduser_afkplayer = rooms.player[0].userid;
+                    const newroom = rooms.player[1];
+                    Room.updateOne({roomid: send.roomid},{$set: {player: newroom}})
+                        .then()
+                        .catch((error)=>{
+                            console.log("error: ",error);
+                        })
+                }
+                else if (rooms.player[1].userid != iduser)
+                {
+                    iduser_afkplayer = rooms.player[1].userid;
+                    const newroom = rooms.player[0];
+                    Room.updateOne({roomid: send.roomid},{$set: {player: newroom}})
+                        .then()
+                        .catch((error)=>{
+                            console.log("error: ",error);
+                        })
+                }
+
+                User.findOne({_id: iduser_afkplayer})
+                .then((user_lose)=>{
+                    user_lose.multiGames++;
+                    const round = user_lose.multiGames;
+                    user_lose.CurExp += score/10;
+                    user_lose.multiPoint -= 1000;
+                    if (user_lose.multiPoint < 0)
+                        user_lose.multiPoint = 0;
+                    User.updateOne({_id: iduser_afkplayer}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
+                    .then( () => {
+                        Room.findOne({socketid: socket.id})
+                        .then((send) => {
+                            socket.to(send.roomid).emit("endgame_exit");
+                            
+                        })
+                        .catch((err) => {
+                            console.log("error",err);
+                        })
+                    })
+                    .catch((error)=>{
+                        console.log("Error: ", error);
+                    })
+                    
+                })
+                .catch((error)=>{
+                    console.log("Error: ", error);
+                })
+            }
+        })
+        .catch((err) =>{
+            console.log("Errrrrroor: ", err);
         })
     })
 })

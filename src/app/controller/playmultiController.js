@@ -3,7 +3,7 @@ const Room = require('../models/Room');
 const User = require('../models/User');
 const UserGoogle = require('../models/UserGoogle');
 const io  = require('../../index');
-let roomid = "";
+
 let room = [];
 
 let listSong = [];
@@ -49,7 +49,7 @@ class playmultiController {
         console.log("count: ", count);
         console.log("sem value: ", sem.count);
         await sem.acquire();
-        roomid = req.params.roomid;
+        let roomid = req.params.roomid;
         let round = parseInt(req.params.round);
         console.log("Round multi: ", round);
         console.log("roomid index: ", roomid);
@@ -64,8 +64,6 @@ class playmultiController {
                 .updateOne({roomid: rooms.roomid}, {count: rooms.count })
                 .then(() =>{
                     loadSong[rooms.roomid] = false;
-                    console.log("room count: ",rooms.count);
-                    console.log("loadsong if 1", loadSong[rooms.roomid], req.session.user._id);
                     playersdone[roomid] = 0;
                     songSchema.aggregate([
                         { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
@@ -78,8 +76,6 @@ class playmultiController {
                             for (let i = 0; i < songs.length; i++) {
                                 infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                             }
-                            
-                            // console.log("loadsong if 2", loadSong[rooms.roomid]);
                             settingSchema.findOne({email: req.session.user.email})
                             .then((st) => {
                                 res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
@@ -104,7 +100,6 @@ class playmultiController {
             {
                 if (loadSong[rooms.roomid]){
                     rooms.count++;
-                    // console.log("loadsong else if 1", loadSong[rooms.roomid]);
                     songSchema.aggregate([
                         { $match: { mode: { $in: ["hard", "hell", "no hope"] } } },
                         { $sample: { size: round} }
@@ -165,19 +160,14 @@ class playmultiController {
 }
 io.on("connection", async function(socket) {
     console.log(`User connected id is ${socket.id}`);
-    // await sem.acquire();
     let ID_room = "";
     socket.emit("pull_roomid");
     socket.on("push_roomid", function(roomid){
         ID_room = roomid;
-        console.log("Roomid 1: ", roomid, typeof roomid);
         socket.join(ID_room);
-        console.log("ID_room: ", ID_room, typeof ID_room);
         Room.findOne({roomid: ID_room})
         .then((loadroom) => {
-            console.log("loadroom ", loadroom);
             loadroom.socketid.push(socket.id);
-            // loadroom.count++;
             Room
                 .updateOne({roomid: loadroom.roomid}, { socketid: loadroom.socketid })
                 .then(() =>{

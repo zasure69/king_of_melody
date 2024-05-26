@@ -830,7 +830,7 @@
         /* left: 50%;
         top: 0; */
         /* width: calc(200/3) %; */
-        overflow-y: scroll;
+        
     }
     
      .container .play-area img{
@@ -1467,6 +1467,9 @@
         }
         .container > .hint h3 {
             font-size: 20px;
+        }
+        .container .play-area {
+            overflow-y: scroll;
         }
         .container .play-area .disc img {
             width: 40%;

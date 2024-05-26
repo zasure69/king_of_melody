@@ -64,10 +64,10 @@ class profileController {
                         }
 
                         let complete;
-                        complete = user.hardGames + user.hellGames + user.nohopeGames;
+                        complete = user.hardGames + user.hellGames + user.nohopeGames + user.multiGames;
 
                         let best;
-                        best = user.hardWinGames + user.hellWinGames + user.nohopeWinGames;
+                        best = user.hardWinGames + user.hellWinGames + user.nohopeWinGames + user.multiWinGames;
 
                         let rank;
                         if(user.multiPoint < 1000) rank="Đồng";

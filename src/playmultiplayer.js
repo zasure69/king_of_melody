@@ -317,7 +317,7 @@ ctrlIcon.addEventListener('click', ()=>{
   
 });
 function updateSlider() {
-  clearInterval(dem_tg);
+  //clearInterval(dem_tg);
   var currentTime = play_song[index].seek();
   var duration = play_song[index].duration();
   songSlider.max = duration;

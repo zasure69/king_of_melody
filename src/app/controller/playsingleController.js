@@ -32,11 +32,12 @@ class playsingleController {
             return arr;
         }
         if (req.session.type == "google") {
-            UserGoogle.findOne({_id: req.session.passpport.user})
+            console.log("req session passport", req.session.passport.user)
+            UserGoogle.findOne({_id: req.session.passport.user})
             .then(async (result) => {
                 const st = await settingSchema.findOne({email: result.email});
                 shuffleArray(hintlist);
-                res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: req.session.user.username, userid: req.session.user._id, mode : req.query.mode});
+                res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: result.username, userid: result._id, mode : req.query.mode});
             })
             .catch(err => {
                 console.log("Error: ", err);

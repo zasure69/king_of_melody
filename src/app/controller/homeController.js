@@ -5,6 +5,7 @@ const setting = require('../models/Setting');
 const mongooseToObject = require('../../util/mongoose')
 const Room = require('../models/Room'); 
 const semaphore = require('../../semaphore');
+const UserGoogle = require('../models/UserGoogle');
 let full = "";
 let Notfound = "";
 let Notinputround = "";
@@ -130,6 +131,13 @@ class homeController{
     }
 
     del(req, res, next) {
+        if (req.session.type == "google") {
+            UserGoogle.deleteOne({_id: req.session.passport.user})
+            .then()
+            .catch(err => {
+                console.log("Lỗi khi đăng xuất tài khoản gg: ", err);
+            })
+        }
         req.session.isAuth = false;
         req.session
         .destroy((err) => {
@@ -174,17 +182,35 @@ class homeController{
         {
             console.log("room: ",roomID);
             req.session.roomid = roomID; 
-            const newRoom = new Room({
-                roomid: roomID,
-                vacant: true,
-                round: roundnumber,
-                count: 0,
-                player: [{userid: req.session.user._id, username: req.session.user.username}]
-            });
-            console.log(newRoom.roomid);
-            newRoom.save();
-            console.log("round: ", roundnumber);
-            res.redirect('/playmulti/' + newRoom.roomid + "/" + roundnumber);
+            if (req.session.type == "google") {
+                UserGoogle.findOne({ _id: req.session.passport.user })
+                    .then((user) => {
+                        const newRoom = new Room({
+                            roomid: roomID,
+                            vacant: true,
+                            round: roundnumber,
+                            count: 0,
+                            player: [{userid: user._id, username: user.username}]
+                        });
+                        console.log(newRoom.roomid);
+                        newRoom.save();
+                        console.log("round: ", roundnumber);
+                        res.redirect('/playmulti/' + newRoom.roomid + "/" + roundnumber);
+                    });
+            } else {
+                const newRoom = new Room({
+                    roomid: roomID,
+                    vacant: true,
+                    round: roundnumber,
+                    count: 0,
+                    player: [{userid: req.session.user._id, username: req.session.user.username}]
+                });
+                console.log(newRoom.roomid);
+                newRoom.save();
+                console.log("round: ", roundnumber);
+                res.redirect('/playmulti/' + newRoom.roomid + "/" + roundnumber);
+            }
+            
         }
         else if (roundnumber > 30)
         {

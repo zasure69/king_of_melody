@@ -26,11 +26,14 @@ const convertToBase64 = (filePath, callback) => {
 };
 class profileController {
     index(req, res, next) {
-        
-        setting.findOne({email: req.session.user.email})
-            .then((result) => {
-                if (req.session.type == 'google') {
-                    UserGoogle.findOne({email: req.session.user.email})
+        let emailUser = "";
+        if (req.session.type == "google") {
+            UserGoogle.findOne({_id: req.session.passport.user})
+            .then((user) => {
+                emailUser = user.email
+                setting.findOne({email: emailUser})
+                .then ((result) => {
+                    UserGoogle.findOne({email: emailUser})
                     .then((user) => {
                         let rateHard;
                         if (user.hardGames > 0) {
@@ -98,7 +101,7 @@ class profileController {
 
                         res.render('profile', 
                         {
-                            username: req.session.user.username,
+                            username: user.username,
                             rank: rank,
                             complete: complete,
                             level: user.Level,
@@ -118,11 +121,23 @@ class profileController {
                             multiWinGames: user.multiWinGames,
                             rateMul: rateMul,
                             empty: user.empty, 
-                            userId: req.session.user._id, 
+                            userId: user._id, 
                             VL: result.EffectVL
                         })
                     })
-                } else {
+                })
+                .catch((err) => {
+                    console.log("Lỗi xảy ra trong khi get profile gg account: ", err)
+                })
+            })
+            .catch ((err) => {
+                console.log("Lỗi xảy ra trong khi get profile gg account: ", err)
+            })
+        } else {
+            emailUser = req.session.user.email
+            setting.findOne({email: emailUser})
+                .then((result) => {
+                    
                     User.findOne({email: req.session.user.email})
                     .then((user) => {
                         let rateHard;
@@ -215,17 +230,13 @@ class profileController {
                             VL: result.EffectVL
                         })
                     })
-                }
-                
-            })
-            .catch(next)
+                })
+                .catch(next)
+        }
+        
     }
     
     update(req, res, next){
-        if (req.session.isAuth == false) {
-            res.redirect('/login');
-            return;
-        }
         const filePath = req.file.path;
         convertToBase64(filePath, (err, base64String) => {
             if (err) {
@@ -275,14 +286,10 @@ class profileController {
     }
 
     changeusername (req, res) {
-        if (req.session.isAuth == false) {
-            res.redirect('/login');
-            return;
-        }
+        
         if (req.session.type == "google") {
-            User.updateOne({_id: req.session.passport.user}, {username: req.body.username})
+            UserGoogle.updateOne({_id: req.session.passport.user}, {username: req.body.username})
                 .then(() => {
-                    req.session.user.username = req.body.username
                     res.redirect('/profile')
                 })
                 .catch ((err) => {
@@ -303,10 +310,7 @@ class profileController {
     }
 
     deleteuser (req, res) {
-        if (req.session.isAuth == false) {
-            res.redirect('/login');
-            return;
-        }
+       
         if (req.session.type == "google") {
             UserGoogle.deleteOne({_id: req.session.passport.user})
                 .then(() => {

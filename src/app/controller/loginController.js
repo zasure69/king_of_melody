@@ -31,7 +31,7 @@ let transporter = nodemailer.createTransport({
 });
 
 const sendVerificationEmail = ({_id, email}, res) => {
-    const currentUrl = "https://kingofmelody.games";
+    const currentUrl = "https://kingofmelody-8911b7a7e907.herokuapp.com";
     const uniqueString = uuidv4() + _id;
     const mailOptions = {
         from: 'king.of.melody.nhom.11@gmail.com',

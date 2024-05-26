@@ -9,7 +9,7 @@ module.exports = function (passport) {
     passport.use(new GoogleStrategy({
         clientID: '90930972268-isl2p1cck7s7faq9nc0dresfi1fqp94v.apps.googleusercontent.com',
         clientSecret: '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',
-        callbackURL: "https://kingofmelody.onrender.com/login/google/callback",
+        callbackURL: "https://kingofmelody.games/login/google/callback",
         scope: ['profile', 'email']
     },
         async (accessToken, refreshToken, email, profile, done) => {

@@ -31,7 +31,7 @@ let transporter = nodemailer.createTransport({
 });
 
 const sendVerificationEmail = ({_id, email}, res) => {
-    const currentUrl = "https://kingofmelody.onrender.com";
+    const currentUrl = "https://kingofmelody.games";
     const uniqueString = uuidv4() + _id;
     const mailOptions = {
         from: 'king.of.melody.nhom.11@gmail.com',

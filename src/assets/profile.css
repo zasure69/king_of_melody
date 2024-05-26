@@ -616,5 +616,9 @@ input[type="submit"]{
         overflow-y: scroll;
         justify-content: flex-start;
     }
+    .modal_change_username, .modal_deleteuser {
+        width: 58vw;
+        height: 51vh;
+    }
     
 }

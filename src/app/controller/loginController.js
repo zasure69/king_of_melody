@@ -177,10 +177,14 @@ class loginController {
                             .compare(password, user[0].password)
                             .then(checkPassword => {
                                 if (checkPassword) {
-                                    req.session.user = user[0];
-                                    req.session.type = "default";
-                                    req.session.isAuth = true;
-                                    res.redirect('/home');
+                                    if (req.session.isAuth) {
+                                        res.redirect('/home');
+                                    } else {
+                                        req.session.user = user[0];
+                                        req.session.type = "default";
+                                        req.session.isAuth = true;
+                                        res.redirect('/home');
+                                    }
                                 } else {
                                     const errorMessage = 'Sai mật khẩu';
                                     res.redirect('/login?errorsignin=' + encodeURIComponent(errorMessage));
@@ -202,9 +206,14 @@ class loginController {
     }
 
     processGoogleSiginCallback(req, res) {
-        req.session.isAuth = true;
-        req.session.type = 'google';
-        res.redirect('/home');
+        if (req.session.id) {
+            res.redirect('/home');
+        } else {
+            req.session.isAuth = true;
+            req.session.type = 'google';
+            res.redirect('/home');
+        }
+        
     }
 }
 module.exports = new loginController;

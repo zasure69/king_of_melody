@@ -58,7 +58,11 @@
                                         <div class="progress-bar-inner"></div>
                                         <span class="progress-bar-label">{{exe}}</span>
                                     </div>
-                                    <div class="up_song_user">Thêm bài hát</div>
+                                    <div class="flex">
+                                        <div class="up_song_user">Thêm bài hát</div>
+                                        <div class="delete_of_user">Xóa tài khoản</div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -165,6 +169,34 @@
                 </form>
             </div>
         </div>
+
+        <div id="change_username_modal">
+            <div class="modal_change_username" id="modal_change_username">
+                <div class="change_username">Sửa tên người dùng</div>
+                <form id="usernameForm" method="POST" action="/profile/edit">
+                    <label for="username">Tên người dùng:</label><br>
+                    <input type="text" class="Input" id="username" name="username" required><br>
+                    <input type="submit" id="submit" value="Thay đổi">
+                </form>
+            </div>
+        </div>
+
+        <div id="deleteuser_modal">
+            <div class="modal_deleteuser" id="modal_deleteuser">
+                <div class="delete_user">Bạn có chắc chắn xóa tài khoản?</div>
+                <div class="yes_no">
+                    <form id="deleteForm" method="POST" action="/profile/deleteuser">
+                    <input type="submit" id="submit_delete" value="Xóa tài khoản">
+                    </form>
+                    <form id="Not">
+                        <input type="submit" id="submit" value="Đóng">
+                    </form>
+
+                </div>
+                
+            </div>
+        </div>
+
     </div>
     <div class="wrapper-warning">
             <img src="/assets/img/phone-rotate.png" alt="">

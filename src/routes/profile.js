@@ -10,6 +10,8 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 router.get('/', profileController.index);
+router.post('/edit', profileController.changeusername);
+router.post('/deleteuser', profileController.deleteuser);
 router.post('/', upload.single('audioFile'), profileController.update);
 
 module.exports = router;

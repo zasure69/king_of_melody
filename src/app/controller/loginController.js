@@ -206,7 +206,7 @@ class loginController {
     }
 
     processGoogleSiginCallback(req, res) {
-        if (req.session.id) {
+        if (req.session.isAuth) {
             res.redirect('/home');
         } else {
             req.session.isAuth = true;

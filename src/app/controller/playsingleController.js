@@ -31,9 +31,22 @@ class playsingleController {
             }
             return arr;
         }
-        const st = await settingSchema.findOne({email: req.session.user.email});
-        shuffleArray(hintlist);
-        res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: req.session.user.username, userid: req.session.user._id, mode : req.query.mode});
+        if (req.session.type == "google") {
+            UserGoogle.findOne({_id: req.session.passpport.user})
+            .then(async (result) => {
+                const st = await settingSchema.findOne({email: result.email});
+                shuffleArray(hintlist);
+                res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: req.session.user.username, userid: req.session.user._id, mode : req.query.mode});
+            })
+            .catch(err => {
+                console.log("Error: ", err);
+            })
+        } else {
+            const st = await settingSchema.findOne({email: req.session.user.email});
+            shuffleArray(hintlist);
+            res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: req.session.user.username, userid: req.session.user._id, mode : req.query.mode});
+        }
+        
     }
 }
 io.on("connection", function (socket){

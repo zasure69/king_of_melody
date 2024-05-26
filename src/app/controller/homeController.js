@@ -130,7 +130,11 @@ class homeController{
     }
 
     del(req, res, next) {
-        
+        if (req.session.isAuth == false) {
+            res.redirect('/login');
+            return;
+        }
+        req.session.isAuth = false;
         req.session
         .destroy((err) => {
             if (err) {
@@ -146,6 +150,10 @@ class homeController{
         
     }
     update(req, res, next) {
+        if (req.session.isAuth == false) {
+            res.redirect('/login');
+            return;
+        }
         if (!req.body.IsSoundOn){
             req.body.IsSoundOn = "off";
             req.body.MusicVL = 0;
@@ -162,6 +170,10 @@ class homeController{
     }
 
     create(req,res){
+        if (req.session.isAuth == false) {
+            res.redirect('/login');
+            return;
+        }
         const {roomID} = req.params;
         const roundnumber = req.body.roundNumber;
         console.log("roundnumber: ", typeof roundnumber);
@@ -198,6 +210,10 @@ class homeController{
         }
     }
     playnow(req, res) {
+        if (req.session.isAuth == false) {
+            res.redirect('/login');
+            return;
+        }
         if (req.body.roundNumber1 == "")
         {
             Notinputround1 = "Hãy nhập số vòng chơi!";
@@ -267,6 +283,10 @@ class homeController{
         }    
     }
     searchroom(req,res){
+        if (req.session.isAuth == false) {
+            res.redirect('/login');
+            return;
+        }
         let search = req.body.roomID.toString();
         console.log("Search: ", search);
         Room

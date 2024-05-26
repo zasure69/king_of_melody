@@ -2,6 +2,7 @@ const setting = require('../models/Setting');
 const mongooseToObject = require('../../util/mongoose')
 class settingController {
     index(req, res, next) {
+        
         setting.findOne({email: req.session.user.email})
             .then((result) => {
                 result.MusicVL = result.MusicVL * 100

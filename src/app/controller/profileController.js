@@ -26,6 +26,7 @@ const convertToBase64 = (filePath, callback) => {
 };
 class profileController {
     index(req, res, next) {
+        
         setting.findOne({email: req.session.user.email})
             .then((result) => {
                 if (req.session.type == 'google') {
@@ -221,6 +222,10 @@ class profileController {
     }
     
     update(req, res, next){
+        if (req.session.isAuth == false) {
+            res.redirect('/login');
+            return;
+        }
         const filePath = req.file.path;
         convertToBase64(filePath, (err, base64String) => {
             if (err) {
@@ -244,7 +249,7 @@ class profileController {
                                         user.empty = user.empty - 1;
                                     UserGoogle.updateOne({email: req.session.user.email}, user)
                                         .then((us) => {
-                                            res.render('profile', {empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
+                                            res.redirect('/profile')
                                         })
                                         .catch(next)
                                 })
@@ -255,7 +260,7 @@ class profileController {
                                         user.empty = user.empty - 1;
                                     User.updateOne({email: req.session.user.email}, user)
                                         .then((us) => {
-                                            res.render('profile', {empty: user.empty, userId: req.session.user._id, VL: result.EffectVL})
+                                            res.redirect('/profile')
                                         })
                                         .catch(next)
                                 })
@@ -267,6 +272,79 @@ class profileController {
                 })
                 .catch(next)
         });
+    }
+
+    changeusername (req, res) {
+        if (req.session.isAuth == false) {
+            res.redirect('/login');
+            return;
+        }
+        if (req.session.type == "google") {
+            User.updateOne({_id: req.session.passport.user}, {username: req.body.username})
+                .then(() => {
+                    req.session.user.username = req.body.username
+                    res.redirect('/profile')
+                })
+                .catch ((err) => {
+                    console.log("Lỗi xảy ra trong khi update username: ", err)
+                })
+        } else {
+            console.log("new username: ", req.body.username)
+            User.updateOne({_id: req.session.user._id}, {username: req.body.username})
+                .then((user) => {
+                    req.session.user.username = req.body.username
+                    res.redirect('/profile')
+                })
+                .catch ((err) => {
+                    console.log("Lỗi xảy ra trong khi update username: ", err)
+                })
+                
+        }
+    }
+
+    deleteuser (req, res) {
+        if (req.session.isAuth == false) {
+            res.redirect('/login');
+            return;
+        }
+        if (req.session.type == "google") {
+            UserGoogle.deleteOne({_id: req.session.passport.user})
+                .then(() => {
+                    req.session
+                    .destroy((err) => {
+                        if (err) {
+                            console.log("err: ",err);
+                            res.json({
+                                status:"Failed",
+                                message: "Lỗi xảy ra khi đăng xuất"
+                            })
+                        }
+                        res.redirect('/login');
+                    })
+                })
+                .catch ((err) => {
+                    console.log("Lỗi xảy ra trong khi delete user: ", err)
+                })
+        } else {
+            User.deleteOne({_id: req.session.user._id})
+                .then(() => {
+                    req.session
+                    .destroy((err) => {
+                        if (err) {
+                            console.log("err: ",err);
+                            res.json({
+                                status:"Failed",
+                                message: "Lỗi xảy ra khi đăng xuất"
+                            })
+                        }
+                        res.redirect('/login');
+                    })
+                })
+                .catch ((err) => {
+                    console.log("Lỗi xảy ra trong khi delete user: ", err)
+                })
+                
+        }
     }
 }
 

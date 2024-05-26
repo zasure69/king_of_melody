@@ -56,9 +56,17 @@ if (document.getElementById("empty").textContent == "0"){
 }
 
 let modal = document.getElementById("team_modal")
+let name_modal = document.getElementById("change_username_modal");
+let deleteuser_modal = document.getElementById("deleteuser_modal");
 window.onclick = function(event) {
   if (event.target === modal) {
     modal.style.display = "none";
+  }
+  if (event.target === name_modal) {
+    name_modal.style.display = "none";
+  }
+  if (event.target === deleteuser_modal) {
+    deleteuser_modal.style.display = "none";
   }
 }
 
@@ -67,6 +75,27 @@ document.querySelector(".up_song_user").onclick = function()
   document.querySelector("#team_modal").style.display = "flex";
   document.querySelector(".modal_update_song").style.display = "flex";
 }
+
+document.querySelector(".delete_of_user").onclick = function()
+{
+  document.querySelector("#deleteuser_modal").style.display = "flex";
+  document.querySelector(".modal_deleteuser").style.display = "flex";
+}
+
+document.querySelector("#Not").onclick = function(e)
+{
+  e.preventDefault();
+  document.querySelector("#deleteuser_modal").style.display = "none";
+  document.querySelector(".modal_deleteuser").style.display = "none";
+}
+
+document.querySelector("#user_logo").onclick = function()
+{
+  document.querySelector("#change_username_modal").style.display = "flex";
+  document.querySelector(".modal_change_username").style.display = "flex";
+}
+
+
 
 document.getElementById("audioFile").addEventListener("change", function() {
   if (this.files[0].size > 500000) {

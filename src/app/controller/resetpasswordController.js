@@ -103,7 +103,7 @@ class resetPasswordController {
     //password reset stuff
     process (req, res) {
         const {email} = req.body;
-        const redirectUrl = 'https://kingofmelody.games/resetPassword/change'
+        const redirectUrl = 'https://kingofmelody-8911b7a7e907.herokuapp.com/resetPassword/change'
         //check email exist
         userSchema
             .find({email})

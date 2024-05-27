@@ -179,7 +179,7 @@ class playmultiController {
                         infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                     }
                     if (req.session.type == "google") {
-                        UserGoogle.findOne({_id: req.session.passpport.user})
+                        UserGoogle.findOne({_id: req.session.passport.user})
                             .then((result) => {
                                 settingSchema.findOne({email: result.email})
                                 .then((st) => {

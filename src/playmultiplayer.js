@@ -45,6 +45,7 @@ let index = 0;
 let start = true;
 
 var isClicked = false;
+let isClicked1 = false;
 
 function handleClick() {
   if (!isClicked) {
@@ -334,7 +335,7 @@ function playNextSong() {
   player.next();
 };
 
-let isClicked1 = false;
+
 // Hàm để kiểm tra đoán đúng tên bài hát
 // guessButton.addEventListener('click', 
 guessButton.addEventListener('click', () => {
@@ -774,10 +775,12 @@ document.getElementById("return").onclick = function(){
 }
 
 socket.on("wait", function() {
+  console.log("wait");
   start = false;
 })
 
 socket.on("start", function(){
+  console.log("start");
   start = true;
 })
 

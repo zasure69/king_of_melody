@@ -64,6 +64,7 @@ class playmultiController {
                 Room
                 .updateOne({roomid: rooms.roomid}, {count: rooms.count })
                 .then(() =>{
+                    console.log("if 1: ", rooms.count, loadSong[rooms.roomid]);
                     loadSong[rooms.roomid] = false;
                     playersdone[roomid] = 0;
                     songSchema.aggregate([
@@ -190,6 +191,8 @@ class playmultiController {
                                         sem.count--;
                                         sem.queue.shift();
                                     }
+                                    loadSong[rooms.roomid] = true;
+                                    console.log("loadsong else else 2", loadSong[rooms.roomid]);
                                 });
                             })
                             .catch(err => {
@@ -199,13 +202,15 @@ class playmultiController {
                     } else {
                         settingSchema.findOne({email: req.session.user.email})
                         .then((st) => {
-                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
+                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
                             sem.release();
                             while(sem.count > 1)
                             {
                                 sem.count--;
                                 sem.queue.shift();
                             }
+                            loadSong[rooms.roomid] = true;
+                            console.log("loadsong else else 2", loadSong[rooms.roomid]);
                         });
                     }
                 }

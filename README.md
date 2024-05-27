@@ -21,7 +21,7 @@
   <li>1. Cài Nodejs bản 20.x trở lên</li>
   <li>2. Bật Terminal và di chuyển vào thư mục chứa source code</li>
   <li>3. Chạy lênh npm init</li>
-  <li>4. Cài đặt các module cần thiết: chạy lệnh npm install <tên module cần cài đặt>
+  <li>4. Cài đặt các module cần thiết: chạy lệnh npm install tên_module_cài_đặt
     <ul>Các module cần cài đặt
       <li>express</li>
       <li>bcrypt</li>
@@ -59,10 +59,10 @@
         Link youtube: https://www.youtube.com/watch?v=kNsVfo1MgcU
       </li>
       <li>2. Điểm SEO và Google PageSpeed Insight
-        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/454a94f9-3135-4056-82fa-9d26e7b4c5fd)
-        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/545154d1-9a76-478d-90cb-e45fa81539b6)
-        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/ba6badf8-cb6d-45da-bec6-12b7424b098f)
-        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/aabc9e53-dec4-499b-b6ea-6f30cca7c419)
+        <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/454a94f9-3135-4056-82fa-9d26e7b4c5fd">
+        <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/545154d1-9a76-478d-90cb-e45fa81539b6">
+        <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/ba6badf8-cb6d-45da-bec6-12b7424b098f">
+       <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/aabc9e53-dec4-499b-b6ea-6f30cca7c419">
         (Vì các page khác cần đăng nhập nên nhóm em không phân tích pagespeed được)
       </li>
       <li>3. Giao diện UI/UX đẹp</li>

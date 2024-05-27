@@ -1,7 +1,6 @@
 *{
     padding: 0;
     margin: 0;
-    /* margin-bottom: 12px; */
     box-sizing: border-box;
 }
 .wrapper-warning > img {
@@ -19,7 +18,8 @@
 @media only screen and (orientation:portrait) {
     .wrapper-warning {
         display: flex;
-    }.setting_container p, span{
+    }
+    .setting_container p, span{
         color: #fff;
     }
     .setting_container .selc_bot {

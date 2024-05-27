@@ -5,7 +5,7 @@ class startController {
         if (req.session.isAuth == true) {
             res.redirect('/home')
         } else {
-            res.render('start')
+            res.render('start', {layout: false})
         }
         
     }

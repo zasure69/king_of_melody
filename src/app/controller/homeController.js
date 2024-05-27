@@ -109,7 +109,7 @@ class homeController{
                     exceed1: exceed_permitted_value1,
                     input_round: Notinputround,
                     input_round1: Notinputround1,
-                    leaderboard: leaderboard
+                    leaderboard: leaderboard,
                 })
                     full = "";
                     Notfound = "";

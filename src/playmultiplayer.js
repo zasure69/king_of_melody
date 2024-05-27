@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io("https://kingofmelody-8911b7a7e907.herokuapp.com/");
 // Lấy các phần tử DOM cần sử dụng
 
 let songSlider = document.querySelector("#progress");

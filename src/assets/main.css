@@ -58,12 +58,12 @@ body{
 #header {
     height: 16vh;
     display: flex;
-    /* width: 100%; */
     position: sticky;
     justify-content: space-between;
     z-index: 4;
     padding-right: 2vw;
 }
+
 #header .left_header{
     position: relative;
     left: 23px;
@@ -187,7 +187,6 @@ body{
 #header .subnav .signout:hover{
     color: #a19bd9;
     cursor: pointer;
-    
 }
 
 #header .button1{
@@ -288,17 +287,6 @@ body{
     margin-left: 4%;
 }
 
-#content .button .girl{
-    width: 45%;
-    display: flex;
-    justify-items: center;
-    position: relative;
-    margin-top: -42%;
-    margin-left: 15%;
-    z-index: 1;
-}
-
-
 #content .button .play-button-link{
     text-decoration: none;
 }
@@ -372,7 +360,6 @@ body{
     color: aliceblue;
 }
 #footer .menu_btn .menu_btn_btn .menu_btn_dt span{
-    /* margin-top: 0.5rem; */
     font-family: neosans;
 }
 #footer .para{
@@ -550,11 +537,6 @@ body{
     height: 8px;
     border-radius: 50%;
     background: white;
-}
-
-.modal_thuong .select_normal_mode_play_button a{
-    text-decoration: none;
-    color: white;
 }
 
 .modal_thuong .select_normal_mode_play_button{

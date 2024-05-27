@@ -9,12 +9,9 @@ const passport = require('passport')
 const MongoDBSession = require('connect-mongodb-session')(session)
 const app = express()
 const port = (process.env.PORT || 3000)
-const fs = require('fs');
-
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-
 
 module.exports = io;
 
@@ -53,8 +50,6 @@ app.engine('hbs', handlebars.engine({
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'resources/views'))
 
-
-
 //session
 const store = new MongoDBSession({
   uri: 'mongodb+srv://zasureh69:HD8d2ZNETWZlpXl0@cluster0.eglftpe.mongodb.net/king_of_melody',
@@ -76,7 +71,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 route(app);
-
 
 server.listen(port);
 

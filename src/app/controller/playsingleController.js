@@ -37,7 +37,7 @@ class playsingleController {
             .then(async (result) => {
                 const st = await settingSchema.findOne({email: result.email});
                 shuffleArray(hintlist);
-                res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: result.username, userid: result._id, mode : req.query.mode});
+                res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: result.username, userid: result._id, mode : req.query.mode, layout: false});
             })
             .catch(err => {
                 console.log("Error: ", err);
@@ -45,7 +45,7 @@ class playsingleController {
         } else {
             const st = await settingSchema.findOne({email: req.session.user.email});
             shuffleArray(hintlist);
-            res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: req.session.user.username, userid: req.session.user._id, mode : req.query.mode});
+            res.render('playsingle', { songs: JSON.stringify(listsong), hintlist, infolist, efVL: st.EffectVL, msVL: st.MusicVL, username: req.session.user.username, userid: req.session.user._id, mode : req.query.mode, layout: false});
         }
         
     }

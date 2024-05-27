@@ -9,7 +9,7 @@ module.exports = function (passport) {
     passport.use(new GoogleStrategy({
         clientID: '90930972268-isl2p1cck7s7faq9nc0dresfi1fqp94v.apps.googleusercontent.com',
         clientSecret: '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',
-        callbackURL: "http://localhost:3000/login/google/callback",
+        callbackURL: "https://kingofmelody-8911b7a7e907.herokuapp.com/login/google/callback",
         scope: ['profile', 'email']
     },
         async (accessToken, refreshToken, email, profile, done) => {

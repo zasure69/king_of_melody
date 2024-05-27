@@ -55,7 +55,7 @@
 <h3>**HÌNH ẢNH TIÊU CHÍ CỘNG ĐIỂM</h3>
     <ul>
       <li>1. Video seminar
-        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/dfbfb0e4-7fe9-446d-91cd-34b9375a03a0)
+        <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/dfbfb0e4-7fe9-446d-91cd-34b9375a03a0">
         Link youtube: https://www.youtube.com/watch?v=kNsVfo1MgcU
       </li>
       <li>2. Điểm SEO và Google PageSpeed Insight

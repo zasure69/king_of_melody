@@ -81,10 +81,12 @@
   </ul>
   </li>
   <li>Người chơi có thể xem các thông tin về số điểm, thứ hạng của bản thân tại các giao diện “Hồ sơ” và “Bảng xếp hạng”. Số điểm của bản thân trong quá trình chơi sẽ được tích lũy một cách tự động và được lưu trữ tại giao diện “Hồ sơ”, điểm của bạn cũng sẽ được sắp xếp lên bảng xếp hạng một cách tự động (nếu bạn được điểm cao).</li>
+  <li>Người chơi có thể đổi tên người dùng trong phần "Hồ sơ" -> Bấm vào tên hiển thị phía trên bên phải -> Nhập tên người dùng mới và bấm "Thay đổi"</li>
   <li>Website cho phép người chơi được tham gia nhiều chế độ, nhiều mức độ khác nhau. Về mức độ chơi, người chơi có thể tham các mức độ “Khó” < “Tuyệt vọng” < “Địa ngục”, mỗi mức độ sẽ có độ khó và mức độ thú vị khác nhau để người chơi có thể trải nghiệm sự đa dạng và phong phú của âm nhạc, sẽ được trải nghiệm cảm giác “tuy lạ mà quen” trong giới âm nhạc. Về chế độ chơi, người chơi có thể tích lũy kinh nghiệm, kiến thức về bài hát tại chế độ “Thường”, hoặc có thể solo kinh nghiệm tại chế độ “Xếp hạng”.</li>
   <li>Trong chế độ "Xếp hạng", người chơi có thể gửi tin nhắn và icon đến người chơi đối diện.</li>
   <li> Trong giao diện "Hồ sơ", người chơi có thể thêm bài hát thông qua khi ấn nút "Thêm bài hát". Lúc này, người dùng cần nhập đầy đủ thông tin cần thiết như: tên bài hát, tên ca sĩ, đường dẫn của bài hát (nếu có) và thêm 1 đoạn nhạc dài 30 giây đối với bài hát không lời và 15 giây đối với bài hát có lời.</li>
   <li>Về vấn đề tài khoản và bảo mật: website sẽ đảm bảo an toàn và bảo mật về thông tin của những người chơi, chỉ hiển thị công khai một số thông tin cần thiết như “Username”.</li>
+    <li>Người chơi có thể xóa tài khoản khi bấm nút xóa tài khoản trong phần "Hồ sơ"</li>
 </ul>
 
 <h4><i>* Về phía người quản lý:</i></h4>

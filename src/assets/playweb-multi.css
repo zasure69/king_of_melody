@@ -493,7 +493,7 @@ body {
     }
     
     .container .disc .btn #progress {
-        -webkit-appearance: none;
+        /* -webkit-appearance: none; */
         width: 51vh;
         height: 0.3em;
         background: #f53192;

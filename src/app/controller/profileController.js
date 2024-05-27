@@ -122,7 +122,8 @@ class profileController {
                             rateMul: rateMul,
                             empty: user.empty, 
                             userId: user._id, 
-                            VL: result.EffectVL
+                            VL: result.EffectVL,
+                            layout: false
                         })
                     })
                 })
@@ -227,7 +228,8 @@ class profileController {
                             rateMul: rateMul,
                             empty: user.empty, 
                             userId: req.session.user._id, 
-                            VL: result.EffectVL
+                            VL: result.EffectVL,
+                            layout: false
                         })
                     })
                 })

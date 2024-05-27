@@ -162,11 +162,23 @@ class homeController{
             req.body.IsEffectOn = "off";
             req.body.EffectVL = 0;
         } else req.body.EffectVL = req.body.EffectVL / 100
-        setting.updateOne({email: req.session.user.email}, req.body)
+        if (req.session.type == "google") {
+            UserGoogle.findOne({ _id: req.session.passport.user })
+                .then((user) => {
+                    setting.updateOne({email: user.email}, req.body)
+                    .then(() => {
+                        res.redirect('/home');
+                    })
+                    .catch(next)
+                })
+        } else {
+            setting.updateOne({email: req.session.user.email}, req.body)
             .then(() => {
-                res.render('home', {userId: req.session.user._id, username: req.session.user.username})
+                res.redirect('/home');
             })
             .catch(next)
+        }
+        
     }
 
     create(req,res){

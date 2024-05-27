@@ -54,16 +54,17 @@
 <h3>**DOMAIN DEPLOY: https://kingofmelody-8911b7a7e907.herokuapp.com/</h3>
 <h3>**HÌNH ẢNH TIÊU CHÍ CỘNG ĐIỂM</h3>
     <ul>
-      <li>1. Video seminar
+      <li>1. Video seminar<br>
         <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/dfbfb0e4-7fe9-446d-91cd-34b9375a03a0">
+        <br>
         Link youtube: https://www.youtube.com/watch?v=kNsVfo1MgcU
       </li>
-      <li>2. Điểm SEO và Google PageSpeed Insight
+      <li>2. Điểm SEO và Google PageSpeed Insight <br>
         <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/454a94f9-3135-4056-82fa-9d26e7b4c5fd">
         <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/545154d1-9a76-478d-90cb-e45fa81539b6">
         <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/ba6badf8-cb6d-45da-bec6-12b7424b098f">
        <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/aabc9e53-dec4-499b-b6ea-6f30cca7c419">
-        (Vì các page khác cần đăng nhập nên nhóm em không phân tích pagespeed được)
+        <br>(Vì các page khác cần đăng nhập nên nhóm em không phân tích pagespeed được)
       </li>
       <li>3. Giao diện UI/UX đẹp</li>
       <li>4. Đã deploy lên cloud sử dụng heroku</li>

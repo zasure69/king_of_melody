@@ -373,10 +373,32 @@ class homeController{
                         .updateOne({roomid: Room1.roomid}, {vacant: false})
                         .then(() => {
                             console.log(`Phòng ${Room1.roomid} trống. Đang vào phòng...`);
-                            Room1.player.push({
-                                userid: req.session.user._id,
-                                username: req.session.user.username,
-                            });
+                            if (req.session.type == "google") {
+                                UserGoogle.findOne({ _id: req.session.passport.user })
+                                    .then((user) => {
+                                        Room1.player.push({
+                                            userid: user._id,
+                                            username: user.username,
+                                        });
+                                        Room
+                                            .updateOne({_id: Room1._id},{player: Room1.player })
+                                            .then(() => {
+                                                res.redirect('/playmulti/' + Room1.roomid + "/" + Room1.round);
+                                            })
+                                            .catch(err => {
+                                                console.log('error: ', err)
+                                            })
+                                    })
+                                    .catch((err) => {
+                                        console.log('Lỗi xảy ra ở dùng 303: ', err)
+                                    })
+                            } else {
+                                Room1.player.push({
+                                    userid: req.session.user._id,
+                                    username: req.session.user.username,
+                                });
+                            }
+                            
                     
                             Room
                                 .updateOne({_id: Room1._id},{player: Room1.player })

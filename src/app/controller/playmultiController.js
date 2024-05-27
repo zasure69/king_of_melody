@@ -78,11 +78,11 @@ class playmultiController {
                                 infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                             }
                             if (req.session.type == "google") {
-                                UserGoogle.findOne({_id: req.session.passpport.user})
+                                UserGoogle.findOne({_id: req.session.passport.user})
                                     .then((result) => {
                                         settingSchema.findOne({email: result.email})
                                         .then((st) => {
-                                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
+                                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: result.username, userid: result._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
                                             sem.release();
                                             while(sem.count > 1)
                                             {

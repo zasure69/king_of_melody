@@ -12,6 +12,7 @@ const nodemailer = require('nodemailer');
 const passport = require('passport');
 //unique string
 const {v4: uuidv4} = require('uuid');
+const UserGoogle = require('../models/UserGoogle');
 //env variables
 require('dotenv').config();
 //nodeemailer stuff
@@ -206,12 +207,27 @@ class loginController {
     }
 
     processGoogleSiginCallback(req, res) {
-        if (req.session.id) {
+        if (req.session.isAuth) {
             res.redirect('/home');
         } else {
             req.session.isAuth = true;
             req.session.type = 'google';
             res.redirect('/home');
+            UserGoogle.findOne({_id: req.session.passport.user})
+                .then((user) => {
+                    const setting = new settingSchema({
+                        email: user.email,
+                    });
+                    setting.save()
+                        .then()
+                        .catch(err =>{
+                            console.log("Error: ", err);
+                        })
+                })
+                .catch(err => {
+                    console.log("Lỗi cập nhật setting khi đăng nhập gg: ", err);
+                })
+            
         }
         
     }

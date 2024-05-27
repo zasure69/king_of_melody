@@ -12,7 +12,7 @@ class settingController {
                         result.EffectVL = result.EffectVL * 100
                         res.render('setting', {userId: user._id,
                             efVL: result.EffectVL, musicVL: result.MusicVL,
-                            IsEffectOn: result.IsEffectOn, IsSoundOn: result.IsSoundOn})
+                            IsEffectOn: result.IsEffectOn, IsSoundOn: result.IsSoundOn, layout: false})
                     })
                     .catch(next)
                 })

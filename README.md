@@ -1,16 +1,75 @@
-“King of melody” là một website giải trí dưới hình thức giải câu đố về âm nhạc được thiết kế bởi Nhóm 11 thuộc lớp NT208.O23.ANTT. Web được tạo ra xuất phát từ yêu cầu giải trí, thư giãn của con người và lấy nguồn cảm hứng từ chủ đề âm nhạc. Chi tiết về tổng quan và chức năng của trang web như sau:<br><br>
+“King of Melody” là một website giải trí dưới hình thức giải câu đố về âm nhạc được thiết kế bởi Nhóm 11 thuộc lớp NT208.O23.ANTT. Web được tạo ra xuất phát từ yêu cầu giải trí, thư giãn của con người và lấy nguồn cảm hứng từ chủ đề âm nhạc. Chi tiết về tổng quan và chức năng của trang web như sau:<br><br>
 <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/60498230/25333577-7418-42d1-870a-84db8b698f00">
-
+<h3> Danh sách thành viên Nhóm 11</h3>
+<ul>
+  <li>Trần Văn Chiến - 22520156</li>
+  <li>Nguyễn Huỳnh Duy - 22520330</li>
+  <li>Nguyễn Khắc Hậu - 22520410</li>
+  <li>Huỳnh Minh Hiển -22520415</li>
+  <li>Ngô Trung Hiếu - 22520437</li>
+</ul>
 
 <h3>**TỔNG QUAN</h3>
 <ul>
   <li>Frontend: HTML/CSS, JAVASCRIPT.</li>
   <li>Backend: NODEJS, EXPRESSJS.</li>
   <li>Cách thức thao tác bên người dùng: thao tác trên giao diện được thiết kế sẵn.</li>
-  <li>Database: có database lưu trữ (Mongodb).</li>
+  <li>Database: có database lưu trữ (MongoDB).</li>
 </ul>
-
-<h3>**VỀ CHỨC NĂNG</h3>
+<h3>**SETUP MÔI TRƯỜNG</h3>
+<ul>
+  <li>1. Cài Nodejs bản 20.x trở lên</li>
+  <li>2. Bật Terminal và di chuyển vào thư mục chứa source code</li>
+  <li>3. Chạy lênh npm init</li>
+  <li>4. Cài đặt các module cần thiết: chạy lệnh npm install <tên module cần cài đặt>
+    <ul>Các module cần cài đặt
+      <li>express</li>
+      <li>bcrypt</li>
+      <li>cheerio</li>
+      <li>dotenv</li>
+      <li>connect-mongodb-session</li>
+      <li>google-auth-library</li>
+      <li>express-session</li>
+      <li>howler</li>
+      <li>husky</li>
+      <li>howler</li>
+      <li>lint-staged</li>
+      <li>method-override</li>
+      <li>mongoose</li>
+      <li>morgan</li>
+      <li>multer</li>
+      <li>nodemailer</li>
+      <li>nodemon</li>
+      <li>passport</li>
+      <li>passport-google-oauth20</li>
+      <li>prettier</li>
+      <li>readable-stream</li>
+      <li>socket.io</li>
+      <li>uuid</li>
+    </ul>
+  </li>
+  <li>5. Chạy lệnh node src/index.js hoặc nodemon src/index.js để khởi động server</li>
+  <li>Lưu ý: cần sửa đường dẫn web ở các file src/config/passport.js (dòng 12), src/app/controller/loginController.js (dòng 35), src/app/controller/resetpasswordController.js (dòng 106), src/playmultiplayer.js (dòng 1), src/playsingleplayer.js (dòng 1), src/resources/views/playmulti.hbs (dòng 10), src/resources/views/playsingle.hbs (dòng 10) thành http://localhost:3000 khi chạy localhost</li>
+</ul>
+<h3>**DOMAIN DEPLOY: https://kingofmelody-8911b7a7e907.herokuapp.com/</h3>
+<h3>**HÌNH ẢNH TIÊU CHÍ CỘNG ĐIỂM</h3>
+    <ul>
+      <li>1. Video seminar
+        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/dfbfb0e4-7fe9-446d-91cd-34b9375a03a0)
+        Link youtube: https://www.youtube.com/watch?v=kNsVfo1MgcU
+      </li>
+      <li>2. Điểm SEO và Google PageSpeed Insight
+        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/454a94f9-3135-4056-82fa-9d26e7b4c5fd)
+        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/545154d1-9a76-478d-90cb-e45fa81539b6)
+        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/ba6badf8-cb6d-45da-bec6-12b7424b098f)
+        ![image](https://github.com/zasure69/king_of_melody/assets/162142037/aabc9e53-dec4-499b-b6ea-6f30cca7c419)
+        (Vì các page khác cần đăng nhập nên nhóm em không phân tích pagespeed được)
+      </li>
+      <li>3. Giao diện UI/UX đẹp</li>
+      <li>4. Đã deploy lên cloud sử dụng heroku</li>
+      <li>5. Có thể sử dụng trên cả máy tính và điện thoại</li>
+    </ul>
+<h3>**VỀ TÍNH NĂNG</h3>
 <h4><i>* Về phía người dùng:</i></h4>
 <ul>
   <li>Người dùng có thể thao tác trực tiếp với giao diện được thiết kế sẵn, giao diện trực quan và rất dễ tương tác, ví dụ như:

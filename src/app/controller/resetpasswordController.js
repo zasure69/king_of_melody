@@ -97,7 +97,7 @@ const sendResetEmail = ({_id, email}, redirectUrl, res) => {
 
 class resetPasswordController {
     index(req, res) {
-        res.render('resetpassword')
+        res.render('resetpassword', {layout: false})
     }
 
     //password reset stuff

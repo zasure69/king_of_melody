@@ -96,7 +96,7 @@ class loginController {
     index(req, res) {
         const message1 = req.query.errorsignin || "";
         const message2 = req.query.errorsignup || "";
-        res.render('login', {messagesignin: message1, messagesignup: message2})
+        res.render('login', {messagesignin: message1, messagesignup: message2, layout: false})
     }
 
     async processSignup(req, res, next) {
@@ -126,7 +126,7 @@ class loginController {
                                         email: formData.email,
                                     });
                                     sendVerificationEmail(result, res);
-                                    res.render('sendverifymail', {email: result.email});
+                                    res.render('sendverifymail', {email: result.email, layout: false});
                                     setting.save()
                                     .then()
                                     .catch(err =>{

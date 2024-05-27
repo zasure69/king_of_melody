@@ -196,7 +196,10 @@ class homeController{
                         newRoom.save();
                         console.log("round: ", roundnumber);
                         res.redirect('/playmulti/' + newRoom.roomid + "/" + roundnumber);
-                    });
+                    })
+                    .catch(err => {
+                        console.log('Lỗi xảy ra ở dòng 201: ', err);
+                    })
             } else {
                 const newRoom = new Room({
                     roomid: roomID,
@@ -242,19 +245,40 @@ class homeController{
                         .updateOne({roomid: Room1[0].roomid}, {vacant: false})
                         .then(() => {
                             console.log(`Phòng ${Room1[0].roomid} trống. Đang vào phòng...`);
-                
-                            Room1[0].player.push({
-                                userid: req.session.user._id,
-                                username: req.session.user.username,
-                            });               
-                            Room
-                                .updateOne({_id: Room1[0]._id},{player: Room1[0].player })
-                                .then(() => {
-                                    res.redirect('/playmulti/' + Room1[0].roomid + "/" + Room1[0].round);
-                                })
-                                .catch(err => {
-                                    console.log('error: ', err)
-                                })                       
+                            if (req.session.type == "google") {
+                                UserGoogle.findOne({ _id: req.session.passport.user })
+                                    .then((user) => {
+                                        Room1[0].player.push({
+                                            userid: user._id,
+                                            username: user.username,
+                                        });               
+                                        Room
+                                            .updateOne({_id: Room1[0]._id},{player: Room1[0].player })
+                                            .then(() => {
+                                                res.redirect('/playmulti/' + Room1[0].roomid + "/" + Room1[0].round);
+                                            })
+                                            .catch(err => {
+                                                console.log('error: ', err)
+                                            })  
+                                    })
+                                    .catch((err) => {
+                                        console.log('Lỗi xảy ra ở dòng 252: ', err)
+                                    })
+                            } else {
+                                Room1[0].player.push({
+                                    userid: req.session.user._id,
+                                    username: req.session.user.username,
+                                });               
+                                Room
+                                    .updateOne({_id: Room1[0]._id},{player: Room1[0].player })
+                                    .then(() => {
+                                        res.redirect('/playmulti/' + Room1[0].roomid + "/" + Room1[0].round);
+                                    })
+                                    .catch(err => {
+                                        console.log('error: ', err)
+                                    })  
+                            }
+                                                 
                         })
                         .catch(err => {
                             console.log('error: ', err)
@@ -262,18 +286,49 @@ class homeController{
                 } 
                 else {
                     let roomID = generateRoomId().toString();
-                    let id = req.session.user._id;
-                    let username = req.session.user.username;
+                    if (req.session.type == "google") {
+                        UserGoogle.findOne({ _id: req.session.passport.user })
+                            .then((user) => {
+                                const newRoom = new Room({
+                                    roomid: roomID,
+                                    vacant: true,
+                                    round: round1,
+                                    count: 0,
+                                    player: [{userid: user._id, username: user.username}]
+                                });
+                                console.log(newRoom.roomid);
+                                newRoom.save();
+                                console.log("round: ", round1);
+                                res.redirect('/playmulti/' + newRoom.roomid + "/" + round1);
+                            })
+                            .catch(err => {
+                                console.log("Lỗi xảy ra ở dòng 284: ", err);
+                            })
+                    } else {
+                        const newRoom = new Room({
+                            roomid: roomID,
+                            vacant: true,
+                            round: round1,
+                            count: 0,
+                            player: [{userid: req.session.user._id, username: req.session.user.username}]
+                        });
+                        console.log(newRoom.roomid);
+                        newRoom.save();
+                        console.log("round: ", round1);
+                        res.redirect('/playmulti/' + newRoom.roomid + "/" + round1);
+                    }
                     
-                    const newRoom = new Room({
-                        roomid: roomID,
-                        vacant: true,
-                        round: round1,
-                        count: 0,
-                        player: [{ userid: id, username: username}]
-                    });
-                    newRoom.save();
-                    res.redirect('/playmulti/' + newRoom.roomid + "/" + round1);
+                    // let username = req.session.user.username;
+                    
+                    // const newRoom = new Room({
+                    //     roomid: roomID,
+                    //     vacant: true,
+                    //     round: round1,
+                    //     count: 0,
+                    //     player: [{ userid: id, username: username}]
+                    // });
+                    // newRoom.save();
+                    // res.redirect('/playmulti/' + newRoom.roomid + "/" + round1);
                 }         
             })
             .catch((error) => {

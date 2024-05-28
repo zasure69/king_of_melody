@@ -76,7 +76,7 @@ window.onbeforeunload = function(event) {
   if (!isClicked1) {
     if (guess_buttonclick != index + 1 && afk == false)
     {
-      socket.emit("exit", iduser, score);
+      socket.emit("exit", iduser, score, roomid.textContent);
     }
     socket.emit("render_home", iduser);
   }
@@ -318,7 +318,7 @@ ctrlIcon.addEventListener('click', ()=>{
   
 });
 function updateSlider() {
-  //clearInterval(dem_tg);
+  if ( index == Numround - 1 ) clearInterval(dem_tg);
   var currentTime = play_song[index].seek();
   var duration = play_song[index].duration();
   songSlider.max = duration;
@@ -852,8 +852,10 @@ socket.on('endgame',() => {
   }
   
 })
+
 socket.on("endgame_exit", ()=>{
   socket.emit("score_win", score, iduser);
+  player.songs[player.index].stop();
   document.getElementsByClassName("play-area")[0].style.opacity = "0.35";
   document.getElementById("end-result").textContent = "Bạn đã dành chiến thắng!";
   endmodal.style.display = "flex";
@@ -868,6 +870,7 @@ home.addEventListener('click', (e)=>{;
   socket.emit("render_home", iduser);
 })
 home1.addEventListener('click', (e)=>{
+  // e.preventDefault();
   socket.emit("render_home", iduser);
 })
 

@@ -1,4 +1,4 @@
-const socket = io("https://kingofmelody-8911b7a7e907.herokuapp.com/");
+const socket = io();
 // Lấy các phần tử DOM cần sử dụng
 
 let songSlider = document.querySelector("#progress");
@@ -45,6 +45,7 @@ let index = 0;
 let start = true;
 
 var isClicked = false;
+let isClicked1 = false;
 
 function handleClick() {
   if (!isClicked) {
@@ -334,7 +335,7 @@ function playNextSong() {
   player.next();
 };
 
-let isClicked1 = false;
+
 // Hàm để kiểm tra đoán đúng tên bài hát
 // guessButton.addEventListener('click', 
 guessButton.addEventListener('click', () => {
@@ -774,10 +775,12 @@ document.getElementById("return").onclick = function(){
 }
 
 socket.on("wait", function() {
+  console.log("wait");
   start = false;
 })
 
 socket.on("start", function(){
+  console.log("start");
   start = true;
 })
 

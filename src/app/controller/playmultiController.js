@@ -64,6 +64,7 @@ class playmultiController {
                 Room
                 .updateOne({roomid: rooms.roomid}, {count: rooms.count })
                 .then(() =>{
+                    console.log("if 1: ", rooms.count, loadSong[rooms.roomid]);
                     loadSong[rooms.roomid] = false;
                     playersdone[roomid] = 0;
                     songSchema.aggregate([
@@ -179,17 +180,19 @@ class playmultiController {
                         infolist.push({name: songs[i].name, singer: songs[i].singer, link: songs[i].link});
                     }
                     if (req.session.type == "google") {
-                        UserGoogle.findOne({_id: req.session.passpport.user})
+                        UserGoogle.findOne({_id: req.session.passport.user})
                             .then((result) => {
                                 settingSchema.findOne({email: result.email})
                                 .then((st) => {
-                                    res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
+                                    res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: result.username, userid: result._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
                                     sem.release();
                                     while(sem.count > 1)
                                     {
                                         sem.count--;
                                         sem.queue.shift();
                                     }
+                                    loadSong[rooms.roomid] = true;
+                                    console.log("loadsong else else 2", loadSong[rooms.roomid]);
                                 });
                             })
                             .catch(err => {
@@ -199,13 +202,15 @@ class playmultiController {
                     } else {
                         settingSchema.findOne({email: req.session.user.email})
                         .then((st) => {
-                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false, username_player1: req.session.user.username, userid: req.session.user._id,  efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
+                            res.render('playmulti.hbs', {songs: JSON.stringify(songs), infolist, layout: false , username_player1: req.session.user.username, userid: req.session.user._id, efVL: st.EffectVL, msVL: st.MusicVL, rom: room.roomid, round1: round});
                             sem.release();
                             while(sem.count > 1)
                             {
                                 sem.count--;
                                 sem.queue.shift();
                             }
+                            loadSong[rooms.roomid] = true;
+                            console.log("loadsong else else 2", loadSong[rooms.roomid]);
                         });
                     }
                 }
@@ -754,85 +759,170 @@ io.on("connection", async function(socket) {
         })
     })
     socket.on("exit", function(iduser, score){
-        User.findOne({_id: iduser})
-        .then((user_lose)=>{
-            user_lose.multiGames++;
-            const round = user_lose.multiGames;
-            user_lose.CurExp += score/10;
-            if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
-            {
-                user_lose.multiPoint -= parseInt(user_lose.multiPoint/50);
-                if (user_lose.multiPoint < 0)
-                    user_lose.multiPoint = 0;
-            }
-            else if (user_lose.multiPoint <= 2400 && user_lose.multiPoint > 1000)
-            {
-                user_lose.multiPoint -= parseInt(user_lose.multiPoint/45);
-            }
-            else if (user_lose.multiPoint <= 4000 && user_lose.multiPoint > 2400)
-            {
-                user_lose.multiPoint -= parseInt(user_lose.multiPoint/40);
-            }
-            else if (user_lose.multiPoint <= 6000 && user_lose.multiPoint > 4000)
-            {
-                user_lose.multiPoint -= parseInt(user_lose.multiPoint/35);
-            }
-            else if (user_lose.multiPoint <= 8000 && user_lose.multiPoint > 6000)
-            {
-                user_lose.multiPoint -= parseInt(user_lose.multiPoint/30);
-            }
-            else if (user_lose.multiPoint <= 12000 && user_lose.multiPoint > 8000)
-            {
-                user_lose.multiPoint -= parseInt(user_lose.multiPoint/25);
-            }
-            else if (user_lose.multiPoint > 12000)
-            {
-                user_lose.multiPoint -= parseInt(user_lose.multiPoint/15);
-            }
-            User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
-            .then( () => {
-                Room.findOne({socketid: socket.id})
-                .then((send) => {
-                    socket.to(send.roomid).emit("endgame_exit");
-                })
-                .catch((err) => {
-                    console.log("error",err);
-                })
+        UserGoogle.findOne({_id: iduser})
+            .then((user_gg_lose)=>{
+                if (user_gg_lose) {
+                    user_gg_lose.multiGames++;
+                    const round = user_gg_lose.multiGames;
+                    user_gg_lose.CurExp += score/10;
+                    if (user_gg_lose.multiPoint <= 1000 && user_gg_lose.multiPoint > 0)
+                    {
+                        user_gg_lose.multiPoint -= parseInt(user_gg_lose.multiPoint/50);
+                        if (user_gg_lose.multiPoint < 0)
+                            user_gg_lose.multiPoint = 0;
+                    }
+                    else if (user_gg_lose.multiPoint <= 2400 && user_gg_lose.multiPoint > 1000)
+                    {
+                        user_gg_lose.multiPoint -= parseInt(user_gg_lose.multiPoint/45);
+                    }
+                    else if (user_gg_lose.multiPoint <= 4000 && user_gg_lose.multiPoint > 2400)
+                    {
+                        user_gg_lose.multiPoint -= parseInt(user_gg_lose.multiPoint/40);
+                    }
+                    else if (user_gg_lose.multiPoint <= 6000 && user_gg_lose.multiPoint > 4000)
+                    {
+                        user_gg_lose.multiPoint -= parseInt(user_gg_lose.multiPoint/35);
+                    }
+                    else if (user_gg_lose.multiPoint <= 8000 && user_gg_lose.multiPoint > 6000)
+                    {
+                        user_gg_lose.multiPoint -= parseInt(user_gg_lose.multiPoint/30);
+                    }
+                    else if (user_gg_lose.multiPoint <= 12000 && user_gg_lose.multiPoint > 8000)
+                    {
+                        user_gg_lose.multiPoint -= parseInt(user_gg_lose.multiPoint/25);
+                    }
+                    else if (user_gg_lose.multiPoint > 12000)
+                    {
+                        user_gg_lose.multiPoint -= parseInt(user_gg_lose.multiPoint/15);
+                    }
+                    UserGoogle.updateOne({_id: iduser}, {multiGames: round, CurExp: user_gg_lose.CurExp, multiPoint: user_gg_lose.multiPoint})
+                    .then( () => {
+                        Room.findOne({socketid: socket.id})
+                        .then((send) => {
+                            socket.to(send.roomid).emit("endgame_exit");
+                        })
+                        .catch((err) => {
+                            console.log("error",err);
+                        })
+                    })
+                    .catch((error)=>{
+                        console.log("Error: ", error);
+                    })
+                } else {
+                    User.findOne({_id: iduser})
+                        .then((user_lose)=>{
+                            user_lose.multiGames++;
+                            const round = user_lose.multiGames;
+                            user_lose.CurExp += score/10;
+                            if (user_lose.multiPoint <= 1000 && user_lose.multiPoint > 0)
+                            {
+                                user_lose.multiPoint -= parseInt(user_lose.multiPoint/50);
+                                if (user_lose.multiPoint < 0)
+                                    user_lose.multiPoint = 0;
+                            }
+                            else if (user_lose.multiPoint <= 2400 && user_lose.multiPoint > 1000)
+                            {
+                                user_lose.multiPoint -= parseInt(user_lose.multiPoint/45);
+                            }
+                            else if (user_lose.multiPoint <= 4000 && user_lose.multiPoint > 2400)
+                            {
+                                user_lose.multiPoint -= parseInt(user_lose.multiPoint/40);
+                            }
+                            else if (user_lose.multiPoint <= 6000 && user_lose.multiPoint > 4000)
+                            {
+                                user_lose.multiPoint -= parseInt(user_lose.multiPoint/35);
+                            }
+                            else if (user_lose.multiPoint <= 8000 && user_lose.multiPoint > 6000)
+                            {
+                                user_lose.multiPoint -= parseInt(user_lose.multiPoint/30);
+                            }
+                            else if (user_lose.multiPoint <= 12000 && user_lose.multiPoint > 8000)
+                            {
+                                user_lose.multiPoint -= parseInt(user_lose.multiPoint/25);
+                            }
+                            else if (user_lose.multiPoint > 12000)
+                            {
+                                user_lose.multiPoint -= parseInt(user_lose.multiPoint/15);
+                            }
+                            User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
+                            .then( () => {
+                                Room.findOne({socketid: socket.id})
+                                .then((send) => {
+                                    socket.to(send.roomid).emit("endgame_exit");
+                                })
+                                .catch((err) => {
+                                    console.log("error",err);
+                                })
+                            })
+                            .catch((error)=>{
+                                console.log("Error: ", error);
+                            })
+                        })
+                        .catch((error)=>{
+                            console.log("Error: ", error);
+                        })
+                }
             })
             .catch((error)=>{
                 console.log("Error: ", error);
             })
-        })
-        .catch((error)=>{
-            console.log("Error: ", error);
-        })
+        
     })
     socket.on("afk", function(iduser, score){
-        User.findOne({_id: iduser})
-        .then((user_lose)=>{
-            user_lose.multiGames++;
-            const round = user_lose.multiGames;
-            user_lose.CurExp += score/10;
-            user_lose.multiPoint -= 1000;
-            if (user_lose.multiPoint < 0)
-                user_lose.multiPoint = 0;
-            User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
-            .then( () => {
-                Room.findOne({socketid: socket.id})
-                .then((send) => {
-                    socket.to(send.roomid).emit("endgame_exit");
-                })
-                .catch((err) => {
-                    console.log("error",err);
-                })
+        UserGoogle.findOne({_id: iduser})
+            .then((user_gg_lose)=>{
+                if (!user_gg_lose) {
+                    User.findOne({_id: iduser})
+                        .then((user_lose)=>{
+                            user_lose.multiGames++;
+                            const round = user_lose.multiGames;
+                            user_lose.CurExp += score/10;
+                            user_lose.multiPoint -= 1000;
+                            if (user_lose.multiPoint < 0)
+                                user_lose.multiPoint = 0;
+                            User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
+                            .then( () => {
+                                Room.findOne({socketid: socket.id})
+                                .then((send) => {
+                                    socket.to(send.roomid).emit("endgame_exit");
+                                })
+                                .catch((err) => {
+                                    console.log("error dòng 839",err);
+                                })
+                            })
+                            .catch((error)=>{
+                                console.log("Error dòng 843: ", error);
+                            })
+                        })
+                        .catch((error)=>{
+                            console.log("Error dòng 847: ", error);
+                        })
+                } else {
+                    user_gg_lose.multiGames++;
+                    const round = user_gg_lose.multiGames;
+                    user_gg_lose.CurExp += score/10;
+                    user_gg_lose.multiPoint -= 1000;
+                    if (user_gg_lose.multiPoint < 0)
+                        user_gg_lose.multiPoint = 0;
+                    UserGoogle.updateOne({_id: iduser}, {multiGames: round, CurExp: user_gg_lose.CurExp, multiPoint: user_gg_lose.multiPoint})
+                    .then( () => {
+                        Room.findOne({socketid: socket.id})
+                        .then((send) => {
+                            socket.to(send.roomid).emit("endgame_exit");
+                        })
+                        .catch((err) => {
+                            console.log("error dòng 863:",err);
+                        })
+                    })
+                    .catch((error)=>{
+                        console.log("Error dòng 867: ", error);
+                    })
+                }
             })
             .catch((error)=>{
-                console.log("Error: ", error);
+                console.log("Lỗi ở dòng 872: ", error);
             })
-        })
-        .catch((error)=>{
-            console.log("Error: ", error);
-        })
+        
     })
     socket.on("check_player", function(score, iduser, roomid){
         Room.findOne({roomid: roomid})
@@ -864,27 +954,51 @@ io.on("connection", async function(socket) {
 
                 User.findOne({_id: iduser_afkplayer})
                 .then((user_lose)=>{
-                    user_lose.multiGames++;
-                    const round = user_lose.multiGames;
-                    user_lose.CurExp += score/10;
-                    user_lose.multiPoint -= 1000;
-                    if (user_lose.multiPoint < 0)
-                        user_lose.multiPoint = 0;
-                    User.updateOne({_id: iduser_afkplayer}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
-                    .then( () => {
-                        Room.findOne({socketid: socket.id})
-                        .then((send) => {
-                            socket.to(send.roomid).emit("endgame_exit");
-                            
+                    if (!user_lose) {
+                        UserGoogle.findOne({_id: iduser_afkplayer})
+                            .then((user_gg_lose)=>{
+                                user_gg_lose.multiGames++;
+                                const round = user_gg_lose.multiGames;
+                                user_gg_lose.CurExp += score/10;
+                                user_gg_lose.multiPoint -= 1000;
+                                if (user_gg_lose.multiPoint < 0)
+                                    user_gg_lose.multiPoint = 0;
+                                UserGoogle.updateOne({_id: iduser_afkplayer}, {multiGames: round, CurExp: user_gg_lose.CurExp, multiPoint: user_gg_lose.multiPoint})
+                                .then( () => {
+                                    Room.findOne({socketid: socket.id})
+                                    .then((send) => {
+                                        socket.to(send.roomid).emit("endgame_exit");
+                                    })
+                                    .catch((err) => {
+                                        console.log("error",err);
+                                    })
+                                })
+                            })
+                            .catch((error)=>{
+                                console.log("Error: ", error);
+                            })
+                    } else {
+                        user_lose.multiGames++;
+                        const round = user_lose.multiGames;
+                        user_lose.CurExp += score/10;
+                        user_lose.multiPoint -= 1000;
+                        if (user_lose.multiPoint < 0)
+                            user_lose.multiPoint = 0;
+                        User.updateOne({_id: iduser_afkplayer}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
+                        .then( () => {
+                            Room.findOne({socketid: socket.id})
+                            .then((send) => {
+                                socket.to(send.roomid).emit("endgame_exit");
+                                
+                            })
+                            .catch((err) => {
+                                console.log("error",err);
+                            })
                         })
-                        .catch((err) => {
-                            console.log("error",err);
+                        .catch((error)=>{
+                            console.log("Error: ", error);
                         })
-                    })
-                    .catch((error)=>{
-                        console.log("Error: ", error);
-                    })
-                    
+                    }
                 })
                 .catch((error)=>{
                     console.log("Error: ", error);

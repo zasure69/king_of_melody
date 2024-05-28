@@ -235,11 +235,12 @@ io.on("connection", async function(socket) {
         console.log(`${socket.id} has disconnect!`);
         Room.findOne({socketid: socket.id})
         .then((send) => {
+                console.log(send);
             // if (send){
                 const newroom = send.socketid.filter(item => item != socket.id);
                 Room.updateOne({roomid: send.roomid},{$set: {socketid: newroom}})
                     .then(()=>{
-                        room.socketid = newroom;
+                        send.socketid = newroom;
                     })
                     .catch((error)=>{
                         console.log("error: ",error);
@@ -256,7 +257,7 @@ io.on("connection", async function(socket) {
         console.log(socket.id);
     })
     socket.on("render_home", async (iduser)=>{
-        await sem1.acquire();
+        // await sem1.acquire();
         console.log(socket.id);
         Room.findOne({socketid: socket.id})
             .then((send) => {
@@ -285,7 +286,7 @@ io.on("connection", async function(socket) {
                             console.log("error",err);
                         })
                     }
-                    sem1.release();
+                    // sem1.release();
             })
             .catch((err)=>{
                 console.log("Error: ", err);

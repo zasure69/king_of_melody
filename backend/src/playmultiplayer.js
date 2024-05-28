@@ -61,7 +61,10 @@ window.addEventListener('load', function() {
 
 // window.history.pushState(null,null,"/home");
 window.onbeforeunload = function(event) {
-  socket.emit("render_home", iduser);
+  // Kiểm tra nếu trang không được tải lại
+  if (!event.currentTarget.performance.navigation.type === 1) {
+    socket.emit("render_home", iduser);
+  }
 }
 
 //Sử dụng biến songs trong các xử lý JavaScript khác
@@ -849,13 +852,15 @@ socket.on('endgame',() => {
   }
   
 })
-home.addEventListener('click', (e)=>{;
+home.addEventListener('click', (e)=>{
+  // e.preventDefault();
   socket.emit("render_home", iduser);
-  home.disabled = true;
+  // home.disabled = true;
 })
 home1.addEventListener('click', (e)=>{
+  // e.preventDefault();
   socket.emit("render_home", iduser);
-  home1.disabled = true;
+  // home1.disabled = true;
 })
 
 back.addEventListener('click', (e)=> {

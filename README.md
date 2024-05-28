@@ -49,7 +49,7 @@
     </ul>
   </li>
   <li>5. Chạy lệnh node src/index.js hoặc nodemon src/index.js để khởi động server</li>
-  <li>Lưu ý: cần sửa đường dẫn web ở các file src/config/passport.js (dòng 12), src/app/controller/loginController.js (dòng 35), src/app/controller/resetpasswordController.js (dòng 106), src/playmultiplayer.js (dòng 1), src/playsingleplayer.js (dòng 1), src/resources/views/playmulti.hbs (dòng 10), src/resources/views/playsingle.hbs (dòng 10) thành http://localhost:<port> khi chạy localhost</li>
+  <li>Lưu ý: cần sửa đường dẫn web ở các file src/config/passport.js (dòng 12), src/app/controller/loginController.js (dòng 35), src/app/controller/resetpasswordController.js (dòng 106), src/playmultiplayer.js (dòng 1), src/playsingleplayer.js (dòng 1), src/resources/views/playmulti.hbs (dòng 10), src/resources/views/playsingle.hbs (dòng 10) thành http://localhost:port khi chạy localhost</li>
 </ul>
 <h3>**DOMAIN DEPLOY: https://kingofmelody-8911b7a7e907.herokuapp.com/</h3>
 <h3>**HÌNH ẢNH TIÊU CHÍ CỘNG ĐIỂM</h3>

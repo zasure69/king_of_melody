@@ -318,7 +318,7 @@ ctrlIcon.addEventListener('click', ()=>{
   
 });
 function updateSlider() {
-  if ( index == Numround - 1 ) clearInterval(dem_tg);
+  if ( index == Numround ) clearInterval(dem_tg);
   var currentTime = play_song[index].seek();
   var duration = play_song[index].duration();
   songSlider.max = duration;

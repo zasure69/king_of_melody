@@ -78,6 +78,7 @@ class homeController{
                     return item;
                 });
                 let rank;
+                console.log("type: ", req.session)
                 if (req.session.type == 'google') {
                     rank = result.rank;
                 } else {
@@ -131,13 +132,6 @@ class homeController{
     }
 
     del(req, res, next) {
-        if (req.session.type == "google") {
-            UserGoogle.deleteOne({_id: req.session.passport.user})
-            .then()
-            .catch(err => {
-                console.log("Lỗi khi đăng xuất tài khoản gg: ", err);
-            })
-        }
         req.session.isAuth = false;
         req.session
         .destroy((err) => {

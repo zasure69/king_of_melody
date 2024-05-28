@@ -178,14 +178,10 @@ class loginController {
                             .compare(password, user[0].password)
                             .then(checkPassword => {
                                 if (checkPassword) {
-                                    if (req.session.isAuth) {
-                                        res.redirect('/home');
-                                    } else {
-                                        req.session.user = user[0];
-                                        req.session.type = "default";
-                                        req.session.isAuth = true;
-                                        res.redirect('/home');
-                                    }
+                                    req.session.user = user[0];
+                                    req.session.type = "default";
+                                    req.session.isAuth = true;
+                                    res.redirect('/home');
                                 } else {
                                     const errorMessage = 'Sai mật khẩu';
                                     res.redirect('/login?errorsignin=' + encodeURIComponent(errorMessage));

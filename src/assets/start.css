@@ -1,0 +1,241 @@
+@font-face {
+    font-family: neosans;
+    src: url("/assets/font/UTM_Neo_Sans_IntelBold_Italic.ttf");
+}
+body{
+    position: relative;
+    font-family: neosans;
+    background-image: linear-gradient(132deg, rgb(228, 157, 252), rgb(168,98,230), rgb(122, 57, 214), rgb(95, 30, 203), rgb(69,6, 191),rgb(61,7,185),rgb(65,19,185), rgb(71, 60, 190), rgb(77, 99, 197), rgb(84, 132, 208), rgb(109, 162, 214), rgb(131, 188, 221), rgb(168, 228, 236));
+    height: 100vh;
+    background-repeat: no-repeat; 
+    background-size: cover;
+
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: neosans;
+}
+
+.wrapper-warning > img {
+    width: 50vw;
+}
+.wrapper-warning {
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+@media only screen and (orientation:portrait) {
+    .wrapper-warning {
+        display: flex;
+    }
+    .wrapper {
+        display: none;
+    }
+}
+
+@media only screen and (orientation:landscape) {
+    .wrapper-warning {
+        display: none;
+    }
+    .wrapper {
+        display: block;
+    }
+}
+
+.landing-page-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+    font-family: neosans;
+}
+
+.header_container {
+    background-color: #10101c;
+    display: flex;
+    flex-direction: row;
+    height: 4em;
+    justify-content: space-between;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.header_container .header-left img {
+    width: 12.5em;
+    height: 3.5em;
+}
+
+.header_container .header-left {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-left: 2em;
+}
+
+.header_container .header-right .btn-sign-in {
+    font-size: 1.75em;
+    text-decoration: none;
+    color: white;
+}
+
+.header_container .header-right .btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    margin-right: 1em;
+}
+
+.header_container .header-right .label {
+    max-width: 100%;
+    padding: 1em;
+}
+
+.body>img {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+    top: 4em;
+    overflow: clip;
+}
+
+.body .content {
+    background: url('/assets/img/musicparty.png') top center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding-top: 50%;
+}
+
+.body .content .body-content {
+    position: absolute;
+    top: 0;
+    margin-top: 10%;
+}
+
+.body .content .body-content > img {
+    width : 24%;
+}
+
+.body .content .body-content .start-page-headline {
+    font-size: 8vw;
+    font-weight: 700;
+    text-shadow: 0 0.125em 0.5em black;
+    text-transform: uppercase;
+}
+
+.body .content .body-content .start-page-description {
+    font-weight: 700;
+    text-shadow: 0 0.125em 0.5em black;
+}
+
+.body .content .body-content .play-button-link{
+    text-decoration: none;
+}
+
+.body .content .body-content .play-button-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.body .content .body-content .play-button-label {
+    max-width: 100%;
+    padding: 0.5em 1.5em;
+    background-color: #6cb928;
+    background-image: radial-gradient(150% 160% at 50% 15%, #fff 0, transparent 30%);
+    color: white;
+    border-radius: 40px;
+    font-size: 2vw;
+    text-transform: uppercase;
+    text-shadow: 0 0.125em 0.4em black;
+    width: 18vw;
+    height: 11vh;
+}
+
+.body .content .body-content .play-button-label:hover {
+    transform: scale(1.05);
+}
+
+.body .below-content {
+    color: white;
+    background-color: rgb(5,4,7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.body .below-content .below-content-container .teaser1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgb(68, 66, 66);
+}
+
+.body .below-content .below-content-container .teaser1>img {
+    width: 45vw;
+}
+
+.body .below-content .below-content-container .content-teaser1 {
+    padding: 2vw;
+    width: 43%;
+    text-align: end;
+}
+
+.body .below-content .below-content-container .teaser2 {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgb(68, 66, 66);
+}
+
+.body .below-content .below-content-container .teaser2>img {
+    width: 45vw;
+}
+
+.body .below-content .below-content-container .content-teaser2 {
+    padding: 2vw;
+    width: 43%;
+}
+
+.body .below-content .below-content-container .teaser3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgb(68, 66, 66);
+}
+
+.body .below-content .below-content-container .teaser3>img {
+    width: 45vw;
+}
+
+.body .below-content .below-content-container .content-teaser3 {
+    padding: 2vw;
+    width: 43%;
+    text-align: end;
+}
+
+.footer {
+    color: white;
+    background-color: rgb(5,4,7);
+    text-align: center;
+    padding: 2em;
+}

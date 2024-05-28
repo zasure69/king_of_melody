@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>King of Melody</title>
+        <link rel="stylesheet" href="../../assets/playweb.css">
+        <link rel="icon" type="image/png" href="/assets/img/favicon.png" sizes="32x32">
+        <script src="https://kit.fontawesome.com/d42216d8d0.js" crossorigin="anonymous"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" 
+        integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js" 
+        integrity="sha512-+wqa4/aOL4vwhL637A4p+6epqhUHDqpEfYJa1+PlzlMf908CSOb3xtIeKwZWh5Q0Q/R2nYUKxH4vvcQg+k8KKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js" 
+        integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+    <body>
+    {{!-- <div class="wrapper"> --}}
+        <div class="container">
+            <div class="hint">
+                <h2>Bài hát gợi ý</h2>
+                {{#each hintlist}}
+                <div class="{{this.song}}" onclick="clicknamesong(this)" >
+                    <h3 id="hintname">{{this.song}}</h3> 
+                    <p>{{this.singer}}</p>
+                </div>
+                {{/each}}
+            </div>
+            <div class="play-area">
+                <div class="info">
+                    <div class="btn-back" id="btn_back">
+                        <a href="/home">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                    </div>
+                    <div class="round-info">
+                        Vòng<br>
+                        <h3 id="Round_play">1/10</h3>
+                    </div>
+                    <div class="player-info">
+                        <img src="assets/img/ava-crop.png" alt="">
+                        <p>{{username}}</p>
+                    </div>
+                    <div class="time-info">
+                        Thời gian<br>
+                        <h3 id="Time_duration">12:30</h3>
+                    </div>
+                    <div class="point-info">
+                        Điểm<br>
+                        <h3 id="Point_play">0</h3>
+                    </div>
+                    
+                </div>
+                
+                <div class="disc">
+                    {{!-- <audio src="data:audio/mpeg;base64,{{curSong.content}}" id="audio" autoplay controls></audio> --}}
+                    <img src="/assets/img/dianhac2.png" class="discimg" id="music_disc" alt="disc">
+                    
+                    <div class="btn">
+                        <div><input type="range" value="0" id="progress"></div>
+                        <div id="progress-control"> 
+                            <div><i class="fa-solid fa-volume-low" id="decrease-volume"></i></div>
+                            <div><i class="fa-solid fa-pause" id="ctrlIcon"></i></div>
+                            <div><i class="fa-solid fa-volume-high" id="increase-volume"></i></div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="answer">
+                    <input type="text" id="answer_song" placeholder="Nhập tên bài hát">
+                    <button id="guessButton">Đoán</button>
+                </div>
+            </div>
+            <div id="end-model">
+                <div class="bg-model">
+                    <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
+                    <div class="end-model-content">
+                        <h2>Trò chơi kết thúc!</h2>
+                        <h3 id="end-model-score">Điểm của bạn: <span id="endpoint"></span> </h3>
+                    </div>
+                    <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
+                </div>
+                <div class="img-model">
+                    <img src="/assets/img/zero-two-02.gif" alt="" id="img-model-ava">
+                </div>
+                <div class="btn-model">
+                    <button class="home-btn" id="btn-detail" >
+                        <span id="btn">
+                            <h3>Chi tiết</h3>
+                        <span>
+                    </button>
+                    <button class="home-btn">
+                        <a href="" class="home-btn-a">
+                            <h3>Chơi tiếp</h3>
+                        </a>
+                    </button>
+                    <button class="home-btn">
+                        <a href="/home" class="home-btn-a">
+                            <h3>Trang chủ</h3>
+                        </a>
+                    </button>
+                </div>
+            </div>
+            <div id="detail-model">
+                <div class="bg-model">
+                    <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
+                    <div class="header">
+                        <div class="end-model-content">
+                            <h3 id="end-model-score">Điểm của bạn: <span id="detailendpoint"></span> </h3>
+                        </div>
+                        <div class="num-ans">
+                            <h3>Đúng: <span id="num-r"></span></h3>
+                            <h3>Sai: <span id="num-w"></span></h3>
+                        </div>
+                    </div>
+                    <img src="/assets/img/music-wave.gif" alt="" class="rank_img">
+                </div>
+                <div class="song-detail">
+                    <div class="songlist">
+                        <h2>Thông Tin Bài hát</h2>
+                    </div>
+                    {{#each infolist}}
+                    <div class="songlist">
+                        <a href="{{this.link}}" target="_blank"><p>    {{this.name}} - {{this.singer}}</p></a>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="btn-model">
+                    <button class="home-btn-1" id="return">
+                        <h3>Trở lại</h3>
+                    </button>
+                    <button class="home-btn-1">
+                        <a href="" class="home-btn-a">
+                            <h3>Chơi tiếp</h3>
+                        </a>
+                    </button>
+                    <button class="home-btn-1">
+                        <a href="/home" class="home-btn-a">
+                            <h3>Trang chủ</h3>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        
+    <div class="wrapper-warning">
+        <img src="/assets/img/phone-rotate.png" alt="">
+        <div class="warning-content">Xoay ngang màn hình để tiếp tục sử dụng trang web</div>
+    </div>
+        <input type="hidden" id="songsInput" data-songs="{{songs}}">
+        <input type="hidden" id="userid" data-user="{{userid}}">
+        <input type="hidden" id="mode" data-mode="{{mode}}">
+        <input type="hidden" id="efVLInput" value="{{efVL}}">
+        <input type="hidden" id="msVLInput" value="{{msVL}}">
+        
+        <script src="playsingleplayer.js"></script>
+    </body>
+</html>

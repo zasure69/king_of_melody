@@ -137,7 +137,7 @@ class playmultiController {
                             loadSong[rooms.roomid] = false;
                             console.log("loadsong else if 2", loadSong[rooms.roomid]);
                             if (req.session.type == "google") {
-                                UserGoogle.findOne({_id: req.session.passpport.user})
+                                UserGoogle.findOne({_id: req.session.passport.user})
                                     .then((result) => {
                                         settingSchema.findOne({email: result.email})
                                         .then((st) => {

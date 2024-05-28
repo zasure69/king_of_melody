@@ -347,7 +347,7 @@ io.on("connection", async function(socket) {
                 const newroom = send.socketid.filter(item => item != socket.id);
                 Room.updateOne({roomid: send.roomid},{$set: {socketid: newroom}})
                     .then(()=>{
-                        if (newroom.length) {
+                        if (newroom.length != 0 || loadSong[send.roomid] == false) {
                             send.socketid = newroom;
                         }
                         else {
@@ -758,7 +758,7 @@ io.on("connection", async function(socket) {
             console.log("error",err);
         })
     })
-    socket.on("exit", function(iduser, score){
+    socket.on("exit", function(iduser, score, roomid){
         UserGoogle.findOne({_id: iduser})
             .then((user_gg_lose)=>{
                 if (user_gg_lose) {
@@ -797,13 +797,7 @@ io.on("connection", async function(socket) {
                     }
                     UserGoogle.updateOne({_id: iduser}, {multiGames: round, CurExp: user_gg_lose.CurExp, multiPoint: user_gg_lose.multiPoint})
                     .then( () => {
-                        Room.findOne({socketid: socket.id})
-                        .then((send) => {
-                            socket.to(send.roomid).emit("endgame_exit");
-                        })
-                        .catch((err) => {
-                            console.log("error",err);
-                        })
+                        socket.to(roomid).emit("endgame_exit");
                     })
                     .catch((error)=>{
                         console.log("Error: ", error);
@@ -846,13 +840,7 @@ io.on("connection", async function(socket) {
                             }
                             User.updateOne({_id: iduser}, {multiGames: round, CurExp: user_lose.CurExp, multiPoint: user_lose.multiPoint})
                             .then( () => {
-                                Room.findOne({socketid: socket.id})
-                                .then((send) => {
-                                    socket.to(send.roomid).emit("endgame_exit");
-                                })
-                                .catch((err) => {
-                                    console.log("error",err);
-                                })
+                                socket.to(roomid).emit("endgame_exit");
                             })
                             .catch((error)=>{
                                 console.log("Error: ", error);

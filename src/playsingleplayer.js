@@ -142,7 +142,7 @@ var List_song = function (songs) {
   this.songs = songs;
   this.index = 0;
 }
-let countdown = 0, click = true, count = 0;
+let countdown = 0, click = false, count = 0;
 
 
 List_song.prototype = {

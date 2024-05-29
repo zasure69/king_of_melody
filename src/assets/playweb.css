@@ -40,6 +40,9 @@
     .wrapper-warning {
         display: none;
     }
+    #hintname{
+        cursor: pointer;
+    }
     .container {
         position: relative;
         display: flex;

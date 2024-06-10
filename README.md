@@ -126,36 +126,37 @@
         Dưới đây là cách sử dụng koa-router để định nghĩa và xử lý các tuyến (routes) trong KoaJS.
         <code>
           const Koa = require('koa');
-        const Router = require('koa-router');
-        const app = new Koa();
-        const router = new Router();
-        // Định nghĩa tuyến cơ bản
-        router.get('/', async (ctx) => {
-          ctx.body = 'Welcome to the home page!';
-        });
-        router.get('/about', async (ctx) => {
-          ctx.body = 'This is the about page!';
-        });
-        // Định nghĩa tuyến với tham số
-        router.get('/user/:id', async (ctx) => {
-          const userId = ctx.params.id;
-          ctx.body = `User ID: ${userId}`;
-        });
-        // Định nghĩa tuyến POST
-        router.post('/data', async (ctx) => {
-          ctx.body = 'Data received!';
-        });
-        // Sử dụng router
-        app
-          .use(router.routes()) // Sử dụng các tuyến đã định nghĩa
-          .use(router.allowedMethods()); // Xử lý các phương thức HTTP không được phép
-        const PORT = 3000;
-        app.listen(PORT, () => {
-          console.log(`Server is running on http://localhost:${PORT}`);
-        });
+          const Router = require('koa-router');
+          const app = new Koa();
+          const router = new Router();
+          // Định nghĩa tuyến cơ bản
+          router.get('/', async (ctx) => {
+            ctx.body = 'Welcome to the home page!';
+          });
+          router.get('/about', async (ctx) => {
+            ctx.body = 'This is the about page!';
+          });
+          // Định nghĩa tuyến với tham số
+          router.get('/user/:id', async (ctx) => {
+            const userId = ctx.params.id;
+            ctx.body = `User ID: ${userId}`;
+          });
+          // Định nghĩa tuyến POST
+          router.post('/data', async (ctx) => {
+            ctx.body = 'Data received!';
+          });
+          // Sử dụng router
+          app
+            .use(router.routes()) // Sử dụng các tuyến đã định nghĩa
+            .use(router.allowedMethods()); // Xử lý các phương thức HTTP không được phép
+          const PORT = 3000;
+          app.listen(PORT, () => {
+            console.log(`Server is running on http://localhost:${PORT}`);
+          });
         </code>
       </li>
       <li>
+        <h4>Bước 3: Sử dụng koa-bodyparser để xử lý dữ liệu POST</h4>
         
       </li>
     </ul>

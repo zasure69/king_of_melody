@@ -124,7 +124,7 @@
       <li>
         <h4>Bước 2: Sử dụng koa-router</h4>
         Dưới đây là cách sử dụng koa-router để định nghĩa và xử lý các tuyến (routes) trong KoaJS.
-        `javascript`
+          `javascript
           const Koa = require('koa');
           const Router = require('koa-router');
           const app = new Koa();
@@ -152,8 +152,7 @@
           const PORT = 3000;
           app.listen(PORT, () => {
             console.log(`Server is running on http://localhost:${PORT}`);
-          });
-        ```
+          });`
       </li>
       <li>
         

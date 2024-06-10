@@ -112,7 +112,56 @@
     </ul>
   </li>
 </ul>
-
+<h3>**TRẢ LỜI CÂU HỎI SEMINAR GIỮA KÌ</h3>
+<ul>
+  <li>
+    <h4>1. Cách routing sử dụng KoaJS</h4>
+    <ul>
+      <li>Routing trong KoaJS được thực hiện thông qua middleware koa-router.</li>
+      <li><h5>Bước 1: Cài đặt koa-router</h5>
+        Trước tiên, bạn cần cài đặt koa-router thông qua npm hoặc yarn: npm install koa-router
+      </li>
+      <li>
+        <h5>Bước 2: Sử dụng koa-router</h5>
+        Dưới đây là cách sử dụng koa-router để định nghĩa và xử lý các tuyến (routes) trong KoaJS.
+        
+        const Koa = require('koa');
+        const Router = require('koa-router');
+        const app = new Koa();
+        const router = new Router();
+        // Định nghĩa tuyến cơ bản
+        router.get('/', async (ctx) => {
+          ctx.body = 'Welcome to the home page!';
+        });
+        
+        router.get('/about', async (ctx) => {
+          ctx.body = 'This is the about page!';
+        });
+        
+        // Định nghĩa tuyến với tham số
+        router.get('/user/:id', async (ctx) => {
+          const userId = ctx.params.id;
+          ctx.body = `User ID: ${userId}`;
+        });
+        
+        // Định nghĩa tuyến POST
+        router.post('/data', async (ctx) => {
+          ctx.body = 'Data received!';
+        });
+        // Sử dụng router
+        app
+          .use(router.routes()) // Sử dụng các tuyến đã định nghĩa
+          .use(router.allowedMethods()); // Xử lý các phương thức HTTP không được phép
+        
+        const PORT = 3000;
+        app.listen(PORT, () => {
+          console.log(`Server is running on http://localhost:${PORT}`);
+        });
+      </li>
+      <li></li>
+    </ul>
+  </li>
+</ul>
 <h3>**LỜI KẾT</h3>
 <p>
   Tóm lại, “King of melody” có đầy đủ các yêu cầu cơ bản mà một website cần có. Web có những chức năng cho cả người dùng lẫn người quản lý, có sự phân cấp rõ rệt và khoa học về các quyền thao tác, quyền truy cập trong website. Web có những giao diện cho người dùng rất trực quan, đa dạng, dễ thao tác và có tính bảo mật đảm bảo về thông tin người dùng. Do đó, “King of melody” là một trang web rất đáng người dùng trải nghiệm.

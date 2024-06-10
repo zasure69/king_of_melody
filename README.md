@@ -118,13 +118,12 @@
     <h4>1. Cách routing sử dụng KoaJS</h4>
     <ul>
       <li>Routing trong KoaJS được thực hiện thông qua middleware koa-router.</li>
-      <li><h5>Bước 1: Cài đặt koa-router</h5>
+      <li><h4>Bước 1: Cài đặt koa-router</h5>
         Trước tiên, bạn cần cài đặt koa-router thông qua npm hoặc yarn: npm install koa-router
       </li>
       <li>
-        <h5>Bước 2: Sử dụng koa-router</h5>
+        <h4>Bước 2: Sử dụng koa-router</h5>
         Dưới đây là cách sử dụng koa-router để định nghĩa và xử lý các tuyến (routes) trong KoaJS.
-        
         const Koa = require('koa');
         const Router = require('koa-router');
         const app = new Koa();
@@ -133,17 +132,14 @@
         router.get('/', async (ctx) => {
           ctx.body = 'Welcome to the home page!';
         });
-        
         router.get('/about', async (ctx) => {
           ctx.body = 'This is the about page!';
         });
-        
         // Định nghĩa tuyến với tham số
         router.get('/user/:id', async (ctx) => {
           const userId = ctx.params.id;
           ctx.body = `User ID: ${userId}`;
         });
-        
         // Định nghĩa tuyến POST
         router.post('/data', async (ctx) => {
           ctx.body = 'Data received!';
@@ -152,7 +148,6 @@
         app
           .use(router.routes()) // Sử dụng các tuyến đã định nghĩa
           .use(router.allowedMethods()); // Xử lý các phương thức HTTP không được phép
-        
         const PORT = 3000;
         app.listen(PORT, () => {
           console.log(`Server is running on http://localhost:${PORT}`);

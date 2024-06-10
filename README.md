@@ -118,7 +118,7 @@
     <h4>1. Cách routing sử dụng KoaJS</h4>
     <ul>
       <li>Routing trong KoaJS được thực hiện thông qua middleware koa-router.</li>
-      <li><h4>Bước 1: Cài đặt koa-router</h5>
+      <li><h4>Bước 1: Cài đặt koa-router</h4>
         Trước tiên, bạn cần cài đặt koa-router thông qua npm hoặc yarn: npm install koa-router
       </li>
       <li>
@@ -153,7 +153,6 @@
         app.listen(PORT, () => {
           console.log(`Server is running on http://localhost:${PORT}`);
         });
-        </p>
       </li>
       <li>
         

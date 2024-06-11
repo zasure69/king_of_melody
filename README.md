@@ -117,7 +117,7 @@
   <li>
     <h4>1. Cách routing sử dụng KoaJS</h4>
     <ul>
-      <li>Việc xử lý routing trong KoaJS thường được thực hiện thông qua một middleware bổ sung, phổ biến nhất là `koa-router`. Dưới đây là hướng dẫn cơ bản về cách thiết lập và sử dụng routing với KoaJS:
+      Việc xử lý routing trong KoaJS thường được thực hiện thông qua một middleware bổ sung, phổ biến nhất là `koa-router`. Dưới đây là hướng dẫn cơ bản về cách thiết lập và sử dụng routing với KoaJS:
           ##1. Cài đặt Koa và Koa Router
           Trước hết, bạn cần cài đặt Koa và Koa Router bằng cách sử dụng npm:
           ```sh
@@ -192,7 +192,6 @@
           app.listen(port, () => {
             console.log(`Server running on http://localhost:${port}`);
           });
-      </li>
     </ul>
   </li>
   <li>

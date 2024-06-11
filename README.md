@@ -142,7 +142,7 @@
           <br>
           <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/12719b77-f992-4c41-b162-8d33bdfec774">
           <h5>5. Ví dụ về routing kết hợp với middleware</h5>
-          <img width="815" alt="image" src="(https://github.com/zasure69/king_of_melody/assets/162142037/68542023-776f-4011-8ba4-58260e3647a5">
+          <img width="500" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/68542023-776f-4011-8ba4-58260e3647a5">
     </ul>
   </li>
   <li>
@@ -160,7 +160,7 @@
     koa-body là một middleware mạnh mẽ hơn, hỗ trợ thêm việc xử lý file uploads.
     <br>
     <code>npm install koa-body</code><br>
-    Sử dụng koa-body:
+    Sử dụng koa-body:<br>
       <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/73049bac-1e12-442c-94ec-5bf434880560">
     <h5>Xử lý query string và params</h5>
     KoaJS cung cấp các thuộc tính của đối tượng ctx.request để truy cập các query string và route params.

@@ -171,7 +171,7 @@
     Sử dụng koa-router để truy cập các route params.<br>
       <img width="500" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/960b6023-72c4-4e09-b8d7-d68d0b037d7d">
     <h5>Xử lý headers</h5>
-    Bạn có thể truy cập các headers từ ctx.request.headers.
+    Bạn có thể truy cập các headers từ ctx.request.headers.<br>
       <img width="500" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/3671dcda-9f81-4c6b-a773-233edc995472">
     <h5>Xử lý cookies</h5>
     <br>
@@ -193,7 +193,7 @@
     <h5>Thiết kế hiện đại và gọn gàng</h5>
     KoaJS sử dụng async/await, giúp code trở nên gọn gàng và dễ đọc hơn so với cách sử dụng callback hoặc promise trong các framework cũ hơn. Điều này làm giảm đáng kể nguy cơ callback hell và giúp dễ dàng quản lý luồng xử lý bất đồng bộ.
     <h5>Middleware dạng đơn giản và thuần túy</h5>
-    KoaJS sử dụng một hệ thống middleware thuần túy và đơn giản, nơi mỗi middleware là một hàm async. Middleware trong KoaJS được tổ chức thành một chuỗi xử lý (stack) mà mỗi middleware có thể gọi tiếp theo (next) hoặc dừng lại. Điều này mang lại sự linh hoạt cao trong việc kiểm soát luồng xử lý.
+    KoaJS sử dụng một hệ thống middleware thuần túy và đơn giản, nơi mỗi middleware là một hàm async. Middleware trong KoaJS được tổ chức thành một chuỗi xử lý (stack) mà mỗi middleware có thể gọi tiếp theo (next) hoặc dừng lại. Điều này mang lại sự linh hoạt cao trong việc kiểm soát luồng xử lý.<br>
     <img width="500" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/b47f5a68-0f61-483c-b949-5c0d33cdfd7a">
     <h5>Kiến trúc nhỏ gọn, tập trung vào lõi</h5>
     KoaJS được thiết kế để trở thành một framework nhỏ gọn, chỉ cung cấp những tính năng cơ bản và cần thiết nhất. Các tính năng mở rộng được thêm vào thông qua các middleware tùy chọn. Điều này giúp ứng dụng KoaJS có kích thước nhỏ và hiệu suất cao.

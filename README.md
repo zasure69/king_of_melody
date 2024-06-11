@@ -118,10 +118,10 @@
     <h4>1. Cách routing sử dụng KoaJS</h4>
     <ul>
       Việc xử lý routing trong KoaJS thường được thực hiện thông qua một middleware bổ sung, phổ biến nhất là `koa-router`. Dưới đây là hướng dẫn cơ bản về cách thiết lập và sử dụng routing với KoaJS:
-          <br><h5>1. Cài đặt Koa và Koa Router</h5><br>
+          <br><h5>1. Cài đặt Koa và Koa Router</h5>
           Trước hết, bạn cần cài đặt Koa và Koa Router bằng cách sử dụng npm:
           <br>
-            npm install koa koa-router
+          <code>npm install koa koa-router</code>
           <br>
           2. Tạo ứng dụng Koa cơ bản với routing
           Dưới đây là một ví dụ về cách thiết lập một ứng dụng Koa cơ bản và sử dụng Koa Router để xử lý routing:

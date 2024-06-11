@@ -125,34 +125,34 @@
           <br>
           2. Tạo ứng dụng Koa cơ bản với routing
           Dưới đây là một ví dụ về cách thiết lập một ứng dụng Koa cơ bản và sử dụng Koa Router để xử lý routing:
-          ```javascript
-          // Import các thư viện cần thiết
-          const Koa = require('koa');
-          const Router = require('koa-router');
-          // Tạo một instance của Koa
-          const app = new Koa();
-          // Tạo một instance của Router
-          const router = new Router();
-          // Định nghĩa các route
-          router.get('/', async (ctx) => {
-            ctx.body = 'Hello, World!';
-          });
-          router.get('/about', async (ctx) => {
-            ctx.body = 'About Us';
-          });
-          router.post('/contact', async (ctx) => {
-            ctx.body = 'Contact Us';
-          });
-          // Sử dụng router middleware
-          app
-            .use(router.routes())
-            .use(router.allowedMethods());
-          // Khởi động server
-          const port = 3000;
-          app.listen(port, () => {
-            console.log(`Server running on http://localhost:${port}`);
-          });
-          ```
+          <code>
+            // Import các thư viện cần thiết
+            const Koa = require('koa');
+            const Router = require('koa-router');
+            // Tạo một instance của Koa
+            const app = new Koa();
+            // Tạo một instance của Router
+            const router = new Router();
+            // Định nghĩa các route
+            router.get('/', async (ctx) => {
+              ctx.body = 'Hello, World!';
+            });
+            router.get('/about', async (ctx) => {
+              ctx.body = 'About Us';
+            });
+            router.post('/contact', async (ctx) => {
+              ctx.body = 'Contact Us';
+            });
+            // Sử dụng router middleware
+            app
+              .use(router.routes())
+              .use(router.allowedMethods());
+            // Khởi động server
+            const port = 3000;
+            app.listen(port, () => {
+              console.log(`Server running on http://localhost:${port}`);
+            });
+          </code>
           ##3. Chi tiết các phương thức và phương pháp
           <ul>
             <li>router.get(path, handler): Định nghĩa một route GET.</li>

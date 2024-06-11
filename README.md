@@ -122,6 +122,7 @@
           Trước hết, bạn cần cài đặt Koa và Koa Router bằng cách sử dụng npm:
           ```sh
           npm install koa koa-router
+          ```
           ##2. Tạo ứng dụng Koa cơ bản với routing
           Dưới đây là một ví dụ về cách thiết lập một ứng dụng Koa cơ bản và sử dụng Koa Router để xử lý routing:
           ```javascript
@@ -151,6 +152,7 @@
           app.listen(port, () => {
             console.log(`Server running on http://localhost:${port}`);
           });
+          ```
           ##3. Chi tiết các phương thức và phương pháp
           <ul>
             <li>router.get(path, handler): Định nghĩa một route GET.</li>

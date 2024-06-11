@@ -117,49 +117,243 @@
   <li>
     <h4>1. Cách routing sử dụng KoaJS</h4>
     <ul>
-      <li>Routing trong KoaJS được thực hiện thông qua middleware koa-router.</li>
-      <li><h4>Bước 1: Cài đặt koa-router</h4>
-        Trước tiên, bạn cần cài đặt koa-router thông qua npm hoặc yarn: npm install koa-router
-      </li>
-      <li>
-        <h4>Bước 2: Sử dụng koa-router</h4>
-        Dưới đây là cách sử dụng koa-router để định nghĩa và xử lý các tuyến (routes) trong KoaJS.
-        <code>
+      <li>Việc xử lý routing trong KoaJS thường được thực hiện thông qua một middleware bổ sung, phổ biến nhất là `koa-router`. Dưới đây là hướng dẫn cơ bản về cách thiết lập và sử dụng routing với KoaJS:
+          ### 1. Cài đặt Koa và Koa Router
+          Trước hết, bạn cần cài đặt Koa và Koa Router bằng cách sử dụng npm:
+          ```sh
+          npm install koa koa-router
+          ### 2. Tạo ứng dụng Koa cơ bản với routing
+          Dưới đây là một ví dụ về cách thiết lập một ứng dụng Koa cơ bản và sử dụng Koa Router để xử lý routing:
+          ```javascript
+          // Import các thư viện cần thiết
           const Koa = require('koa');
           const Router = require('koa-router');
+          // Tạo một instance của Koa
           const app = new Koa();
+          // Tạo một instance của Router
           const router = new Router();
-          // Định nghĩa tuyến cơ bản
+          // Định nghĩa các route
           router.get('/', async (ctx) => {
-            ctx.body = 'Welcome to the home page!';
+            ctx.body = 'Hello, World!';
           });
           router.get('/about', async (ctx) => {
-            ctx.body = 'This is the about page!';
+            ctx.body = 'About Us';
           });
-          // Định nghĩa tuyến với tham số
-          router.get('/user/:id', async (ctx) => {
-            const userId = ctx.params.id;
-            ctx.body = `User ID: ${userId}`;
+          router.post('/contact', async (ctx) => {
+            ctx.body = 'Contact Us';
           });
-          // Định nghĩa tuyến POST
-          router.post('/data', async (ctx) => {
-            ctx.body = 'Data received!';
-          });
-          // Sử dụng router
+          // Sử dụng router middleware
           app
-            .use(router.routes()) // Sử dụng các tuyến đã định nghĩa
-            .use(router.allowedMethods()); // Xử lý các phương thức HTTP không được phép
-          const PORT = 3000;
-          app.listen(PORT, () => {
-            console.log(`Server is running on http://localhost:${PORT}`);
+            .use(router.routes())
+            .use(router.allowedMethods());
+          // Khởi động server
+          const port = 3000;
+          app.listen(port, () => {
+            console.log(`Server running on http://localhost:${port}`);
           });
-        </code>
-      </li>
-      <li>
-        <h4>Bước 3: Sử dụng koa-bodyparser để xử lý dữ liệu POST</h4>
-        
+          ### 3. Chi tiết các phương thức và phương pháp
+          <ul>
+            <li>router.get(path, handler): Định nghĩa một route GET.</li>
+            <li>router.post(path, handler): Định nghĩa một route POST.</li>
+            <li>router.put(path, handler): Định nghĩa một route PUT.</li>
+            <li>router.delete(path, handler): Định nghĩa một route DELETE.</li>
+            <li>router.routes(): Trả về một middleware tổng hợp từ các route đã định nghĩa.</li>
+            <li>router.allowedMethods(): Trả về một middleware xử lý các phương thức không được phép.</li>
+          </ul>
+          ### 4. Middleware trong KoaJS
+          KoaJS rất mạnh mẽ nhờ vào hệ thống middleware của nó. Bạn có thể thêm các middleware khác để xử lý nhiều tác vụ khác nhau. Dưới đây là ví dụ về cách thêm middleware để xử lý JSON request body:
+          ```sh
+          npm install koa-bodyparser
+          ````javascript
+          const bodyParser = require('koa-bodyparser');
+          // Sử dụng bodyparser middleware
+          app.use(bodyParser());
+          ### 5. Ví dụ về routing kết hợp với middleware
+          ```javascript
+          const Koa = require('koa');
+          const Router = require('koa-router');
+          const bodyParser = require('koa-bodyparser');
+          const app = new Koa();
+          const router = new Router();
+          app.use(bodyParser());
+          router.post('/data', async (ctx) => {
+            const data = ctx.request.body;
+            if (!data.name || !data.age) {
+              ctx.status = 400;
+              ctx.body = { error: 'Name and age are required' };
+            } else {
+              ctx.body = { message: `Hello, ${data.name}. You are ${data.age} years old.` };
+            }
+          });
+          app
+            .use(router.routes())
+            .use(router.allowedMethods());
+          const port = 3000;
+          app.listen(port, () => {
+            console.log(`Server running on http://localhost:${port}`);
+          });
       </li>
     </ul>
+  </li>
+  <li>
+    <h4>2. KoaJS có hỗ trợ gì cho việc xử lý và phân tích dữ liệu đầu vào từ các yêu cầu của HTTP</h4>
+    KoaJS có nhiều cách để hỗ trợ việc xử lý và phân tích dữ liệu đầu vào từ các yêu cầu HTTP. Dưới đây là một số phương pháp phổ biến và các middleware hữu ích mà bạn có thể sử dụng trong ứng dụng KoaJS để xử lý dữ liệu đầu vào:
+    ###Xử lý body của yêu cầu
+    Sử dụng koa-bodyparser
+    koa-bodyparser là một middleware phổ biến giúp bạn phân tích (parse) body của các yêu cầu HTTP. Nó hỗ trợ cả JSON, URL-encoded, và dữ liệu thô.
+    ```sh
+    npm install koa-bodyparser
+    Sử dụng koa-bodyparser:
+    ```javascript
+    const Koa = require('koa');
+    const bodyParser = require('koa-bodyparser');
+    const app = new Koa();
+    app.use(bodyParser());
+    app.use(async ctx => {
+      ctx.body = ctx.request.body;
+    });
+    app.listen(3000, () => {
+      console.log('Server running on http://localhost:3000');
+    });
+    Sử dụng koa-body
+    koa-body là một middleware mạnh mẽ hơn, hỗ trợ thêm việc xử lý file uploads.
+    Cài đặt koa-body:
+    ```sh
+    npm install koa-body
+    Sử dụng koa-body:
+    ```javascript
+      const Koa = require('koa');
+      const koaBody = require('koa-body');
+      const app = new Koa();
+      app.use(koaBody({
+        multipart: true,  // Hỗ trợ file uploads
+        urlencoded: true,
+      }));
+      app.use(async ctx => {
+        if (ctx.request.files) {
+          // Xử lý file uploads
+          console.log(ctx.request.files);
+        }
+        ctx.body = ctx.request.body;
+      });
+      app.listen(3000, () => {
+        console.log('Server running on http://localhost:3000');
+      });
+      ###Xử lý query string và params
+      KoaJS cung cấp các thuộc tính của đối tượng ctx.request để truy cập các query string và route params.
+      Truy cập query string
+      Bạn có thể truy cập các query string trực tiếp từ ctx.query hoặc ctx.request.query.
+      ```javascript
+      app.use(async ctx => {
+        const query = ctx.query; // or ctx.request.query
+        console.log(query);
+        ctx.body = query;
+      });
+      Truy cập route params
+      Sử dụng koa-router để truy cập các route params.  
+      ```javascript
+      const Koa = require('koa');
+      const Router = require('koa-router');
+      const app = new Koa();
+      const router = new Router();
+      router.get('/users/:id', async ctx => {
+        const userId = ctx.params.id;
+        ctx.body = `User ID: ${userId}`;
+      });
+      app
+        .use(router.routes())
+        .use(router.allowedMethods());
+      app.listen(3000, () => {
+        console.log('Server running on http://localhost:3000');
+      });
+      ###Xử lý headers
+      Bạn có thể truy cập các headers từ ctx.request.headers.
+      ```javascript
+      app.use(async ctx => {
+        const headers = ctx.request.headers;
+        console.log(headers);
+        ctx.body = headers;
+      });
+      ###Xử lý cookies
+      Sử dụng koa-cookie hoặc koa-session để xử lý cookies.
+      Sử dụng koa-cookie
+      Cài đặt koa-cookie:
+      ```sh
+      npm install koa-cookie
+      Sử dụng koa-cookie:
+      ```javascript
+      const Koa = require('koa');
+      const cookie = require('koa-cookie');
+      const app = new Koa();
+      app.use(cookie());
+      app.use(async ctx => {
+        ctx.cookies.set('name', 'Koa');
+        const name = ctx.cookies.get('name');
+        ctx.body = `Hello, ${name}`;
+      });
+      app.listen(3000, () => {
+        console.log('Server running on http://localhost:3000');
+      });
+      Sử dụng koa-session
+      Cài đặt koa-session:
+      ```sh
+      npm install koa-session
+      Sử dụng koa-session:
+      ```javascript
+      const Koa = require('koa');
+      const session = require('koa-session');
+      const app = new Koa();
+      app.keys = ['some secret hurr'];
+      const CONFIG = {
+        key: 'koa:sess',
+        maxAge: 86400000,
+      };
+      app.use(session(CONFIG, app));
+      app.use(async ctx => {
+        if (ctx.path === '/favicon.ico') return;
+        let n = ctx.session.views || 0;
+        ctx.session.views = ++n;
+        ctx.body = n + ' views';
+      });
+      app.listen(3000, () => {
+        console.log('Server running on http://localhost:3000');
+      });
+  </li>
+  <li>
+    <h4>3. Những ưu điểm của middleware trong koajs so với các framework khác</h4>
+    Middleware trong KoaJS có một số ưu điểm nổi bật so với các framework khác, như Express. Dưới đây là một số ưu điểm chính:
+    ###Thiết kế hiện đại và gọn gàng
+    KoaJS sử dụng async/await, giúp code trở nên gọn gàng và dễ đọc hơn so với cách sử dụng callback hoặc promise trong các framework cũ hơn. Điều này làm giảm đáng kể nguy cơ callback hell và giúp dễ dàng quản lý luồng xử lý bất đồng bộ.
+    ###Middleware dạng đơn giản và thuần túy
+    KoaJS sử dụng một hệ thống middleware thuần túy và đơn giản, nơi mỗi middleware là một hàm async. Middleware trong KoaJS được tổ chức thành một chuỗi xử lý (stack) mà mỗi middleware có thể gọi tiếp theo (next) hoặc dừng lại. Điều này mang lại sự linh hoạt cao trong việc kiểm soát luồng xử lý.
+    ```javascript
+    app.use(async (ctx, next) => {
+      console.log('Before next middleware');
+      await next();
+      console.log('After next middleware');
+    });
+    ###Kiến trúc nhỏ gọn, tập trung vào lõi
+    KoaJS được thiết kế để trở thành một framework nhỏ gọn, chỉ cung cấp những tính năng cơ bản và cần thiết nhất. Các tính năng mở rộng được thêm vào thông qua các middleware tùy chọn. Điều này giúp ứng dụng KoaJS có kích thước nhỏ và hiệu suất cao.
+    ###Hiệu suất cao
+    Nhờ vào thiết kế gọn nhẹ và tối ưu, KoaJS thường có hiệu suất cao hơn so với các framework khác. Điều này đặc biệt quan trọng đối với các ứng dụng cần xử lý lượng lớn request hoặc yêu cầu hiệu suất cao.
+    ###Xử lý lỗi mạnh mẽ và nhất quán
+    KoaJS có cơ chế xử lý lỗi mạnh mẽ. Bằng cách sử dụng async/await và try/catch, bạn có thể dễ dàng bắt và xử lý lỗi trong middleware mà không cần các cấu trúc phức tạp.
+    ```javascript
+    app.use(async (ctx, next) => {
+      try {
+        await next();
+      } catch (err) {
+        ctx.status = err.status || 500;
+        ctx.body = err.message;
+        ctx.app.emit('error', err, ctx);
+      }
+    });
+    ###Dễ dàng tùy chỉnh và mở rộng
+    KoaJS cho phép bạn dễ dàng viết và sử dụng các middleware tùy chỉnh. Bạn có thể thêm hoặc thay thế các middleware theo nhu cầu của ứng dụng mà không gặp khó khăn.
+    ###Tính mô-đun cao
+    KoaJS khuyến khích việc sử dụng các middleware độc lập và tái sử dụng. Bạn có thể dễ dàng tìm thấy hoặc tạo ra các middleware cho các tác vụ phổ biến như xử lý request body, xác thực, logging, v.v. Điều này giúp việc xây dựng và duy trì ứng dụng trở nên dễ dàng hơn.
+    ###Hỗ trợ tốt cho việc quản lý trạng thái
+    KoaJS cung cấp context (ctx) cho mỗi request, giúp bạn dễ dàng lưu trữ và quản lý thông tin liên quan đến request đó. Context này có thể được chia sẻ giữa các middleware, giúp giảm thiểu việc phải truyền dữ liệu giữa các hàm xử lý.
   </li>
 </ul>
 <h3>**LỜI KẾT</h3>

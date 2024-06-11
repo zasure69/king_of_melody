@@ -125,7 +125,7 @@
           <br>
           <h5>2. Tạo ứng dụng Koa cơ bản với routing</h5>
           Dưới đây là một ví dụ về cách thiết lập một ứng dụng Koa cơ bản và sử dụng Koa Router để xử lý routing:<br>
-          ![image](https://github.com/zasure69/king_of_melody/assets/162142037/e112f1e7-14cf-44e5-ac9b-f467bdbdca97)
+          <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/e112f1e7-14cf-44e5-ac9b-f467bdbdca97">
           <h5>3. Chi tiết các phương thức và phương pháp</h5>
           <ul>
             <li>router.get(path, handler): Định nghĩa một route GET.</li>
@@ -140,9 +140,9 @@
           <br>
           <code>npm install koa-bodyparser</code>
           <br>
-          ![image](https://github.com/zasure69/king_of_melody/assets/162142037/12719b77-f992-4c41-b162-8d33bdfec774)
+          <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/12719b77-f992-4c41-b162-8d33bdfec774">
           <h5>5. Ví dụ về routing kết hợp với middleware</h5>
-          ![image](https://github.com/zasure69/king_of_melody/assets/162142037/68542023-776f-4011-8ba4-58260e3647a5)
+          <img width="815" alt="image" src="(https://github.com/zasure69/king_of_melody/assets/162142037/68542023-776f-4011-8ba4-58260e3647a5">
     </ul>
   </li>
   <li>
@@ -154,38 +154,38 @@
     <h6>Cài đặt koa-bodyparser:</h6>
     <code>npm install koa-bodyparser</code><br>
     <h6>Sử dụng koa-bodyparser:</h6>
-    ![image](https://github.com/zasure69/king_of_melody/assets/162142037/2982191d-fb07-4c48-bb4b-42a1f8dd3bc5)
+    <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/2982191d-fb07-4c48-bb4b-42a1f8dd3bc5">
     <br>
     <h6>Sử dụng koa-body</h6>
     koa-body là một middleware mạnh mẽ hơn, hỗ trợ thêm việc xử lý file uploads.
     <br>
     <code>npm install koa-body</code><br>
     Sử dụng koa-body:
-      ![image](https://github.com/zasure69/king_of_melody/assets/162142037/73049bac-1e12-442c-94ec-5bf434880560)
+      <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/73049bac-1e12-442c-94ec-5bf434880560">
     <h5>Xử lý query string và params</h5>
     KoaJS cung cấp các thuộc tính của đối tượng ctx.request để truy cập các query string và route params.
     <h6>Truy cập query string</h6>
     Bạn có thể truy cập các query string trực tiếp từ ctx.query hoặc ctx.request.query.<br>
-      ![image](https://github.com/zasure69/king_of_melody/assets/162142037/ddc9050c-84ee-4d73-82be-9a6211fab19c)
+      <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/ddc9050c-84ee-4d73-82be-9a6211fab19c">
     <h6>Truy cập route params</h6>
     Sử dụng koa-router để truy cập các route params.<br>
-      ![image](https://github.com/zasure69/king_of_melody/assets/162142037/960b6023-72c4-4e09-b8d7-d68d0b037d7d)
+      <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/960b6023-72c4-4e09-b8d7-d68d0b037d7d">
     <h5>Xử lý headers</h5>
     Bạn có thể truy cập các headers từ ctx.request.headers.
-      ![image](https://github.com/zasure69/king_of_melody/assets/162142037/3671dcda-9f81-4c6b-a773-233edc995472)
+      <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/3671dcda-9f81-4c6b-a773-233edc995472">
     <h5>Xử lý cookies</h5>
     <br>
     <h6>Sử dụng koa-cookie hoặc koa-session để xử lý cookies.</h6>
     Sử dụng koa-cookie<br>
     Cài đặt koa-cookie:<code>npm install koa-cookie</code><br>
     Sử dụng koa-cookie:<br>
-    ![image](https://github.com/zasure69/king_of_melody/assets/162142037/9da78621-2978-4957-bb1a-234d5d5c8af2)
+    <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/9da78621-2978-4957-bb1a-234d5d5c8af2">
     <br>
     Sử dụng koa-session
     <br>
     Cài đặt koa-session:<code>npm install koa-session</code><br>
     Sử dụng koa-session:<br>
-      ![image](https://github.com/zasure69/king_of_melody/assets/162142037/66be6406-e6d9-4c3e-95a5-259c8ea7c37f)
+      <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/66be6406-e6d9-4c3e-95a5-259c8ea7c37f">
   </li>
   <li>
     <h4>3. Những ưu điểm của middleware trong koajs so với các framework khác</h4>
@@ -194,14 +194,14 @@
     KoaJS sử dụng async/await, giúp code trở nên gọn gàng và dễ đọc hơn so với cách sử dụng callback hoặc promise trong các framework cũ hơn. Điều này làm giảm đáng kể nguy cơ callback hell và giúp dễ dàng quản lý luồng xử lý bất đồng bộ.
     <h5>Middleware dạng đơn giản và thuần túy</h5>
     KoaJS sử dụng một hệ thống middleware thuần túy và đơn giản, nơi mỗi middleware là một hàm async. Middleware trong KoaJS được tổ chức thành một chuỗi xử lý (stack) mà mỗi middleware có thể gọi tiếp theo (next) hoặc dừng lại. Điều này mang lại sự linh hoạt cao trong việc kiểm soát luồng xử lý.
-    ![image](https://github.com/zasure69/king_of_melody/assets/162142037/b47f5a68-0f61-483c-b949-5c0d33cdfd7a)
+    <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/b47f5a68-0f61-483c-b949-5c0d33cdfd7a">
     <h5>Kiến trúc nhỏ gọn, tập trung vào lõi</h5>
     KoaJS được thiết kế để trở thành một framework nhỏ gọn, chỉ cung cấp những tính năng cơ bản và cần thiết nhất. Các tính năng mở rộng được thêm vào thông qua các middleware tùy chọn. Điều này giúp ứng dụng KoaJS có kích thước nhỏ và hiệu suất cao.
     <h5>Hiệu suất cao</h5>
     Nhờ vào thiết kế gọn nhẹ và tối ưu, KoaJS thường có hiệu suất cao hơn so với các framework khác. Điều này đặc biệt quan trọng đối với các ứng dụng cần xử lý lượng lớn request hoặc yêu cầu hiệu suất cao.
     <h5>Xử lý lỗi mạnh mẽ và nhất quán</h5>
     KoaJS có cơ chế xử lý lỗi mạnh mẽ. Bằng cách sử dụng async/await và try/catch, bạn có thể dễ dàng bắt và xử lý lỗi trong middleware mà không cần các cấu trúc phức tạp.<br>
-    ![image](https://github.com/zasure69/king_of_melody/assets/162142037/33b07830-3029-475b-872d-a367a37e1a95)
+    <img width="815" alt="image" src="https://github.com/zasure69/king_of_melody/assets/162142037/33b07830-3029-475b-872d-a367a37e1a95">
     <h5>Dễ dàng tùy chỉnh và mở rộng</h5>
     KoaJS cho phép bạn dễ dàng viết và sử dụng các middleware tùy chỉnh. Bạn có thể thêm hoặc thay thế các middleware theo nhu cầu của ứng dụng mà không gặp khó khăn.
     <h5>Tính mô-đun cao</h5>

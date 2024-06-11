@@ -118,11 +118,11 @@
     <h4>1. Cách routing sử dụng KoaJS</h4>
     <ul>
       <li>Việc xử lý routing trong KoaJS thường được thực hiện thông qua một middleware bổ sung, phổ biến nhất là `koa-router`. Dưới đây là hướng dẫn cơ bản về cách thiết lập và sử dụng routing với KoaJS:
-          ###1. Cài đặt Koa và Koa Router
+          ##1. Cài đặt Koa và Koa Router
           Trước hết, bạn cần cài đặt Koa và Koa Router bằng cách sử dụng npm:
           ```sh
           npm install koa koa-router
-          ###2. Tạo ứng dụng Koa cơ bản với routing
+          ##2. Tạo ứng dụng Koa cơ bản với routing
           Dưới đây là một ví dụ về cách thiết lập một ứng dụng Koa cơ bản và sử dụng Koa Router để xử lý routing:
           ```javascript
           // Import các thư viện cần thiết
@@ -151,7 +151,7 @@
           app.listen(port, () => {
             console.log(`Server running on http://localhost:${port}`);
           });
-          ### 3. Chi tiết các phương thức và phương pháp
+          ##3. Chi tiết các phương thức và phương pháp
           <ul>
             <li>router.get(path, handler): Định nghĩa một route GET.</li>
             <li>router.post(path, handler): Định nghĩa một route POST.</li>
@@ -160,7 +160,7 @@
             <li>router.routes(): Trả về một middleware tổng hợp từ các route đã định nghĩa.</li>
             <li>router.allowedMethods(): Trả về một middleware xử lý các phương thức không được phép.</li>
           </ul>
-          ###4. Middleware trong KoaJS
+          ##4. Middleware trong KoaJS
           KoaJS rất mạnh mẽ nhờ vào hệ thống middleware của nó. Bạn có thể thêm các middleware khác để xử lý nhiều tác vụ khác nhau. Dưới đây là ví dụ về cách thêm middleware để xử lý JSON request body:
           ```sh
           npm install koa-bodyparser
@@ -168,7 +168,7 @@
           const bodyParser = require('koa-bodyparser');
           // Sử dụng bodyparser middleware
           app.use(bodyParser());
-          ### 5. Ví dụ về routing kết hợp với middleware
+          ##5. Ví dụ về routing kết hợp với middleware
           ```javascript
           const Koa = require('koa');
           const Router = require('koa-router');
@@ -198,28 +198,28 @@
   <li>
     <h4>2. KoaJS có hỗ trợ gì cho việc xử lý và phân tích dữ liệu đầu vào từ các yêu cầu của HTTP</h4>
     KoaJS có nhiều cách để hỗ trợ việc xử lý và phân tích dữ liệu đầu vào từ các yêu cầu HTTP. Dưới đây là một số phương pháp phổ biến và các middleware hữu ích mà bạn có thể sử dụng trong ứng dụng KoaJS để xử lý dữ liệu đầu vào:
-    ###Xử lý body của yêu cầu
+    ##Xử lý body của yêu cầu
     Sử dụng koa-bodyparser
     koa-bodyparser là một middleware phổ biến giúp bạn phân tích (parse) body của các yêu cầu HTTP. Nó hỗ trợ cả JSON, URL-encoded, và dữ liệu thô.
     ```sh
-    npm install koa-bodyparser
+      npm install koa-bodyparser
     Sử dụng koa-bodyparser:
     ```javascript
-    const Koa = require('koa');
-    const bodyParser = require('koa-bodyparser');
-    const app = new Koa();
-    app.use(bodyParser());
-    app.use(async ctx => {
-      ctx.body = ctx.request.body;
-    });
-    app.listen(3000, () => {
-      console.log('Server running on http://localhost:3000');
-    });
+      const Koa = require('koa');
+      const bodyParser = require('koa-bodyparser');
+      const app = new Koa();
+      app.use(bodyParser());
+      app.use(async ctx => {
+        ctx.body = ctx.request.body;
+      });
+      app.listen(3000, () => {
+        console.log('Server running on http://localhost:3000');
+      });
     Sử dụng koa-body
     koa-body là một middleware mạnh mẽ hơn, hỗ trợ thêm việc xử lý file uploads.
     Cài đặt koa-body:
     ```sh
-    npm install koa-body
+      npm install koa-body
     Sử dụng koa-body:
     ```javascript
       const Koa = require('koa');
@@ -239,19 +239,19 @@
       app.listen(3000, () => {
         console.log('Server running on http://localhost:3000');
       });
-      ###Xử lý query string và params
-      KoaJS cung cấp các thuộc tính của đối tượng ctx.request để truy cập các query string và route params.
-      Truy cập query string
-      Bạn có thể truy cập các query string trực tiếp từ ctx.query hoặc ctx.request.query.
-      ```javascript
+    ##Xử lý query string và params
+    KoaJS cung cấp các thuộc tính của đối tượng ctx.request để truy cập các query string và route params.
+    Truy cập query string
+    Bạn có thể truy cập các query string trực tiếp từ ctx.query hoặc ctx.request.query.
+    ```javascript
       app.use(async ctx => {
         const query = ctx.query; // or ctx.request.query
         console.log(query);
         ctx.body = query;
       });
-      Truy cập route params
-      Sử dụng koa-router để truy cập các route params.  
-      ```javascript
+    Truy cập route params
+    Sử dụng koa-router để truy cập các route params.  
+    ```javascript
       const Koa = require('koa');
       const Router = require('koa-router');
       const app = new Koa();
@@ -266,22 +266,22 @@
       app.listen(3000, () => {
         console.log('Server running on http://localhost:3000');
       });
-      ###Xử lý headers
-      Bạn có thể truy cập các headers từ ctx.request.headers.
-      ```javascript
+    ###Xử lý headers
+    Bạn có thể truy cập các headers từ ctx.request.headers.
+    ```javascript
       app.use(async ctx => {
         const headers = ctx.request.headers;
         console.log(headers);
         ctx.body = headers;
       });
-      ###Xử lý cookies
-      Sử dụng koa-cookie hoặc koa-session để xử lý cookies.
-      Sử dụng koa-cookie
-      Cài đặt koa-cookie:
-      ```sh
+    ###Xử lý cookies
+    Sử dụng koa-cookie hoặc koa-session để xử lý cookies.
+    Sử dụng koa-cookie
+    Cài đặt koa-cookie:
+    ```sh
       npm install koa-cookie
-      Sử dụng koa-cookie:
-      ```javascript
+    Sử dụng koa-cookie:
+    ```javascript
       const Koa = require('koa');
       const cookie = require('koa-cookie');
       const app = new Koa();
@@ -294,12 +294,12 @@
       app.listen(3000, () => {
         console.log('Server running on http://localhost:3000');
       });
-      Sử dụng koa-session
-      Cài đặt koa-session:
-      ```sh
+    Sử dụng koa-session
+    Cài đặt koa-session:
+    ```sh
       npm install koa-session
-      Sử dụng koa-session:
-      ```javascript
+    Sử dụng koa-session:
+    ```javascript
       const Koa = require('koa');
       const session = require('koa-session');
       const app = new Koa();
